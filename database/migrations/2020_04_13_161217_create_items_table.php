@@ -38,11 +38,11 @@ class CreateItemsTable extends Migration
             $table->string('description');
             $table->string('price');
             $table->string('main_image');
-            $table->string('map');
-            $table->string('lat');
-            $table->string('lang');
-            $table->string('phone');
-            $table->string('featured');
+            $table->string('map')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lang')->nullable();
+            $table->string('phone')->nullable();
+            $table->boolean('featured')->default(0);
             $table->boolean('status')->default(0);
             $table->timestamps();
         });

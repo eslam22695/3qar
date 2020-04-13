@@ -18,7 +18,7 @@ class CreateAttributesTable extends Migration
             $table->unsignedBigInteger('family_id');
             $table->foreign('family_id')->references('id')->on('attribute_families')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
-            $table->string('icon');
+            $table->text('icon')->nullable();
             $table->boolean('status')->default(0);
             $table->timestamps();
         });
