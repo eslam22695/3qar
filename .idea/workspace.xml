@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="270799fd-399e-4656-8034-3be1135d7a2d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="725f1862-cddb-4fa2-ac18-42fee8a60c5d" name="Default" comment="" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,47 +14,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_004444_create_categories_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_150657_create_attribute_families_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_150808_create_attributes_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_150857_create_attribute_values_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_150942_create_option_groups_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_160843_create_owners_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_160950_create_cities_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_161047_create_dimensions_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_161130_create_districts_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_161151_create_options_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_161217_create_items_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_161242_create_item_attributes_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_161312_create_item_options_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_161402_create_item_images_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_161501_create_item_clicks_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_161521_create_wishlists_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2020_04_13_161541_create_blogs_table.php" />
-        <option value="$PROJECT_DIR$/app/Category.php" />
-        <option value="$PROJECT_DIR$/app/Blog.php" />
-        <option value="$PROJECT_DIR$/app/Attribute.php" />
-        <option value="$PROJECT_DIR$/app/AttributeFamily.php" />
-        <option value="$PROJECT_DIR$/app/AttributeValue.php" />
-        <option value="$PROJECT_DIR$/app/City.php" />
-        <option value="$PROJECT_DIR$/app/Dimension.php" />
-        <option value="$PROJECT_DIR$/app/District.php" />
-        <option value="$PROJECT_DIR$/app/Item.php" />
-        <option value="$PROJECT_DIR$/app/ItemAttribute.php" />
-        <option value="$PROJECT_DIR$/app/ItemClick.php" />
-        <option value="$PROJECT_DIR$/app/ItemImage.php" />
-        <option value="$PROJECT_DIR$/app/ItemOption.php" />
-        <option value="$PROJECT_DIR$/app/Option.php" />
-        <option value="$PROJECT_DIR$/app/OptionGroup.php" />
-        <option value="$PROJECT_DIR$/app/Owner.php" />
-        <option value="$PROJECT_DIR$/app/Wishlist.php" />
-      </list>
-    </option>
-  </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
@@ -65,12 +21,6 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="280" />
-    <option name="y" value="61" />
-    <option name="width" value="1000" />
-    <option name="height" value="728" />
-  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -118,9 +68,6 @@
       </pane>
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -144,24 +91,24 @@
       <option name="presentableId" value="Default" />
       <updated>1586737196366</updated>
       <workItem from="1586737198690" duration="4203000" />
-      <workItem from="1586789709779" duration="10302000" />
+      <workItem from="1586789709779" duration="10674000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14505000" />
+    <option name="totallyTimeSpent" value="14877000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3161876" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3161876" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39244664" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39244664" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
