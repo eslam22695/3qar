@@ -10,4 +10,9 @@ class AttributeValue extends Model
     protected $fillable = [
         'id', 'name', 'status','attribute_id'
     ];
+
+    public function attribute()
+    {
+        return $this->belongsTo('App\Attribute', 'attribute_id', 'id');
+    }
 }

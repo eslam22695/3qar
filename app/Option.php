@@ -10,4 +10,9 @@ class Option extends Model
     protected $fillable = [
         'id', 'name', 'status','option_group_id'
     ];
+
+    public function option_group()
+    {
+        return $this->belongsTo('App\OptionGroup', 'option_group_id', 'id');
+    }
 }

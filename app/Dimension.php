@@ -10,4 +10,10 @@ class Dimension extends Model
     protected $fillable = [
         'id', 'name', 'status','city_id'
     ];
+
+    public function city()
+    {
+        return $this->belongsTo('App\City', 'city_id', 'id');
+    }
+
 }

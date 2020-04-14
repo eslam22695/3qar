@@ -10,4 +10,9 @@ class ItemImage extends Model
     protected $fillable = [
         'id','status', 'image','item_id'
     ];
+
+    public function item()
+    {
+        return $this->belongsTo('App\Item', 'item_id', 'id');
+    }
 }
