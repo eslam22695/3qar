@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
+use App\City;
 
 class CityContoller extends Controller
 {
@@ -14,7 +18,8 @@ class CityContoller extends Controller
      */
     public function index()
     {
-        //
+        $cities = City::where('status',1)->get();
+        return view('admin.city.index',compact('cities'));
     }
 
     /**

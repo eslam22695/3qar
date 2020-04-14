@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html dir="rtl">
 
 <head>
 
@@ -10,9 +10,9 @@
 
     <meta name="author" content="Coderthemes">
 
-    <link rel="shortcut icon" href="{{asset('website/image/img/logo.png')}}">
+    <link rel="shortcut icon" href="{{asset('admin_assets/images/logo.png')}}">
 
-    <title>Conversion Click</title>
+    <title>بريق</title>
 
     <!--Morris Chart CSS -->
 
@@ -35,20 +35,7 @@
     {{-- <link href="{{asset('admin_assets/scss/_menu.scss')}}" rel="stylesheet" type="text/css" /> --}}
 
     <script src="{{asset('admin_assets/js/modernizr.min.js')}}"></script>
-
-    <link href="{{asset('admin_assets/plugins/bootstrap-table/css/bootstrap-table.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('admin_assets/plugins/custombox/css/custombox.css')}}" rel="stylesheet">
-
-    <link href="{{asset('admin_assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css')}}" rel="stylesheet" />
-    <link href="{{asset('admin_assets/plugins/switchery/css/switchery.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('admin_assets/plugins/multiselect/css/multi-select.css')}}"  rel="stylesheet" type="text/css" />
-    <link href="{{asset('admin_assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('admin_assets/plugins/bootstrap-select/css/bootstrap-select.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('admin_assets/plugins/bootstrap-touchspin/css/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" />
-
-    <link href="{{asset('admin_assets/plugins/owl.carousel/dist/assets/owl.carousel.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('admin_assets/plugins/owl.carousel/dist/assets/owl.theme.default.min.css')}}" rel="stylesheet" type="text/css" />
-
+    
     @yield('styles')
 
 </head>
@@ -69,10 +56,10 @@
 
             <div class="text-center">
 
-                <a href="{{'/'}}" class="logo">
+                <a href="{{route('admin.home')}}" class="logo" dir="rtl">
                     <i class="icon-c-logo"></i>
                     <span> 
-                        Conversion Click
+                        بريق
                     </span>
                 </a>
 
@@ -84,7 +71,7 @@
 
         <nav class="navbar-custom">
 
-            <ul class="list-inline float-right mb-0">
+            <ul class="list-inline float-left mb-0">
 
                 <!--full screen button-->
 
@@ -106,7 +93,7 @@
 
                        aria-haspopup="false" aria-expanded="false">
 
-                        <img src="{{asset('admin_assets/images/avatar-1.jpg')}}" alt="user" class="rounded-circle">
+                        <img src="{{asset('website/ar/imgs/Logo-2.png')}}" alt="user" class="rounded-circle">
 
                     </a>
 
@@ -116,22 +103,28 @@
 
                         <div class="dropdown-item noti-title">
 
-                            <h5 class="text-overflow"><small>Hello</small> </h5>
+                            <h5 class="text-overflow"><small>مرحبا</small> </h5>
 
                         </div>
 
                         <!-- logout-->
 
-                        {{-- <a class="dropdown-item notify-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        {{-- <a class="dropdown-item notify-item" href="{{ route('logout') }}"
 
-                            <i class="zmdi zmdi-power"></i> <span>Logout</span>
+                           onclick="event.preventDefault();
+
+                                                 document.getElementById('logout-form').submit();">
+
+                            <i class="zmdi zmdi-power"></i> <span>تسجيل خروج</span>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 
                                 {{ csrf_field() }}
 
                             </form>
+
                         </a> --}}
+
                     </div>
 
                 </li>
@@ -142,7 +135,7 @@
 
             <ul class="list-inline menu-left mb-0">
 
-                <li class="float-left">
+                <li class="float-right">
 
                     <button class="button-menu-mobile open-left waves-light waves-effect">
 
@@ -182,7 +175,7 @@
 
             <footer class="footer text-right">
 
-                Conversion &copy; 2019 All rights reserved.
+                Otex &copy; 2018 All rights reserved.
 
             </footer>
 
@@ -206,28 +199,17 @@
 
                 <ul>
 
-                    <li><a href="{{route('home')}}" class="waves-effect"><i class="md-dashboard"></i> <span> Home </span></a></li>
-                    <li><a href="{{route('about.index')}}" class="waves-effect"><i class="ion-person"></i> <span> About </span></a></li>
-                    <li><a href="{{route('why-us.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Why Us </span></a></li>
-                    <li><a href="{{route('feature.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Features </span></a></li>
-                    <li><a href="{{route('service.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Services </span></a></li>
-                    <li><a href="{{route('speed-service.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Speed Services </span></a></li>
-                    <li><a href="{{route('tag.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Tags </span></a></li>
-                    <li><a href="{{route('blog.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Blogs </span></a></li>
-                    <li><a href="{{route('client.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Clients </span></a></li>
-                    <li><a href="{{route('request-service.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Requested Services </span></a></li>
-                    <li><a href="{{route('seo-score.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Seo Score </span></a></li>
-                    <li><a href="{{route('subscribe.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Subscribers </span></a></li>
-                    <li><a href="{{route('contact-us.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Contact Us </span></a></li>
-                    <li><a href="{{route('information.index')}}" class="waves-effect"><i class="ion-person"></i> <span> Information </span></a></li>
-
-                    {{-- <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="md-insert-drive-file"></i><span> Events </span> <span class="menu-arrow"></span></a>
-                        <ul class="list-unstyled" style="display: none;">
-                            <li><a href="{{url('admin/events')}}" class="waves-effect">Events Details</a></li>
-                            <li><a href="{{url('admin/tickets')}}" class="waves-effect">Tickets Details</a></li>
-                        </ul>
-                    </li> --}}
+                    <li><a href="{{route('admin.home')}}" class="waves-effect"><i class="ti-home"></i> <span> الرئيسيه </span></a></li>
+                    <li><a href="{{route('admin.category.index')}}" class="waves-effect"><i class="ion-images"></i> <span> الاقسام </span></a></li>
+                    {{-- <li><a href="{{route('information.index')}}" class="waves-effect"><i class="ion-ios7-information-outline"></i> <span> البيانات </span></a></li>
+                    <li><a href="{{route('about.index')}}" class="waves-effect"><i class="md md-border-color"></i> <span> من نحن </span></a></li>
+                    <li><a href="{{route('client.index')}}" class="waves-effect"><i class="md md-account-circle"></i> <span> العملاء </span></a></li>
+                    <li><a href="{{route('category.index')}}" class="waves-effect"><i class="icon-list"></i> <span> الاقسام </span></a></li>
+                    <li><a href="{{route('item.index')}}" class="waves-effect"><i class="icon-layers"></i> <span> المنتجات </span></a></li>
+                    <li><a href="{{route('feature.index')}}" class="waves-effect"><i class="md md-assignment"></i> <span> المميزات </span></a></li>
+                    <li><a href="{{route('blog.index')}}" class="waves-effect"><i class="icon-globe"></i> <span> المدونه </span></a></li>
+                    <li><a href="{{route('testmonial.index')}}" class="waves-effect"><i class="fa fa-signal"></i> <span> الاعضاء </span></a></li>
+                    <li><a href="{{route('contact.index')}}" class="waves-effect"><i class="ion-paper-airplane"></i> <span>طلبات التواصل </span></a></li> --}}
 
                 </ul>
 

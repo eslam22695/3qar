@@ -1188,7 +1188,7 @@ body.fixed-left .side-menu.left {
 
   overflow: hidden;
   float: left;
-  width: 85%;
+  width: 83%;
  }
 
 .content-page > .content {
@@ -5625,7 +5625,7 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
     z-index: 99; 
   }
   .content-page {
-    width: 85%;
+    width: 83%;
 }
   }
 

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
+use App\Category;
 
 class CategoryContoller extends Controller
 {
@@ -14,7 +18,8 @@ class CategoryContoller extends Controller
      */
     public function index()
     {
-        //
+        $cats = Category::where('status',1)->get();
+        return view('admin.category.index',compact('cats'));
     }
 
     /**
