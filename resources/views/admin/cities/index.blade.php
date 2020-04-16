@@ -53,7 +53,6 @@
                                                         <input type="text" id="example-input-large" name="url" class="form-control input-lg">
                                                     </div>
                                                 </div>
-                                                </div>
                                                 <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
                                             </div>
                                         </div>
@@ -81,35 +80,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(isset($cats))
-                            @foreach($cats as $cat)
+                        @if(isset($cities))
+                            @foreach($cities as $city)
                                 <tr>
-                                    <td>{{$cat->name}}</td>
+                                    <td>{{$city->name}}</td>
                                     <td class="actions">
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$cat->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$cat->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$city->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$city->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
                                     </td>
                                 </tr>
 
-                                <div id="{{$cat->id}}edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                <div id="{{$city->id}}edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
-                                            {{Form::model($cat,['method'=>'PATCH','action' => ['admin\CityContoller@update',$cat->id], 'files' => true])}}
+                                            {{Form::model($city,['method'=>'PATCH','action' => ['admin\CityContoller@update',$city->id], 'files' => true])}}
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="icon" class="control-label">الرابط</label>
-                                                                <input type="text" id="example-input-large" name="url" class="form-control input-lg" value="{{$cat->name}}">
+                                                                <input type="text" id="example-input-large" name="url" class="form-control input-lg" value="{{$city->name}}">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                        <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
-                                                    </div>
+                                                    <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
                                                 </div>
                                             {!! Form::close() !!}
                                         </div>
@@ -117,7 +115,7 @@
                                 </div>
 
 
-                                <div id="{{$cat->id}}delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+                                <div id="{{$city->id}}delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog" style="width:55%;">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -128,7 +126,7 @@
                                                 <h4 style="text-align:center;">تأكيد الحذف</h4>
                                             </div>
                                             <div class="modal-footer" style="text-align:center">
-                                                <form action="{{action('admin\CityContoller@destroy', $cat['id'])}}" method="post">
+                                                <form action="{{action('admin\CityContoller@destroy', $city['id'])}}" method="post">
                                                     {{csrf_field()}}
                                                     <input name="_method" type="hidden" value="DELETE">
                                                     <button class="btn btn-danger" type="submit" dir="ltr">حذف</button>

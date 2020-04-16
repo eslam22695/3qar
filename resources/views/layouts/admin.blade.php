@@ -201,6 +201,16 @@
 
                     <li><a href="{{route('admin.home')}}" class="waves-effect"><i class="ti-home"></i> <span> الرئيسيه </span></a></li>
                     <li><a href="{{route('admin.category.index')}}" class="waves-effect"><i class="ion-images"></i> <span> الاقسام </span></a></li>
+                    <li><a href="{{route('admin.city.index')}}" class="waves-effect"><i class="ion-images"></i> <span> المدن </span></a></li>
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="index.html">Dashboard 1</a></li>
+                            <li><a href="dashboard_2.html">Dashboard 2</a></li>
+                            <li><a href="dashboard_3.html">Dashboard 3</a></li>
+                            <li><a href="dashboard_4.html">Dashboard 4</a></li>
+                        </ul>
+                    </li>
                     {{-- <li><a href="{{route('information.index')}}" class="waves-effect"><i class="ion-ios7-information-outline"></i> <span> البيانات </span></a></li>
                     <li><a href="{{route('about.index')}}" class="waves-effect"><i class="md md-border-color"></i> <span> من نحن </span></a></li>
                     <li><a href="{{route('client.index')}}" class="waves-effect"><i class="md md-account-circle"></i> <span> العملاء </span></a></li>
