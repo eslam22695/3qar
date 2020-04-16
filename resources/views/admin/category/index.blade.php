@@ -53,7 +53,6 @@
                                                         <input type="text" id="example-input-large" name="url" class="form-control input-lg">
                                                     </div>
                                                 </div>
-                                                </div>
                                                 <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
                                             </div>
                                         </div>
@@ -108,8 +107,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                        <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
-                                                    </div>
+                                                    <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
                                                 </div>
                                             {!! Form::close() !!}
                                         </div>
