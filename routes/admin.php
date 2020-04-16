@@ -6,3 +6,5 @@ Route::get('/home', function () {
 
 Route::resource('category', 'admin\CategoryContoller', ['except' => ['create','show','edit']]);
 Route::resource('city', 'admin\CityContoller', ['except' => ['create','show','edit']]);
+Route::resource('attribute_family', 'admin\AttributeFamilyContoller', ['except' => ['create','show','edit']]);
+Route::resource('option_family', 'admin\OptionGroupContoller', ['except' => ['create','show','edit']]);

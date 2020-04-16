@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
+use App\AttributeFamily;
+use App\Category;
 
 class AttributeFamilyContoller extends Controller
 {
@@ -14,7 +19,9 @@ class AttributeFamilyContoller extends Controller
      */
     public function index()
     {
-        //
+        $families = AttributeFamily::where('status',1)->get();
+        $cats = Category::where('status',1)->get();
+        return view('admin.attribute_family.index',compact('families','cats'));
     }
 
     /**

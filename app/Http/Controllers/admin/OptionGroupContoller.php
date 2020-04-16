@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
+use App\OptionGroup;
+use App\Category;
 
 class OptionGroupContoller extends Controller
 {
@@ -14,7 +19,9 @@ class OptionGroupContoller extends Controller
      */
     public function index()
     {
-        //
+        $families = OptionGroup::where('status',1)->get();
+        $cats = Category::where('status',1)->get();
+        return view('admin.option_group.index',compact('families','cats'));
     }
 
     /**
