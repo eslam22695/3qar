@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Blog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserContoller extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class UserContoller extends Controller
      */
     public function index()
     {
-        //
+        $blog = Blog::where('status',1)->get();
+        return view('admin.blog.index',compact('blog'));
     }
 
     /**
@@ -24,7 +26,8 @@ class UserContoller extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.blog.create');
+
     }
 
     /**
@@ -35,7 +38,20 @@ class UserContoller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+            [
+                'title'        => 'required',
+                'description'  => 'required',
+                'content'      => 'required',
+            ]);
+
+
+        $input = $request->all();
+
+        Blog::create($input);
+        Session::flash('success','تم الاضافه بنجاح');
+        return redirect()->back();
+
     }
 
     /**
@@ -57,7 +73,9 @@ class UserContoller extends Controller
      */
     public function edit($id)
     {
-        //
+        $blogID = Blog::find($id);
+
+        return view('admin.blog.create',compact('blogID'));
     }
 
     /**
@@ -69,7 +87,23 @@ class UserContoller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(),
+            [
+                'title'        => 'required',
+                'description'  => 'required',
+                'content'      => 'required'
+            ]);
+
+        $input = $request->all();
+        if($blog = Blog::find($id)){
+
+            $blog->update($input);
+            Session::flash('success','تم التعديل بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم التعديل ');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -80,6 +114,9 @@ class UserContoller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete =  Blog::find($id);
+        $delete->delete();
+        session()->flash('success','تم الحذف بنجاح');
+        return back();
     }
 }

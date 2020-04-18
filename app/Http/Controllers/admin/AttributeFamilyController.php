@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\AttributeFamily;
+use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AttributeContoller extends Controller
+class AttributeFamilyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,9 @@ class AttributeContoller extends Controller
      */
     public function index()
     {
-        //
+            $families = AttributeFamily::where('status',1)->get();
+            $cats = Category::where('status',1)->get();
+            return view('admin.attribute_family.index',compact('families','cats'));
     }
 
     /**
@@ -24,7 +28,7 @@ class AttributeContoller extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.attribute_family.create');
     }
 
     /**
@@ -35,7 +39,17 @@ class AttributeContoller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+            [
+                'name'  => 'required',
+            ]);
+
+
+        $input = $request->all();
+
+        AttributeFamily::create($input);
+        Session::flash('success','تم الاضافه بنجاح');
+        return redirect()->back();
     }
 
     /**
@@ -57,7 +71,9 @@ class AttributeContoller extends Controller
      */
     public function edit($id)
     {
-        //
+        $families = Category::find($id);
+
+        return view('admin.attribute_family.create',compact('families'));
     }
 
     /**
@@ -69,7 +85,21 @@ class AttributeContoller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(),
+            [
+                'name' => 'required',
+            ]);
+
+        $input = $request->all();
+        if($families = AttributeFamily::find($id)){
+
+            $families->update($input);
+            Session::flash('success','تم التعديل بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم التعديل ');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -80,6 +110,9 @@ class AttributeContoller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete =  AttributeFamily::find($id);
+        $delete->delete();
+        session()->flash('success','تم الحذف بنجاح');
+        return back();
     }
 }

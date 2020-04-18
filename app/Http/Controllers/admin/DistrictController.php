@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\City;
+use App\District;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DistrictContoller extends Controller
+class DistrictController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,9 @@ class DistrictContoller extends Controller
      */
     public function index()
     {
-        //
+        $district = District::where('status',1)->get();
+        $cities = City::where('status',1)->get();
+        return view('admin.district.index',compact('district','cities'));
     }
 
     /**
@@ -24,7 +28,7 @@ class DistrictContoller extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.district.create');
     }
 
     /**
@@ -35,7 +39,17 @@ class DistrictContoller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+            [
+                'name'  => 'required',
+            ]);
+
+
+        $input = $request->all();
+
+        District::create($input);
+        Session::flash('success','تم الاضافه بنجاح');
+        return redirect()->back();
     }
 
     /**
@@ -57,7 +71,9 @@ class DistrictContoller extends Controller
      */
     public function edit($id)
     {
-        //
+        $districtID = District::find($id);
+
+        return view('admin.district.create',compact('districtID'));
     }
 
     /**
@@ -69,7 +85,21 @@ class DistrictContoller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(),
+            [
+                'name' => 'required',
+            ]);
+
+        $input = $request->all();
+        if($district = District::find($id)){
+
+            $district->update($input);
+            Session::flash('success','تم التعديل بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم التعديل ');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -80,6 +110,9 @@ class DistrictContoller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete =  District::find($id);
+        $delete->delete();
+        session()->flash('success','تم الحذف بنجاح');
+        return back();
     }
 }
