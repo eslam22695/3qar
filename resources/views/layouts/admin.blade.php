@@ -202,8 +202,10 @@
                     <li><a href="{{route('admin.home')}}" class="waves-effect"><i class="ti-home"></i> <span> الرئيسيه </span></a></li>
                     <li><a href="{{route('admin.category.index')}}" class="waves-effect"><i class="ion-images"></i> <span> الاقسام </span></a></li>
                     <li><a href="{{route('admin.city.index')}}" class="waves-effect"><i class="ion-images"></i> <span> المدن </span></a></li>
+                    <li><a href="{{route('admin.district.index')}}" class="waves-effect"><i class="ion-images"></i> <span> الاحياء </span></a></li>
                     <li><a href="{{route('admin.attribute_family.index')}}" class="waves-effect"><i class="ion-images"></i> <span> عائلة الخصائص </span></a></li>
                     <li><a href="{{route('admin.option_family.index')}}" class="waves-effect"><i class="ion-images"></i> <span> عائلة المميزات </span></a></li>
+                    <li><a href="{{route('admin.blog.index')}}" class="waves-effect"><i class="ion-images"></i> <span> المدونة </span></a></li>
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
