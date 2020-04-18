@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Session;
-use App\Category;
+use App\Http\Controllers\Controller;
 
-class CategoryContoller extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +14,7 @@ class CategoryContoller extends Controller
      */
     public function index()
     {
-        $cats = Category::where('status',1)->get();
-        return view('admin.category.index',compact('cats'));
+        //
     }
 
     /**

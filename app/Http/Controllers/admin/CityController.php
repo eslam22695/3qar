@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class OwnerContoller extends Controller
+class CityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class OwnerContoller extends Controller
      */
     public function index()
     {
-        //
+            $cities = City::where('status',1)->get();
+            return view('admin.cities.index',compact('cities'));
     }
 
     /**
@@ -24,7 +26,7 @@ class OwnerContoller extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.cities.create');
     }
 
     /**
@@ -35,7 +37,18 @@ class OwnerContoller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+            [
+                'name'                   => 'required',
+            ]);
+
+
+        $input = $request->all();
+
+        City::create($input);
+        Session::flash('success','تم الاضافه بنجاح');
+        return redirect()->back();
+
     }
 
     /**
@@ -57,7 +70,9 @@ class OwnerContoller extends Controller
      */
     public function edit($id)
     {
-        //
+        $cityID = City::find($id);
+
+        return view('admin.cities.create',compact('cityID'));
     }
 
     /**
@@ -69,7 +84,22 @@ class OwnerContoller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(),
+            [
+                'name'                   => 'required',
+            ]);
+
+        $input = $request->all();
+        if($city = City::find($id)){
+
+            $city->update($input);
+            Session::flash('success','تم التعديل بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم التعديل ');
+            return redirect()->back();
+        }
+
     }
 
     /**
@@ -80,6 +110,9 @@ class OwnerContoller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete =  City::find($id);
+        $delete->delete();
+        session()->flash('success','تم الحذف بنجاح');
+        return back();
     }
 }
