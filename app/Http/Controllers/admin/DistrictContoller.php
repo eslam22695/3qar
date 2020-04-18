@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
+use App\District;
+use App\City;
 
 class DistrictContoller extends Controller
 {
@@ -14,7 +19,10 @@ class DistrictContoller extends Controller
      */
     public function index()
     {
-        //
+        $districts = District::where('status',1)->get();
+        $cities = City::where('status',1)->get();
+
+        return view('admin.district.index',compact('districts','cities'));
     }
 
     /**

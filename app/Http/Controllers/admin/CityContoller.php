@@ -19,7 +19,7 @@ class CityContoller extends Controller
     public function index()
     {
         $cities = City::where('status',1)->get();
-        return view('admin.cities.index',compact('cities'));
+        return view('admin.city.index',compact('cities'));
     }
 
     /**
