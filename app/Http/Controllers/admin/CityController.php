@@ -26,7 +26,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        return view('admin.cities.create');
+        //
     }
 
     /**
@@ -70,9 +70,7 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        $cityID = City::find($id);
-
-        return view('admin.cities.create',compact('cityID'));
+        //
     }
 
     /**

@@ -28,8 +28,7 @@ class OptionGroupController extends Controller
      */
     public function create()
     {
-        return view('admin.option_group.create');
-
+        //
     }
 
     /**
@@ -72,9 +71,7 @@ class OptionGroupController extends Controller
      */
     public function edit($id)
     {
-        $optionGroupID = OptionGroup::find($id);
-
-        return view('admin.option_group.create',compact('optionGroupID'));
+        //
     }
 
     /**

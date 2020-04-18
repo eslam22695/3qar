@@ -28,7 +28,7 @@ class AttributeFamilyController extends Controller
      */
     public function create()
     {
-        return view('admin.attribute_family.create');
+        //
     }
 
     /**
@@ -71,9 +71,7 @@ class AttributeFamilyController extends Controller
      */
     public function edit($id)
     {
-        $families = Category::find($id);
-
-        return view('admin.attribute_family.create',compact('families'));
+        //
     }
 
     /**
