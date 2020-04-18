@@ -38,7 +38,7 @@
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                     </div>
-                                    {{Form::open(['method'=>'POST','action' => ['admin\OptionGroupContoller@store'], 'files' => true])}}
+                                    {{Form::open(['method'=>'POST','action' => ['admin\OptionGroupController@store'], 'files' => true])}}
                                         <div class="modal-body">
                                             <div class="row">
                                                 {{-- <div class="col-md-12">
@@ -96,7 +96,7 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
-                                            {{Form::model($cat,['method'=>'PATCH','action' => ['admin\OptionGroupContoller@update',$cat->id], 'files' => true])}}
+                                            {{Form::model($cat,['method'=>'PATCH','action' => ['admin\OptionGroupController@update',$cat->id], 'files' => true])}}
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         
@@ -126,7 +126,7 @@
                                                 <h4 style="text-align:center;">تأكيد الحذف</h4>
                                             </div>
                                             <div class="modal-footer" style="text-align:center">
-                                                <form action="{{action('admin\OptionGroupContoller@destroy', $family['id'])}}" method="post">
+                                                <form action="{{action('admin\OptionGroupController@destroy', $family['id'])}}" method="post">
                                                     {{csrf_field()}}
                                                     <input name="_method" type="hidden" value="DELETE">
                                                     <button class="btn btn-danger" type="submit" dir="ltr">حذف</button>
