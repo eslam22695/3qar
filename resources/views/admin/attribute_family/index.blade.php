@@ -53,6 +53,19 @@
                                                         <input type="text" id="example-input-large" name="name" class="form-control input-lg">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="icon" class="control-label">اسم القسم</label>
+                                                        <select class="form-control" required name="category_id">
+                                                            <option value="" selected disabled>إختار القسم</option>
+                                                            @if($cats != null)
+                                                                @foreach($cats as $cat)
+                                                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
                                             </div>
                                         </div>
@@ -104,6 +117,20 @@
                                                             <div class="form-group">
                                                                 <label for="icon" class="control-label">الاسم</label>
                                                                 <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$family->name}}">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="icon" class="control-label">اسم القسم</label>
+                                                                <select class="form-control" required name="category_id">
+                                                                    <option value="" selected disabled>إختار القسم</option>
+                                                                    @if($cats != null)
+                                                                        @foreach($cats as $cat)
+                                                                            <option value="{{$cat->id}}"  {{$family->category_id === $cat->id ? 'selected' : ''}}>{{$cat->name}}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
