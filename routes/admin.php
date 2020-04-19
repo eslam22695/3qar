@@ -4,6 +4,7 @@ Route::get('/home', function () {
     return view('admin.home');
 })->name('home');
 
+Route::resource('user', 'admin\UserController');
 Route::resource('blog', 'admin\BlogController');
 Route::resource('attribute', 'admin\AttributeController');
 Route::resource('category', 'admin\CategoryController', ['except' => ['create','show','edit']]);
