@@ -5,6 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Blog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
 
 class BlogController extends Controller
 {

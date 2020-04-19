@@ -6,6 +6,9 @@ use App\AttributeFamily;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
 
 class AttributeFamilyController extends Controller
 {

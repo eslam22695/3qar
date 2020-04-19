@@ -6,6 +6,9 @@ use App\City;
 use App\District;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
 
 class DistrictController extends Controller
 {
@@ -115,4 +118,5 @@ class DistrictController extends Controller
         session()->flash('success','تم الحذف بنجاح');
         return back();
     }
+
 }
