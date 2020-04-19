@@ -54,7 +54,9 @@ class AttributeController extends Controller
      */
     public function show($id)
     {
-        $values = AttributeValue::where
+        $values = AttributeValue::where('atribute_id',$id)->get();
+        $attribute = Attribute::find($id);
+        return view('admin.attribute.show',compact('values','attribute'));
     }
 
     /**
