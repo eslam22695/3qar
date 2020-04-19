@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
+use App\Attribute;
+use App\AttributeFamily;
+use App\AttributeValue;
 
 class AttributeController extends Controller
 {
@@ -14,7 +20,8 @@ class AttributeController extends Controller
      */
     public function index()
     {
-        //
+        $attributes = Attribute::where('status',1)->get();
+        return view('admin.attribute.index',compact('attributes'));
     }
 
     /**
@@ -24,7 +31,8 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        //
+        $families = AttributeFamily::where('status',1)->get();
+        return view('admin.attribute.create',compact('families'));
     }
 
     /**
@@ -46,7 +54,7 @@ class AttributeController extends Controller
      */
     public function show($id)
     {
-        //
+        $values = AttributeValue::where
     }
 
     /**
