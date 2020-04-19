@@ -43,7 +43,7 @@ class CreateItemsTable extends Migration
             $table->string('lang')->nullable();
             $table->string('phone')->nullable();
             $table->boolean('featured')->default(0);
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

@@ -23,7 +23,7 @@ class CreateDistrictsTable extends Migration
             $table->foreign('dimension_id')->references('id')->on('dimensions')->onUpdate('cascade')->onDelete('cascade');
 
             $table->string('name');
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

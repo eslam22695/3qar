@@ -19,7 +19,7 @@ class CreateAttributesTable extends Migration
             $table->foreign('family_id')->references('id')->on('attribute_families')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->text('icon')->nullable();
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ class CreateOwnersTable extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('email');
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
