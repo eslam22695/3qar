@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Session;
+use App\Option;
+use App\OptionGroup;
 
 class OptionController extends Controller
 {
@@ -17,7 +19,9 @@ class OptionController extends Controller
      */
     public function index()
     {
-        //
+        $options = Option::where('status',1)->get();
+        $groups = OptionGroup::where('status',1)->get();
+        return view('admin.option.index',compact('options','groups'));
     }
 
     /**
@@ -38,7 +42,18 @@ class OptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+            [
+                'name'  => 'required',
+                'option_group_id' => 'required|exists:option_groups,id',
+            ]);
+
+
+        $input = $request->all();
+
+        Option::create($input);
+        Session::flash('success','تم الاضافه بنجاح');
+        return redirect()->back();
     }
 
     /**
@@ -72,7 +87,22 @@ class OptionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(),
+            [
+                'name' => 'required',
+                'option_group_id' => 'required|exists:option_groups,id',
+            ]);
+
+        $input = $request->all();
+        if($Option = Option::find($id)){
+
+            $Option->update($input);
+            Session::flash('success','تم التعديل بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم التعديل ');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -83,6 +113,9 @@ class OptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete =  Option::find($id);
+        $delete->delete();
+        session()->flash('success','تم الحذف بنجاح');
+        return back();
     }
 }

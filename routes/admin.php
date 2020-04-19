@@ -10,4 +10,5 @@ Route::resource('category', 'admin\CategoryController', ['except' => ['create','
 Route::resource('city', 'admin\CityController', ['except' => ['create','show','edit']]);
 Route::resource('district', 'admin\DistrictController', ['except' => ['create','show','edit']]);
 Route::resource('attribute_family', 'admin\AttributeFamilyController', ['except' => ['create','show','edit']]);
-Route::resource('option_family', 'admin\OptionGroupController', ['except' => ['create','show','edit']]);
+Route::resource('option_group', 'admin\OptionGroupController', ['except' => ['create','show','edit']]);
+Route::resource('option', 'admin\OptionController', ['except' => ['create','show','edit']]);
