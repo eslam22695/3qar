@@ -49,8 +49,8 @@
                                                 </div> --}}
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="icon" class="control-label">الرابط</label>
-                                                        <input type="text" id="example-input-large" name="url" class="form-control input-lg">
+                                                        <label for="icon" class="control-label">الاسم</label>
+                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg">
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
@@ -102,8 +102,8 @@
                                                         
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <label for="icon" class="control-label">الرابط</label>
-                                                                <input type="text" id="example-input-large" name="url" class="form-control input-lg" value="{{$city->name}}">
+                                                                <label for="icon" class="control-label">الاسم</label>
+                                                                <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$city->name}}">
                                                             </div>
                                                         </div>
                                                     </div>
