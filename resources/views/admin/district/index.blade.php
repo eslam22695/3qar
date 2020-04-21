@@ -16,7 +16,13 @@
             @elseif(Session::has('danger'))
                 <div class="alert alert-danger">{{ Session::get('danger') }}</div>
             @endif
-            <h4 class="page-title">الاحياء</h4>
+            <h4 class="page-title">
+                @if($status === 0) <!--From Index-->
+                    الاحياء
+                @elseif($status === 1)<!--From Show-->
+                    احياء {{$city_district->name}}
+                @endif
+            </h4>
         </div>
         
     </div>
@@ -53,19 +59,23 @@
                                                         <input type="text" id="example-input-large" name="name" class="form-control input-lg">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">اسم المدينة</label>
-                                                        <select class="form-control" required name="city_id">
-                                                            <option value="" selected disabled>إختار المدينة</option>
-                                                            @if($cities != null)
-                                                                @foreach($cities as $city)
-                                                                    <option value="{{$city->id}}">{{$city->name}}</option>
-                                                                @endforeach
-                                                            @endif
-                                                        </select>
+                                                @if($status === 0)
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="icon" class="control-label">اسم المدينة</label>
+                                                            <select class="form-control" required name="city_id">
+                                                                <option value="" selected disabled>إختار المدينة</option>
+                                                                @if($cities != null)
+                                                                    @foreach($cities as $city)
+                                                                        <option value="{{$city->id}}">{{$city->name}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                @elseif($status === 1)
+                                                    <input type="hidden" name="city_id" value="{{$city_district->id}}">
+                                                @endif
                                                 <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
                                             </div>
                                         </div>
@@ -89,14 +99,16 @@
                     <thead>
                         <tr>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
+                            <th data-field="اسم المدينة"  data-align="center">اسم المدينة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if(isset($districts))
-                            @foreach($district as $district)
+                            @foreach($districts as $district)
                                 <tr>
                                     <td>{{$district->name}}</td>
+                                    <td>{{$district->city->name}}</td>
                                     <td class="actions">
                                         <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$district->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$district->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
@@ -119,19 +131,23 @@
                                                                 <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$district->name}}">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="icon" class="control-label">اسم المدينة</label>
-                                                                <select class="form-control" required name="city_id">
-                                                                    <option value="" disabled>إختار المدينة</option>
-                                                                    @if($cities != null)
-                                                                        @foreach($cities as $city)
-                                                                            <option value="{{$district->id}}" {{$district->city_id === $city->id ? 'selected' : ''}}>{{$district->name}}</option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </select>
+                                                        @if($status === 0)
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="icon" class="control-label">اسم المدينة</label>
+                                                                    <select class="form-control" required name="city_id">
+                                                                        <option value="" disabled>إختار المدينة</option>
+                                                                        @if($cities != null)
+                                                                            @foreach($cities as $city)
+                                                                                <option value="{{$city->id}}" {{$district->city_id === $city->id ? 'selected' : ''}}>{{$district->name}}</option>
+                                                                            @endforeach
+                                                                        @endif
+                                                                    </select>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @elseif($status === 1)
+                                                            <input type="hidden" name="city_id" value="{{$city_district->id}}">
+                                                        @endif
                                                     </div>
                                                     <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
                                                 </div>

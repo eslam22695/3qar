@@ -85,6 +85,7 @@
                                 <tr>
                                     <td>{{$city->name}}</td>
                                     <td class="actions">
+                                        <a href="{{ route('admin.city_districts.show',$city->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$city->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$city->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
                                     </td>

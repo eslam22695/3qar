@@ -89,6 +89,7 @@
                     <thead>
                         <tr>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
+                            <th data-field="اسم القسم"  data-align="center">اسم القسم</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -97,6 +98,7 @@
                             @foreach($families as $family)
                                 <tr>
                                     <td>{{$family->name}}</td>
+                                    <td>{{$family->category->name}}</td>
                                     <td class="actions">
                                         <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$family->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$family->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>

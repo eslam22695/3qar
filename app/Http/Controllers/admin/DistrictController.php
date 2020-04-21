@@ -19,9 +19,10 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        $district = District::where('status',1)->get();
+        $districts = District::where('status',1)->get();
         $cities = City::where('status',1)->get();
-        return view('admin.district.index',compact('district','cities'));
+        $status = 0;
+        return view('admin.district.index',compact('districts','cities','status'));
     }
 
     /**
@@ -45,7 +46,7 @@ class DistrictController extends Controller
         $this->validate(request(),
             [
                 'name'        => 'required',
-
+                'city_id' => 'required|exists:cities,id',
             ]);
 
 
@@ -64,7 +65,12 @@ class DistrictController extends Controller
      */
     public function show($id)
     {
-        //
+        //$id is id of city using city disticts route
+        $districts = District::where('city_id',$id)->where('status',1)->get();
+        $city_district = City::find($id);
+        $status = 1;
+        return view('admin.district.index',compact('districts','city_district','status'));
+
     }
 
     /**
@@ -90,7 +96,7 @@ class DistrictController extends Controller
         $this->validate(request(),
             [
                 'name'    => 'required',
-
+                'city_id' => 'required|exists:cities,id',
             ]);
 
         $input = $request->all();
