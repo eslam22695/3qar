@@ -45,7 +45,7 @@ class OptionController extends Controller
         $this->validate(request(),
             [
                 'name'  => 'required',
-                'option_group_id' => 'required|exists:option_groups,id',
+                'option_group_id' => 'nullable|exists:option_groups,id',
             ]);
 
 
@@ -90,7 +90,7 @@ class OptionController extends Controller
         $this->validate(request(),
             [
                 'name' => 'required',
-                'option_group_id' => 'required|exists:option_groups,id',
+                'option_group_id' => 'nullable|exists:option_groups,id',
             ]);
 
         $input = $request->all();

@@ -47,10 +47,10 @@
                                                         <input type="text" id="example-input-large" name="name" class="form-control input-lg">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
+                                                {{-- <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="icon" class="control-label">اسم عائلة المميزات</label>
-                                                        <select class="form-control" required name="option_group_id">
+                                                        <select class="form-control" name="option_group_id">
                                                             <option value="" selected disabled>إختار عائلة المميزات</option>
                                                             @if($groups != null)
                                                                 @foreach($groups as $group)
@@ -59,7 +59,7 @@
                                                             @endif
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@
                     <thead>
                         <tr>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
-                            <th data-field="عائلة المميزات"  data-align="center">عائلة المميزات</th>
+                            {{-- <th data-field="عائلة المميزات"  data-align="center">عائلة المميزات</th> --}}
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -92,7 +92,7 @@
                             @foreach($options as $option)
                                 <tr>
                                     <td>{{$option->name}}</td>
-                                    <td>{{$option->option_group->name}}</td>
+                                    {{-- <td>{{$option->option_group->name}}</td> --}}
                                     <td class="actions">
                                         <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$option->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$option->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
@@ -105,7 +105,7 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
-                                            {{Form::model($group,['method'=>'PATCH','action' => ['admin\OptionController@update',$group->id], 'files' => true])}}
+                                            {{Form::model($option,['method'=>'PATCH','action' => ['admin\OptionController@update',$option->id], 'files' => true])}}
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         
@@ -116,10 +116,10 @@
                                                             </div>
                                                         </div>
                                                         
-                                                        <div class="col-md-12">
+                                                        {{-- <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="icon" class="control-label">اسم عائلة المميزات</label>
-                                                                <select class="form-control" required name="option_group_id">
+                                                                <select class="form-control" name="option_group_id">
                                                                     <option value="" disabled>إختار عائلة المميزات</option>
                                                                     @if($groups != null)
                                                                         @foreach($groups as $group)
@@ -128,7 +128,7 @@
                                                                     @endif
                                                                 </select>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                     <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
                                                 </div>
