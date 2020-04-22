@@ -25,3 +25,11 @@ Route::resource('attribute', 'admin\AttributeController');
 //option
 Route::resource('option_group', 'admin\OptionGroupController', ['except' => ['create','show','edit']]);
 Route::resource('option', 'admin\OptionController', ['except' => ['create','show','edit']]);
+
+
+//services
+Route::resource('services', 'admin\ServiceController', ['except' => ['create','show','edit']]);
+
+
+//owner
+Route::resource('owner', 'admin\OwnerController');

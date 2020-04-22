@@ -29,7 +29,7 @@ $(function () {
 
     // Initialize ajax autocomplete:
     $('#autocomplete-ajax').autocomplete({
-        // serviceUrl: '/autosuggest/service/url',
+        // serviceUrl: '/autosuggest/services/url',
         lookup: countriesArray,
         lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
             var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');

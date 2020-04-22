@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
 
 class ServiceController extends Controller
 {
@@ -14,7 +18,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::where('status',1)->get();
+        return view('admin.services.index',compact('services'));
     }
 
     /**
@@ -35,7 +40,17 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+            [
+                'name'  => 'required',
+            ]);
+
+
+        $input = $request->all();
+
+        Service::create($input);
+        Session::flash('success','تم الاضافه بنجاح');
+        return redirect()->back();
     }
 
     /**
@@ -69,7 +84,21 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(),
+            [
+                'name' => 'required',
+            ]);
+
+        $input = $request->all();
+        if($service = Service::find($id)){
+
+            $service->update($input);
+            Session::flash('success','تم التعديل بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم التعديل ');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -80,6 +109,9 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete =  Service::find($id);
+        $delete->delete();
+        session()->flash('success','تم الحذف بنجاح');
+        return back();
     }
 }

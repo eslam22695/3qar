@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Owner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,8 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        //
+        $owners = Owner::where('status',1)->get();
+        return view('admin.owner.index',compact('owners'));
     }
 
     /**
@@ -27,7 +29,8 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.owner.create');
+
     }
 
     /**
@@ -38,7 +41,19 @@ class OwnerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+            [
+                'name'  => 'required',
+                'email'  => 'required',
+                'phone'  => 'required'
+            ]);
+
+
+        $input = $request->all();
+
+        Owner::create($input);
+        Session::flash('success','تم الاضافه بنجاح');
+        return redirect()->back();
     }
 
     /**
@@ -49,7 +64,8 @@ class OwnerController extends Controller
      */
     public function show($id)
     {
-        //
+        $owner = Owner::find($id);
+        return view('admin.owner.show',compact('owner'));
     }
 
     /**
@@ -60,7 +76,8 @@ class OwnerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $owner = Owner::find($id);
+        return view('admin.owner.edit',compact('owner'));
     }
 
     /**
@@ -72,7 +89,23 @@ class OwnerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(),
+            [
+                'name'  => 'required',
+                'email'  => 'required|email',
+                'phone'  => 'numeric|required',
+            ]);
+
+        $input = $request->all();
+        if($owner = Owner::find($id)){
+
+            $owner->update($input);
+            Session::flash('success','تم التعديل بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم التعديل ');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -83,6 +116,9 @@ class OwnerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete =  Owner::find($id);
+        $delete->delete();
+        session()->flash('success','تم الحذف بنجاح');
+        return back();
     }
 }
