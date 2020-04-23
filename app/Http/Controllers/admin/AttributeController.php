@@ -43,7 +43,26 @@ class AttributeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+        [
+            'name'  => 'required',
+            'family_id'  => 'required|exists:attribute_families,id',
+            'icon'   => 'required'
+        ]);
+
+        $input = $request->all();
+        $attribute = Attribute::create($input);
+
+        for($i=0;$i<count($input['attribute_value']);$i++){
+            $value = [
+                'attribute_id' => $attribute->id,
+                'value' => $input['attribute_value'][$i]
+            ];
+            AttributeValue::create($value);
+        }
+
+        Session::flash('success','تم الاضافه بنجاح');
+        return redirect()->back();
     }
 
     /**
@@ -54,7 +73,7 @@ class AttributeController extends Controller
      */
     public function show($id)
     {
-        $values = AttributeValue::where('atribute_id',$id)->get();
+        $values = AttributeValue::where('attribute_id',$id)->get();
         $attribute = Attribute::find($id);
         return view('admin.attribute.show',compact('values','attribute'));
     }
@@ -67,7 +86,10 @@ class AttributeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $attribute = Attribute::find($id);
+        $families = AttributeFamily::where('status',1)->get();
+        $values = AttributeValue::where('attribute_id',$id)->get();
+        return view('admin.attribute.edit',compact('values','attribute','families'));
     }
 
     /**
@@ -79,7 +101,28 @@ class AttributeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(),[
+            'name'  => 'required',
+            'family_id'  => 'required|exists:attribute_families,id',
+        ]);
+
+        $input = $request->all();
+        Attribute::find($id)->update($input);
+        $values = AttributeValue::where('attribute_id',$id)->get();
+        foreach($values as $value){
+            $value->delete();
+        }
+
+        for($i=0;$i<count($input['attribute_value']);$i++){
+            $value = [
+                'attribute_id' => $id,
+                'value' => $input['attribute_value'][$i]
+            ];
+            AttributeValue::create($value);
+        }
+
+        Session::flash('success','تم التعديل بنجاح');
+        return redirect()->back();
     }
 
     /**
@@ -90,6 +133,9 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete =  Attribute::find($id);
+        $delete->delete();
+        session()->flash('success','تم الحذف بنجاح');
+        return back();
     }
 }

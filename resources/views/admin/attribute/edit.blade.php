@@ -35,10 +35,10 @@
                             <tr>
                                 <td>الصورة</td>
                                 <td>
-                                    <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="image">
-                                    @if ($errors->has('image'))
+                                    <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="icon">
+                                    @if ($errors->has('icon'))
                                         <span class="alert alert-danger">
-                                            <strong>{{ $errors->first('image') }}</strong>
+                                            <strong>{{ $errors->first('icon') }}</strong>
                                         </span>
                                     @endif
 
@@ -51,7 +51,7 @@
                             <tr>
                                 <td>عائلة الخصائص</td>
                                 <td>
-                                    <select class="form-control" required name="city_id">
+                                    <select class="form-control" required name="family_id">
                                         <option value="" disabled>إختار عائلة الخصائص</option>
                                         @if($families != null)
                                             @foreach($families as $family)
@@ -67,13 +67,11 @@
                         
                         <tbody id="items_table">
                             @foreach($values as $value)
-                                <?php $i = 1; ?>
                                 <tr>
-                                    <td>قيمة {{$i}}</td>
-                                    <td><input type="text" class="form-control" name="attribute_value[]" value="{{$value->name}}" required></td>
-                                    <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td>
+                                    <td>قيمة</td>
+                                    <td><input type="text" class="form-control" name="attribute_value[]" value="{{$value->value}}" required></td>
+                                    <td><button type="button" name="remove" class="btn btn-danger btn_remove">X</button></td>
                                 </tr>
-                                <?php $i++; ?>
                             @endforeach
                             <tr>
                                 <td style="width:25%"></td>

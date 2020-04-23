@@ -36,10 +36,10 @@
                             <tr>
                                 <td>الصورة</td>
                                 <td>
-                                    <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="image" required>
-                                    @if ($errors->has('image'))
+                                    <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="icon" required>
+                                    @if ($errors->has('icon'))
                                         <span class="alert alert-danger">
-                                            <strong>{{ $errors->first('image') }}</strong>
+                                            <strong>{{ $errors->first('icon') }}</strong>
                                         </span>
                                     @endif
 
@@ -52,7 +52,7 @@
                             <tr>
                                 <td>عائلة الخصائص</td>
                                 <td>
-                                    <select class="form-control" required name="city_id">
+                                    <select class="form-control" required name="family_id">
                                         <option value="" disabled selected>إختار عائلة الخصائص</option>
                                         @if($families != null)
                                             @foreach($families as $family)
