@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
+use App\Setting;
 
 class SettingController extends Controller
 {
@@ -14,7 +18,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //
+        $setting = Setting::first();
+        return view('admin.setting.index',compact('setting'));
     }
 
     /**
@@ -35,7 +40,10 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        Setting::create($input);
+        Session::flash('success','تم الاضافه بنجاح');
+        return redirect()->back();
     }
 
     /**
@@ -69,7 +77,11 @@ class SettingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $Setting = Setting::find($id);
+        $Setting->update($input);
+        Session::flash('success','تم التعديل بنجاح');
+        return redirect()->back();
     }
 
     /**

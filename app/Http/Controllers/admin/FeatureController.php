@@ -7,9 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Session;
-use App\User;
+use App\Feature;
 
-class UserController extends Controller
+class FeatureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('status',1)->get();
-        return view('admin.user.index',compact('users'));
+        $features = Feature::all();
+        return view('admin.feature.index',compact('features'));
     }
 
     /**
@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        //
     }
 
     /**
@@ -40,17 +40,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(),
-        [
-            'name'  => 'required',
-            'email'  => 'required',
-            'phone'  => 'required',
-            'password'  => 'required',
-        ]);
-
         $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        User::create($input);
+
+        Feature::create($input);
         Session::flash('success','تم الاضافه بنجاح');
         return redirect()->back();
     }
@@ -63,8 +55,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('admin.user.show',compact('user'));
+        //
     }
 
     /**
@@ -75,8 +66,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('admin.user.edit',compact('user'));
+        //
     }
 
     /**
@@ -88,26 +78,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate(request(),
-        [
-            'name'  => 'required',
-            'email'  => 'required',
-            'phone'  => 'required',
-            'password'  => 'required',
-        ]);
-
         $input = $request->all();
+        if($Feature = Feature::find($id)){
 
-        $user = User::find($id);
-
-        if($input['password'] == null){
-            $input['password'] = $user->password;
+            $Feature->update($input);
+            Session::flash('success','تم التعديل بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم التعديل ');
+            return redirect()->back();
         }
-
-        $user->update($input);
-        
-        Session::flash('success','تم التعديل بنجاح');
-        return redirect()->back();
     }
 
     /**
@@ -118,7 +98,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $delete =  User::find($id);
+        $delete =  Feature::find($id);
         $delete->delete();
         session()->flash('success','تم الحذف بنجاح');
         return back();

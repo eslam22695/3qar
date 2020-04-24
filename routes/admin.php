@@ -26,10 +26,17 @@ Route::resource('attribute', 'admin\AttributeController');
 Route::resource('option_group', 'admin\OptionGroupController', ['except' => ['create','show','edit']]);
 Route::resource('option', 'admin\OptionController', ['except' => ['create','show','edit']]);
 
-
 //services
 Route::resource('services', 'admin\ServiceController', ['except' => ['create','show','edit']]);
 
-
 //owner
 Route::resource('owner', 'admin\OwnerController');
+
+//settings
+Route::resource('setting', 'admin\SettingController', ['except' => ['create','show','edit']]);
+
+//contacts
+Route::resource('contact', 'admin\ContactController', ['only' => ['index','show']]);
+
+//feature
+Route::resource('feature', 'admin\FeatureController', ['except' => ['create','show','edit']]);

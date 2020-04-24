@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
+use App\Contact;
 
 class ContactController extends Controller
 {
@@ -14,7 +18,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        $contacts = Contact::all();
+        return view('admin.contact.index',compact('contacts'));
     }
 
     /**
@@ -46,7 +51,8 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        //
+        $contact = Contact::find($id);
+        return view('admin.contact.show',compact('contact'));
     }
 
     /**

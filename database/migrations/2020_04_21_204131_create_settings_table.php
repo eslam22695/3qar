@@ -25,15 +25,6 @@ class CreateSettingsTable extends Migration
             $table->string('phone2')->nullable();
             $table->string('address')->nullable();
             $table->string('email')->nullable();
-            $table->text('feature1_icon')->nullable();
-            $table->text('feature1_title')->nullable();
-            $table->text('feature1_description')->nullable();
-            $table->text('feature2_icon')->nullable();
-            $table->text('feature2_title')->nullable();
-            $table->text('feature2_description')->nullable();
-            $table->text('feature3_icon')->nullable();
-            $table->text('feature3_title')->nullable();
-            $table->text('feature3_description')->nullable();
             $table->text('map')->nullable();
             $table->text('facebook')->nullable();
             $table->text('twitter')->nullable();
