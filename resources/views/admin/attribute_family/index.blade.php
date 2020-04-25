@@ -100,6 +100,7 @@
                                     <td>{{$family->name}}</td>
                                     <td>{{$family->category->name}}</td>
                                     <td class="actions">
+{{--                                        <a href="{{ route('admin.family_attribute.show',$family->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
                                         <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$family->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$family->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
                                     </td>

@@ -35,6 +35,10 @@
                             <td>الرسالة</td>
                             <td>{{ $serviceRequest->message }}</td>
                         </tr>
+                        <tr>
+                            <td>اسم الخدمة</td>
+                            <td>{{ $serviceRequest->service->name }}</td>
+                        </tr>
                         
                     </tbody>
                 </table>

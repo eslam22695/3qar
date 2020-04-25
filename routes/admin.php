@@ -20,6 +20,7 @@ Route::resource('city_districts', 'admin\DistrictController', ['except' => ['cre
 
 //attribute
 Route::resource('attribute_family', 'admin\AttributeFamilyController', ['except' => ['create','show','edit']]);
+//Route::resource('family_attribute', 'admin\AttributeFamilyController', ['except' => ['create','index','edit']]);
 Route::resource('attribute', 'admin\AttributeController');
 Route::get('attribute_value/{id}', 'admin\AttributeController@delete_value')->name('attribute_value.delete');
 
