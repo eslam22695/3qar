@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\ServiceRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,8 @@ class ServiceRequestController extends Controller
      */
     public function index()
     {
-        //
+        $serviceRequests = ServiceRequest::all();
+        return view('admin.service_request.index',compact('serviceRequests'));
     }
 
     /**
@@ -46,7 +48,8 @@ class ServiceRequestController extends Controller
      */
     public function show($id)
     {
-        //
+        $serviceRequest = ServiceRequest::find($id);
+        return view('admin.service_request.show',compact('serviceRequest'));
     }
 
     /**

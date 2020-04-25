@@ -214,6 +214,7 @@
                     <li><a href="{{route('admin.contact.index')}}" class="waves-effect"><i class="ion-images"></i> <span> طلبات التواصل </span></a></li>
                     <li><a href="{{route('admin.setting.index')}}" class="waves-effect"><i class="ion-images"></i> <span> الاعدادات </span></a></li>
                     <li><a href="{{route('admin.feature.index')}}" class="waves-effect"><i class="ion-images"></i> <span> ما يميز الشركة </span></a></li>
+                    <li><a href="{{route('admin.service_request.index')}}" class="waves-effect"><i class="ion-images"></i> <span> طلبات الخدمات </span></a></li>
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">

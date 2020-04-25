@@ -40,3 +40,6 @@ Route::resource('contact', 'admin\ContactController', ['only' => ['index','show'
 
 //feature
 Route::resource('feature', 'admin\FeatureController', ['except' => ['create','show','edit']]);
+
+//service_request
+Route::resource('service_request', 'admin\ServiceRequestController', ['only' => ['index','show']]);
