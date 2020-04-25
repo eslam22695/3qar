@@ -70,25 +70,25 @@
                                 <tr>
                                     <td>قيمة</td>
                                     <td><input type="text" class="form-control" name="attribute_value[]" value="{{$value->value}}" required></td>
-                                    <td><button type="button" name="remove" class="btn btn-danger btn_remove">X</button></td>
+                                    <td>
+                                        <a href="{{ route('admin.attribute_value.delete',$value->id) }}" class="btn btn-danger waves-effect" title="remove">X</a>
+                                    </td>
                                 </tr>
                             @endforeach
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered table-striped">
+                        <tbody>
                             <tr>
                                 <td style="width:25%"></td>
                                 <td><button type="button" id="add" class="btn btn-info form-control">إضافة قيمة اخرى</button></td>
                             </tr>
-                        </tbody>
-                    
-                    </table>
-                    <table class="table table-bordered table-striped">
-                    
-                        <tbody>
                             <tr>
                                 <td style="width:25%"></td>
                                 <td><button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button></td>
                             </tr>
                         </tbody>
-                    
                     </table>                    
                 {!! Form::close() !!}
 

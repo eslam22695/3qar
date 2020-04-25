@@ -21,6 +21,7 @@ Route::resource('city_districts', 'admin\DistrictController', ['except' => ['cre
 //attribute
 Route::resource('attribute_family', 'admin\AttributeFamilyController', ['except' => ['create','show','edit']]);
 Route::resource('attribute', 'admin\AttributeController');
+Route::get('attribute_value/{id}', 'admin\AttributeController@delete_value')->name('attribute_value.delete');
 
 //option
 Route::resource('option_group', 'admin\OptionGroupController', ['except' => ['create','show','edit']]);

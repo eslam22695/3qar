@@ -47,7 +47,8 @@ class AttributeController extends Controller
         [
             'name'  => 'required',
             'family_id'  => 'required|exists:attribute_families,id',
-            'icon'   => 'required'
+            'icon'   => 'required',
+            'attribute_value.*'   => 'required',
         ]);
 
         $input = $request->all();
@@ -135,7 +136,14 @@ class AttributeController extends Controller
     {
         $delete =  Attribute::find($id);
         $delete->delete();
-        session()->flash('success','تم الحذف بنجاح');
-        return back();
+        Session::flash('success','تم الحذف بنجاح');
+        return redirect()->back();
+    }
+
+    public function delete_value($attribute_value_id){
+        $delete =  AttributeValue::find($attribute_value_id);
+        $delete->delete();
+        Session::flash('success','تم الحذف بنجاح');
+        return redirect()->back();
     }
 }
