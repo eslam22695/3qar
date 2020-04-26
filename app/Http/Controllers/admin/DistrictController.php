@@ -19,8 +19,8 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        $districts = District::where('status',1)->get();
-        $cities = City::where('status',1)->get();
+        $districts = District::where('status',1)->orderBy('id','desc')->get();
+        $cities = City::where('status',1)->orderBy('id','desc')->get();
         $status = 0;
         return view('admin.district.index',compact('districts','cities','status'));
     }
@@ -44,10 +44,10 @@ class DistrictController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),
-            [
-                'name'        => 'required',
-                'city_id' => 'required|exists:cities,id',
-            ]);
+        [
+            'name'        => 'required',
+            'city_id' => 'required|exists:cities,id',
+        ]);
 
 
         $input = $request->all();
@@ -66,7 +66,7 @@ class DistrictController extends Controller
     public function show($id)
     {
         //$id is id of city using city disticts route
-        $districts = District::where('city_id',$id)->where('status',1)->get();
+        $districts = District::where('city_id',$id)->where('status',1)->orderBy('id','desc')->get();
         $city_district = City::find($id);
         $status = 1;
         return view('admin.district.index',compact('districts','city_district','status'));
@@ -94,10 +94,10 @@ class DistrictController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(),
-            [
-                'name'    => 'required',
-                'city_id' => 'required|exists:cities,id',
-            ]);
+        [
+            'name'    => 'required',
+            'city_id' => 'required|exists:cities,id',
+        ]);
 
         $input = $request->all();
         if($district = District::find($id)){
@@ -119,9 +119,14 @@ class DistrictController extends Controller
      */
     public function destroy($id)
     {
-        $delete =  District::find($id);
-        $delete->delete();
-        session()->flash('success','تم الحذف بنجاح');
-        return back();
+        if($district = District::find($id)){
+
+            $district->delete();
+            Session::flash('success','تم الحذف بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم الحذف ');
+            return redirect()->back();
+        }
     }
 }

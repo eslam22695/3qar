@@ -20,11 +20,20 @@
                 @if($status === 0) <!--From Index-->
                     الاحياء
                 @elseif($status === 1)<!--From Show-->
-                    احياء {{$city_district->name}}
+                    احياء {{isset($city_district) && $city_district->name != null ? $city_district->name : ''}}
                 @endif
             </h4>
         </div>
-        
+        @if ($errors->has('name'))
+            <span class="alert alert-danger">
+                <strong>{{ $errors->first('name') }}</strong>
+            </span>
+        @endif
+        @if ($errors->has('city_id'))
+            <span class="alert alert-danger">
+                <strong>{{ $errors->first('city_id') }}</strong>
+            </span>
+        @endif
     </div>
 </div>
 
@@ -47,12 +56,6 @@
                                     {{Form::open(['method'=>'POST','action' => ['admin\DistrictController@store'], 'files' => true])}}
                                         <div class="modal-body">
                                             <div class="row">
-                                                {{-- <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">الاسم</label>
-                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg">
-                                                    </div>
-                                                </div> --}}
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="icon" class="control-label">اسم الحى</label>
@@ -108,7 +111,7 @@
                             @foreach($districts as $district)
                                 <tr>
                                     <td>{{$district->name}}</td>
-                                    <td>{{$district->city->name}}</td>
+                                    <td>{{$district->city->name != null ? $district->city->name : ''}}</td>
                                     <td class="actions">
                                         <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$district->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$district->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>

@@ -18,7 +18,16 @@
             @endif
             <h4 class="page-title">عائله الخصائص</h4>
         </div>
-        
+        @if ($errors->has('name'))
+            <span class="alert alert-danger">
+                <strong>{{ $errors->first('name') }}</strong>
+            </span>
+        @endif
+        @if ($errors->has('category_id'))
+            <span class="alert alert-danger">
+                <strong>{{ $errors->first('category_id') }}</strong>
+            </span>
+        @endif
     </div>
 </div>
 
@@ -41,12 +50,7 @@
                                     {{Form::open(['method'=>'POST','action' => ['admin\AttributeFamilyController@store'], 'files' => true])}}
                                         <div class="modal-body">
                                             <div class="row">
-                                                {{-- <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">الاسم</label>
-                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg">
-                                                    </div>
-                                                </div> --}}
+                                               
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="icon" class="control-label">الاسم</label>
@@ -98,9 +102,9 @@
                             @foreach($families as $family)
                                 <tr>
                                     <td>{{$family->name}}</td>
-                                    <td>{{$family->category->name}}</td>
+                                    <td>{{$family->category->name != null ? $family->category->name : ''}}</td>
                                     <td class="actions">
-{{--                                        <a href="{{ route('admin.family_attribute.show',$family->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
+                                        {{--<a href="{{ route('admin.family_attribute.show',$family->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
                                         <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$family->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$family->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
                                     </td>

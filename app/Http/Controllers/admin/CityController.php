@@ -18,8 +18,8 @@ class CityController extends Controller
      */
     public function index()
     {
-            $cities = City::where('status',1)->get();
-            return view('admin.city.index',compact('cities'));
+        $cities = City::where('status',1)->orderBy('id','desc')->get();
+        return view('admin.city.index',compact('cities'));
     }
 
     /**
@@ -41,9 +41,9 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),
-            [
-                'name'                   => 'required',
-            ]);
+        [
+            'name'  => 'required',
+        ]);
 
 
         $input = $request->all();
@@ -86,9 +86,9 @@ class CityController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(),
-            [
-                'name'                   => 'required',
-            ]);
+        [
+            'name'                   => 'required',
+        ]);
 
         $input = $request->all();
         if($city = City::find($id)){
@@ -111,9 +111,14 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-        $delete =  City::find($id);
-        $delete->delete();
-        session()->flash('success','تم الحذف بنجاح');
-        return back();
+        if($city = City::find($id)){
+
+            $city->delete();
+            Session::flash('success','تم الحذف بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم الحذف ');
+            return redirect()->back();
+        }
     }
 }

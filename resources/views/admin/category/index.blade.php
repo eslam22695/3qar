@@ -18,7 +18,11 @@
             @endif
             <h4 class="page-title">الاقسام</h4>
         </div>
-        
+        @if ($errors->has('name'))
+            <span class="alert alert-danger">
+                <strong>{{ $errors->first('name') }}</strong>
+            </span>
+        @endif
     </div>
 </div>
 
@@ -41,15 +45,9 @@
                                     {{Form::open(['method'=>'POST','action' => ['admin\CategoryController@store'], 'files' => true])}}
                                         <div class="modal-body">
                                             <div class="row">
-                                                {{-- <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">الاسم</label>
-                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg">
-                                                    </div>
-                                                </div> --}}
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="icon" class="control-label">الاسم</label>
+                                                        <label for="name" class="control-label">الاسم</label>
                                                         <input type="text" id="example-input-large" name="name" class="form-control input-lg">
                                                     </div>
                                                 </div>

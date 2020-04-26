@@ -18,8 +18,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-            $cats = Category::where('status',1)->get();
-            return view('admin.category.index',compact('cats'));
+        $cats = Category::where('status',1)->orderBy('id','desc')->get();
+        return view('admin.category.index',compact('cats'));
 
     }
 
@@ -42,18 +42,16 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),
-            [
-                'name'  => 'required',
-            ]);
-
+        [
+            'name'  => 'required',
+        ]);
 
         $input = $request->all();
 
         Category::create($input);
+
         Session::flash('success','تم الاضافه بنجاح');
-        return redirect()->back();
-
-
+        return redirect()->back();    
     }
     /**
      * Display the specified resource.
@@ -86,11 +84,12 @@ class CategoryController extends Controller
     public function update(Request $request , $id)
     {
         $this->validate(request(),
-            [
-                'name' => 'required',
-            ]);
+        [
+            'name' => 'required',
+        ]);
 
         $input = $request->all();
+
         if($Category = Category::find($id)){
 
             $Category->update($input);
@@ -111,9 +110,14 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $delete =  Category::find($id);
-        $delete->delete();
-        session()->flash('success','تم الحذف بنجاح');
-        return back();
+        if($Category = Category::find($id)){
+
+            $Category->delete();
+            Session::flash('success','تم الحذف بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم الحذف ');
+            return redirect()->back();
+        }
     }
 }

@@ -20,9 +20,9 @@ class AttributeController extends Controller
      */
     public function index()
     {
-        $attributes = Attribute::where('status',1)->get();
-//        $attributeFamily = AttributeFamily::where('status',1)->get();
-//        $status = 0;
+        $attributes = Attribute::where('status',1)->orderBy('id','desc')->get();
+        //$attributeFamily = AttributeFamily::where('status',1)->get();
+        //$status = 0;
         return view('admin.attribute.index',compact('attributes'));
     }
 
@@ -79,8 +79,8 @@ class AttributeController extends Controller
         $values = AttributeValue::where('attribute_id',$id)->get();
         $attribute = Attribute::find($id);
 
-//        $attribute_families = AttributeFamily::find($id);
-//        $status = 1;
+        //$attribute_families = AttributeFamily::find($id);
+        //$status = 1;
         return view('admin.attribute.show',compact('values','attribute'));
     }
 

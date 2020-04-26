@@ -19,8 +19,8 @@ class AttributeFamilyController extends Controller
      */
     public function index()
     {
-            $families = AttributeFamily::where('status',1)->get();
-            $cats = Category::where('status',1)->get();
+            $families = AttributeFamily::where('status',1)->orderBy('id','desc')->get();
+            $cats = Category::where('status',1)->orderBy('id','desc')->get();
             return view('admin.attribute_family.index',compact('families','cats'));
     }
 
@@ -43,9 +43,9 @@ class AttributeFamilyController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),
-            [
-                'name'  => 'required',
-            ]);
+        [
+            'name'  => 'required',
+        ]);
 
 
         $input = $request->all();
@@ -87,9 +87,9 @@ class AttributeFamilyController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(),
-            [
-                'name' => 'required',
-            ]);
+        [
+            'name' => 'required',
+        ]);
 
         $input = $request->all();
         if($families = AttributeFamily::find($id)){
@@ -111,9 +111,14 @@ class AttributeFamilyController extends Controller
      */
     public function destroy($id)
     {
-        $delete =  AttributeFamily::find($id);
-        $delete->delete();
-        session()->flash('success','تم الحذف بنجاح');
-        return back();
+        if($families = AttributeFamily::find($id)){
+
+            $families->delete();
+            Session::flash('success','تم الحذف بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم الحذف ');
+            return redirect()->back();
+        }
     }
 }
