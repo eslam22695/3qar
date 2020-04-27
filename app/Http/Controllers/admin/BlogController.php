@@ -46,10 +46,19 @@ class BlogController extends Controller
                 'title'        => 'required',
                 'description'  => 'required',
                 'content'      => 'required',
+                'image'      => 'required',
             ]);
 
 
         $input = $request->all();
+
+        if(isset($input['image'])){
+            $image = $input['image'];
+            $destination = public_path('admin_assets/images/blog');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $image->move($destination,$name);
+            $input['image'] = $name;
+        }
 
         Blog::create($input);
         Session::flash('success','تم الاضافه بنجاح');
@@ -96,11 +105,24 @@ class BlogController extends Controller
             [
                 'title'        => 'required',
                 'description'  => 'required',
-                'content'      => 'required'
+                'content'      => 'required',
+                'image'      => 'nullable'
             ]);
 
         $input = $request->all();
         if($blog = Blog::find($id)){
+
+            if(isset($input['image'])){
+                $path=$blog['image'];
+                $image = $input['image'];
+                $destination = public_path('admin_assets/images/blog');
+                if(file_exists($destination.' / '.$path)){
+                    unlink($destination.' / '.$path);
+                }
+                $name=time().'.'.$image->getClientOriginalName();
+                $image->move($destination,$name);
+                $input['image']=$name;
+            }
 
             $blog->update($input);
             Session::flash('success','تم التعديل بنجاح');

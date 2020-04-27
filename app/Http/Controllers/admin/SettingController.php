@@ -41,6 +41,23 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+
+        if(isset($input['logo'])){
+            $logo = $input['logo'];
+            $destination = public_path('admin_assets/images/setting');
+            $name = time().'.'.$logo->getClientOriginalExtension();
+            $logo->move($destination,$name);
+            $input['logo'] = $name;
+        }
+
+        if(isset($input['about_image'])){
+            $about_image = $input['about_image'];
+            $destination = public_path('admin_assets/images/setting');
+            $name = time().'.'.$about_image->getClientOriginalExtension();
+            $about_image->move($destination,$name);
+            $input['about_image'] = $name;
+        }
+
         Setting::create($input);
         Session::flash('success','تم الاضافه بنجاح');
         return redirect()->back();
@@ -78,6 +95,31 @@ class SettingController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
+        
+        if(isset($input['logo'])){
+            $path=$attribute['logo'];
+            $logo = $input['logo'];
+            $destination = public_path('admin_assets/images/setting');
+            if(file_exists($destination.' / '.$path)){
+                unlink($destination.' / '.$path);
+            }
+            $name=time().'.'.$logo->getClientOriginalName();
+            $logo->move($destination,$name);
+            $input['logo']=$name;
+        }
+
+        if(isset($input['about_image'])){
+            $path=$attribute['about_image'];
+            $about_image = $input['about_image'];
+            $destination = public_path('admin_assets/images/setting');
+            if(file_exists($destination.' / '.$path)){
+                unlink($destination.' / '.$path);
+            }
+            $name=time().'.'.$about_image->getClientOriginalName();
+            $about_image->move($destination,$name);
+            $input['about_image']=$name;
+        }
+
         $Setting = Setting::find($id);
         $Setting->update($input);
         Session::flash('success','تم التعديل بنجاح');

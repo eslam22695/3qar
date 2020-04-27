@@ -45,3 +45,7 @@ Route::resource('feature', 'admin\FeatureController', ['except' => ['create','sh
 
 //service_request
 Route::resource('service_request', 'admin\ServiceRequestController', ['only' => ['index','show']]);
+
+//item
+Route::resource('item', 'admin\ItemController');
+Route::get('item_family/{family_id}','admin\ItemController@item_family')->name('item_family');

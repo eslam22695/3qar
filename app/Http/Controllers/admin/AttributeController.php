@@ -54,6 +54,15 @@ class AttributeController extends Controller
         ]);
 
         $input = $request->all();
+
+        if(isset($input['icon'])){
+            $icon = $input['icon'];
+            $destination = public_path('admin_assets/images/attribute');
+            $name = time().'.'.$icon->getClientOriginalExtension();
+            $icon->move($destination,$name);
+            $input['icon'] = $name;
+        }
+
         $attribute = Attribute::create($input);
 
         for($i=0;$i<count($input['attribute_value']);$i++){
@@ -113,7 +122,22 @@ class AttributeController extends Controller
         ]);
 
         $input = $request->all();
-        Attribute::find($id)->update($input);
+        $attribute = Attribute::find($id);
+
+        if(isset($input['icon'])){
+            $path=$attribute['icon'];
+            $icon = $input['icon'];
+            $destination = public_path('admin_assets/images/attribute');
+            if(file_exists($destination.' / '.$path)){
+                unlink($destination.' / '.$path);
+            }
+            $name=time().'.'.$icon->getClientOriginalName();
+            $icon->move($destination,$name);
+            $input['icon']=$name;
+        }
+
+        $attribute->update($input);
+
         $values = AttributeValue::where('attribute_id',$id)->get();
         foreach($values as $value){
             $value->delete();

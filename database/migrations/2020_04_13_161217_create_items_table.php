@@ -23,7 +23,7 @@ class CreateItemsTable extends Migration
             $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')->references('id')->on('cities')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->unsignedBigInteger('dimension_id');
+            $table->unsignedBigInteger('dimension_id')->nullable();
             $table->foreign('dimension_id')->references('id')->on('dimensions')->onUpdate('cascade')->onDelete('cascade');
 
 
@@ -37,6 +37,7 @@ class CreateItemsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('price');
+            $table->string('area');
             $table->string('main_image');
             $table->string('map')->nullable();
             $table->string('lat')->nullable();

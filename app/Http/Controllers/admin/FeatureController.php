@@ -40,7 +40,22 @@ class FeatureController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate(request(),
+        [
+            'title'  => 'required',
+            'description'  => 'required',
+            'icon'   => 'required',
+        ]);
+
         $input = $request->all();
+
+        if(isset($input['icon'])){
+            $icon = $input['icon'];
+            $destination = public_path('admin_assets/images/feature');
+            $name = time().'.'.$icon->getClientOriginalExtension();
+            $icon->move($destination,$name);
+            $input['icon'] = $name;
+        }
 
         Feature::create($input);
         Session::flash('success','تم الاضافه بنجاح');
@@ -78,9 +93,26 @@ class FeatureController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate(request(),
+        [
+            'title'  => 'required',
+            'description'  => 'required',
+            'icon'   => 'nullable',
+        ]);
+
         $input = $request->all();
         if($Feature = Feature::find($id)){
-
+            if(isset($input['icon'])){
+                $path=$Feature['icon'];
+                $icon = $input['icon'];
+                $destination = public_path('admin_assets/images/feature');
+                if(file_exists($destination.' / '.$path)){
+                    unlink($destination.' / '.$path);
+                }
+                $name=time().'.'.$icon->getClientOriginalName();
+                $icon->move($destination,$name);
+                $input['icon']=$name;
+            }
             $Feature->update($input);
             Session::flash('success','تم التعديل بنجاح');
             return redirect()->back();

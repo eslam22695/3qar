@@ -23,11 +23,11 @@
                 <strong>{{ $errors->first('name') }}</strong>
             </span>
         @endif
-        @if ($errors->has('category_id'))
+        {{-- @if ($errors->has('category_id'))
             <span class="alert alert-danger">
                 <strong>{{ $errors->first('category_id') }}</strong>
             </span>
-        @endif
+        @endif --}}
     </div>
 </div>
 
@@ -57,7 +57,7 @@
                                                         <input type="text" id="example-input-large" name="name" class="form-control input-lg">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
+                                                {{-- <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="icon" class="control-label">اسم القسم</label>
                                                         <select class="form-control" required name="category_id">
@@ -69,7 +69,7 @@
                                                             @endif
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
                                             </div>
                                         </div>
@@ -93,7 +93,7 @@
                     <thead>
                         <tr>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
-                            <th data-field="اسم القسم"  data-align="center">اسم القسم</th>
+                            {{-- <th data-field="اسم القسم"  data-align="center">اسم القسم</th> --}}
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -102,7 +102,7 @@
                             @foreach($families as $family)
                                 <tr>
                                     <td>{{$family->name}}</td>
-                                    <td>{{$family->category->name != null ? $family->category->name : ''}}</td>
+                                    {{-- <td>{{$family->category->name != null ? $family->category->name : ''}}</td> --}}
                                     <td class="actions">
                                         {{--<a href="{{ route('admin.family_attribute.show',$family->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
                                         <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$family->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
@@ -116,7 +116,7 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
-                                            {{Form::model($cat,['method'=>'PATCH','action' => ['admin\AttributeFamilyController@update',$cat->id], 'files' => true])}}
+                                            {{Form::model($family,['method'=>'PATCH','action' => ['admin\AttributeFamilyController@update',$family->id], 'files' => true])}}
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         
@@ -127,7 +127,7 @@
                                                             </div>
                                                         </div>
                                                         
-                                                        <div class="col-md-12">
+                                                        {{-- <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="icon" class="control-label">اسم القسم</label>
                                                                 <select class="form-control" required name="category_id">
@@ -139,7 +139,7 @@
                                                                     @endif
                                                                 </select>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                     <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
                                                 </div>
