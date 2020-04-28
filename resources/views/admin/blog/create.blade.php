@@ -50,11 +50,11 @@
                             </tr>
                             <tr>
                                 <td>الوصف</td>
-                                <td><textarea class="form-control" name="description" required></textarea></td>
+                                <td><textarea class="form-control" name="description"></textarea></td>
                             </tr>
                             <tr>
                                 <td>المحتوي</td>
-                                <td><textarea id="content2" name="content" required></textarea></td>
+                                <td><textarea id="content2" name="content"></textarea></td>
                             </tr>
                             <tr>
                                 <td style="width:25%"></td>
