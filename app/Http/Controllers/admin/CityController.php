@@ -121,4 +121,13 @@ class CityController extends Controller
             return redirect()->back();
         }
     }
+
+    /**
+     * District Ajax
+     */
+    public function district(Request $request)
+    {
+        $districts = DB::table('districts')->where('city_id',$request->city_id)->pluck("name","id")->all();
+        return response()->json($districts);
+    }
 }

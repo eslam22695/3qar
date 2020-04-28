@@ -17,4 +17,8 @@ class Attribute extends Model
         return $this->belongsTo('App\AttributeFamily', 'family_id', 'id');
     }
 
+    public function values()
+    {
+        return $this->hasMany('App\AttributeValue', 'attribute_id', 'id');
+    }
 }

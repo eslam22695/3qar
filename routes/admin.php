@@ -17,6 +17,7 @@ Route::resource('category', 'admin\CategoryController', ['except' => ['create','
 Route::resource('city', 'admin\CityController', ['except' => ['create','show','edit']]);
 Route::resource('district', 'admin\DistrictController', ['except' => ['create','show','edit']]);
 Route::resource('city_districts', 'admin\DistrictController', ['except' => ['create','index','edit']]);
+Route::get('get_districts','admin\CityController@district')->name('get_districts');
 
 //attribute
 Route::resource('attribute_family', 'admin\AttributeFamilyController', ['except' => ['create','show','edit']]);

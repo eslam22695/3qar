@@ -7,6 +7,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Session;
+use App\Item;
+use App\Category;
+use App\AttributeFamily;
+use App\Attribute;
+use App\AttributeValue;
+use App\City;
+use App\District;
+use App\Option;
+use App\Owner;
+use App\ItemAttribute;
+use App\ItemOption;
+use App\ItemImage;
 
 class ItemController extends Controller
 {
@@ -17,7 +29,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::where('status',1)->orderBy('id','desc')->get();
+        return view('admin.item.index',compact('items'));
     }
 
     /**
@@ -27,7 +40,23 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        $families = AttributeFamily::where('status',1)->orderBy('id','desc')->get();
+        return view('admin.item.create',compact('families'));
+    }
+
+    /**
+     * Display the rest of create form.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function item_family($family_id){
+        $cats = Category::where('status',1)->orderBy('id','desc')->get();
+        $cities = City::where('status',1)->orderBy('id','desc')->get();
+        $attributes = Attribute::where('family_id',$family_id)->where('status',1)->orderBy('id','desc')->get();
+        $options = Option::where('status',1)->orderBy('id','desc')->get();
+        $owners = Owner::where('status',1)->orderBy('id','desc')->get();
+        return view('admin.item.complete_create',compact('cats','cities','attributes','options','owners'));
     }
 
     /**
@@ -38,7 +67,71 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+        [
+            'name'  => 'required',
+            'description'  => 'required',
+            'price'  => 'required',
+            'main_image'  => 'required',
+            'phone'  => 'required',
+            'area'  => 'required',
+            'district_id'  => 'required|exists:districts,id',
+            'city_id'  => 'required|exists:cities,id',
+            'category_id'  => 'required|exists:categories,id',
+            'owner_id'  => 'required|exists:owners,id',
+        ]);
+
+        $input = $request->all();
+
+        if(isset($input['main_image'])){
+            $image = $input['main_image'];
+            $destination = public_path('admin_assets/images/item');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $image->move($destination,$name);
+            $input['main_image'] = $name;
+        }
+
+        $item = Item::create($input);
+
+        for($v=0;$v<count($input['values']);$v++){
+            $values = [
+                'attribute_value_id' => $input['values'][$v],
+                'item_id' => $item->id
+            ];
+            ItemAttribute::create($values);
+        }
+
+        for($o=0;$o<count($input['options']);$o++){
+            $options = [
+                'option_id' => $input['options'][$o],
+                'item_id' => $item->id
+            ];
+            ItemOption::create($options);
+        }
+
+        if(isset($input['images'])){
+            for($i = 0; $i < count($input['images']); $i++){
+
+                if($input['images'][$i]){
+                    $image = $input['images'][$i];
+                    $destination = public_path('admin_assets/images/item');
+                    $name = time().$item->id.$i.'images.'.$image->getClientOriginalExtension();
+                    $image->move($destination,$name);
+                    $input['images'][$i] = $name;
+                }
+
+                $images = [
+                    'image' => $input['images'][$i],
+                    'item_id' => $item->id
+                ];
+                ItemImage::create($images);
+            }
+        }
+
+        Session::flash('success','تم الاضافه بنجاح');
+        return redirect()->back();
+
+        
     }
 
     /**
@@ -83,16 +176,10 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete =  Item::find($id);
+        $delete->delete();
+        session()->flash('success','تم الحذف بنجاح');
+        return back();
     }
 
-    /**
-     * Display the rest of create form.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function item_family($id){
-
-    }
 }
