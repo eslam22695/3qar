@@ -18,7 +18,13 @@
             @endif
             <h4 class="page-title">الخدمات</h4>
         </div>
-        
+    </div>
+    <div class="col-md-12">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
 </div>
 
@@ -51,6 +57,11 @@
                                                     <div class="form-group">
                                                         <label for="icon" class="control-label">الاسم</label>
                                                         <input type="text" id="example-input-large" name="name" class="form-control input-lg">
+                                                        @if ($errors->has('name'))
+                                                            <span class="alert alert-danger">
+                                                                <strong>{{ $errors->first('name') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
@@ -104,6 +115,11 @@
                                                             <div class="form-group">
                                                                 <label for="icon" class="control-label">الاسم</label>
                                                                 <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$service->name}}">
+                                                                @if ($errors->has('name'))
+                                                                    <span class="alert alert-danger">
+                                                                        <strong>{{ $errors->first('name') }}</strong>
+                                                                    </span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>

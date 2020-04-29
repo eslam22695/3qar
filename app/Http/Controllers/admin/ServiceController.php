@@ -42,7 +42,7 @@ class ServiceController extends Controller
     {
         $this->validate(request(),
             [
-                'name'  => 'required',
+                'name'  => 'required|unique:services,name',
             ]);
 
 
@@ -86,7 +86,7 @@ class ServiceController extends Controller
     {
         $this->validate(request(),
             [
-                'name' => 'required',
+                'name' => 'required|unique:services,name',
             ]);
 
         $input = $request->all();

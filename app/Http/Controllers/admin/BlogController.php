@@ -46,7 +46,7 @@ class BlogController extends Controller
                 'title'        => 'required',
                 'description'  => 'required',
                 'content'      => 'required',
-                'image'      => 'required',
+                'image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
             ]);
 
 
@@ -123,6 +123,7 @@ class BlogController extends Controller
                 $image->move($destination,$name);
                 $input['image']=$name;
             }
+
 
             $blog->update($input);
             Session::flash('success','تم التعديل بنجاح');

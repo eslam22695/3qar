@@ -45,7 +45,7 @@ class DistrictController extends Controller
     {
         $this->validate(request(),
         [
-            'name'        => 'required',
+            'name'        => 'required|unique:districts,name',
             'city_id' => 'required|exists:cities,id',
         ]);
 
@@ -95,7 +95,7 @@ class DistrictController extends Controller
     {
         $this->validate(request(),
         [
-            'name'    => 'required',
+            'name'    => 'required|unique:districts,name',
             'city_id' => 'required|exists:cities,id',
         ]);
 

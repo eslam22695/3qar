@@ -22,6 +22,13 @@
                 <div class="alert alert-danger">{{ Session::get('danger') }}</div>
             @endif
         </div>
+        <div class="col-md-12">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     </div>
     <div class="row">
         <div class="col-12">
@@ -35,7 +42,7 @@
                             <tr>
                                 <td>الصورة</td>
                                 <td>
-                                    <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="image" required>
+                                    <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="image" required >
                                     @if ($errors->has('image'))
                                         <span class="alert alert-danger">
                                             <strong>{{ $errors->first('image') }}</strong>
@@ -46,15 +53,38 @@
                             </tr>
                             <tr>
                                 <td>العنوان</td>
-                                <td><input type="text" class="form-control" name="title" required></td>
+                                <td><input type="text" class="form-control" name="title" required {{old('title')}}></td>
+                                @if ($errors->has('title'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('title') }}</strong>
+                                    </span>
+                                @endif
                             </tr>
                             <tr>
                                 <td>الوصف</td>
+<<<<<<< HEAD
+                                <td><textarea class="form-control" name="description" required>{{old('description')}}</textarea></td>
+                                @if ($errors->has('description'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                            </tr>
+                            <tr>
+                                <td>المحتوي</td>
+                                <td><textarea id="content2" name="content" required>{{old('content')}}</textarea></td>
+                                @if ($errors->has('content'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('content') }}</strong>
+                                    </span>
+                                @endif
+=======
                                 <td><textarea class="form-control" name="description"></textarea></td>
                             </tr>
                             <tr>
                                 <td>المحتوي</td>
                                 <td><textarea id="content2" name="content"></textarea></td>
+>>>>>>> c428f97a15dec2d170eea89fa85a27574179b4e5
                             </tr>
                             <tr>
                                 <td style="width:25%"></td>

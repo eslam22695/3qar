@@ -22,6 +22,13 @@
                 <div class="alert alert-danger">{{ Session::get('danger') }}</div>
             @endif
         </div>
+        <div class="col-md-12">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     </div>
     <div class="row">
         <div class="col-12">
@@ -47,14 +54,29 @@
                             <tr>
                                 <td>العنوان</td>
                                 <td><input type="text" class="form-control" name="title" value="{{$blog->title}}" required></td>
+                                @if ($errors->has('title'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('title') }}</strong>
+                                    </span>
+                                @endif
                             </tr>
                            <tr>
                                 <td>الوصف</td>
                                 <td><textarea class="form-control" name="description" required>{{$blog->description}}</textarea></td>
-                            </tr>
+                               @if ($errors->has('description'))
+                                   <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                               @endif
+                           </tr>
                             <tr>
                                 <td>المحتوي</td>
                                 <td><textarea id="content2" name="content" required>{!!$blog->content!!}</textarea></td>
+                                @if ($errors->has('content'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('content') }}</strong>
+                                    </span>
+                                @endif
                             </tr>
                             <tr>
                                 <td style="width:25%"></td>

@@ -157,7 +157,14 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::find($id);
+        $value =ItemAttribute::where('item_id',$id)->first();
+        $attribute = Attribute::where('family_id',$value->attribute_value->attribute->family_id)->get();
+        $cats = Category::where('status',1)->orderBy('id','desc')->get();
+        $cities = City::where('status',1)->orderBy('id','desc')->get();
+        $options = Option::where('status',1)->orderBy('id','desc')->get();
+        $owners = Owner::where('status',1)->orderBy('id','desc')->get();
+        return view('admin.item.edit',compact('item','attribute','cats','cities','options','owners'));
     }
 
     /**
@@ -169,7 +176,67 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(),
+            [
+                'name'  => 'required',
+                'description'  => 'required',
+                'price'  => 'required',
+                'main_image'  => 'required',
+                'phone'  => 'required',
+                'area'  => 'required',
+                'district_id'  => 'required|exists:districts,id',
+                'city_id'  => 'required|exists:cities,id',
+                'category_id'  => 'required|exists:categories,id',
+                'owner_id'  => 'required|exists:owners,id',
+            ]);
+
+        $input = $request->all();
+        if($item = Item::find($id)){
+
+
+        if(isset($input['main_image'])){
+            $path=$item['main_image'];
+            $image = $input['main_image'];
+            $destination = public_path('admin_assets/images/item');
+            if(file_exists($destination.' / '.$path)){
+                unlink($destination.' / '.$path);
+            }
+            $name=time().'.'.$image->getClientOriginalName();
+            $image->move($destination,$name);
+            $input['main_image']=$name;
+        }
+
+
+            if(isset($input['images'])){
+                for($i = 0; $i < count($input['images']); $i++){
+
+                    if($input['images'][$i]){
+                        $path=$item['images'];
+                        $image = $input['images'][$i];
+                        $destination = public_path('admin_assets/images/item');
+                        if(file_exists($destination.' / '.$path)){
+                            unlink($destination.' / '.$path);
+                        }
+                        $name = time().$item->id.$i.'images.'.$image->getClientOriginalName();
+                        $image->move($destination,$name);
+                        $input['images'][$i] = $name;
+                    }
+//                    $images = [
+//                        'image' => $input['images'][$i],
+//                        'item_id' => $item->id
+//                    ];
+//                    ItemImage::create($images);
+                }
+            }
+
+
+            $item->update($input);
+            Session::flash('success','تم التعديل بنجاح');
+            return redirect()->back();
+        }else{
+            Session::flash('danger','لم يتم التعديل ');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -187,3 +254,5 @@ class ItemController extends Controller
     }
 
 }
+
+
