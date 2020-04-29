@@ -42,10 +42,20 @@ class UserController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required',
-            'email'  => 'required',
+            'name'  => 'required|max:191',
+            'email'  => 'required|email|unique:users',
             'phone'  => 'required',
-            'password'  => 'required',
+            'password'  => 'required|min:6',
+        ],[
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
+            'email.required' => 'حقل البريد الالكترونى مطلوب',
+            'email.email' => 'حقل البريد الالكترونى يجب أن يكون بريد الكترونى صالح',
+            'email.unique' => 'البريد الالكترونى موجود مسبقا',
+            'phone.required' => 'حقل رقم الجوال مطلوب',
+            'password.required' => 'حقل كلمة المرور مطلوب',
+            'password.min' => 'حقل كلمة المرور على الأقل 6 حروف',
+
         ]);
 
         $input = $request->all();
@@ -90,10 +100,19 @@ class UserController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required',
-            'email'  => 'required',
+            'name'  => 'required|max:191',
+            'email'  => 'required|email|unique:users,email,'.$id,
             'phone'  => 'required',
-            'password'  => 'required',
+            'password'  => 'nullable|min:6',
+        ],[
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
+            'email.required' => 'حقل البريد الالكترونى مطلوب',
+            'email.email' => 'حقل البريد الالكترونى يجب أن يكون بريد الكترونى صالح',
+            'email.unique' => 'البريد الالكترونى موجود مسبقا',
+            'phone.required' => 'حقل رقم الجوال مطلوب',
+            'password.min' => 'حقل كلمة المرور على الأقل 6 حروف',
+
         ]);
 
         $input = $request->all();

@@ -42,9 +42,17 @@ class FeatureController extends Controller
     {
         $this->validate(request(),
         [
-            'title'  => 'required',
+            'title'  => 'required|max:191',
             'description'  => 'required',
-            'icon'   => 'required',
+            'icon'   => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],[
+            'title.required' => 'حقل الاسم مطلوب',
+            'title.max' => 'حقل الاسم أكبر من اللازم',
+            'description.required' => 'حقل الوصف مطلوب',
+            'icon.required' => 'حقل الصورة مطلوب',
+            'icon.image' => 'حقل الصورة يجب أن يكون صورة',
+            'icon.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'icon.max' => 'أقصى مساحة للصوره 2 ميجابايت',
         ]);
 
         $input = $request->all();
@@ -56,9 +64,13 @@ class FeatureController extends Controller
             $icon->move($destination,$name);
             $input['icon'] = $name;
         }
-
-        Feature::create($input);
-        Session::flash('success','تم الاضافه بنجاح');
+        if(Feature::count() === 3){
+            Session::flash('success','لا يمكن إضافة اكثر من 3 مميزات');
+        }else{
+            Feature::create($input);
+            Session::flash('success','تم الاضافه بنجاح');
+        }
+        
         return redirect()->back();
     }
 
@@ -95,9 +107,16 @@ class FeatureController extends Controller
     {
         $this->validate(request(),
         [
-            'title'  => 'required',
+            'title'  => 'required|max:191',
             'description'  => 'required',
-            'icon'   => 'nullable',
+            'icon'   => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],[
+            'title.required' => 'حقل الاسم مطلوب',
+            'title.max' => 'حقل الاسم أكبر من اللازم',
+            'description.required' => 'حقل الوصف مطلوب',
+            'icon.image' => 'حقل الصورة يجب أن يكون صورة',
+            'icon.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'icon.max' => 'أقصى مساحة للصوره 2 ميجابايت',
         ]);
 
         $input = $request->all();

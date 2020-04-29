@@ -44,7 +44,10 @@ class AttributeFamilyController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required',
+            'name'  => 'required|max:191',
+        ],[
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
         ]);
 
 
@@ -88,7 +91,10 @@ class AttributeFamilyController extends Controller
     {
         $this->validate(request(),
         [
-            'name' => 'required',
+            'name' => 'required|max:191',
+        ],[
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
         ]);
 
         $input = $request->all();

@@ -43,10 +43,13 @@ class OptionController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),
-            [
-                'name'  => 'required',
-                'option_group_id' => 'nullable|exists:option_groups,id',
-            ]);
+        [
+            'name'  => 'required|max:191',
+            'option_group_id' => 'nullable|exists:option_groups,id',
+        ],[
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
+        ]);
 
 
         $input = $request->all();
@@ -88,10 +91,13 @@ class OptionController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(),
-            [
-                'name' => 'required',
-                'option_group_id' => 'nullable|exists:option_groups,id',
-            ]);
+        [
+            'name' => 'required|max:191',
+            'option_group_id' => 'nullable|exists:option_groups,id',
+        ],[
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
+        ]);
 
         $input = $request->all();
         if($Option = Option::find($id)){

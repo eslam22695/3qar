@@ -47,10 +47,20 @@ class AttributeController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required',
+            'name'  => 'required|max:191',
             'family_id'  => 'required|exists:attribute_families,id',
-            'icon'   => 'required',
+            'icon'   => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'attribute_value.*'   => 'required',
+        ],[
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
+            'family_id.required' => 'حقل عائلة الخصائص مطلوب',
+            'family_id.exists' => 'عائلة الخصائص غير موجودة',
+            'icon.required' => 'حقل الصورة مطلوب',
+            'icon.image' => 'حقل الصورة يجب أن يكون صورة',
+            'icon.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'icon.max' => 'أقصى مساحة للصوره 2 ميجابايت',
+            'attribute_value.required' => 'يجب إدخال قيمة على الاقل',
         ]);
 
         $input = $request->all();
@@ -117,8 +127,17 @@ class AttributeController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(),[
-            'name'  => 'required',
+            'name'  => 'required|max:191',
             'family_id'  => 'required|exists:attribute_families,id',
+            'icon'   => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ],[
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
+            'family_id.required' => 'حقل عائلة الخصائص مطلوب',
+            'family_id.exists' => 'عائلة الخصائص غير موجودة',
+            'icon.image' => 'حقل الصورة يجب أن يكون صورة',
+            'icon.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'icon.max' => 'أقصى مساحة للصوره 2 ميجابايت',
         ]);
 
         $input = $request->all();
