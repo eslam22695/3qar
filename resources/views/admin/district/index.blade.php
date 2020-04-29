@@ -20,20 +20,28 @@
                 @if($status === 0) <!--From Index-->
                     الاحياء
                 @elseif($status === 1)<!--From Show-->
-                    احياء {{isset($city_district) && $city_district->name != null ? $city_district->name : ''}}
+  احياء                {{isset($city_district) && $city_district->name != null ? $city_district->name : ''}}
                 @endif
             </h4>
         </div>
-        @if ($errors->has('name'))
-            <span class="alert alert-danger">
-                <strong>{{ $errors->first('name') }}</strong>
-            </span>
-        @endif
-        @if ($errors->has('city_id'))
-            <span class="alert alert-danger">
-                <strong>{{ $errors->first('city_id') }}</strong>
-            </span>
-        @endif
+        <div class="col-md-12">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+
+        {{--@if ($errors->has('name'))--}}
+            {{--<span class="alert alert-danger">--}}
+                {{--<strong>{{ $errors->first('name') }}</strong>--}}
+            {{--</span>--}}
+        {{--@endif--}}
+        {{--@if ($errors->has('city_id'))--}}
+            {{--<span class="alert alert-danger">--}}
+                {{--<strong>{{ $errors->first('city_id') }}</strong>--}}
+            {{--</span>--}}
+        {{--@endif--}}
     </div>
 </div>
 
@@ -60,6 +68,11 @@
                                                     <div class="form-group">
                                                         <label for="icon" class="control-label">اسم الحى</label>
                                                         <input type="text" id="example-input-large" name="name" class="form-control input-lg">
+                                                        @if ($errors->has('name'))
+                                                            <span class="alert alert-danger">
+                                                                <strong>{{ $errors->first('name') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 @if($status === 0)
@@ -74,6 +87,11 @@
                                                                     @endforeach
                                                                 @endif
                                                             </select>
+                                                            @if ($errors->has('city_id'))
+                                                                <span class="alert alert-danger">
+                                                                    <strong>{{ $errors->first('city_id') }}</strong>
+                                                                </span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 @elseif($status === 1)
@@ -132,6 +150,11 @@
                                                             <div class="form-group">
                                                                 <label for="icon" class="control-label">الاسم</label>
                                                                 <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$district->name}}">
+                                                                @if ($errors->has('name'))
+                                                                    <span class="alert alert-danger">
+                                                                        <strong>{{ $errors->first('name') }}</strong>
+                                                                    </span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         @if($status === 0)
@@ -146,6 +169,11 @@
                                                                             @endforeach
                                                                         @endif
                                                                     </select>
+                                                                    @if ($errors->has('city_id'))
+                                                                        <span class="alert alert-danger">
+                                                                            <strong>{{ $errors->first('city_id') }}</strong>
+                                                                        </span>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         @elseif($status === 1)

@@ -51,21 +51,29 @@
                                             <strong>{{ $errors->first('icon') }}</strong>
                                         </span>
                                     @endif
-
                                 </td>
                             </tr>
                             <tr>
                                 <td>الاسم</td>
-<<<<<<< HEAD
+
                                 <td><input type="text" class="form-control" name="name" required></td>
                                 @if ($errors->has('name'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
-=======
+
                                 <td><input type="text" class="form-control" name="name" required {{old('name')}}></td>
->>>>>>> c428f97a15dec2d170eea89fa85a27574179b4e5
+
+                                <td>
+                                    <input type="text" class="form-control" name="name" required {{old('name')}}>
+                                    @if ($errors->has('name'))
+                                        <span class="alert alert-danger">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </td>
+
                             </tr>
                             <tr>
                                 <td>عائلة الخصائص</td>
@@ -78,6 +86,11 @@
                                             @endforeach
                                         @endif
                                     </select>
+                                    @if ($errors->has('family_id'))
+                                        <span class="alert alert-danger">
+                                            <strong>{{ $errors->first('family_id') }}</strong>
+                                        </span>
+                                    @endif
                                 </td>
                             </tr>
                         </tbody>

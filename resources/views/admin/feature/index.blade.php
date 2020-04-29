@@ -20,6 +20,13 @@
         </div>
         
     </div>
+    <div class="col-md-12">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
 </div>
 
 <div class="row">
@@ -44,19 +51,34 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="icon" class="control-label">الاسم</label>
-                                                        <input type="text" id="example-input-large" name="title" class="form-control input-lg">
+                                                        <input type="text" id="example-input-large" name="title" class="form-control input-lg" {{old('title')}}>
+                                                        @if ($errors->has('title'))
+                                                            <span class="alert alert-danger">
+                                                                <strong>{{ $errors->first('title') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="icon" class="control-label">الصورة</label>
                                                         <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="icon">
+                                                        @if ($errors->has('icon'))
+                                                            <span class="alert alert-danger">
+                                                                <strong>{{ $errors->first('icon') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="icon" class="control-label">الوصف</label>
-                                                        <textarea id="textarea" class="form-control" rows="2" name="description"></textarea>
+                                                        <textarea id="textarea" class="form-control" rows="2" name="description">{{old('description')}}</textarea>
+                                                        @if ($errors->has('description'))
+                                                            <span class="alert alert-danger">
+                                                                <strong>{{ $errors->first('description') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
@@ -115,18 +137,33 @@
                                                             <div class="form-group">
                                                                 <label for="icon" class="control-label">الاسم</label>
                                                                 <input type="text" id="example-input-large" name="title" class="form-control input-lg" value="{{$feature->title}}">
+                                                                @if ($errors->has('title'))
+                                                                    <span class="alert alert-danger">
+                                                                        <strong>{{ $errors->first('title') }}</strong>
+                                                                    </span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="icon" class="control-label">الصورة</label>
                                                                 <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="icon">
+                                                                @if ($errors->has('icon'))
+                                                                    <span class="alert alert-danger">
+                                                                        <strong>{{ $errors->first('icon') }}</strong>
+                                                                    </span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="icon" class="control-label">الوصف</label>
                                                                 <textarea id="textarea" class="form-control" rows="2" name="description">{{$feature->description}}</textarea>
+                                                                @if ($errors->has('description'))
+                                                                    <span class="alert alert-danger">
+                                                                        <strong>{{ $errors->first('description') }}</strong>
+                                                                    </span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>

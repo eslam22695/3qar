@@ -18,11 +18,19 @@
             @endif
             <h4 class="page-title">الاقسام</h4>
         </div>
-        @if ($errors->has('name'))
-            <span class="alert alert-danger">
-                <strong>{{ $errors->first('name') }}</strong>
-            </span>
-        @endif
+
+        <div class="col-md-12">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        {{--@if ($errors->has('name'))--}}
+            {{--<span class="alert alert-danger">--}}
+                {{--<strong>{{ $errors->first('name') }}</strong>--}}
+            {{--</span>--}}
+        {{--@endif--}}
     </div>
 </div>
 
@@ -103,6 +111,12 @@
                                                                 <label for="icon" class="control-label">الاسم</label>
                                                                 <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$cat->name}}">
                                                             </div>
+                                                            @if ($errors->has('name'))
+                                                                <span class="alert alert-danger">
+                                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                                </span>
+                                                            @endif
+
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>

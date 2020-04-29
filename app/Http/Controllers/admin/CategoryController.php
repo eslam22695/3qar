@@ -43,7 +43,7 @@ class CategoryController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required',
+            'name'  => 'required|unique:categories,name',
         ]);
 
         $input = $request->all();
@@ -85,7 +85,7 @@ class CategoryController extends Controller
     {
         $this->validate(request(),
         [
-            'name' => 'required',
+            'name' => 'required|unique:categories,name',
         ]);
 
         $input = $request->all();

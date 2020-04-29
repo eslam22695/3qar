@@ -42,7 +42,7 @@
                             <tr>
                                 <td>الصورة</td>
                                 <td>
-                                    <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="image" required>
+                                    <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="image" required >
                                     @if ($errors->has('image'))
                                         <span class="alert alert-danger">
                                             <strong>{{ $errors->first('image') }}</strong>
@@ -53,7 +53,7 @@
                             </tr>
                             <tr>
                                 <td>العنوان</td>
-                                <td><input type="text" class="form-control" name="title" required></td>
+                                <td><input type="text" class="form-control" name="title" required {{old('title')}}></td>
                                 @if ($errors->has('title'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('title') }}</strong>
@@ -63,7 +63,7 @@
                             <tr>
                                 <td>الوصف</td>
 <<<<<<< HEAD
-                                <td><textarea class="form-control" name="description" required></textarea></td>
+                                <td><textarea class="form-control" name="description" required>{{old('description')}}</textarea></td>
                                 @if ($errors->has('description'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('description') }}</strong>
@@ -72,7 +72,7 @@
                             </tr>
                             <tr>
                                 <td>المحتوي</td>
-                                <td><textarea id="content2" name="content" required></textarea></td>
+                                <td><textarea id="content2" name="content" required>{{old('content')}}</textarea></td>
                                 @if ($errors->has('content'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('content') }}</strong>

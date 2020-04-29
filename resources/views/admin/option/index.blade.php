@@ -20,6 +20,13 @@
         </div>
         
     </div>
+    <div class="col-md-12">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
 </div>
 
 <div class="row">
@@ -44,7 +51,12 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="icon" class="control-label">الاسم</label>
-                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg">
+                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg" {{old('name')}}>
+                                                        @if ($errors->has('name'))
+                                                            <span class="alert alert-danger">
+                                                                <strong>{{ $errors->first('name') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-md-12">
@@ -113,6 +125,11 @@
                                                             <div class="form-group">
                                                                 <label for="icon" class="control-label">الاسم</label>
                                                                 <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$option->name}}">
+                                                                @if ($errors->has('name'))
+                                                                    <span class="alert alert-danger">
+                                                                        <strong>{{ $errors->first('name') }}</strong>
+                                                                    </span>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         

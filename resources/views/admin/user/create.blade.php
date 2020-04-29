@@ -41,6 +41,7 @@
                         
                             <tr>
                                 <td>الاسم</td>
+<<<<<<< HEAD
                                 <td><input type="text" class="form-control" name="name" required></td>
                                 @if ($errors->has('name'))
                                     <span class="alert alert-danger">
@@ -74,6 +75,49 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
+=======
+                                <td>
+                                    <input type="text" class="form-control" name="name" {{old('name')}} required>
+                                    @if ($errors->has('name'))
+                                        <span class="alert alert-danger">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>البريد الالكترونى</td>
+                                <td>
+                                    <input type="email" class="form-control" name="email" {{old('email')}} required>
+                                    @if ($errors->has('email'))
+                                        <span class="alert alert-danger">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>الجوال</td>
+                                <td>
+                                    <input type="text" class="form-control" name="phone" {{old('phone')}} required>
+                                    @if ($errors->has('phone'))
+                                        <span class="alert alert-danger">
+                                            <strong>{{ $errors->first('phone') }}</strong>
+                                        </span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>كلمة المرور</td>
+                                <td>
+                                    <input type="password" class="form-control" name="password" {{old('password')}} required>
+                                    @if ($errors->has('password'))
+                                        <span class="alert alert-danger">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                </td>
+>>>>>>> 6b5adf90e86a96fd67e76a36c071df610af6ff3b
                             </tr>
                             <tr>
                                 <td style="width:25%"></td>

@@ -45,7 +45,7 @@ class OwnerController extends Controller
             [
                 'name'  => 'required|unique:owners,name',
                 'email'  => 'required|email|unique:owners,email',
-                'phone'  => 'required'
+                'phone'  => 'required|digits:11|unique:owners,phone'
             ]);
 
 
@@ -93,7 +93,7 @@ class OwnerController extends Controller
             [
                 'name'  => 'required|unique:owners,name',
                 'email'  => 'required|email|unique:owners,email',
-                'phone'  => 'numeric|required',
+                'phone'  => 'numeric|required|digits:11|unique:owners,phone',
             ]);
 
         $input = $request->all();
