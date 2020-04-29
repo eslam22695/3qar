@@ -22,6 +22,13 @@
                 <div class="alert alert-danger">{{ Session::get('danger') }}</div>
             @endif
         </div>
+        <div class="col-md-12">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     </div>
     <div class="row">
         <div class="col-12">
@@ -42,12 +49,18 @@
                                             <strong>{{ $errors->first('icon') }}</strong>
                                         </span>
                                     @endif
-
                                 </td>
                             </tr>
                             <tr>
                                 <td>الاسم</td>
-                                <td><input type="text" class="form-control" name="name" required {{old('name')}}></td>
+                                <td>
+                                    <input type="text" class="form-control" name="name" required {{old('name')}}>
+                                    @if ($errors->has('name'))
+                                        <span class="alert alert-danger">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </td>
                             </tr>
                             <tr>
                                 <td>عائلة الخصائص</td>
@@ -60,6 +73,11 @@
                                             @endforeach
                                         @endif
                                     </select>
+                                    @if ($errors->has('family_id'))
+                                        <span class="alert alert-danger">
+                                            <strong>{{ $errors->first('family_id') }}</strong>
+                                        </span>
+                                    @endif
                                 </td>
                             </tr>
                         </tbody>
