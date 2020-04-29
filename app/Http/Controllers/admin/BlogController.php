@@ -124,6 +124,7 @@ class BlogController extends Controller
                 $input['image']=$name;
             }
 
+
             $blog->update($input);
             Session::flash('success','تم التعديل بنجاح');
             return redirect()->back();

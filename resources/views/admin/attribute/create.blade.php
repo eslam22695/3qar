@@ -22,6 +22,15 @@
                 <div class="alert alert-danger">{{ Session::get('danger') }}</div>
             @endif
         </div>
+
+        <div class="col-md-12">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+
     </div>
     <div class="row">
         <div class="col-12">
@@ -48,6 +57,11 @@
                             <tr>
                                 <td>الاسم</td>
                                 <td><input type="text" class="form-control" name="name" required></td>
+                                @if ($errors->has('name'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
                             </tr>
                             <tr>
                                 <td>عائلة الخصائص</td>
@@ -72,6 +86,11 @@
                                 <td>قيمة الخاصية 1</td>
                                 <td><input type="text" class="form-control" name="attribute_value[]" required></td>
                                 <td><button type="button" id="add" class="btn btn-info form-control">إضافة قيمة اخرى</button></td>
+                                @if ($errors->has('attribute_value'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('attribute_value') }}</strong>
+                                    </span>
+                                @endif
                             </tr>
                         </tbody>
                     

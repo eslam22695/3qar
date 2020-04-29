@@ -142,7 +142,7 @@
                                                                         <option value="" disabled>إختار المدينة</option>
                                                                         @if($cities != null)
                                                                             @foreach($cities as $city)
-                                                                                <option value="{{$city->id}}" {{$district->city_id === $city->id ? 'selected' : ''}}>{{$district->name}}</option>
+                                                                                <option value="{{$city->id}}" {{$district->city_id === $city->id ? 'selected' : ''}}>{{$city->name}}</option>
                                                                             @endforeach
                                                                         @endif
                                                                     </select>

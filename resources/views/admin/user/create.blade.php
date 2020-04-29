@@ -22,6 +22,13 @@
                 <div class="alert alert-danger">{{ Session::get('danger') }}</div>
             @endif
         </div>
+        <div class="col-md-12">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     </div>
     <div class="row">
         <div class="col-12">
@@ -35,18 +42,38 @@
                             <tr>
                                 <td>الاسم</td>
                                 <td><input type="text" class="form-control" name="name" required></td>
+                                @if ($errors->has('name'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
                             </tr>
                             <tr>
                                 <td>البريد الالكترونى</td>
                                 <td><input type="email" class="form-control" name="email" required></td>
+                                @if ($errors->has('email'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                             </tr>
                             <tr>
                                 <td>الجوال</td>
                                 <td><input type="text" class="form-control" name="phone" required></td>
+                                @if ($errors->has('phone'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
                             </tr>
                             <tr>
                                 <td>كلمة المرور</td>
                                 <td><input type="password" class="form-control" name="password" required></td>
+                                @if ($errors->has('password'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
                             </tr>
                             <tr>
                                 <td style="width:25%"></td>
