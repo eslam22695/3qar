@@ -79,6 +79,8 @@ class ItemController extends Controller
             'city_id'  => 'required|exists:cities,id',
             'category_id'  => 'required|exists:categories,id',
             'owner_id'  => 'required|exists:owners,id',
+        ],[
+            'name.required' => 'الاسم مطلوب',
         ]);
 
         $input = $request->all();
@@ -129,9 +131,7 @@ class ItemController extends Controller
         }
 
         Session::flash('success','تم الاضافه بنجاح');
-        return redirect()->back();
-
-        
+        return redirect()->back();        
     }
 
     /**
@@ -142,7 +142,11 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Item::find($id);
+        $attributes = ItemAttribute::where('item_id',$id)->where('status',1)->get();
+        $options = ItemOption::where('item_id',$id)->where('status',1)->get();
+        $images = ItemImage::where('item_id',$id)->where('status',1)->get();
+        return view('admin.item.show',compact('item','attributes','options','images'));
     }
 
     /**

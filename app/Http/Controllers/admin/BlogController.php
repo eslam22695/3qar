@@ -18,8 +18,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blog = Blog::where('status',1)->get();
-        return view('admin.blog.index',compact('blog'));
+        $blogs = Blog::where('status',1)->get();
+        return view('admin.blog.index',compact('blogs'));
     }
 
     /**

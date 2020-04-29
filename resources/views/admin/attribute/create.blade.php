@@ -18,7 +18,7 @@
         <div class="col-sm-12">
             @if (Session::has('success'))
                 <div class="alert alert-success">{{ Session::get('success') }}</div>
-            @elseif(Session::has('danger'))
+            @elseif(Session::has('dangepr'))
                 <div class="alert alert-danger">{{ Session::get('danger') }}</div>
             @endif
         </div>
@@ -56,12 +56,16 @@
                             </tr>
                             <tr>
                                 <td>الاسم</td>
+<<<<<<< HEAD
                                 <td><input type="text" class="form-control" name="name" required></td>
                                 @if ($errors->has('name'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
+=======
+                                <td><input type="text" class="form-control" name="name" required {{old('name')}}></td>
+>>>>>>> c428f97a15dec2d170eea89fa85a27574179b4e5
                             </tr>
                             <tr>
                                 <td>عائلة الخصائص</td>

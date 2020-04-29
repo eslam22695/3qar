@@ -43,8 +43,8 @@ class OwnerController extends Controller
     {
         $this->validate(request(),
             [
-                'name'  => 'required',
-                'email'  => 'required',
+                'name'  => 'required|unique:owners,name',
+                'email'  => 'required|email|unique:owners,email',
                 'phone'  => 'required'
             ]);
 
@@ -91,8 +91,8 @@ class OwnerController extends Controller
     {
         $this->validate(request(),
             [
-                'name'  => 'required',
-                'email'  => 'required|email',
+                'name'  => 'required|unique:owners,name',
+                'email'  => 'required|email|unique:owners,email',
                 'phone'  => 'numeric|required',
             ]);
 
