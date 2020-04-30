@@ -42,7 +42,7 @@
         <div class="col-12">
             <div class="card-box">
                 <h4 class="header-title m-t-0 m-b-20">اضافه عقار</h4>
-                {{Form::open($item,['method'=>'POST','action' => ['admin\ItemController@update',$item->id], 'files' => true])}}
+                {{Form::model($item,['method'=>'PATCH','action' => ['admin\ItemController@update',$item->id], 'files' => true])}}
 
                 <div class="tabs-vertical-env">
 
@@ -158,7 +158,7 @@
                                             <option value="" selected disabled>إختار المالك</option>
                                             @if($owners != null)
                                                 @foreach($owners as $owner)
-                                                    <option value="{{$owner->id}}">{{$owner->name}}</option>
+                                                    <option value="{{$owner->id}}" {{$owner->id === $item->owner_id ? 'selected' : ''}}>{{$owner->name}}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -186,7 +186,7 @@
                                         <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="main_image" >
                                         <img src="{{asset('admin_assets/images/item/'.$item->main_image)}}" class="img-responsive" width="100px" height="100px">
 
-                                    @if ($errors->has('main_image'))
+                                        @if ($errors->has('main_image'))
                                             <span class="alert alert-danger">
                                                 <strong>{{ $errors->first('main_image') }}</strong>
                                             </span>
@@ -197,9 +197,12 @@
                                     <div class="form-group">
                                         <label for="icon" class="control-label">الصور</label>
                                         <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="images[]" multiple>
+                                        <div class="multi-images">
                                         @foreach($images as $image)
-                                        <img src="{{asset('admin_assets/images/item/'.$image->image)}}" class="img-responsive" width="100px" height="100px">
+                                            <img src="{{asset('admin_assets/images/item/'.$image->image)}}" class="img-responsive img{{$image->id}}" width="100px" height="100px">
+                                            <a href="javascript:void(0)" data-toggle="tooltip"  data-id="{{ $image->id }}" data-original-title="حذف" class="btn btn-danger btn-sm deleteImage img{{$image->id}}">حذف</a>
                                         @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -234,7 +237,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="icon" class="control-label">تعديل الحى</label>
-                                        <select class="form-control" required name="district_id">
+                                        <select class="form-control" name="district_id">
                                             <option value="" selected disabled>إختار الحى</option>
                                             @if(!empty($districts))
                                                 @foreach($districts as $key => $value)
@@ -294,7 +297,7 @@
 
                 </div>
 
-                <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
+                <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
 
                 {!! Form::close() !!}
             </div>
@@ -305,6 +308,31 @@
 
 @section('scripts')
     <script>
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('body').on('click', '.deleteImage', function () {
+     
+            var image_id = $(this).data("id");
+            confirm("هل تريد مسح هذة الصورة !");
+            var route = "{{route('admin.item.edit',$item->id)}}";
+            $.ajax({
+                type: "DELETE",
+                url: "{{ url('admin/delete_image') }}"+'/'+image_id,
+                success: function (data) {
+                    $('.img'+image_id).fadeOut();
+                    alert('تم مسح الصورة !');
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        });
+
         $("select[name='city_id']").change(function(){
             var city_id = $(this).val();
             if(city_id){
@@ -353,5 +381,6 @@
 
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap" async defer></script>
+
 
 @endsection
