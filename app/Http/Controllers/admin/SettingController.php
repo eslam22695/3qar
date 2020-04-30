@@ -40,6 +40,38 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate(request(),
+        [
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'about_image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'phone1' => 'numeric',
+            'phone2' => 'numeric',
+            'email' => 'email',
+            'facebook' => 'url',
+            'twitter' => 'url',
+            'linkedin' => 'url',
+            'instagram' => 'url',
+            'youtube' => 'url',
+            'android' => 'url',
+            'apple' => 'url',
+        ],[
+            'logo.image' => 'حقل اللوجو يجب أن يكون صورة',
+            'logo.mimes' => 'حقل اللوجو يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'about_image.image' => 'حقل صورة من نحن يجب أن يكون صورة',
+            'about_image.mimes' => 'حقل صورة من نحن يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'phone1.numeric' => 'حقل رقم الجوال 1 يجب أن يكون رقم',
+            'phone2.numeric' => 'حقل رقم الجوال 2 يجب أن يكون رقم',
+            'email.email' => 'حقل البريد الالكترونى يجب أن يكون بريد الكترونى صالح',
+            'facebook.url' => 'حقل الفيسبوك يجب أن يكون رابط',
+            'twitter.url' => 'حقل تويتر يجب أن يكون رابط',
+            'linkedin.url' => 'حقل لينكدأن يجب أن يكون رابط',
+            'instagram.url' => 'حقل انستجرام يجب أن يكون رابط',
+            'youtube.url' => 'حقل يوتيوب يجب أن يكون رابط',
+            'android.url' => 'حقل رابط تطبيق الاندرويد يجب أن يكون رابط',
+            'apple.url' => 'حقل رابط تطبيق الايفون يجب أن يكون رابط',
+
+        ]);
+
         $input = $request->all();
 
         if(isset($input['logo'])){
@@ -94,6 +126,38 @@ class SettingController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate(request(),
+        [
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'about_image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'phone1' => 'numeric',
+            'phone2' => 'numeric',
+            'email' => 'email',
+            'facebook' => 'url',
+            'twitter' => 'url',
+            'linkedin' => 'url',
+            'instagram' => 'url',
+            'youtube' => 'url',
+            'android' => 'url',
+            'apple' => 'url',
+        ],[
+            'logo.image' => 'حقل اللوجو يجب أن يكون صورة',
+            'logo.mimes' => 'حقل اللوجو يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'about_image.image' => 'حقل صورة من نحن يجب أن يكون صورة',
+            'about_image.mimes' => 'حقل صورة من نحن يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'phone1.numeric' => 'حقل رقم الجوال 1 يجب أن يكون رقم',
+            'phone2.numeric' => 'حقل رقم الجوال 2 يجب أن يكون رقم',
+            'email.email' => 'حقل البريد الالكترونى يجب أن يكون بريد الكترونى صالح',
+            'facebook.url' => 'حقل الفيسبوك يجب أن يكون رابط',
+            'twitter.url' => 'حقل تويتر يجب أن يكون رابط',
+            'linkedin.url' => 'حقل لينكدأن يجب أن يكون رابط',
+            'instagram.url' => 'حقل انستجرام يجب أن يكون رابط',
+            'youtube.url' => 'حقل يوتيوب يجب أن يكون رابط',
+            'android.url' => 'حقل رابط تطبيق الاندرويد يجب أن يكون رابط',
+            'apple.url' => 'حقل رابط تطبيق الايفون يجب أن يكون رابط',
+
+        ]);
+
         $input = $request->all();
         
         if(isset($input['logo'])){
