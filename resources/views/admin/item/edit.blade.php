@@ -64,7 +64,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#v2-attribute" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                                    الخصائص
+                                                     الخصائص
                             </a>
                         </li>
                         <li class="nav-item">
@@ -164,8 +164,8 @@
                                         </select>
                                         @if ($errors->has('owner_id'))
                                             <span class="alert alert-danger">
-                                                    <strong>{{ $errors->first('owner_id') }}</strong>
-                                                </span>
+                                                <strong>{{ $errors->first('owner_id') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
@@ -184,10 +184,12 @@
                                     <div class="form-group">
                                         <label for="icon" class="control-label">الصورة الرئيسية</label>
                                         <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="main_image" >
-                                        @if ($errors->has('main_image'))
+                                        <img src="{{asset('admin_assets/images/item/'.$item->main_image)}}" class="img-responsive" width="100px" height="100px">
+
+                                    @if ($errors->has('main_image'))
                                             <span class="alert alert-danger">
-                                                    <strong>{{ $errors->first('main_image') }}</strong>
-                                                </span>
+                                                <strong>{{ $errors->first('main_image') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
@@ -195,6 +197,9 @@
                                     <div class="form-group">
                                         <label for="icon" class="control-label">الصور</label>
                                         <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="images[]" multiple>
+                                        @foreach($images as $image)
+                                        <img src="{{asset('admin_assets/images/item/'.$image->image)}}" class="img-responsive" width="100px" height="100px">
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -202,10 +207,13 @@
 
                         <div class="tab-pane" id="v2-location">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                    {{$item->city->name}}
+                                </div>
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="icon" class="control-label">المدينة</label>
-                                        <select class="form-control" required name="city_id">
+                                        <label for="icon" class="control-label">تعديل المدينة</label>
+                                        <select class="form-control" name="city_id">
                                             <option value="" selected disabled>إختار المدينة</option>
                                             @if($cities != null)
                                                 @foreach($cities as $city)
@@ -220,9 +228,12 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                    {{$item->district->name}}
+                                </div>
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="icon" class="control-label">الحى</label>
+                                        <label for="icon" class="control-label">تعديل الحى</label>
                                         <select class="form-control" required name="district_id">
                                             <option value="" selected disabled>إختار الحى</option>
                                             @if(!empty($districts))
@@ -256,7 +267,7 @@
                                                 <option value="" selected disabled>إختار قيمة</option>
                                                 @if($attribute->values() != null)
                                                     @foreach($attribute->values as $value)
-                                                        <option value="{{$value->id}}">{{$value->value}}</option>
+                                                        <option value="{{$value->id}}" {{$item->selected_value($item->id,$value->id) === 1 ? 'selected' : ''}}>{{$value->value}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -272,7 +283,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label"> {{$option->name}} </label>
-                                            <input type="checkbox" data-plugin="switchery" data-color="#5d9cec" name="options[]" value="{{$option->id}}"/>
+                                            <input type="checkbox" data-plugin="switchery" data-color="#5d9cec" name="options[]" value="{{$option->id}}" {{$item->selected_option($item->id,$option->id) === 1 ? 'checked' : ''}}/>
                                         </div>
                                     </div>
                                 @endforeach

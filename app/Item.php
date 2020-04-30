@@ -37,4 +37,14 @@ class Item extends Model
         return $this->belongsTo('App\District', 'district_id', 'id');
     }
 
+    public function selected_value($item_id,$value_id){
+        $count = \App\ItemAttribute::where('item_id',$item_id)->where('attribute_value_id',$value_id)->count();
+        return $count;
+    }
+
+    public function selected_option($item_id,$option_id){
+        $count = \App\ItemOption::where('item_id',$item_id)->where('option_id',$option_id)->count();
+        return $count;
+    }
+
 }
