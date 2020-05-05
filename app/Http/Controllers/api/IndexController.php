@@ -9,6 +9,9 @@ use Validator;
 use Illuminate\Support\Facades\DB;
 
 use App\Setting;
+use App\Contact;
+use App\Service;
+use App\ServiceRequest;
 
 class IndexController extends Controller
 {
@@ -63,9 +66,35 @@ class IndexController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function contact_form(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'message' => 'required',
+        ],[
+            'name.required' => 'يرجى إضافة الاسم',
+            'email.required' => 'يرجى إضافة البريد الالكتروني',
+            'email.email' => 'يرجى إدخال بريد الكترونى صحيح',
+            'phone.required' => 'يرجى إضافة رقم الجوال',
+            'message.required' => 'يرجى إضافة الرسالة',            
+        ]);
+
+        if ($validator->fails()) {
+            return response([
+                'status'    =>      'error',
+                'errors'     =>      $validator->errors(),
+                'data'      =>      null
+            ], 401);
+        }
+
+        $input = $request->all();
+        Contact::create($input);
+
+        return response([
+            'status'    =>      'success',
+        ], 200);
     }
 
     /**
@@ -74,9 +103,19 @@ class IndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function services()
     {
-        //
+        $services = Service::where('status',1)->get();
+        if(isset($services) && count($services)>0){
+            $data['services'] = $services;
+        }else{
+            $data = [];
+        }
+        
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
     }
 
     /**
@@ -85,9 +124,38 @@ class IndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function service_request()
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'message' => 'required',
+            'service_id'  => 'required|exists:services,id',
+        ],[
+            'name.required' => 'يرجى إضافة الاسم',
+            'email.required' => 'يرجى إضافة البريد الالكتروني',
+            'email.email' => 'يرجى إدخال بريد الكترونى صحيح',
+            'phone.required' => 'يرجى إضافة رقم الجوال',
+            'message.required' => 'يرجى إضافة الرسالة',            
+            'service_id.required' => 'يرجى إختيار خدمة',            
+            'service_id.exists' => 'الخدمة غير موجودة',            
+        ]);
+
+        if ($validator->fails()) {
+            return response([
+                'status'    =>      'error',
+                'errors'     =>      $validator->errors(),
+                'data'      =>      null
+            ], 401);
+        }
+
+        $input = $request->all();
+        ServiceRequest::create($input);
+
+        return response([
+            'status'    =>      'success',
+        ], 200);
     }
 
     /**
