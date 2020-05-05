@@ -50,6 +50,8 @@
                             <th data-field="البريد الالكترونى"  data-align="center">البريد الالكترونى</th>
                             <th data-field="الجوال"  data-align="center">الجوال</th>
                             <th data-field="الحالة"  data-align="center">الحالة</th>
+                            <th data-field="الحالة"  data-align="center">الحالة</th>
+
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -60,10 +62,13 @@
                                     <td>{{$owner->name}}</td>
                                     <td>{{$owner->email}}</td>
                                     <td>{{$owner->phone}}</td>
+                                    <td>{{$owner->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
                                     <td class="actions">
-                                        <a href="{{ route('admin.owner.show',$owner->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        <a href="{{ route('admin.owner.edit',$owner->id) }}" class="btn btn-success waves-effect" title="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$owner->id}}delete" title="delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <a href="{{ route('admin.status',[$owner->status,'owners',$owner->id]) }}" class="btn btn-{{$owner->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$owner->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
+                                        <a href="{{ route('admin.owner.show',$owner->id) }}" class="btn btn-primary waves-effect" title="مشاهدة">مشاهدة</a>
+                                        <a href="{{ route('admin.owner.edit',$owner->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$owner->id}}delete" title="حذف">حذف</button>
                                     </td>
                                 </tr>
 

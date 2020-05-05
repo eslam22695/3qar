@@ -121,6 +121,7 @@
                         <tr>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
                             <th data-field="اسم المدينة"  data-align="center">اسم المدينة</th>
+                            <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -130,9 +131,12 @@
                                 <tr>
                                     <td>{{$district->name}}</td>
                                     <td>{{$district->city->name != null ? $district->city->name : ''}}</td>
+                                    <td>{{$district->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
                                     <td class="actions">
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$district->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$district->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <a href="{{ route('admin.status',[$district->status,'districts',$district->id]) }}" class="btn btn-{{$district->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$district->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
+                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$district->id}}edit"> تعديل</button>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$district->id}}delete"> حذف</button>
                                     </td>
                                 </tr>
 

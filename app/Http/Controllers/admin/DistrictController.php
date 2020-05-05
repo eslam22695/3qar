@@ -19,7 +19,7 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        $districts = District::where('status',1)->orderBy('id','desc')->get();
+        $districts = District::orderBy('id','desc')->get();
         $cities = City::where('status',1)->orderBy('id','desc')->get();
         $status = 0;
         return view('admin.district.index',compact('districts','cities','status'));
@@ -45,8 +45,15 @@ class DistrictController extends Controller
     {
         $this->validate(request(),
         [
-            'name'        => 'required|unique:districts,name',
+            'name'        => 'required|max:191|unique:districts,name',
             'city_id' => 'required|exists:cities,id',
+        ],[
+                'name.required' => 'حقل الاسم مطلوب',
+                'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.unique' => 'حقل الاسم موجود مسبقا',
+                'city_id.required' => 'حقل المدينة  مطلوب',
+                'city_id.exists' => 'المدينة غير موجودة',
+
         ]);
 
 

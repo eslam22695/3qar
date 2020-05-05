@@ -86,6 +86,7 @@
                     <thead>
                         <tr>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
+                            <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -94,10 +95,13 @@
                             @foreach($cities as $city)
                                 <tr>
                                     <td>{{$city->name}}</td>
+                                    <td>{{$city->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
                                     <td class="actions">
+                                        <a href="{{ route('admin.status',[$city->status,'cities',$city->id]) }}" class="btn btn-{{$city->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$city->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
                                         <a href="{{ route('admin.city_districts.show',$city->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$city->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$city->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$city->id}}edit"> تعديل</button>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$city->id}}delete">حذف</button>
                                     </td>
                                 </tr>
 

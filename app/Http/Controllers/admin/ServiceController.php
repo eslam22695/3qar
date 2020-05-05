@@ -18,7 +18,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::where('status',1)->get();
+        $services = Service::orderBy('id','desc')->get();
         return view('admin.services.index',compact('services'));
     }
 
@@ -42,7 +42,12 @@ class ServiceController extends Controller
     {
         $this->validate(request(),
             [
-                'name'  => 'required|unique:services,name',
+                'name'  => 'required|max:191|unique:services,name',
+            ],[
+                'name.required' => 'حقل الاسم مطلوب',
+                'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.unique' => 'حقل الاسم موجود مسبقا',
+
             ]);
 
 
@@ -86,7 +91,12 @@ class ServiceController extends Controller
     {
         $this->validate(request(),
             [
-                'name' => 'required|unique:services,name',
+                'name'  => 'required|max:191|unique:services,name',
+
+            ],[
+                'name.required' => 'حقل الاسم مطلوب',
+                'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.unique' => 'حقل الاسم موجود مسبقا'
             ]);
 
         $input = $request->all();

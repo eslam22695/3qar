@@ -19,7 +19,7 @@ class AttributeFamilyController extends Controller
      */
     public function index()
     {
-            $families = AttributeFamily::where('status',1)->orderBy('id','desc')->get();
+            $families = AttributeFamily::orderBy('id','desc')->get();
             $cats = Category::where('status',1)->orderBy('id','desc')->get();
             return view('admin.attribute_family.index',compact('families','cats'));
     }
@@ -44,11 +44,13 @@ class AttributeFamilyController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required|max:191',
+            'name'  => 'required|max:191||unique:attribute_families,name',
         ],[
             'name.required' => 'حقل الاسم مطلوب',
             'name.max' => 'حقل الاسم أكبر من اللازم',
-        ]);
+            'name.unique' => 'حقل الاسم موجود مسبقا',
+
+            ]);
 
 
         $input = $request->all();
@@ -91,10 +93,11 @@ class AttributeFamilyController extends Controller
     {
         $this->validate(request(),
         [
-            'name' => 'required|max:191',
+            'name'  => 'required|max:191||unique:attribute_families,name',
         ],[
-            'name.required' => 'حقل الاسم مطلوب',
-            'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.required' => 'حقل الاسم مطلوب',
+                'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.unique' => 'حقل الاسم موجود مسبقا',
         ]);
 
         $input = $request->all();

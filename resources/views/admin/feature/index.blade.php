@@ -107,6 +107,7 @@
                             <th data-field="الاسم"  data-align="center">الصورة</th>
                             <th data-field="الاسم"  data-align="center">الوصف</th>
                             {{-- <th data-field="عائلة المميزات"  data-align="center">عائلة المميزات</th> --}}
+                            <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -117,9 +118,11 @@
                                     <td>{{$feature->title}}</td>
                                     <td>{{$feature->icon}}</td>
                                     <td>{{$feature->description}}</td>
+                                    <td>{{$feature->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
                                     <td class="actions">
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$feature->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$feature->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <a href="{{ route('admin.status',[$feature->status,'items',$feature->id]) }}" class="btn btn-{{$feature->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$feature->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
+                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$feature->id}}edit"> تعديل</button>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$feature->id}}delete"> حذف</button>
                                     </td>
                                 </tr>
 

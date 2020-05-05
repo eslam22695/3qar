@@ -41,6 +41,7 @@
                             <th data-field="البريد الالكتروني"  data-align="center">البريد الالكتروني</th>
                             <th data-field="رقم الجوال"  data-align="center">رقم الجوال</th>
                             <th data-field="اسم الخدمة"  data-align="center">اسم الخدمة</th>
+                            <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -52,8 +53,10 @@
                                     <td>{{$serviceRequest->email}}</td>
                                     <td>{{$serviceRequest->phone}}</td>
                                     <td>{{$serviceRequest->service->name}}</td>
+                                    <td>{{$contact->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
                                     <td class="actions">
-                                        <a href="{{ route('admin.service_request.show',$serviceRequest->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <a href="{{ route('admin.service_request.show',$serviceRequest->id) }}" class="btn btn-primary waves-effect" title="مشاهدة">مشاهدة</a>
                                     </td>
                                 </tr>
                             @endforeach

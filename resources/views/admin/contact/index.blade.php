@@ -40,6 +40,7 @@
                             <th data-field="الاسم"  data-align="center">الاسم</th>
                             <th data-field="البريد الالكتروني"  data-align="center">البريد الالكتروني</th>
                             <th data-field="رقم الجوال"  data-align="center">رقم الجوال</th>
+                            <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -50,8 +51,11 @@
                                     <td>{{$contact->name}}</td>
                                     <td>{{$contact->email}}</td>
                                     <td>{{$contact->phone}}</td>
+                                    <td>{{$contact->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
                                     <td class="actions">
-                                        <a href="{{ route('admin.contact.show',$contact->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+                                        <a href="{{ route('admin.contact.show',$contact->id) }}" class="btn btn-primary waves-effect" title="مشاهدة">مشاهدة</a>
                                     </td>
                                 </tr>
                             @endforeach

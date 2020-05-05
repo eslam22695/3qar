@@ -19,7 +19,7 @@ class DimensionController extends Controller
      */
     public function index()
     {
-        $districts = District::where('status',1)->get();
+        $districts = District::all();
         $cities = City::where('status',1)->get();
 
         return view('admin.district.index',compact('districts','cities'));

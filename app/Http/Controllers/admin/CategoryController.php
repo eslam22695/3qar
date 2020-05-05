@@ -43,7 +43,12 @@ class CategoryController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required|unique:categories,name',
+            'name'  => 'required|max:191|unique:categories,name',
+
+        ],[
+                'name.required' => 'حقل الاسم مطلوب',
+                'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.unique' => 'حقل الاسم موجود مسبقا'
         ]);
 
         $input = $request->all();
@@ -85,8 +90,13 @@ class CategoryController extends Controller
     {
         $this->validate(request(),
         [
-            'name' => 'required|unique:categories,name',
-        ]);
+            'name'  => 'required|max:191|unique:categories,name',
+
+        ],[
+                'name.required' => 'حقل الاسم مطلوب',
+                'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.unique' => 'حقل الاسم موجود مسبقا'
+            ]);
 
         $input = $request->all();
 

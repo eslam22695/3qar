@@ -52,6 +52,8 @@ class ServiceRequestController extends Controller
     public function show($id)
     {
         $serviceRequest = ServiceRequest::find($id);
+        $serviceRequest->status = 1;
+        $serviceRequest->update();
         return view('admin.service_request.show',compact('serviceRequest'));
     }
 

@@ -47,13 +47,14 @@ class AttributeController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required|max:191',
+            'name'  => 'required|max:191|unique:attributes,name',
             'family_id'  => 'required|exists:attribute_families,id',
             'icon'   => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'attribute_value.*'   => 'required',
         ],[
             'name.required' => 'حقل الاسم مطلوب',
             'name.max' => 'حقل الاسم أكبر من اللازم',
+            'name.unique' => 'حقل الاسم موجود مسبقا',
             'family_id.required' => 'حقل عائلة الخصائص مطلوب',
             'family_id.exists' => 'عائلة الخصائص غير موجودة',
             'icon.required' => 'حقل الصورة مطلوب',

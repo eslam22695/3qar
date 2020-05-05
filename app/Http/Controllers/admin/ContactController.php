@@ -52,6 +52,8 @@ class ContactController extends Controller
     public function show($id)
     {
         $contact = Contact::find($id);
+        $contact->status = 1;
+        $contact->update();
         return view('admin.contact.show',compact('contact'));
     }
 

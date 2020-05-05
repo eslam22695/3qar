@@ -18,7 +18,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::where('status',1)->orderBy('id','desc')->get();
+        $cities = City::orderBy('id','desc')->get();
         return view('admin.city.index',compact('cities'));
     }
 
@@ -42,7 +42,12 @@ class CityController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required|unique:cities,name',
+            'name'  => 'required|max:191|unique:cities,name',
+
+        ],[
+                'name.required' => 'حقل الاسم مطلوب',
+                'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.unique' => 'حقل الاسم موجود مسبقا'
         ]);
 
 
@@ -87,7 +92,12 @@ class CityController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required|unique:cities,name',
+            'name'  => 'required|max:191|unique:cities,name',
+
+        ],[
+                'name.required' => 'حقل الاسم مطلوب',
+                'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.unique' => 'حقل الاسم موجود مسبقا'
         ]);
 
         $input = $request->all();

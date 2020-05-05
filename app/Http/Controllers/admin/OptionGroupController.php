@@ -19,8 +19,8 @@ class OptionGroupController extends Controller
      */
     public function index()
     {
-            $families = OptionGroup::where('status',1)->get();
-            $cats = Category::where('status',1)->get();
+            $families = OptionGroup::orderBy('id','desc')->get();
+            $cats = Category::orderBy('id','desc')->get();
             return view('admin.option_group.index',compact('families','cats'));
     }
 
@@ -44,7 +44,11 @@ class OptionGroupController extends Controller
     {
         $this->validate(request(),
             [
-                'name'  => 'required',
+                'name'  => 'required|max:191|unique:option_groups,name',
+            ],[
+                'name.required' => 'حقل الاسم مطلوب',
+                'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.unique' => 'حقل الاسم موجود مسبقا',
             ]);
 
 
@@ -88,7 +92,11 @@ class OptionGroupController extends Controller
     {
         $this->validate(request(),
             [
-                'name' => 'required',
+                'name'  => 'required|max:191|unique:option_groups,name',
+            ],[
+                'name.required' => 'حقل الاسم مطلوب',
+                'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.unique' => 'حقل الاسم موجود مسبقا',
             ]);
 
         $input = $request->all();

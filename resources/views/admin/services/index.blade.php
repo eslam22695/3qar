@@ -87,6 +87,7 @@
                     <thead>
                         <tr>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
+                            <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -95,9 +96,12 @@
                             @foreach($services as $service)
                                 <tr>
                                     <td>{{$service->name}}</td>
+                                    <td>{{$service->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
                                     <td class="actions">
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$service->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$service->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <a href="{{ route('admin.status',[$service->status,'services',$service->id]) }}" class="btn btn-{{$service->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$service->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
+                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$service->id}}edit"> تعدييل</button>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$service->id}}delete"> حذف</button>
                                     </td>
                                 </tr>
 

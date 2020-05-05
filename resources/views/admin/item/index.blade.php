@@ -50,6 +50,7 @@
                             <th data-field="القسم" data-align="center">القسم</th>
                             <th data-field="المدينة" data-align="center">المدينة</th>
                             <th data-field="المالك" data-align="center">المالك</th>
+                            <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -61,10 +62,13 @@
                                     <td>{{$item->category->name}}</td>
                                     <td>{{$item->city->name}}</td>
                                     <td>{{$item->owner->name}}</td>
+                                    <td>{{$item->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
                                     <td class="actions">
-                                        <a href="{{ route('admin.item.show',$item->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        <a href="{{ route('admin.item.edit',$item->id) }}" class="btn btn-success waves-effect" title="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$item->id}}delete" title="delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <a href="{{ route('admin.status',[$item->status,'items',$item->id]) }}" class="btn btn-{{$item->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$item->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
+                                        <a href="{{ route('admin.item.show',$item->id) }}" class="btn btn-primary waves-effect" title="مشاهدة">مشاهدة</a>
+                                        <a href="{{ route('admin.item.edit',$item->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$item->id}}delete" title="خدف"> خدف</button>
                                     </td>
                                 </tr>
 

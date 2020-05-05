@@ -49,6 +49,7 @@
                             <th data-field="الصورة"  data-align="center">الصورة</th>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
                             <th data-field="العائلة"  data-align="center">العائلة</th>
+                            <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -59,10 +60,13 @@
                                     <td>{{$attribute->icon}}</td>
                                     <td>{{$attribute->name}}</td>
                                     <td>{{$attribute->attribute_family->name}}</td>
+                                    <td>{{$attribute->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
                                     <td class="actions">
-                                        <a href="{{ route('admin.attribute.show',$attribute->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        <a href="{{ route('admin.attribute.edit',$attribute->id) }}" class="btn btn-success waves-effect" title="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$attribute->id}}delete" title="delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <a href="{{ route('admin.status',[$attribute->status,'attributes',$attribute->id]) }}" class="btn btn-{{$attribute->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$attribute->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
+                                        <a href="{{ route('admin.attribute.show',$attribute->id) }}" class="btn btn-primary waves-effect" title="مشاهدة">مشاهدة</a>
+                                        <a href="{{ route('admin.attribute.edit',$attribute->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$attribute->id}}delete" title="حذف"> حذف</button>
                                     </td>
                                 </tr>
 

@@ -82,6 +82,7 @@
                     <thead>
                         <tr>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
+                            <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -90,9 +91,12 @@
                             @foreach($cats as $cat)
                                 <tr>
                                     <td>{{$cat->name}}</td>
+                                    <td>{{$cat->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
                                     <td class="actions">
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$cat->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$cat->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <a href="{{ route('admin.status',[$cat->status,'categories',$cat->id]) }}" class="btn btn-{{$cat->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$cat->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
+                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$cat->id}}edit"> تعديل</button>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$cat->id}}delete"> حذف</button>
                                     </td>
                                 </tr>
 

@@ -76,6 +76,7 @@
                     <thead>
                         <tr>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
+                            <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -84,9 +85,12 @@
                             @foreach($families as $family)
                                 <tr>
                                     <td>{{$family->name}}</td>
+                                     <td>{{$family->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
                                     <td class="actions">
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$family->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$family->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                     <a href="{{ route('admin.status',[$family->status,'option_groups',$family->id]) }}" class="btn btn-{{$family->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$family->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
+                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$family->id}}edit"> تعديل</button>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$family->id}}delete">حذف </button>
                                     </td>
                                 </tr>
 

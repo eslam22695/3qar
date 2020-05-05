@@ -96,6 +96,7 @@
                         <tr>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
                             {{-- <th data-field="عائلة المميزات"  data-align="center">عائلة المميزات</th> --}}
+                             <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -104,10 +105,13 @@
                             @foreach($options as $option)
                                 <tr>
                                     <td>{{$option->name}}</td>
+                                     <td>{{$option->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
                                     {{-- <td>{{$option->option_group->name}}</td> --}}
                                     <td class="actions">
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$option->id}}edit"> <i class="fa fa-edit" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$option->id}}delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                     <a href="{{ route('admin.status',[$option->status,'options',$option->id]) }}" class="btn btn-{{$option->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$option->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
+                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$option->id}}edit"> تعديل</button>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$option->id}}delete"> حذف</button>
                                     </td>
                                 </tr>
 
