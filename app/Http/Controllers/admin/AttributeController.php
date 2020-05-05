@@ -20,7 +20,7 @@ class AttributeController extends Controller
      */
     public function index()
     {
-        $attributes = Attribute::where('status',1)->orderBy('id','desc')->get();
+        $attributes = Attribute::orderBy('id','desc')->get();
         //$attributeFamily = AttributeFamily::where('status',1)->get();
         //$status = 0;
         return view('admin.attribute.index',compact('attributes'));

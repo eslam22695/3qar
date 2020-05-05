@@ -51,3 +51,6 @@ Route::resource('service_request', 'admin\ServiceRequestController', ['only' => 
 Route::resource('item', 'admin\ItemController');
 Route::get('item_family/{family_id}','admin\ItemController@item_family')->name('item_family');
 Route::delete('delete_image/{image_id}','admin\ItemController@delete_image')->name('delete_image');
+
+//Global Status Route
+Route::get('status/{status}/{db}/{id}','admin\SettingController@status')->name('status');

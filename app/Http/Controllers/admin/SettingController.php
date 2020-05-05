@@ -196,8 +196,11 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function status($status,$db,$id)
     {
-        //
+        $status == 0 ? $status = 1 : $status = 0;
+        DB::table($db)->where('id',$id)->update(['status' => $status]);
+        Session::flash('success','تم التعديل بنجاح');
+        return redirect()->back();
     }
 }

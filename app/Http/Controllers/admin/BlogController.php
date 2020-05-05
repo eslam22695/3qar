@@ -18,7 +18,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::where('status',1)->get();
+        $blogs = Blog::all();
         return view('admin.blog.index',compact('blogs'));
     }
 
