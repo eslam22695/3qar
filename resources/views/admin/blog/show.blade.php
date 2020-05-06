@@ -21,7 +21,7 @@
                 
                         <tr>
                             <td>الصورة</td>
-                            <td><img src="{{asset('admin_assets/blog/'.$blog->image)}}" class="img-responsive" width="100px" height="100px"></td>
+                            <td><img src="{{asset('admin_assets/images/blog/'.$blog->image)}}" class="img-responsive" width="100px" height="100px"></td>
                         </tr>
                         <tr>
                             <td>الوصف</td>

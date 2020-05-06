@@ -100,7 +100,7 @@
 
                                     <td class="actions">
                                         <a href="{{ route('admin.status',[$service->status,'services',$service->id]) }}" class="btn btn-{{$service->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$service->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$service->id}}edit"> تعدييل</button>
+                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$service->id}}edit"> تعديل</button>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$service->id}}delete"> حذف</button>
                                     </td>
                                 </tr>

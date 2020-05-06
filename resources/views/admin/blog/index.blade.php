@@ -46,6 +46,7 @@
                                 
                     <thead>
                         <tr>
+                            <th data-field="الصورة"  data-align="center">الصورة</th>
                             <th data-field="عنوان الخبر"  data-align="center">عنوان الخبر</th>
                             <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
@@ -55,6 +56,7 @@
                         @if(isset($blogs))
                             @foreach($blogs as $blog)
                                 <tr>
+                                    <td><img src="{{asset('admin_assets/images/blog/'.$blog->image)}}" class="img-responsive" width="100px" height="100px"></td>
                                     <td>{{$blog->title}}</td>
                                     <td>{{$blog->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
                                     <td class="actions">

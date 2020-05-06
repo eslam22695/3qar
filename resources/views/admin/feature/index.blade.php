@@ -104,10 +104,8 @@
                     <thead>
                         <tr>
                             <th data-field="الاسم"  data-align="center">الاسم</th>
-                            <th data-field="الاسم"  data-align="center">الصورة</th>
-                            <th data-field="الاسم"  data-align="center">الوصف</th>
-                            {{-- <th data-field="عائلة المميزات"  data-align="center">عائلة المميزات</th> --}}
-                            <th data-field="الحالة"  data-align="center">الحالة</th>
+                            <th data-field="الصورة"  data-align="center">الصورة</th>
+                            <th data-field="الوصف"  data-align="center">الوصف</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -116,11 +114,9 @@
                             @foreach($features as $feature)
                                 <tr>
                                     <td>{{$feature->title}}</td>
-                                    <td>{{$feature->icon}}</td>
+                                    <td><img src="{{asset('admin_assets/images/feature/'.$feature->icon)}}" class="img-responsive" width="100px" height="100px"></td>
                                     <td>{{$feature->description}}</td>
-                                    <td>{{$feature->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
                                     <td class="actions">
-                                        <a href="{{ route('admin.status',[$feature->status,'items',$feature->id]) }}" class="btn btn-{{$feature->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$feature->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
                                         <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$feature->id}}edit"> تعديل</button>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$feature->id}}delete"> حذف</button>
                                     </td>
