@@ -31,7 +31,8 @@ class OptionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.option.create');
+
     }
 
     /**
@@ -80,7 +81,9 @@ class OptionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $option = Option::find($id);
+
+        return view('admin.option.edit',compact('option'));
     }
 
     /**

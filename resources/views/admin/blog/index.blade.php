@@ -61,7 +61,6 @@
                                     <td>{{$blog->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
                                     <td class="actions">
                                         <a href="{{ route('admin.status',[$blog->status,'blogs',$blog->id]) }}" class="btn btn-{{$blog->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$blog->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
-
                                         <a href="{{ route('admin.blog.show',$blog->id) }}" class="btn btn-primary waves-effect" title="مشاهدة">مشاهدة</a>
                                         <a href="{{ route('admin.blog.edit',$blog->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$blog->id}}delete" title="حذف">حذف </button>

@@ -11,23 +11,23 @@ Route::resource('user', 'admin\UserController');
 Route::resource('blog', 'admin\BlogController');
 
 //category
-Route::resource('category', 'admin\CategoryController', ['except' => ['create','show','edit']]);
+Route::resource('category', 'admin\CategoryController', ['except' => ['show']]);
 
 //location
-Route::resource('city', 'admin\CityController', ['except' => ['create','show','edit']]);
+Route::resource('city', 'admin\CityController', ['except' => ['show']]);
 Route::resource('district', 'admin\DistrictController', ['except' => ['create','show','edit']]);
 Route::resource('city_districts', 'admin\DistrictController', ['except' => ['create','index','edit']]);
 Route::get('get_districts','admin\CityController@district')->name('get_districts');
 
 //attribute
-Route::resource('attribute_family', 'admin\AttributeFamilyController', ['except' => ['create','show','edit']]);
+Route::resource('attribute_family', 'admin\AttributeFamilyController', ['except' => ['show']]);
 //Route::resource('family_attribute', 'admin\AttributeFamilyController', ['except' => ['create','index','edit']]);
 Route::resource('attribute', 'admin\AttributeController');
 Route::get('attribute_value/{id}', 'admin\AttributeController@delete_value')->name('attribute_value.delete');
 
 //option
 Route::resource('option_group', 'admin\OptionGroupController', ['except' => ['create','show','edit']]);
-Route::resource('option', 'admin\OptionController', ['except' => ['create','show','edit']]);
+Route::resource('option', 'admin\OptionController', ['except' => ['show']]);
 
 //services
 Route::resource('services', 'admin\ServiceController', ['except' => ['create','show','edit']]);

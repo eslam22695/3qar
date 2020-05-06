@@ -30,7 +30,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
+
     }
 
     /**
@@ -77,7 +78,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cat = Category::find($id);
+
+        return view('admin.category.edit',compact('cat'));
     }
     /**
      * Update the specified resource in storage.

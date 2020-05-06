@@ -39,49 +39,11 @@
                 <div class="col-sm-12">
                     <div class=" main-btn-00">
                         <!-- Responsive modal -->
-                        <button type="button" class="btn btn-default waves-effect" data-toggle="modal" data-target="#add"> اضافة عائلة حصائص + </button>
-
-                        <div id="add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    </div>
-                                    {{Form::open(['method'=>'POST','action' => ['admin\AttributeFamilyController@store'], 'files' => true])}}
-                                        <div class="modal-body">
-                                            <div class="row">
-                                               
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">الاسم</label>
-                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg" {{old('name')}}>
-                                                        @if ($errors->has('name'))
-                                                            <span class="alert alert-danger">
-                                                                <strong>{{ $errors->first('name') }}</strong>
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                {{-- <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">اسم القسم</label>
-                                                        <select class="form-control" required name="category_id">
-                                                            <option value="" selected disabled>إختار القسم</option>
-                                                            @if($cats != null)
-                                                                @foreach($cats as $cat)
-                                                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
-                                                                @endforeach
-                                                            @endif
-                                                        </select>
-                                                    </div>
-                                                </div> --}}
-                                                <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
-                                            </div>
-                                        </div>
-                                    {!! Form::close() !!}
-                                </div>
-                            </div>
+                        <div class=" main-btn-00">
+                            <!-- Responsive modal -->
+                            <a href="{{ route('admin.attribute_family.create') }}" class="btn btn-default waves-effect"> اضافة عائلة خصائص +  </a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -114,54 +76,10 @@
                                     <td class="actions">
                                         {{--<a href="{{ route('admin.family_attribute.show',$family->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
                                         <a href="{{ route('admin.status',[$family->status,'attribute_families',$family->id]) }}" class="btn btn-{{$family->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$family->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$family->id}}edit"> تعديل</button>
+                                        <a href="{{ route('admin.attribute_family.edit',$family->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$family->id}}delete"> حذف</button>
                                     </td>
                                 </tr>
-
-                                <div id="{{$family->id}}edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div>
-                                            {{Form::model($family,['method'=>'PATCH','action' => ['admin\AttributeFamilyController@update',$family->id], 'files' => true])}}
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="icon" class="control-label">الاسم</label>
-                                                                <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$family->name}}">
-                                                                @if ($errors->has('name'))
-                                                                    <span class="alert alert-danger">
-                                                                        <strong>{{ $errors->first('name') }}</strong>
-                                                                    </span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        {{-- <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="icon" class="control-label">اسم القسم</label>
-                                                                <select class="form-control" required name="category_id">
-                                                                    <option value="" selected disabled>إختار القسم</option>
-                                                                    @if($cats != null)
-                                                                        @foreach($cats as $cat)
-                                                                            <option value="{{$cat->id}}"  {{$family->category_id === $cat->id ? 'selected' : ''}}>{{$cat->name}}</option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </select>
-                                                            </div>
-                                                        </div> --}}
-                                                    </div>
-                                                    <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
-                                                </div>
-                                            {!! Form::close() !!}
-                                        </div>
-                                    </div>
-                                </div>
-
 
                                 <div id="{{$family->id}}delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
                                     <div class="modal-dialog" style="width:55%;">
