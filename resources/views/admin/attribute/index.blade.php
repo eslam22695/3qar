@@ -57,7 +57,7 @@
                         @if(isset($attributes))
                             @foreach($attributes as $attribute)
                                 <tr>
-                                    <td>{{$attribute->icon}}</td>
+                                    <td><img src="{{asset('admin_assets/images/attribute/'.$attribute->icon)}}" class="img-responsive" width="100px" height="100px"></td>
                                     <td>{{$attribute->name}}</td>
                                     <td>{{$attribute->attribute_family->name}}</td>
                                     <td>{{$attribute->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
