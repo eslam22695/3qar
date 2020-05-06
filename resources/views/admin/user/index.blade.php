@@ -60,10 +60,14 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->phone}}</td>
+                                    <td>{{$user->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+
+
                                     <td class="actions">
-                                        <a href="{{ route('admin.user.show',$user->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        <a href="{{ route('admin.user.edit',$user->id) }}" class="btn btn-success waves-effect" title="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$user->id}}delete" title="delete"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <a href="{{ route('admin.status',[$user->status,'users',$user->id]) }}" class="btn btn-{{$user->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$user->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
+                                        <a href="{{ route('admin.user.show',$user->id) }}" class="btn btn-primary waves-effect" title="مشاهدة">مشاهدة</a>
+                                        <a href="{{ route('admin.user.edit',$user->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
+                                        <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$user->id}}delete" title="خذف"> حذف</button>
                                     </td>
                                 </tr>
 

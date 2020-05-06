@@ -41,7 +41,7 @@
                 <div class="col-sm-12">
                     <div class=" main-btn-00">
                         <!-- Responsive modal -->
-                        <button type="button" class="btn btn-default waves-effect" data-toggle="modal" data-target="#add"> <i class="fa fa-user-plus" aria-hidden="true"></i></button>
+                        <button type="button" class="btn btn-default waves-effect" data-toggle="modal" data-target="#add"> اضافة مدينة + </button>
 
                         <div id="add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                             <div class="modal-dialog">
@@ -99,7 +99,7 @@
 
                                     <td class="actions">
                                         <a href="{{ route('admin.status',[$city->status,'cities',$city->id]) }}" class="btn btn-{{$city->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$city->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
-                                        <a href="{{ route('admin.city_districts.show',$city->id) }}" class="btn btn-primary waves-effect" title="show"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <a href="{{ route('admin.city_districts.show',$city->id) }}" class="btn btn-primary waves-effect" title="الاحياء">الاحياء</a>
                                         <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$city->id}}edit"> تعديل</button>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$city->id}}delete">حذف</button>
                                     </td>

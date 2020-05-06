@@ -51,7 +51,7 @@
                                     <td>{{$contact->name}}</td>
                                     <td>{{$contact->email}}</td>
                                     <td>{{$contact->phone}}</td>
-                                    <td>{{$contact->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+                                    <td>{{$contact->status === 1 ? 'تم المشاهدة' : 'لم يتم المشاهدة'}}</td>
 
                                     <td class="actions">
 

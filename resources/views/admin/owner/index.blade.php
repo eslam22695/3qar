@@ -50,7 +50,6 @@
                             <th data-field="البريد الالكترونى"  data-align="center">البريد الالكترونى</th>
                             <th data-field="الجوال"  data-align="center">الجوال</th>
                             <th data-field="الحالة"  data-align="center">الحالة</th>
-                            <th data-field="الحالة"  data-align="center">الحالة</th>
 
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
