@@ -8,6 +8,6 @@ class City extends Model
 {
     protected $table = 'cities';
     protected $fillable = [
-        'id', 'name', 'status'
+        'id', 'name', 'lat', 'lang', 'status'
     ];
 }
