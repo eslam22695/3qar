@@ -42,30 +42,11 @@
                 <div class="col-sm-12">
                     <div class=" main-btn-00">
                         <!-- Responsive modal -->
-                        <button type="button" class="btn btn-default waves-effect" data-toggle="modal" data-target="#add"> اضافة قسم + </button>
-
-                        <div id="add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    </div>
-                                    {{Form::open(['method'=>'POST','action' => ['admin\CategoryController@store'], 'files' => true])}}
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="name" class="control-label">الاسم</label>
-                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg">
-                                                    </div>
-                                                </div>
-                                                <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
-                                            </div>
-                                        </div>
-                                    {!! Form::close() !!}
-                                </div>
-                            </div>
+                        <div class=" main-btn-00">
+                            <!-- Responsive modal -->
+                            <a href="{{ route('admin.category.create') }}" class="btn btn-default waves-effect">اضافه قسم  +</a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -95,40 +76,10 @@
 
                                     <td class="actions">
                                         <a href="{{ route('admin.status',[$cat->status,'categories',$cat->id]) }}" class="btn btn-{{$cat->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$cat->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$cat->id}}edit"> تعديل</button>
+                                        <a href="{{ route('admin.category.edit',$cat->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$cat->id}}delete"> حذف</button>
                                     </td>
                                 </tr>
-
-                                <div id="{{$cat->id}}edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div>
-                                            {{Form::model($cat,['method'=>'PATCH','action' => ['admin\CategoryController@update',$cat->id], 'files' => true])}}
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="icon" class="control-label">الاسم</label>
-                                                                <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$cat->name}}">
-                                                            </div>
-                                                            @if ($errors->has('name'))
-                                                                <span class="alert alert-danger">
-                                                                    <strong>{{ $errors->first('name') }}</strong>
-                                                                </span>
-                                                            @endif
-
-                                                        </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
-                                                </div>
-                                            {!! Form::close() !!}
-                                        </div>
-                                    </div>
-                                </div>
 
 
                                 <div id="{{$cat->id}}delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">

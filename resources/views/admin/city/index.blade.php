@@ -41,35 +41,11 @@
                 <div class="col-sm-12">
                     <div class=" main-btn-00">
                         <!-- Responsive modal -->
-                        <button type="button" class="btn btn-default waves-effect" data-toggle="modal" data-target="#add"> اضافة مدينة + </button>
-
-                        <div id="add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    </div>
-                                    {{Form::open(['method'=>'POST','action' => ['admin\CityController@store'], 'files' => true])}}
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">الاسم</label>
-                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg">
-                                                        @if ($errors->has('name'))
-                                                            <span class="alert alert-danger">
-                                                                <strong>{{ $errors->first('name') }}</strong>
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
-                                            </div>
-                                        </div>
-                                    {!! Form::close() !!}
-                                </div>
-                            </div>
+                        <div class=" main-btn-00">
+                            <!-- Responsive modal -->
+                            <a href="{{ route('admin.city.create') }}" class="btn btn-default waves-effect">اضافه مدينة  +</a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -100,39 +76,39 @@
                                     <td class="actions">
                                         <a href="{{ route('admin.status',[$city->status,'cities',$city->id]) }}" class="btn btn-{{$city->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$city->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
                                         <a href="{{ route('admin.city_districts.show',$city->id) }}" class="btn btn-primary waves-effect" title="الاحياء">الاحياء</a>
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$city->id}}edit"> تعديل</button>
+                                        <a href="{{ route('admin.city.edit',$city->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$city->id}}delete">حذف</button>
                                     </td>
                                 </tr>
 
-                                <div id="{{$city->id}}edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div>
-                                            {{Form::model($city,['method'=>'PATCH','action' => ['admin\CityController@update',$city->id], 'files' => true])}}
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="icon" class="control-label">الاسم</label>
-                                                                <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$city->name}}">
-                                                                @if ($errors->has('name'))
-                                                                    <span class="alert alert-danger">
-                                                                        <strong>{{ $errors->first('name') }}</strong>
-                                                                    </span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
-                                                </div>
-                                            {!! Form::close() !!}
-                                        </div>
-                                    </div>
-                                </div>
+                                {{--<div id="{{$city->id}}edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">--}}
+                                    {{--<div class="modal-dialog">--}}
+                                        {{--<div class="modal-content">--}}
+                                            {{--<div class="modal-header">--}}
+                                                {{--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--}}
+                                            {{--</div>--}}
+                                            {{--{{Form::model($city,['method'=>'PATCH','action' => ['admin\CityController@update',$city->id], 'files' => true])}}--}}
+                                                {{--<div class="modal-body">--}}
+                                                    {{--<div class="row">--}}
+                                                        {{----}}
+                                                        {{--<div class="col-md-12">--}}
+                                                            {{--<div class="form-group">--}}
+                                                                {{--<label for="icon" class="control-label">الاسم</label>--}}
+                                                                {{--<input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$city->name}}">--}}
+                                                                {{--@if ($errors->has('name'))--}}
+                                                                    {{--<span class="alert alert-danger">--}}
+                                                                        {{--<strong>{{ $errors->first('name') }}</strong>--}}
+                                                                    {{--</span>--}}
+                                                                {{--@endif--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                    {{--<button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>--}}
+                                                {{--</div>--}}
+                                            {{--{!! Form::close() !!}--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
 
 
                                 <div id="{{$city->id}}delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">

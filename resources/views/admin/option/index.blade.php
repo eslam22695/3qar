@@ -37,47 +37,9 @@
                 <div class="col-sm-12">
                     <div class=" main-btn-00">
                         <!-- Responsive modal -->
-                        <button type="button" class="btn btn-default waves-effect" data-toggle="modal" data-target="#add">اضافة ميزة + </button>
-
-                        <div id="add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    </div>
-                                    {{Form::open(['method'=>'POST','action' => ['admin\OptionController@store'], 'files' => true])}}
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">الاسم</label>
-                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg" {{old('name')}}>
-                                                        @if ($errors->has('name'))
-                                                            <span class="alert alert-danger">
-                                                                <strong>{{ $errors->first('name') }}</strong>
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                {{-- <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">اسم عائلة المميزات</label>
-                                                        <select class="form-control" name="option_group_id">
-                                                            <option value="" selected disabled>إختار عائلة المميزات</option>
-                                                            @if($groups != null)
-                                                                @foreach($groups as $group)
-                                                                    <option value="{{$group->id}}">{{$group->name}}</option>
-                                                                @endforeach
-                                                            @endif
-                                                        </select>
-                                                    </div>
-                                                </div> --}}
-                                                <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
-                                            </div>
-                                        </div>
-                                    {!! Form::close() !!}
-                                </div>
-                            </div>
+                        <div class=" main-btn-00">
+                            <!-- Responsive modal -->
+                            <a href="{{ route('admin.option.create') }}" class="btn btn-default waves-effect">اضافه ميزة + </a>
                         </div>
                     </div>
                 </div>
@@ -110,53 +72,10 @@
                                     {{-- <td>{{$option->option_group->name}}</td> --}}
                                     <td class="actions">
                                      <a href="{{ route('admin.status',[$option->status,'options',$option->id]) }}" class="btn btn-{{$option->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$option->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$option->id}}edit"> تعديل</button>
+                                        <a href="{{ route('admin.option.edit',$option->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$option->id}}delete"> حذف</button>
                                     </td>
                                 </tr>
-
-                                <div id="{{$option->id}}edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div>
-                                            {{Form::model($option,['method'=>'PATCH','action' => ['admin\OptionController@update',$option->id], 'files' => true])}}
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="icon" class="control-label">الاسم</label>
-                                                                <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$option->name}}">
-                                                                @if ($errors->has('name'))
-                                                                    <span class="alert alert-danger">
-                                                                        <strong>{{ $errors->first('name') }}</strong>
-                                                                    </span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        {{-- <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="icon" class="control-label">اسم عائلة المميزات</label>
-                                                                <select class="form-control" name="option_group_id">
-                                                                    <option value="" disabled>إختار عائلة المميزات</option>
-                                                                    @if($groups != null)
-                                                                        @foreach($groups as $group)
-                                                                            <option value="{{$group->id}}"  {{$option->option_group_id === $group->id ? 'selected' : ''}}>{{$group->name}}</option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </select>
-                                                            </div>
-                                                        </div> --}}
-                                                    </div>
-                                                    <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
-                                                </div>
-                                            {!! Form::close() !!}
-                                        </div>
-                                    </div>
-                                </div>
 
 
                                 <div id="{{$option->id}}delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
