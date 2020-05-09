@@ -10,6 +10,13 @@
     <link href="{{asset('admin_assets/plugins/bootstrap-touchspin/css/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" />
     <link href="{{asset('admin_assets/plugins/bootstrap-table/css/bootstrap-table.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('admin_assets/plugins/custombox/css/custombox.css')}}" rel="stylesheet">
+
+    <style type="text/css">
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -51,6 +58,25 @@
                             </tr>
 
                             <tr>
+                                <td>مركز المدينة</td>
+                                <td>
+                                    <div id="map"></div>
+                                    <input type="hidden" id="lat" name="lat" value="23.8859">
+                                    <input type="hidden" id="lang" name="lang" value="45.0792">    
+                                </td>
+                                @if ($errors->has('lat'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('lat') }}</strong>
+                                    </span>
+                                @endif
+                                @if ($errors->has('lang'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('lang') }}</strong>
+                                    </span>
+                                @endif
+                            </tr>
+
+                            <tr>
                                 <td style="width:25%"></td>
                                 <td><button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button></td>
                             </tr>
@@ -61,4 +87,33 @@
         </div><!-- end col -->
     </div>
         
+@endsection
+
+@section('scripts')
+    <script>
+        function initMap() {
+            var myLatLng = {lat: 23.8859, lng: 45.0792};
+        
+            var map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 6
+            });
+        
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!',
+                draggable: true
+                });
+        
+            google.maps.event.addListener(marker, 'dragend', function(marker) {
+                var latLng = marker.latLng;
+                document.getElementById('lat').value = latLng.lat();
+                document.getElementById('lang').value = latLng.lng();
+            });
+        }
+        
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap" async defer></script>
+         
 @endsection
