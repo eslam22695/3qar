@@ -62,8 +62,7 @@
                             </tr>
                             <tr>
                                 <td>الوصف</td>
-<<<<<<< HEAD
-                                <td><textarea class="form-control" name="description" required>{{old('description')}}</textarea></td>
+                                <td><textarea class="form-control" name="description" >{{old('description')}}</textarea></td>
                                 @if ($errors->has('description'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('description') }}</strong>
@@ -72,20 +71,14 @@
                             </tr>
                             <tr>
                                 <td>المحتوي</td>
-                                <td><textarea id="content2" name="content" required>{{old('content')}}</textarea></td>
+                                <td><textarea id="content2" name="content" >{{old('content')}}</textarea></td>
                                 @if ($errors->has('content'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('content') }}</strong>
                                     </span>
                                 @endif
-=======
-                                <td><textarea class="form-control" name="description"></textarea></td>
                             </tr>
-                            <tr>
-                                <td>المحتوي</td>
-                                <td><textarea id="content2" name="content"></textarea></td>
->>>>>>> c428f97a15dec2d170eea89fa85a27574179b4e5
-                            </tr>
+
                             <tr>
                                 <td style="width:25%"></td>
                                 <td><button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button></td>

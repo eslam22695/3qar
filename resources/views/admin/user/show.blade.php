@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card-box">
-                <h4 class="header-title m-t-0 m-b-20">{{$user->title}}</h4>
+                <h4 class="header-title m-t-0 m-b-20">{{$user->name}}</h4>
 
                 <table class="table table-bordered table-striped">
                     <tbody>

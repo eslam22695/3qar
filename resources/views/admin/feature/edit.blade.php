@@ -65,7 +65,7 @@
 
                             <tr>
                                 <td>الوصف</td>
-                                <td><textarea id="textarea" class="form-control" rows="2" name="description">value="{{$feature->description}}"</textarea>
+                                <td><textarea id="textarea" class="form-control" rows="2" name="description">{{$feature->description}}</textarea>
                                 </td>
                                 @if ($errors->has('description'))
                                     <span class="alert alert-danger">
