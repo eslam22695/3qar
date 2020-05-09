@@ -21,7 +21,7 @@
                 
                         <tr>
                             <td>الصورة</td>
-                            <td><img src="{{asset('admin_assets/attribute/'.$attribute->image)}}" class="img-responsive" width="100px" height="100px"></td>
+                            <td><img src="{{asset('admin_assets/images/attribute/'.$attribute->icon)}}" class="img-responsive" width="100px" height="100px"></td>
                         </tr>
                         <tr>
                             <td>عائلة الخصائص</td>
@@ -37,11 +37,11 @@
 
                 <table class="table table-bordered table-striped">
                     <tbody>
-                        @foreach($values as $value)
                         <?php $i = 1; ?>
+                        @foreach($values as $value)
                         <tr>
                             <td>القيمة {{$i}}</td>
-                            <td>{{$value->name}}</td>
+                            <td>{{$value->value}}</td>
                         </tr>
                         <?php $i++; ?>
                         @endforeach

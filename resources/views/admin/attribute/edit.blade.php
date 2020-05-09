@@ -25,7 +25,7 @@
         <div class="col-md-12">
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
                 @endforeach
             </ul>
         </div>
@@ -44,9 +44,9 @@
                                 <td>
                                     <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="icon">
                                     @if ($errors->has('icon'))
-                                        <span class="alert alert-danger">
+                                        <p class="alert alert-danger">
                                             <strong>{{ $errors->first('icon') }}</strong>
-                                        </span>
+                                        </p>
                                     @endif
 
                                 </td>
@@ -56,9 +56,9 @@
                                 <td>
                                     <input type="text" class="form-control" name="name" value="{{$attribute->name}}" required>
                                     @if ($errors->has('name'))
-                                        <span class="alert alert-danger">
+                                        <p class="alert alert-danger">
                                             <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
+                                        </p>
                                     @endif
                                 </td>
                             </tr>
@@ -74,9 +74,9 @@
                                         @endif
                                     </select>
                                     @if ($errors->has('family_id'))
-                                        <span class="alert alert-danger">
+                                        <p class="alert alert-danger">
                                             <strong>{{ $errors->first('family_id') }}</strong>
-                                        </span>
+                                        </p>
                                     @endif
                                 </td>
                             </tr>

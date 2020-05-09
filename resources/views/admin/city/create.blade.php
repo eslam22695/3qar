@@ -10,6 +10,13 @@
     <link href="{{asset('admin_assets/plugins/bootstrap-touchspin/css/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" />
     <link href="{{asset('admin_assets/plugins/bootstrap-table/css/bootstrap-table.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('admin_assets/plugins/custombox/css/custombox.css')}}" rel="stylesheet">
+
+    <style type="text/css">
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -25,7 +32,7 @@
         <div class="col-md-12">
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
                 @endforeach
             </ul>
         </div>
@@ -42,12 +49,35 @@
 
                             <tr>
                                 <td>الاسم</td>
-                                <td><input type="text" class="form-control" name="name" required {{old('name')}}></td>
-                                @if ($errors->has('name'))
-                                    <span class="alert alert-danger">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                                <td>
+                                    <input type="text" class="form-control" name="name" required {{old('name')}}>
+                                    @if ($errors->has('name'))
+                                        <p class="alert alert-danger">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </p>
+                                    @endif
+                                </td>
+                                
+                            </tr>
+
+                            <tr>
+                                <td>مركز المدينة</td>
+                                <td>
+                                    <div id="map"></div>
+                                    <input type="hidden" id="lat" name="lat" value="23.8859">
+                                    <input type="hidden" id="lang" name="lang" value="45.0792">    
+                                
+                                    @if ($errors->has('lat'))
+                                        <p class="alert alert-danger">
+                                            <strong>{{ $errors->first('lat') }}</strong>
+                                        </p>
+                                    @endif
+                                    @if ($errors->has('lang'))
+                                        <p class="alert alert-danger">
+                                            <strong>{{ $errors->first('lang') }}</strong>
+                                        </p>
+                                    @endif
+                                </td>
                             </tr>
 
                             <tr>
@@ -61,4 +91,33 @@
         </div><!-- end col -->
     </div>
         
+@endsection
+
+@section('scripts')
+    <script>
+        function initMap() {
+            var myLatLng = {lat: 23.8859, lng: 45.0792};
+        
+            var map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 6
+            });
+        
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!',
+                draggable: true
+                });
+        
+            google.maps.event.addListener(marker, 'dragend', function(marker) {
+                var latLng = marker.latLng;
+                document.getElementById('lat').value = latLng.lat();
+                document.getElementById('lang').value = latLng.lng();
+            });
+        }
+        
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap" async defer></script>
+         
 @endsection
