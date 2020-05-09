@@ -25,7 +25,7 @@
         <div class="col-md-12">
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
                 @endforeach
             </ul>
         </div>
@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card-box">
-                <h4 class="header-title m-t-0 m-b-20">تعديل المدينة </h4>
+                <h4 class="header-title m-t-0 m-b-20">تعديل القسم </h4>
 
                 <table class="table table-bordered table-striped">
                     {{Form::model($cat,['method'=>'PATCH','action' => ['admin\CategoryController@update',$cat->id], 'files' => true])}}
@@ -42,12 +42,16 @@
 
                             <tr>
                                 <td>الاسم</td>
-                                <td><input type="text" class="form-control" name="name" value="{{$cat->name}}" required></td>
-                                @if ($errors->has('name'))
-                                    <span class="alert alert-danger">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                                <td>
+                                    <input type="text" class="form-control" name="name" value="{{$cat->name}}" required>
+
+                                    @if ($errors->has('name'))
+                                        <p class="alert alert-danger">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </p>
+                                    @endif
+                                </td>
+                                
                             </tr>
 
                             <tr>

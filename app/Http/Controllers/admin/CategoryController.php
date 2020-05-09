@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $cats = Category::where('status',1)->orderBy('id','desc')->get();
+        $cats = Category::orderBy('id','desc')->get();
         return view('admin.category.index',compact('cats'));
 
     }
@@ -93,7 +93,7 @@ class CategoryController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required|max:191|unique:categories,name',
+            'name'  => 'required|max:191|unique:categories,name,'.$id,
 
         ],[
                 'name.required' => 'حقل الاسم مطلوب',

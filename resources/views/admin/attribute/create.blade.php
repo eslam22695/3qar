@@ -26,7 +26,7 @@
         <div class="col-md-12">
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
                 @endforeach
             </ul>
         </div>
@@ -47,30 +47,21 @@
                                 <td>
                                     <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="icon" required>
                                     @if ($errors->has('icon'))
-                                        <span class="alert alert-danger">
+                                        <p class="alert alert-danger">
                                             <strong>{{ $errors->first('icon') }}</strong>
-                                        </span>
+                                        </p>
                                     @endif
                                 </td>
                             </tr>
                             <tr>
                                 <td>الاسم</td>
 
-                                <td><input type="text" class="form-control" name="name" required></td>
-                                @if ($errors->has('name'))
-                                    <span class="alert alert-danger">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-
-                                <td><input type="text" class="form-control" name="name" required {{old('name')}}></td>
-
                                 <td>
                                     <input type="text" class="form-control" name="name" required {{old('name')}}>
                                     @if ($errors->has('name'))
-                                        <span class="alert alert-danger">
+                                        <p class="alert alert-danger">
                                             <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
+                                        </p>
                                     @endif
                                 </td>
 
@@ -87,9 +78,9 @@
                                         @endif
                                     </select>
                                     @if ($errors->has('family_id'))
-                                        <span class="alert alert-danger">
+                                        <p class="alert alert-danger">
                                             <strong>{{ $errors->first('family_id') }}</strong>
-                                        </span>
+                                        </p>
                                     @endif
                                 </td>
                             </tr>
@@ -104,9 +95,9 @@
                                 <td><input type="text" class="form-control" name="attribute_value[]" required></td>
                                 <td><button type="button" id="add" class="btn btn-info form-control">إضافة قيمة اخرى</button></td>
                                 @if ($errors->has('attribute_value'))
-                                    <span class="alert alert-danger">
+                                    <p class="alert alert-danger">
                                         <strong>{{ $errors->first('attribute_value') }}</strong>
-                                    </span>
+                                    </p>
                                 @endif
                             </tr>
                         </tbody>

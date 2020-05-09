@@ -98,7 +98,7 @@ class CityController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required|max:191|unique:cities,name',
+            'name'  => 'required|max:191|unique:cities,name,'.$id,
 
         ],[
                 'name.required' => 'حقل الاسم مطلوب',

@@ -25,7 +25,7 @@
         <div class="col-md-12">
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
                 @endforeach
             </ul>
         </div>
@@ -42,12 +42,14 @@
 
                             <tr>
                                 <td>الاسم</td>
-                                <td><input type="text" class="form-control" name="name" value="{{$family->name}}" required></td>
-                                @if ($errors->has('name'))
-                                    <span class="alert alert-danger">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                                <td>
+                                    <input type="text" class="form-control" name="name" value="{{$family->name}}" required>
+                                    @if ($errors->has('name'))
+                                        <p class="alert alert-danger">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </p>
+                                    @endif
+                                </td>
                             </tr>
 
                             <tr>

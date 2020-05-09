@@ -32,7 +32,7 @@
         <div class="col-md-12">
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
                 @endforeach
             </ul>
         </div>
@@ -49,12 +49,15 @@
 
                             <tr>
                                 <td>الاسم</td>
-                                <td><input type="text" class="form-control" name="name" required {{old('name')}}></td>
-                                @if ($errors->has('name'))
-                                    <span class="alert alert-danger">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                                <td>
+                                    <input type="text" class="form-control" name="name" required {{old('name')}}>
+                                    @if ($errors->has('name'))
+                                        <p class="alert alert-danger">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </p>
+                                    @endif
+                                </td>
+                                
                             </tr>
 
                             <tr>
@@ -63,17 +66,18 @@
                                     <div id="map"></div>
                                     <input type="hidden" id="lat" name="lat" value="23.8859">
                                     <input type="hidden" id="lang" name="lang" value="45.0792">    
+                                
+                                    @if ($errors->has('lat'))
+                                        <p class="alert alert-danger">
+                                            <strong>{{ $errors->first('lat') }}</strong>
+                                        </p>
+                                    @endif
+                                    @if ($errors->has('lang'))
+                                        <p class="alert alert-danger">
+                                            <strong>{{ $errors->first('lang') }}</strong>
+                                        </p>
+                                    @endif
                                 </td>
-                                @if ($errors->has('lat'))
-                                    <span class="alert alert-danger">
-                                        <strong>{{ $errors->first('lat') }}</strong>
-                                    </span>
-                                @endif
-                                @if ($errors->has('lang'))
-                                    <span class="alert alert-danger">
-                                        <strong>{{ $errors->first('lang') }}</strong>
-                                    </span>
-                                @endif
                             </tr>
 
                             <tr>

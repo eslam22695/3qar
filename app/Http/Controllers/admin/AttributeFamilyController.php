@@ -51,7 +51,7 @@ class AttributeFamilyController extends Controller
             'name.max' => 'حقل الاسم أكبر من اللازم',
             'name.unique' => 'حقل الاسم موجود مسبقا',
 
-            ]);
+        ]);
 
 
         $input = $request->all();
@@ -96,7 +96,7 @@ class AttributeFamilyController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required|max:191||unique:attribute_families,name',
+            'name'  => 'required|max:191||unique:attribute_families,name,'.$id,
         ],[
                 'name.required' => 'حقل الاسم مطلوب',
                 'name.max' => 'حقل الاسم أكبر من اللازم',

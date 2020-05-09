@@ -73,7 +73,7 @@ class DistrictController extends Controller
     public function show($id)
     {
         //$id is id of city using city disticts route
-        $districts = District::where('city_id',$id)->where('status',1)->orderBy('id','desc')->get();
+        $districts = District::where('city_id',$id)->orderBy('id','desc')->get();
         $city_district = City::find($id);
         $status = 1;
         return view('admin.district.index',compact('districts','city_district','status'));
