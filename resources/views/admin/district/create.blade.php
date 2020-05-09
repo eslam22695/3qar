@@ -35,24 +35,13 @@
     <div class="row">
         <div class="col-12">
             <div class="card-box">
-                <h4 class="header-title m-t-0 m-b-20">اضافه خاصية</h4>
-                {{Form::open(['method'=>'POST','action' => ['admin\AttributeController@store'], 'files' => true])}}
+                <h4 class="header-title m-t-0 m-b-20">اضافه +  </h4>
+                {{Form::open(['method'=>'POST','action' => ['admin\DistrictController@store'], 'files' => true])}}
 
                     <table class="table table-bordered table-striped">
                     
                         <tbody>
-                        
-                            <tr>
-                                <td>الصورة</td>
-                                <td>
-                                    <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="icon" required>
-                                    @if ($errors->has('icon'))
-                                        <span class="alert alert-danger">
-                                            <strong>{{ $errors->first('icon') }}</strong>
-                                        </span>
-                                    @endif
-                                </td>
-                            </tr>
+
                             <tr>
                                 <td>الاسم</td>
 
@@ -63,32 +52,21 @@
                                     </span>
                                 @endif
 
-                                <td><input type="text" class="form-control" name="name" required {{old('name')}}></td>
-
-                                <td>
-                                    <input type="text" class="form-control" name="name" required {{old('name')}}>
-                                    @if ($errors->has('name'))
-                                        <span class="alert alert-danger">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                    @endif
-                                </td>
-
                             </tr>
                             <tr>
-                                <td>عائلة الخصائص</td>
+                                <td>المدينة </td>
                                 <td>
-                                    <select class="form-control" required name="family_id">
-                                        <option value="" disabled selected>إختار عائلة الخصائص</option>
-                                        @if($families != null)
-                                            @foreach($families as $family)
-                                                <option value="{{$family->id}}">{{$family->name}}</option>
+                                    <select class="form-control" required name="city_id">
+                                        <option value="" disabled selected>إختار مدينة </option>
+                                        @if($cities != null)
+                                            @foreach($cities as $city)
+                                                <option value="{{$city->id}}">{{$city->name}}</option>
                                             @endforeach
                                         @endif
                                     </select>
-                                    @if ($errors->has('family_id'))
+                                    @if ($errors->has('city_id'))
                                         <span class="alert alert-danger">
-                                            <strong>{{ $errors->first('family_id') }}</strong>
+                                            <strong>{{ $errors->first('city_id') }}</strong>
                                         </span>
                                     @endif
                                 </td>
@@ -96,22 +74,7 @@
                         </tbody>
                     
                     </table>
-                    <table class="table table-bordered table-striped">
-                    
-                        <tbody id="items_table">
-                            <tr>
-                                <td>قيمة الخاصية 1</td>
-                                <td><input type="text" class="form-control" name="attribute_value[]" required></td>
-                                <td><button type="button" id="add" class="btn btn-info form-control">إضافة قيمة اخرى</button></td>
-                                @if ($errors->has('attribute_value'))
-                                    <span class="alert alert-danger">
-                                        <strong>{{ $errors->first('attribute_value') }}</strong>
-                                    </span>
-                                @endif
-                            </tr>
-                        </tbody>
-                    
-                    </table>
+
                     <table class="table table-bordered table-striped">
                     
                         <tbody>

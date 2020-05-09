@@ -33,16 +33,16 @@
     <div class="row">
         <div class="col-12">
             <div class="card-box">
-                <h4 class="header-title m-t-0 m-b-20">تعديل المدينة </h4>
+                <h4 class="header-title m-t-0 m-b-20">تعديل الخدمة </h4>
 
                 <table class="table table-bordered table-striped">
-                    {{Form::model($cat,['method'=>'PATCH','action' => ['admin\CategoryController@update',$cat->id], 'files' => true])}}
+                    {{Form::model($service,['method'=>'PATCH','action' => ['admin\ServiceController@update',$service->id], 'files' => true])}}
                         <tbody>
                         
 
                             <tr>
                                 <td>الاسم</td>
-                                <td><input type="text" class="form-control" name="name" value="{{$cat->name}}" required></td>
+                                <td><input type="text" class="form-control" name="name" value="{{$service->name}}" required></td>
                                 @if ($errors->has('name'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('name') }}</strong>

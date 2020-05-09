@@ -37,57 +37,11 @@
                 <div class="col-sm-12">
                     <div class=" main-btn-00">
                         <!-- Responsive modal -->
-                        <button type="button" class="btn btn-default waves-effect" data-toggle="modal" data-target="#add"> اضافة + </button>
-
-                        <div id="add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    </div>
-                                    {{Form::open(['method'=>'POST','action' => ['admin\FeatureController@store'], 'files' => true])}}
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">الاسم</label>
-                                                        <input type="text" id="example-input-large" name="title" class="form-control input-lg" {{old('title')}}>
-                                                        @if ($errors->has('title'))
-                                                            <span class="alert alert-danger">
-                                                                <strong>{{ $errors->first('title') }}</strong>
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">الصورة</label>
-                                                        <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="icon">
-                                                        @if ($errors->has('icon'))
-                                                            <span class="alert alert-danger">
-                                                                <strong>{{ $errors->first('icon') }}</strong>
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">الوصف</label>
-                                                        <textarea id="textarea" class="form-control" rows="2" name="description">{{old('description')}}</textarea>
-                                                        @if ($errors->has('description'))
-                                                            <span class="alert alert-danger">
-                                                                <strong>{{ $errors->first('description') }}</strong>
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
-                                            </div>
-                                        </div>
-                                    {!! Form::close() !!}
-                                </div>
-                            </div>
+                        <div class=" main-btn-00">
+                            <!-- Responsive modal -->
+                            <a href="{{ route('admin.feature.create') }}" class="btn btn-default waves-effect">اضافه  + </a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -117,61 +71,11 @@
                                     <td><img src="{{asset('admin_assets/images/feature/'.$feature->icon)}}" class="img-responsive" width="100px" height="100px"></td>
                                     <td>{{$feature->description}}</td>
                                     <td class="actions">
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$feature->id}}edit"> تعديل</button>
+                                        <a href="{{ route('admin.feature.edit',$feature->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$feature->id}}delete"> حذف</button>
                                     </td>
                                 </tr>
 
-                                <div id="{{$feature->id}}edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div>
-                                            {{Form::model($feature,['method'=>'PATCH','action' => ['admin\FeatureController@update',$feature->id], 'files' => true])}}
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="icon" class="control-label">الاسم</label>
-                                                                <input type="text" id="example-input-large" name="title" class="form-control input-lg" value="{{$feature->title}}">
-                                                                @if ($errors->has('title'))
-                                                                    <span class="alert alert-danger">
-                                                                        <strong>{{ $errors->first('title') }}</strong>
-                                                                    </span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="icon" class="control-label">الصورة</label>
-                                                                <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="icon">
-                                                                @if ($errors->has('icon'))
-                                                                    <span class="alert alert-danger">
-                                                                        <strong>{{ $errors->first('icon') }}</strong>
-                                                                    </span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="icon" class="control-label">الوصف</label>
-                                                                <textarea id="textarea" class="form-control" rows="2" name="description">{{$feature->description}}</textarea>
-                                                                @if ($errors->has('description'))
-                                                                    <span class="alert alert-danger">
-                                                                        <strong>{{ $errors->first('description') }}</strong>
-                                                                    </span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
-                                                </div>
-                                            {!! Form::close() !!}
-                                        </div>
-                                    </div>
-                                </div>
 
 
                                 <div id="{{$feature->id}}delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">

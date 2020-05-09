@@ -33,28 +33,16 @@
     <div class="row">
         <div class="col-12">
             <div class="card-box">
-                <h4 class="header-title m-t-0 m-b-20">تعديل خاصية</h4>
-                {{Form::model($attribute,['method'=>'PATCH','action' => ['admin\AttributeController@update',$attribute->id], 'files' => true])}}
+                <h4 class="header-title m-t-0 m-b-20">تعديل  </h4>
+                {{Form::model($district,['method'=>'PATCH','action' => ['admin\DistrictController@update',$district->id], 'files' => true])}}
 
                     <table class="table table-bordered table-striped">
                         <tbody>
-                        
-                            <tr>
-                                <td>الصورة</td>
-                                <td>
-                                    <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="icon">
-                                    @if ($errors->has('icon'))
-                                        <span class="alert alert-danger">
-                                            <strong>{{ $errors->first('icon') }}</strong>
-                                        </span>
-                                    @endif
 
-                                </td>
-                            </tr>
                             <tr>
                                 <td>الاسم</td>
                                 <td>
-                                    <input type="text" class="form-control" name="name" value="{{$attribute->name}}" required>
+                                    <input type="text" class="form-control" name="name" value="{{$district->name}}" required>
                                     @if ($errors->has('name'))
                                         <span class="alert alert-danger">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -63,46 +51,30 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>عائلة الخصائص</td>
+                                <td>المدينة</td>
                                 <td>
-                                    <select class="form-control" required name="family_id">
-                                        <option value="" disabled>إختار عائلة الخصائص</option>
-                                        @if($families != null)
-                                            @foreach($families as $family)
-                                                <option value="{{$family->id}}" {{$attribute->family_id === $family->id ? 'selected' : ''}}>{{$family->name}}</option>
+                                    <select class="form-control" required name="city_id">
+                                        <option value="" disabled>إختار المدينة </option>
+                                        @if($cities != null)
+                                            @foreach($cities as $city)
+                                                <option value="{{$city->id}}" {{$district->city_id === $city->id ? 'selected' : ''}}>{{$city->name}}</option>
                                             @endforeach
                                         @endif
                                     </select>
-                                    @if ($errors->has('family_id'))
+                                    @if ($errors->has('city_id'))
                                         <span class="alert alert-danger">
-                                            <strong>{{ $errors->first('family_id') }}</strong>
+                                            <strong>{{ $errors->first('city_id') }}</strong>
                                         </span>
                                     @endif
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <table class="table table-bordered table-striped">
-                        
-                        <tbody id="items_table">
-                            @foreach($values as $value)
-                                <tr>
-                                    <td>قيمة</td>
-                                    <td><input type="text" class="form-control" name="attribute_value[]" value="{{$value->value}}" required></td>
-                                    <td>
-                                        <a href="{{ route('admin.attribute_value.delete',$value->id) }}" class="btn btn-danger waves-effect" title="remove">X</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+
 
                     <table class="table table-bordered table-striped">
                         <tbody>
-                            <tr>
-                                <td style="width:25%"></td>
-                                <td><button type="button" id="add" class="btn btn-info form-control">إضافة قيمة اخرى</button></td>
-                            </tr>
+
                             <tr>
                                 <td style="width:25%"></td>
                                 <td><button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button></td>

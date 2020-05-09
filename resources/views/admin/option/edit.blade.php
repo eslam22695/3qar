@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card-box">
-                <h4 class="header-title m-t-0 m-b-20">تعديل عائلة خصائص </h4>
+                <h4 class="header-title m-t-0 m-b-20">تعديل ميزة </h4>
 
                 <table class="table table-bordered table-striped">
                     {{Form::model($option,['method'=>'PATCH','action' => ['admin\OptionController@update',$option->id], 'files' => true])}}

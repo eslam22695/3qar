@@ -29,7 +29,8 @@ class FeatureController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.feature.create');
+
     }
 
     /**
@@ -93,7 +94,9 @@ class FeatureController extends Controller
      */
     public function edit($id)
     {
-        //
+        $feature = Feature::find($id);
+
+        return view('admin.feature.edit',compact('feature'));
     }
 
     /**

@@ -15,7 +15,7 @@ Route::resource('category', 'admin\CategoryController', ['except' => ['show']]);
 
 //location
 Route::resource('city', 'admin\CityController', ['except' => ['show']]);
-Route::resource('district', 'admin\DistrictController', ['except' => ['create','show','edit']]);
+Route::resource('district', 'admin\DistrictController', ['except' => ['show']]);
 Route::resource('city_districts', 'admin\DistrictController', ['except' => ['create','index','edit']]);
 Route::get('get_districts','admin\CityController@district')->name('get_districts');
 
@@ -30,7 +30,7 @@ Route::resource('option_group', 'admin\OptionGroupController', ['except' => ['cr
 Route::resource('option', 'admin\OptionController', ['except' => ['show']]);
 
 //services
-Route::resource('services', 'admin\ServiceController', ['except' => ['create','show','edit']]);
+Route::resource('services', 'admin\ServiceController', ['except' => ['show']]);
 
 //owner
 Route::resource('owner', 'admin\OwnerController');
@@ -42,7 +42,7 @@ Route::resource('setting', 'admin\SettingController', ['except' => ['create','sh
 Route::resource('contact', 'admin\ContactController', ['only' => ['index','show']]);
 
 //feature
-Route::resource('feature', 'admin\FeatureController', ['except' => ['create','show','edit']]);
+Route::resource('feature', 'admin\FeatureController', ['except' => ['show']]);
 
 //service_request
 Route::resource('service_request', 'admin\ServiceRequestController', ['only' => ['index','show']]);

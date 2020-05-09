@@ -53,57 +53,12 @@
                 <div class="col-sm-12">
                     <div class=" main-btn-00">
                         <!-- Responsive modal -->
-                        <button type="button" class="btn btn-default waves-effect" data-toggle="modal" data-target="#add"> اضافة احياء + </button>
-
-                        <div id="add" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    </div>
-                                    {{Form::open(['method'=>'POST','action' => ['admin\DistrictController@store'], 'files' => true])}}
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">اسم الحى</label>
-                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg">
-                                                        @if ($errors->has('name'))
-                                                            <span class="alert alert-danger">
-                                                                <strong>{{ $errors->first('name') }}</strong>
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                @if($status === 0)
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="icon" class="control-label">اسم المدينة</label>
-                                                            <select class="form-control" required name="city_id">
-                                                                <option value="" selected disabled>إختار المدينة</option>
-                                                                @if($cities != null)
-                                                                    @foreach($cities as $city)
-                                                                        <option value="{{$city->id}}">{{$city->name}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select>
-                                                            @if ($errors->has('city_id'))
-                                                                <span class="alert alert-danger">
-                                                                    <strong>{{ $errors->first('city_id') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                @elseif($status === 1)
-                                                    <input type="hidden" name="city_id" value="{{$city_district->id}}">
-                                                @endif
-                                                <button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button>
-                                            </div>
-                                        </div>
-                                    {!! Form::close() !!}
-                                </div>
-                            </div>
+                        {{--<button type="button" class="btn btn-default waves-effect" data-toggle="modal" data-target="#add"> اضافة احياء + </button>--}}
+                        <div class=" main-btn-00">
+                            <!-- Responsive modal -->
+                            <a href="{{ route('admin.district.create') }}" class="btn btn-default waves-effect">اضافة احياء + </a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -135,61 +90,11 @@
 
                                     <td class="actions">
                                         <a href="{{ route('admin.status',[$district->status,'districts',$district->id]) }}" class="btn btn-{{$district->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$district->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
-                                        <button type="button" class="btn btn-success waves-effect" data-toggle="modal" data-target="#{{$district->id}}edit"> تعديل</button>
+
+                                        <a href="{{ route('admin.district.edit',$district->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$district->id}}delete"> حذف</button>
                                     </td>
                                 </tr>
-
-                                <div id="{{$district->id}}edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div>
-                                            {{Form::model($district,['method'=>'PATCH','action' => ['admin\DistrictController@update',$district->id], 'files' => true])}}
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="icon" class="control-label">الاسم</label>
-                                                                <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$district->name}}">
-                                                                @if ($errors->has('name'))
-                                                                    <span class="alert alert-danger">
-                                                                        <strong>{{ $errors->first('name') }}</strong>
-                                                                    </span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        @if($status === 0)
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label for="icon" class="control-label">اسم المدينة</label>
-                                                                    <select class="form-control" required name="city_id">
-                                                                        <option value="" disabled>إختار المدينة</option>
-                                                                        @if($cities != null)
-                                                                            @foreach($cities as $city)
-                                                                                <option value="{{$city->id}}" {{$district->city_id === $city->id ? 'selected' : ''}}>{{$city->name}}</option>
-                                                                            @endforeach
-                                                                        @endif
-                                                                    </select>
-                                                                    @if ($errors->has('city_id'))
-                                                                        <span class="alert alert-danger">
-                                                                            <strong>{{ $errors->first('city_id') }}</strong>
-                                                                        </span>
-                                                                    @endif
-                                                                </div>
-                                                            </div>
-                                                        @elseif($status === 1)
-                                                            <input type="hidden" name="city_id" value="{{$city_district->id}}">
-                                                        @endif
-                                                    </div>
-                                                    <button type="submit" class="btn btn-default waves-effect waves-light form-control">تعديل</button>
-                                                </div>
-                                            {!! Form::close() !!}
-                                        </div>
-                                    </div>
-                                </div>
 
 
                                 <div id="{{$district->id}}delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">

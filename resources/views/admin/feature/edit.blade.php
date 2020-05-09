@@ -33,19 +33,43 @@
     <div class="row">
         <div class="col-12">
             <div class="card-box">
-                <h4 class="header-title m-t-0 m-b-20">تعديل المدينة </h4>
+                <h4 class="header-title m-t-0 m-b-20">تعديل  </h4>
 
                 <table class="table table-bordered table-striped">
-                    {{Form::model($service,['method'=>'PATCH','action' => ['admin\ServiceController@update',$service->id], 'files' => true])}}
+                    {{Form::model($feature,['method'=>'PATCH','action' => ['admin\FeatureController@update',$feature->id], 'files' => true])}}
                         <tbody>
-                        
+
+
+                        <tr>
+                            <td>الصورة</td>
+                            <td>
+                                <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="icon">
+                                @if ($errors->has('icon'))
+                                    <span class="alert alert-danger">
+                                            <strong>{{ $errors->first('icon') }}</strong>
+                                        </span>
+                                @endif
+
+                            </td>
+                        </tr>
 
                             <tr>
                                 <td>الاسم</td>
-                                <td><input type="text" class="form-control" name="name" value="{{$service->name}}" required></td>
-                                @if ($errors->has('name'))
+                                <td><input type="text" class="form-control" name="title" value="{{$feature->title}}" required ></td>
+                                @if ($errors->has('title'))
                                     <span class="alert alert-danger">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('title') }}</strong>
+                                    </span>
+                                @endif
+                            </tr>
+
+                            <tr>
+                                <td>الوصف</td>
+                                <td><textarea id="textarea" class="form-control" rows="2" name="description">value="{{$feature->description}}"</textarea>
+                                </td>
+                                @if ($errors->has('description'))
+                                    <span class="alert alert-danger">
+                                        <strong>{{ $errors->first('description') }}</strong>
                                     </span>
                                 @endif
                             </tr>

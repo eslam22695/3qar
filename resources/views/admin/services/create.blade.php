@@ -33,10 +33,10 @@
     <div class="row">
         <div class="col-12">
             <div class="card-box">
-                <h4 class="header-title m-t-0 m-b-20">اضافه مدينة </h4>
+                <h4 class="header-title m-t-0 m-b-20">اضافه الخدمة + </h4>
 
                 <table class="table table-bordered table-striped">
-                    {{Form::open(['method'=>'POST','action' => ['admin\CategoryController@store'], 'files' => true])}}
+                    {{Form::open(['method'=>'POST','action' => ['admin\ServiceController@store'], 'files' => true])}}
                         <tbody>
                         
 

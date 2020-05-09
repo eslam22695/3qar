@@ -32,7 +32,9 @@ class DistrictController extends Controller
      */
     public function create()
     {
-        //
+        $cities = City::where('status',1)->get();
+        return view('admin.district.create',compact('cities'));
+
     }
 
     /**
@@ -88,7 +90,9 @@ class DistrictController extends Controller
      */
     public function edit($id)
     {
-        //
+        $district = District::find($id);
+        $cities = City::where('status',1)->get();
+        return view('admin.district.edit',compact('district','cities'));
     }
 
     /**
