@@ -32,7 +32,7 @@ body{
     border-left: 5px solid #379c87;
 }
 #sidebar-menu ul ul li a {
-    color: #75798B;
+    color: #cccccc;
     font-weight: 600;
     padding-right: 64px;
     padding-left: 15px;
@@ -44,7 +44,7 @@ body{
     color: #ffffff;
 }
 .list-unstyled{
-    background: #f3f3f3;
+    background: #4c535a;
 }
 #sidebar-menu > ul > li > a:active {
     background: #55b9a4 !important;
