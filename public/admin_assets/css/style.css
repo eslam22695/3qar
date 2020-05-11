@@ -1064,7 +1064,9 @@ select[multiple] {
   margin-bottom: 0;
   padding: 0 10px;
   /*margin-left: 240px;*/
-  min-height: 70px; }
+  min-height: 70px;
+  border-bottom: 4px solid #207160;
+ }
   .navbar-custom .nav-link {
     padding: 0;
     line-height: 70px;
@@ -1169,7 +1171,7 @@ select[multiple] {
   z-index: 2; }
 
 .side-menu.left {
-  background: #ffffff;
+  background: #36404a;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   position: absolute;
   top: 70px; }
@@ -1253,11 +1255,11 @@ body.fixed-left .side-menu.left {
     color: #5fbeaa !important; }
 
 #sidebar-menu > ul > li > a {
-  color: #36404a;
+  color: #ffffff;
   display: block;
   padding: 12px 20px;
   margin: 4px 0;
-  border-left: 3px solid #ffffff; }
+}
   #sidebar-menu > ul > li > a:hover {
     color: #5fbeaa;
     text-decoration: none; }
