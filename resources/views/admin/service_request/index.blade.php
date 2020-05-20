@@ -53,7 +53,7 @@
                                     <td>{{$serviceRequest->email}}</td>
                                     <td>{{$serviceRequest->phone}}</td>
                                     <td>{{$serviceRequest->service->name}}</td>
-                                    <td>{{$contact->status === 1 ? 'تم المشاهدة' : 'لم يتم المشاهدة'}}</td>
+                                    <td>{{$serviceRequest->status === 1 ? 'تم المشاهدة' : 'لم يتم المشاهدة'}}</td>
 
                                     <td class="actions">
                                         <a href="{{ route('admin.service_request.show',$serviceRequest->id) }}" class="btn btn-primary waves-effect" title="مشاهدة">مشاهدة</a>

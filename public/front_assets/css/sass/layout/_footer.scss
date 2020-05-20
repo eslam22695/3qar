@@ -1,0 +1,85 @@
+footer{
+	background-color: $blackColor;
+	padding: 2rem 0 0 0;
+	p{
+		font-size: 16px;
+		color: $whiteColor;
+		margin-bottom: 0;
+		line-height: 2;
+	}
+	a{
+		text-decoration-color: transparent;
+		text-decoration: none;
+	}
+	h5{
+		font-size: 23px;
+		color: $whiteColor;
+		padding: 1rem 0;
+	}
+	.fa {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    margin-left: 1rem;	
+    justify-content: center;
+    align-items: center;
+	transition: .5s ease-in-out;	
+}
+	.fa.fa-facebook {
+    background-color: #5a73a8;
+	color: #fff;	
+		&:hover{
+			transform: rotate(360deg);
+			background-color: #6f8dcc;
+		}	
+}
+	.fa.fa-twitter {
+    background-color: #53d4ff;
+	color: #fff;	
+		&:hover{
+			transform: rotate(360deg);
+			background-color: #67b4ce;
+		}	
+}
+		.fa.fa-instagram {
+    background-color: #6e90af;
+	color: #fff;	
+		&:hover{
+			transform: rotate(360deg);
+			background-color: #92b1ce;
+		}	
+}
+		.fa.fa-youtube {
+    background-color: #b6495b;
+	color: #fff;	
+		&:hover{
+			transform: rotate(360deg);
+			background-color: #e01839;
+		}	
+}
+		.fa.fa-android {
+    background-color: #bcd679;
+	color: #fff;	
+		&:hover{
+			transform: rotate(360deg);
+			background-color: #73883c;
+		}	
+}
+		.fa.fa-apple {
+    background-color: #fff;
+	color: #000;	
+		&:hover{
+			transform: rotate(360deg);
+			background-color: #ece9e9;
+		}	
+}
+	.back-copy{
+		background-color: $blueColor;
+		color: $whiteColor;
+		font-size: 16px;
+		text-align: center;
+		padding: 10px;
+		margin-top: 1rem;
+	}	
+}

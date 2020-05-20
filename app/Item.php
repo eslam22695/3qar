@@ -47,4 +47,9 @@ class Item extends Model
         return $count;
     }
 
+    public function value()
+    {
+        return $this->hasMany('App\ItemAttribute', 'item_id', 'id');
+    }
+
 }

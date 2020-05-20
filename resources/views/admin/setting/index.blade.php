@@ -19,7 +19,7 @@
             <div class="card-box">
                 <h4 class="header-title m-t-0 m-b-20">البيانات</h4>
                 @if(isset($setting->id))
-                    {{Form::model($setting,['method'=>'PATCH','action' => ['admin\SettingController@update',$setting->id]])}}
+                    {{Form::model($setting,['method'=>'PATCH','action' => ['admin\SettingController@update',$setting->id], 'files' => true])}}
                         <table class="table table-bordered table-striped">
                             <tbody>
                                 
@@ -236,7 +236,7 @@
                         </table>
                     {!! Form::close() !!}
                 @else
-                    {{Form::open(['method'=>'POST','action' => ['admin\SettingController@store']])}}
+                    {{Form::open(['method'=>'POST','action' => ['admin\SettingController@store'], 'files' => true])}}
                         <table class="table table-bordered table-striped">
                             <tbody>
                                 
