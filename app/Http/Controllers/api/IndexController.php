@@ -12,9 +12,12 @@ use App\Setting;
 use App\Contact;
 use App\Service;
 use App\ServiceRequest;
+use App\Blog;
 
 class IndexController extends Controller
 {
+    private $asset = '/admin_assets/images/';
+
     /**
      * Display a listing of the resource.
      *
@@ -165,9 +168,24 @@ class IndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function blog()
     {
-        //
+        $blogs = Blog::where('status',1)->orderBy('id','desc')->get();
+        $data = [];
+        if(isset($blogs) && count($blogs)>0){
+            for($i=0; $i<count($blogs); $i++){
+                $data['blogs'][$i]['id'] = $blogs[$i]->id;
+                $data['blogs'][$i]['title'] = $blogs[$i]->title;
+                $data['blogs'][$i]['description'] = $blogs[$i]->description;
+                $data['blogs'][$i]['image'] = url($this->asset.'blog/'.$blogs[$i]->image);
+                
+            }
+        }
+        
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
     }
 
     /**
@@ -176,8 +194,19 @@ class IndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function blog_details($id)
     {
-        //
+        $blog = Blog::find($id);
+        $data = [];
+        $data['id'] = $blog->id;
+        $data['title'] = $blog->title;
+        $data['description'] = $blog->description;
+        $data['content'] = $blog->content;
+        $data['image'] = url($this->asset.'blog/'.$blog->image);
+
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
     }
 }
