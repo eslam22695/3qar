@@ -27,6 +27,7 @@ class IndexController extends Controller
      */
     public function home(Request $request)
     { 
+        $data = [];
         $lat = $request['lat'];
         $lang = $request['lang'];
         
@@ -56,7 +57,7 @@ class IndexController extends Controller
     }
 
     public function category($id){
-
+        $data = [];
         $item = Item::where('category_id',$id)->where('status',1)->orderBy('id')->get();
 
         if(isset($item) && $item != null){
