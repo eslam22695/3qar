@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 Route::post('login', 'api\AuthController@login');
 Route::post('register', 'api\AuthController@register');
 
+Route::get('home', 'api\IndexController@home');
+
 Route::get('about', 'api\IndexController@about');
 Route::get('contact', 'api\IndexController@contact');
 Route::post('contact_form', 'api\IndexController@contact_form');

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Support\Facades\DB;
 
+use App\Item;
 use App\Setting;
 use App\Contact;
 use App\Service;
@@ -17,6 +18,30 @@ use App\Blog;
 class IndexController extends Controller
 {
     private $asset = '/admin_assets/images/';
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function home(Request $request)
+    { 
+        $lat = $request['lat'];
+        $lang = $request['lang'];
+        
+        $items = Item::select(DB::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lang ) - radians('.$lang.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->having('distance', '<', 25)->orderBy('distance')->get();
+
+        if(isset($items) && count($items)>0){
+            $data['items'] = $items;
+        }else{
+            $data = [];
+        }
+        
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
 
     /**
      * Display a listing of the resource.
