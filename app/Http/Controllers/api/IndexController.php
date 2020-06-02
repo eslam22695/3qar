@@ -95,7 +95,7 @@ class IndexController extends Controller
 
         if(isset($setting) && $setting != null){
             $data['setting']['about_text'] = $setting->main_about;
-            $data['setting']['about_image'] = url($this->asset.'setting/'.$setting[$i]->about_image);
+            $data['setting']['about_image'] = url($this->asset.'setting/'.$setting->about_image);
         }else{
             $data = ['setting'];
         }
@@ -203,7 +203,7 @@ class IndexController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function service_request()
+    public function service_request(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
