@@ -14,6 +14,7 @@ use App\Contact;
 use App\Service;
 use App\ServiceRequest;
 use App\Blog;
+use App\Feature;
 
 class IndexController extends Controller
 {
@@ -32,16 +33,18 @@ class IndexController extends Controller
         $item = Item::select(DB::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lang ) - radians('.$lang.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->having('distance', '<', 25)->where('status',1)->orderBy('distance')->get();
 
         if(isset($item) && count($item)>0){
-            $data['id'] = $item[$i]->id;
-            $data['name'] = $item[$i]->name;
-            $data['description'] = $item[$i]->description;
-            $data['price'] = $item[$i]->price;
-            $data['main_image'] = url($this->asset.'item/'.$item[$i]->main_image);
-            $data['category'] = $item[$i]->category->name;
-            $data['district'] = $item[$i]->district->name;
-            $data['city'] = $item[$i]->city->name;
-            $data['area'] = $item[$i]->area;
-            $data['phone'] = $item[$i]->phone;
+            for($i=0; $i<count($item); $i++){
+                $data['item'][$i]['id'] = $item[$i]->id;
+                $data['item'][$i]['name'] = $item[$i]->name;
+                $data['item'][$i]['description'] = $item[$i]->description;
+                $data['item'][$i]['price'] = $item[$i]->price;
+                $data['item'][$i]['main_image'] = url($this->asset.'item/'.$item[$i]->main_image);
+                $data['item'][$i]['category'] = $item[$i]->category->name;
+                $data['item'][$i]['district'] = $item[$i]->district->name;
+                $data['item'][$i]['city'] = $item[$i]->city->name;
+                $data['item'][$i]['area'] = $item[$i]->area;
+                $data['item'][$i]['phone'] = $item[$i]->phone;
+            }
         }else{
             $data = [];
         }
@@ -58,16 +61,16 @@ class IndexController extends Controller
 
         if(isset($item) && $item != null){
             for($i=0; $i<count($item); $i++){
-                $data['id'] = $item[$i]->id;
-                $data['name'] = $item[$i]->name;
-                $data['description'] = $item[$i]->description;
-                $data['price'] = $item[$i]->price;
-                $data['main_image'] = url($this->asset.'item/'.$item[$i]->main_image);
-                $data['category'] = $item[$i]->category->name;
-                $data['district'] = $item[$i]->district->name;
-                $data['city'] = $item[$i]->city->name;
-                $data['area'] = $item[$i]->area;
-                $data['phone'] = $item[$i]->phone;
+                $data['item'][$i]['id'] = $item[$i]->id;
+                $data['item'][$i]['name'] = $item[$i]->name;
+                $data['item'][$i]['description'] = $item[$i]->description;
+                $data['item'][$i]['price'] = $item[$i]->price;
+                $data['item'][$i]['main_image'] = url($this->asset.'item/'.$item[$i]->main_image);
+                $data['item'][$i]['category'] = $item[$i]->category->name;
+                $data['item'][$i]['district'] = $item[$i]->district->name;
+                $data['item'][$i]['city'] = $item[$i]->city->name;
+                $data['item'][$i]['area'] = $item[$i]->area;
+                $data['item'][$i]['phone'] = $item[$i]->phone;
             }
         }else{
             $data = [];
@@ -86,12 +89,24 @@ class IndexController extends Controller
      */
     public function about()
     { 
+        $data = [];
         $setting = Setting::first();
+        $feature = Feature::take(3)->get();
+
         if(isset($setting) && $setting != null){
-            $data['about_text'] = $setting->main_about;
-            $data['about_image'] = $setting->about_image;
+            $data['setting']['about_text'] = $setting->main_about;
+            $data['setting']['about_image'] = url($this->asset.'setting/'.$setting[$i]->about_image);
         }else{
-            $data = [];
+            $data = ['setting'];
+        }
+
+        if(isset($feature) && count($feature)>0){
+            for($i=0; $i<count($feature); $i++){
+                $data['feature'][$i]['id'] = $feature[$i]->id;
+                $data['feature'][$i]['title'] = $feature[$i]->title;
+                $data['feature'][$i]['description'] = $feature[$i]->description;
+                $data['feature'][$i]['icon'] = url($this->asset.'feature/'.$feature[$i]->icon);
+            }
         }
         
         return response([
