@@ -29,14 +29,50 @@ class IndexController extends Controller
         $lat = $request['lat'];
         $lang = $request['lang'];
         
-        $items = Item::select(DB::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lang ) - radians('.$lang.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->having('distance', '<', 25)->orderBy('distance')->get();
+        $item = Item::select(DB::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lang ) - radians('.$lang.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->having('distance', '<', 25)->where('status',1)->orderBy('distance')->get();
 
-        if(isset($items) && count($items)>0){
-            $data['items'] = $items;
+        if(isset($item) && count($item)>0){
+            $data['id'] = $item[$i]->id;
+            $data['name'] = $item[$i]->name;
+            $data['description'] = $item[$i]->description;
+            $data['price'] = $item[$i]->price;
+            $data['main_image'] = url($this->asset.'item/'.$item[$i]->main_image);
+            $data['category'] = $item[$i]->category->name;
+            $data['district'] = $item[$i]->district->name;
+            $data['city'] = $item[$i]->city->name;
+            $data['area'] = $item[$i]->area;
+            $data['phone'] = $item[$i]->phone;
         }else{
             $data = [];
         }
         
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
+
+    public function category($id){
+
+        $item = Item::where('category_id',$id)->where('status',1)->orderBy('id')->get();
+
+        if(isset($item) && $item != null){
+            for($i=0; $i<count($item); $i++){
+                $data['id'] = $item[$i]->id;
+                $data['name'] = $item[$i]->name;
+                $data['description'] = $item[$i]->description;
+                $data['price'] = $item[$i]->price;
+                $data['main_image'] = url($this->asset.'item/'.$item[$i]->main_image);
+                $data['category'] = $item[$i]->category->name;
+                $data['district'] = $item[$i]->district->name;
+                $data['city'] = $item[$i]->city->name;
+                $data['area'] = $item[$i]->area;
+                $data['phone'] = $item[$i]->phone;
+            }
+        }else{
+            $data = [];
+        }
+
         return response([
             'status'    =>      'success',
             'data'      =>      $data
@@ -51,7 +87,7 @@ class IndexController extends Controller
     public function about()
     { 
         $setting = Setting::first();
-        if(isset($setting) && count($setting)>0){
+        if(isset($setting) && $setting != null){
             $data['about_text'] = $setting->main_about;
             $data['about_image'] = $setting->about_image;
         }else{
@@ -72,7 +108,7 @@ class IndexController extends Controller
     public function contact()
     {
         $setting = Setting::first();
-        if(isset($setting) && count($setting)>0){
+        if(isset($setting) && $setting != null){
             $data['phone1'] = $setting->phone1;
             $data['phone2'] = $setting->phone2;
             $data['address'] = $setting->address;

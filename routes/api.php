@@ -16,6 +16,7 @@ Route::post('login', 'api\AuthController@login');
 Route::post('register', 'api\AuthController@register');
 
 Route::get('home', 'api\IndexController@home');
+Route::get('category/{id}', 'api\IndexController@category');
 
 Route::get('about', 'api\IndexController@about');
 Route::get('contact', 'api\IndexController@contact');
