@@ -9,6 +9,8 @@ use Validator;
 use Illuminate\Support\Facades\DB;
 
 use App\Item;
+use App\Category;
+use App\City;
 use App\Setting;
 use App\Contact;
 use App\Service;
@@ -83,6 +85,36 @@ class IndexController extends Controller
         ], 200);
     }
 
+    public function categories(){
+
+        $cats = Category::where('status',1)->get();
+        if(isset($cats) && $cats != null){
+            $data['cats'] = $cats;
+        }else{
+            $data = [];
+        }
+
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
+
+    public function cities(){
+
+        $city = City::where('status',1)->get();
+        if(isset($city) && $city != null){
+            $data['city'] = $city;
+        }else{
+            $data = [];
+        }
+
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -98,7 +130,7 @@ class IndexController extends Controller
             $data['setting']['about_text'] = $setting->main_about;
             $data['setting']['about_image'] = url($this->asset.'setting/'.$setting->about_image);
         }else{
-            $data = ['setting'];
+            $data['setting'] = [];
         }
 
         if(isset($feature) && count($feature)>0){
@@ -108,6 +140,8 @@ class IndexController extends Controller
                 $data['feature'][$i]['description'] = $feature[$i]->description;
                 $data['feature'][$i]['icon'] = url($this->asset.'feature/'.$feature[$i]->icon);
             }
+        }else{
+            $data['feature'] = [];
         }
         
         return response([

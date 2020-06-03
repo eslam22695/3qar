@@ -18,6 +18,8 @@ Route::post('register', 'api\AuthController@register');
 Route::get('home', 'api\IndexController@home');
 Route::get('category/{id}', 'api\IndexController@category');
 
+Route::get('categories', 'api\IndexController@categories');
+Route::get('cities', 'api\IndexController@cities');
 Route::get('about', 'api\IndexController@about');
 Route::get('contact', 'api\IndexController@contact');
 Route::post('contact_form', 'api\IndexController@contact_form');
