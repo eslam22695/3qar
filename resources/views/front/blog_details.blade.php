@@ -28,7 +28,7 @@
                             <div class="">
                                 <h5> {{$blog_menu->title}}</h5>
                                 <p class="p-details">{{$blog_menu->description}}</p>
-                                <i class="fa fa-calendar p-details"></i> <span>{{$blog_menu->created_at->format('d M YY') }}</span>
+                                <i class="fa fa-calendar p-details"></i> <span>{{$blog_menu->created_at->format('d M Y') }}</span>
                             </div>
                         </div>
 

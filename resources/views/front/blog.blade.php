@@ -8,12 +8,12 @@
     <div class="container">
         <div class="row">
             @foreach($blogs as $blog)
-            @if($loop->iteration == 1)
-            <divu class="col-lg-8 col-md-6 ">
+            @if($loop->first)
+            <div id="{{$loop->iteration}}" class="col-lg-8 col-md-6 ">
                 <a href=" {{route('blog_details',$blog->id)}}">
                     <div class=" mb-3 wow fadeIn" data-wow-delay=".5s">
                         <div class="card shadow-lg p-2">
-                            <span class="back-color-bg">{{$blog->created_at->format('d M YY') }}</span>
+                            <span class="back-color-bg">{{$blog->created_at->format('d M Y') }}</span>
                             <div class="image-wrapper">
 
                                 <img src="{{asset('admin_assets/images/blog/'.$blog->image)}}" class="img-blog-big" alt="spongebob crew" />
@@ -29,14 +29,14 @@
                         </div>
                     </div>
                 </a>
-            </divu>
+            </div>
             @else
-            <div class="col-lg-4 col-md-6">
+            <div id="{{$loop->iteration}}" class="col-lg-4 col-md-6">
                 <a href=" {{route('blog_details',$blog->id)}}">
 
                     <div class=" mb-3 wow fadeIn" data-wow-delay=".5s">
                         <div class="card shadow-lg p-2">
-                            <span class="back-color-sm">{{$blog->created_at->format('d M YY') }}</span>
+                            <span class="back-color-sm">{{$blog->created_at->format('d M Y') }}</span>
                             <div class="image-wrapper">
 
                                 <img src="{{asset('admin_assets/images/blog/'.$blog->image)}}" class="img-blog-sm" alt="spongebob crew" />

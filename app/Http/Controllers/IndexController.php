@@ -42,7 +42,7 @@ class IndexController extends Controller
 
     public function blog()
     {
-        $blogs = Blog::All();
+        $blogs = Blog::all();
 
         return view('front.blog',compact('blogs'));
 
