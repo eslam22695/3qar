@@ -19,11 +19,11 @@ Route::get('consultation'  ,'IndexController@consultation')->name('consultation'
 Route::post('consultation'  ,'IndexController@consultation_post');
 Route::get('contact'  ,'IndexController@contact')->name('contact');
 Route::post('contact'  ,'IndexController@contact_post');
-Route::get('filter'  ,'IndexController@filter')->name('filter');
-Route::get('filter_details'  ,'IndexController@filter_details')->name('filter_details');
+Route::get('item_details'  ,'IndexController@item_details')->name('item_details');
 Route::get('profile'  ,'IndexController@profile')->name('profile');
 Route::get('special'  ,'IndexController@special')->name('special');
 
+Route::get('items'  ,'IndexController@items')->name('items');
 
 
 

@@ -9,13 +9,15 @@
             <div class="row">
 
                 <div class="col-md-6 wow fadeInUp"  data-wow-duration="2s">
+                    @if(isset($setting->about_image))
                     <img src="{{asset('admin_assets/images/setting/'.$setting->about_image)}}" width="100%" class="">
+                    @endif
                 </div>
                 <div class="col-md-6 text-about wow fadeInDown"  data-wow-duration="2s">
                     <div class="head">
                         <h2>من نحن</h2>
                     </div>
-                    <h3> {{$setting->about_home}} </h3>
+                    <h3> {{isset($setting->about_home) ? $setting->about_home : ''}} </h3>
 
                 </div>
             </div>
@@ -91,7 +93,7 @@
                         <div class="">
 
                             <h5>اتصل بنا</h5>
-                            <p>{{$setting->phone1}}</p>
+                            <p>{{isset($setting->phone1) ? $setting->phone1 : ''}}</p>
                         </div>
 
                     </div>
@@ -100,7 +102,7 @@
                     <div class="head">
                         <h2>تواصل معنا</h2>
                     </div>
-                    <h3>{{$setting->contact_text}}</h3>
+                    <h3>{{isset($setting->contact_text) ? $setting->contact_text : ''}}</h3>
 
 
                 </div>

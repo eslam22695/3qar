@@ -24,7 +24,7 @@
             <div class="head  wow fadeInRight" >
                 <h2 class="mb-5"> تواصل معنا</h2>
             </div>
-            <iframe class="wow fadeIn" src="{{$setting->map}}" width="100%" height="300px" frameborder="0" style="border:0" allowfullscreen></iframe>
+            {{-- <iframe class="wow fadeIn" src="{{$setting->map}}" width="100%" height="300px" frameborder="0" style="border:0" allowfullscreen></iframe> --}}
         </div>
         <div class="Special">
             <div class="container">
@@ -73,13 +73,13 @@
                     </div>
                     <div class="col-md-6 wow fadeInDown"  data-wow-duration="1s">
                         <div class="single-contact">
-                            <i class="fa fa-home"></i> <span> {{$setting->address}} </span>
+                            <i class="fa fa-home"></i> <span> {{isset($setting->address) ? $setting->address : ''}} </span>
                         </div>
                         <div class="single-contact">
-                            <i class="fa fa-phone"></i> <span> {{$setting->phone1}} / {{$setting->phone2}} </span>
+                            <i class="fa fa-phone"></i> <span> {{isset($setting->phone1) ? $setting->phone1 : ''}} {{isset($setting->phone2) ? '/ '.$setting->phone2 : ''}}</span>
                         </div>
                         <div class="single-contact">
-                            <i class="fa fa-envelope"></i> <span> {{$setting->email}} </span>
+                            <i class="fa fa-envelope"></i> <span> {{isset($setting->email) ? $setting->email : ''}} </span>
                         </div>
                     </div>
                 </div>

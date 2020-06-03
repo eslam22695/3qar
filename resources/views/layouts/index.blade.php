@@ -6,6 +6,7 @@
     <meta name="generator" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>ALATEEQ GROUP</title>
     <link rel="icon" type="image/png" href="{{asset('front_assets/img/logoo.png')}}">
     <link rel="stylesheet" href=" {{asset('front_assets/css/bootstrap.min.css')}}">
@@ -63,72 +64,51 @@
 <!--------start banner -------------->
 <section class="banner">
     <div class="container">
-        <div class="row">
-            <div class="wow fadeInLeft col-12">
-                <h1>ابحث عن عقارات للبيع و للايجار بالتقسيط او كاش في السعوديه</h1>
-                <p>تحب تسكن فين ؟</p>
-            </div>
-            <div class="col-md-5 p-0 wow fadeInLeft">
-                <div class="form-group border-form">
-                    <select data-live-search="true" class="form-control selectpicker select-one">
-                        <option>اختر النوع</option>
-                        <option>Orange</option>
-                        <option>Lychee</option>
-                        <option>Pineapple</option>
-                        <option>Apple</option>
-                        <option>Banana</option>
-                        <option>Grapes</option>
-                        <option>Water Melon</option>
-                        <option>اختر النوع</option>
-                        <option>Orange</option>
-                        <option>Lychee</option>
-                        <option>Pineapple</option>
-                        <option>Apple</option>
-                        <option>Banana</option>
-                        <option>Grapes</option>
-                        <option>Water Melon</option>
-                        <option>اختر النوع</option>
-                        <option>Orange</option>
-                        <option>Lychee</option>
-                        <option>Pineapple</option>
-                        <option>Apple</option>
-                        <option>Banana</option>
-                        <option>Grapes</option>
-                        <option>Water Melon</option>
-                        <option>اختر النوع</option>
-                        <option>Orange</option>
-                        <option>Lychee</option>
-                        <option>Pineapple</option>
-                        <option>Apple</option>
-                        <option>Banana</option>
-                        <option>Grapes</option>
-                        <option>Water Melon</option>
-                    </select>
+        <form method="GET" action="{{route('items')}}">
+            <div class="row">
+                <div class="wow fadeInLeft col-12">
+                    <h1>ابحث عن عقارات للبيع و للايجار بالتقسيط او كاش في السعوديه</h1>
+                    <p>تحب تسكن فين ؟</p>
                 </div>
+                    
+                <div class="col-md-5 p-0 wow fadeInLeft">
+                    <div class="form-group border-form">
+                        <select data-live-search="true" class="form-control selectpicker select-one" required name="cat_id">
+                            <option selected disabled value="0">اختر النوع</option>
+                            @foreach(@Helper::cats() as $cat)
+                                <option value="{{$cat->id}}">{{$cat->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-            </div>
-            <div class="col-md-5 p-0 wow fadeInLeft">
-                <div class="form-group">
-                    <select data-live-search="true" class="form-control selectpicker select-two">
-                        <option>اختر المدينه</option>
-                        <option>Orange</option>
-                        <option>Lychee</option>
-                        <option>Pineapple</option>
-                        <option>Apple</option>
-                        <option>Banana</option>
-                        <option>Grapes</option>
-                        <option>Water Melon</option>
-                    </select>
+                </div>
+                <div class="col-md-5 p-0 wow fadeInLeft">
+                    <div class="form-group">
+                        <select data-live-search="true" class="form-control selectpicker select-two" required name="city_id">
+                            <option selected disabled value="0">اختر المدينه</option>
+                            @foreach(@Helper::cities() as $city)
+                                <option value="{{$city->id}}">{{$city->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary  pl-5 pr-5 wow fadeInLeft">بحث</button>
+                    <h3>تحب تسكن فين ؟</h3>
+                </div>
+                <div class="col-md-12">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-primary  pl-5 pr-5 wow fadeInLeft">بحث</button>
-                <h3>تحب تسكن فين ؟</h3>
-            </div>
-        </div>
+        </form>
     </div>
 </section>
 <!--------end banner -------------->
+
 @yield('content')
 
 <!--------start footer -------------->

@@ -10,67 +10,46 @@
                 <div class="col-md-9 postion">
                     <div class="product__slider-main  img-slide-filter photos">
                         <div class=" item">
-                            <a href="./img/1.jpg" data-lightbox="photos"><img class="img-fluid slide-img-bigg" src="./img/1.jpg"></a>
+                            <a href="{{asset('admin_assets/images/item/'.$item->main_image)}}" data-lightbox="photos"><img class="img-fluid slide-img-bigg" src="{{asset('admin_assets/images/item/'.$item->main_image)}}"></a>
                         </div>
+                        @foreach($images as $image)
                         <div class=" item">
-                            <a href="./img/2.jpg" data-lightbox="photos"><img class="img-fluid slide-img-bigg" src="./img/1.jpg"></a>
+                            <a href="{{asset('admin_assets/images/item/'.$image->image)}}" data-lightbox="photos"><img class="img-fluid slide-img-bigg" src="{{asset('admin_assets/images/item/'.$image->image)}}"></a>
                         </div>
+                        @endforeach
                         <div class=" item">
-                            <a href="./img/3.jpg" data-lightbox="photos"><img class="img-fluid slide-img-bigg" src="./img/1.jpg"></a>
-                        </div>
-                        <div class=" item">
-                            <a href="./img/1.jpg" data-lightbox="photos"><img class="img-fluid slide-img-bigg" src="./img/1.jpg"></a>
-                        </div>
-                        <div class=" item">
-                            <a href="./img/2.jpg" data-lightbox="photos"><img class="img-fluid slide-img-bigg" src="./img/1.jpg"></a>
-                        </div>
-                        <div class=" item">
-                            <a href="./img/3.jpg" data-lightbox="photos"><img class="img-fluid slide-img-bigg" src="./img/1.jpg"></a>
-                        </div>
-                        <div class=" item">
-                            <a href="./img/1.jpg" data-lightbox="photos"><img class="img-fluid" src="./img/1.jpg"></a>
+                            <a href="{{asset('admin_assets/images/item/'.$item->main_image)}}" data-lightbox="photos"><img class="img-fluid" src="{{asset('admin_assets/images/item/'.$item->main_image)}}"></a>
                         </div>
                     </div>
                     <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
                     <div class="product__slider-thmb">
-                        <div class="slide"><img src="./img/s-Recovered.jpg" alt="" class="img-responsive img-big"></div>
-                        <div class="slide"><img src="./img/2.jpg" alt="" class="img-responsive img-big"></div>
-                        <div class="slide"><img src="./img/3.jpg" alt="" class="img-responsive img-big"></div>
-                        <div class="slide"><img src="./img/1.jpg" alt="" class="img-responsive img-big"></div>
-                        <div class="slide"><img src="./img/2.jpg" alt="" class="img-responsive img-big"></div>
-                        <div class="slide"><img src="./img/3.jpg" alt="" class="img-responsive img-big"></div>
-                        <div class="slide"><img src="./img/1.jpg" alt="" class="img-responsive img-big"></div>
+                        <div class="slide"><img src="{{asset('admin_assets/images/item/'.$item->main_image)}}" alt="" class="img-responsive img-big"></div>
+                        @foreach($images as $image)
+                        <div class="slide"><img src="{{asset('admin_assets/images/item/'.$image->image)}}" alt="" class="img-responsive img-big"></div>
+                        @endforeach
                     </div>
                     <div class="text-slider mb-5">
                         <div class="container">
-                            <h3>شقه للبيع في الرياض ب 140 الف ريال بعد الخصم</h3>
+                            <h3>{{$item->name}}</h3>
                             <div class="d-flex justify-content-between  align-items-center ">
-                               	<span class="icon-p">
-									 <img class="icon-img" src="img/burj-al-arab.png">
-									انيوهاوس  </span>
-                                <span class="icon-p">
-									  <img class="icon-img" src="img/expand.png">
-									  431 متر </span>
-                                <span class="icon-p">
-									  <img class="icon-img" src="img/bed.png">
-									  غرفه </span>
-                                <span class="icon-p">
-										<img class="icon-img" src="img/bath.png">
-									 	حمام </span>
+                                @foreach($item->value() as $value)
+                                    <span class="icon-p">
+                                        <img class="icon-img" src="{{asset('admin_assets/images/attribute/'.$value->attribute_value->attribute->icon)}}">
+                                        {{$value->attribute_value->attribute->name}}  </span>
+                                @endforeach
 
                             </div>
 
-                            <p class="card-text">توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل<br>  لوكيشن بمدينة
-                                أكتوبر نفسك تسكن فى فيلا...</p>
                             <span class="icon-p ">
-							<img class="icon-img" src="img/67872.png">
-							الحي المتميز/الرياض </span>
+                                <img class="icon-img" src="{{asset('front_assets/img/67872.png')}}">
+                            {{isset($item->district->name) ? $item->district->name.' / ' : ''}} {{isset($item->city->name) ? $item->city->name : ''}}
+                         </span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="number-phone shadow-lg  mb-4">
-                        <p><a href="#">3,900,000 ريال </a></p>
+                        <p><a href="#">{{$item->price}} ريال سعودي</a></p>
                         <a href="./filter.html" class="btn btn-primary">اظهر الرقم الهاتف</a>
                     </div>
                     <h3><strong>شاهد ايضا</strong></h3>
@@ -175,16 +154,7 @@
             <div id="section2" class="container-fluid back-color mb-5">
                 <div class="head wow fadeInRight "  data-wow-duration="2s">
                     <h2 class="mb-5"> وصف الاعلان </h2>
-                    <p>توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل
-                        لوكيشن بمدينة أكتوبر نفسك تسكن فى فيلا توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل
-                        لوكيشن بمدينة أكتوبر نفسك تسكن فى فيلا. توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل
-                        لوكيشن بمدينة أكتوبر نفسك تسكن فى فيلا. توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل
-                        لوكيشن بمدينة أكتوبر نفسك تسكن فى فيلا.</p>
-                    <p>توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل
-                        لوكيشن بمدينة أكتوبر نفسك تسكن فى فيلا توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل
-                        لوكيشن بمدينة أكتوبر نفسك تسكن فى فيلا. توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل
-                        لوكيشن بمدينة أكتوبر نفسك تسكن فى فيلا. توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل
-                        لوكيشن بمدينة أكتوبر نفسك تسكن فى فيلا.</p>
+                    <p>{{$item->description}}</p>
                 </div>
             </div>
             <div id="section3" class="container-fluid back-color">

@@ -8,6 +8,7 @@ use App\Contact;
 use App\Feature;
 use App\Http\Controllers\Controller;
 use App\Item;
+use App\ItemImage;
 use App\Service;
 use App\ServiceRequest;
 use Illuminate\Http\Request;
@@ -109,28 +110,38 @@ class IndexController extends Controller
     }
 
 
-    public function filter()
+    public function items(Request $request)
     {
-        return view('front.filter');
+        $this->validate($request,[
+            'cat_id' => 'required|exists:categories,id',
+            'city_id' => 'required|exists:cities,id',
+        ]);
 
+        $input = $request->all();
+
+        $items = Item::where('category_id',$input['cat_id'])->where('city_id',$input['city_id'])->where('status',1)->paginate(9);
+
+        return view('front.filter',compact('items'));
     }
 
-    public function filter_details()
+    public function item_details($id)
     {
-        return view('front.filter_details');
+        $item = Item::find($id);
+        $images = ItemImage::where('item_id',$id)->get();
+
+        return view('front.filter_details',compact('item','images'));
 
     }
 
     public function profile()
     {
         return view('front.profile');
-
     }
 
     public function special()
     {
-        return view('front.special');
-
+        $specials = Item::where('featured',1)->where('status',1)->paginate(6);
+        return view('front.special',compact('specials'));
     }
 
 }

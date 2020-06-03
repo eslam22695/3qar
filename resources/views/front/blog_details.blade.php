@@ -38,7 +38,7 @@
                 <div class="col-md-12">
                     <div class="head pb-5 wow fadeInRight"  data-wow-duration="2s">
                         <h2>{{$blog->title}} </h2>
-                        <i class="fa fa-calendar p-details"></i> <span>{{$blog->created_at->format('d M YY') }}</span>
+                        <i class="fa fa-calendar p-details"></i> <span>{{$blog->created_at->format('d M Y') }}</span>
                         <p> {!!$blog->content!!}</p>
 
                     </div>
