@@ -21,7 +21,7 @@
                         <div class="d-flex justify-content-between  align-items-center pb-3">
 
                             <div class="image-wrapper img-details ">
-                                <a href="">
+                                <a href="{{route('blog_details',$blog_menu->id)}}">
                                     <img width="100%" src="{{asset('admin_assets/images/blog/'.$blog_menu->image)}}" class="img-small" alt="spongebob crew" />
                                 </a>
                             </div>
@@ -45,20 +45,20 @@
 
                 </div>
 
-                @foreach($blogs as $blog)
+                @foreach($blogs as $blog_mob)
 
                     <div class="col-lg-4 col-md-6  d-md-none d-sm-block">
                         <div class="d-flex justify-content-between  align-items-center pb-3">
 
                             <div class="image-wrapper img-details ">
-                                <a href="">
-                                    <img width="100%" src="{{asset('admin_assets/images/blog/'.$blog->image)}}" class="img-small" alt="spongebob crew" />
+                                <a href="{{route('blog_details',$blog_mob->id)}}">
+                                    <img width="100%" src="{{asset('admin_assets/images/blog/'.$blog_mob->image)}}" class="img-small" alt="spongebob crew" />
                                 </a>
                             </div>
                             <div class="">
-                                <h5> {{$blog->title}}</h5>
-                                <p class="p-details">{{$blog->description}}</p>
-                                <i class="fa fa-calendar p-details"></i> <span>{{$blog->created_at->format('d M YY') }}</span>
+                                <h5> {{$blog_mob->title}}</h5>
+                                {{-- <p class="p-details">{{$blog_mob->description}}</p> --}}
+                                <i class="fa fa-calendar p-details"></i> <span>{{$blog_mob->created_at->format('d M Y') }}</span>
                             </div>
                         </div>
 

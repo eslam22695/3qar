@@ -24,7 +24,7 @@
     <div class="Special">
         <div class="container">
             <div class="head  wow fadeInRight" >
-                <h2 class="mb-5">  الاستشارات الهندسيه </h2>
+                <h2 class="mb-5">  خدمات اخرى </h2>
             </div>
             <div class="row mt-5">
                 <div class="col-md-6 wow fadeInUp"  data-wow-duration=".5s">

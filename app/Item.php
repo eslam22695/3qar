@@ -52,4 +52,16 @@ class Item extends Model
         return $this->hasMany('App\ItemAttribute', 'item_id', 'id');
     }
 
+    public function option()
+    {
+        return $this->hasMany('App\ItemOption', 'item_id', 'id');
+    }
+
+    public function favourite($id){
+
+        $favourite = \App\Favourite::where('item_id',$id)->where('user_id',\Auth::user()->id)->count();
+
+        return $favourite;
+    }
+
 }

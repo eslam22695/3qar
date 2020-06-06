@@ -136,21 +136,21 @@
                                         {{isset($item->district->name) ? $item->district->name.' / ' : ''}} {{isset($item->city->name) ? $item->city->name : ''}}
                                     </span>
                                     <div class="d-flex justify-content-between  align-items-center ">
-                                        @foreach($item->value() as $value)
+                                        @foreach($item->value()->get() as $value)
                                             <span class="icon-p">
                                                 <img class="icon-img" src="{{asset('admin_assets/images/attribute/'.$value->attribute_value->attribute->icon)}}">
                                                 {{$value->attribute_value->attribute->name}}  </span>
                                         @endforeach
 
                                     </div>
-                                    <p><a href="#"> <strong>{{$item->price}} ريال سعودي</strong> </a></p>
-                                    <a href="./filter-details.html" class="btn btn-primary">شاهد</a>
+                                    <p><a href="{{route('item_details',$item->id)}}"> <strong>{{$item->price}} ريال سعودي</strong> </a></p>
+                                    <a href="{{route('item_details',$item->id)}}" class="btn btn-primary">شاهد</a>
                                 </div>
                             </div>
                         </div>
                     @endforeach
 
-                    <nav class="m-auto" aria-label="...">
+                    {{-- <nav class="m-auto" aria-label="...">
                         <ul class="pagination shadow-sm mt-5">
                             <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Previous">
@@ -171,7 +171,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </nav>
+                    </nav> --}}
 
                 </div>
             </div>

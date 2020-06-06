@@ -51,30 +51,12 @@
                         </div>
                     </div>
                 </a>
-                {{--<a href="#">--}}
-                    {{--<div class=" mb-3 wow fadeIn" data-wow-delay=".5s">--}}
-                        {{--<div class="card shadow-lg p-2">--}}
-                            {{--<span class="back-color-sm">{{$blog->created_at->format('d M YY') }}</span>--}}
-                            {{--<div class="image-wrapper">--}}
-
-                                {{--<img src="{{asset('admin_assets/images/blog/'.$blog->image)}}" class="img-blog-sm" alt="spongebob crew" />--}}
-                            {{--</div>--}}
-                            {{--<div class="card-body">--}}
-
-                                {{--<div class="head">--}}
-                                    {{--<h2 class="card-title mt-5">{{$blog->title}}</h2>--}}
-                                {{--</div>--}}
-                                {{--<p>{{$blog->description}} </p>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</a>--}}
             </div>
             @endif
            @endforeach
         </div>
 
-        <div class="col-md-4 m-auto">
+        {{-- <div class="col-md-4 m-auto">
             <nav aria-label="...">
                 <ul class="pagination shadow-sm mt-5">
                     <li class="page-item">
@@ -98,7 +80,7 @@
                 </ul>
             </nav>
 
-        </div>
+        </div> --}}
     </div>
 </section>
 <!--------end 3akar -------------->

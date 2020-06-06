@@ -1,7 +1,19 @@
 @extends('layouts.index')
 
-@section('content')
+@section('styles')
+    
+<style type="text/css">
+    #map {
+        width: 100%;
+        height: 400px;
+    }
+    .filter-details .back-color{
+        padding: 100px 50px !important;
+    }
+</style>
+@endsection
 
+@section('content')
 
     <!-------- start filter slider------>
     <section class="filter-slider  blog mt-5 wow fadeInUp">
@@ -21,7 +33,21 @@
                             <a href="{{asset('admin_assets/images/item/'.$item->main_image)}}" data-lightbox="photos"><img class="img-fluid" src="{{asset('admin_assets/images/item/'.$item->main_image)}}"></a>
                         </div>
                     </div>
-                    <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                    <span id="fav-block-{{$item->id}}">
+                        @if(Auth::check())
+                            @if($item->favourite($item->id) == 1)
+                                <a onclick="unfav({{$item->id}});">
+                                    <span id="wish-icon-{{$item->id}}" class="wish-icon"><i class="fa fa-heart ml-3"></i></span>
+                                </a>
+                            @else
+                                <a onclick="fav({{$item->id}});">
+                                    <span id="wish-icon-{{$item->id}}" class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                                </a>
+                            @endif
+                        @else
+                            <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                        @endif
+                    </span>
                     <div class="product__slider-thmb">
                         <div class="slide"><img src="{{asset('admin_assets/images/item/'.$item->main_image)}}" alt="" class="img-responsive img-big"></div>
                         @foreach($images as $image)
@@ -49,37 +75,55 @@
                 </div>
                 <div class="col-md-3">
                     <div class="number-phone shadow-lg  mb-4">
-                        <p><a href="#">{{$item->price}} ريال سعودي</a></p>
-                        <a href="./filter.html" class="btn btn-primary">اظهر الرقم الهاتف</a>
+                        <p><a href="{{route('item_details',$item->id)}}">{{$item->price}} ريال سعودي</a></p>
+                        @if($count == 1)
+                            <a href="tel:{{$item->phone}}" class="btn btn-primary">{{$item->phone}}</a>
+                        @else
+                            <div id="show_phone">
+                                <a onclick="show_phone({{$item->id}});" class="btn btn-primary">اظهر الرقم الهاتف</a>
+                            </div>
+                        @endif
                     </div>
                     <h3><strong>شاهد ايضا</strong></h3>
-                    <a href="./blog-details.html">
-                        <div class=" mb-3 wow fadeIn" data-wow-delay=".5s">
-                            <div class="card shadow-lg p-2 postion">
-                                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                <div class="image-wrapper">
+                    @foreach($others as $other)
+                        <a href="{{route('item_details',$other->id)}}">
+                            <div class=" mb-3 wow fadeIn" data-wow-delay="{{$loop->iteration/3}}s">
+                                <div class="card shadow-lg p-2 postion">
+                                    <span id="fav-block-{{$other->id}}">
+                                        @if(Auth::check())
+                                            @if($other->favourite($other->id) == 1)
+                                                <a onclick="unfav({{$other->id}});">
+                                                    <span id="wish-icon-{{$other->id}}" class="wish-icon"><i class="fa fa-heart ml-3"></i></span>
+                                                </a>
+                                            @else
+                                                <a onclick="fav({{$other->id}});">
+                                                    <span id="wish-icon-{{$other->id}}" class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                                                </a>
+                                            @endif
+                                        @else
+                                            <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                                        @endif
+                                    </span>
+                                    <div class="image-wrapper">
 
-                                    <img src="./img/2.jpg" class="img-blog" alt="spongebob crew" />
-                                </div>
-                                <div class="card-body p-0">
-                                    <h5 class="mb-0"><strong>شقه للبيع في مدي...</strong></h5>
-                                    <p class="mb-0">تاون هاوس للبيع</p>
-                                    <div class="d-flex justify-content-start  align-items-center">
-                                        <i class="fa fa-home">   نيو هاوس </i>
-                                        <i class="	fa fa-bath	"> متر </i>
+                                        <img src="{{asset('admin_assets/images/item/'.$other->main_image)}}" class="img-blog" alt="spongebob crew" />
                                     </div>
-                                    <div class="d-flex justify-content-start  align-items-center">
-                                        <i class="fa fa-bed"> غرف </i>
-                                        <i class="	fa fa-arrows-alt"> حمام </i>
+                                    <div class="card-body p-0">
+                                        <h5 class="mb-0"><strong>{{$other->name}}</strong></h5>
+                                        <div class="d-flex justify-content-start  align-items-center">
+                                            @foreach($other->value()->get() as $value)
+                                                {{$value->attribute_value->attribute->name}} {{$value->attribute_value->value}} {{$loop->last ? '' : '/'}}
+                                            @endforeach 
+                                        </div>
+
+                                        <p class="mb-0"><a href="{{route('item_details',$other->id)}}">{{$other->price}}  ريال سعودي </a></p>
+                                        <a href="{{route('item_details',$other->id)}}" class="btn btn-primary btn-filter">شاهد</a>
+
                                     </div>
-
-                                    <p class="mb-0"><a href="#">3,900,000 ريال </a></p>
-                                    <a href="./filter.html" class="btn btn-primary btn-filter">اظهر الرقم الهاتف</a>
-
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    @endforeach
 
                 </div>
             </div>
@@ -110,44 +154,43 @@
             <div id="section1" class="container-fluid back-color mb-5">
                 <div class="head wow fadeInRight "  data-wow-duration="2s">
                     <h2 class="mb-5"> تفاصيل الاعلان </h2>
-
-                    <div class="d-flex justify-content-around  align-items-center pb-3 table">
-                        <p> <strong>الطابق</strong> </p>
-                        <p> 5 </p>
-                        <p><strong>رقم الاعلان</strong></p>
-                        <p>KSA-6688744</p>
-                    </div>
-                    <div class="d-flex justify-content-around  align-items-center pb-3 table">
-                        <p> <strong>الدور</strong> </p>
-                        <p> 2018 </p>
-                        <p><strong>رقم الاعلان</strong></p>
-                        <p>KSA-6688744</p>
-                    </div>
-                    <div class="d-flex justify-content-around  align-items-center pb-3 table">
-                        <p> <strong>الطابق</strong> </p>
-                        <p> 5 </p>
-                        <p><strong>رقم الاعلان</strong></p>
-                        <p>KSA-6688744</p>
-                    </div>
-                    <div class="d-flex justify-content-around  align-items-center pb-3 table">
-                        <p> <strong>الدور</strong> </p>
-                        <p> 2018 </p>
-                        <p><strong>رقم الاعلان</strong></p>
-                        <p>KSA-6688744</p>
-                    </div>
-                    <div class="d-flex justify-content-around  align-items-center pb-3">
-                             	<span class="icon-p">
-									 <img class="icon-img" src="img/98866.png">
-									انيوهاوس  </span>
-                        <span class="icon-p">
-									  <img class="icon-img" src="img/98866.png">
-									  431 متر </span>
-                        <span class="icon-p">
-									  <img class="icon-img" src="img/98866.png">
-									  غرفه </span>
-                        <span class="icon-p">
-										<img class="icon-img" src="img/98866.png">
-									 	حمام </span>
+                    <div class="row">
+                        <div class="col-md-6">    
+                            <div class="d-flex justify-content-around  align-items-center pb-3 table">
+                                <p> <strong>المساحة</strong> </p>
+                                <p> {{$item->area}} متر مربع</p>
+                            </div>
+                            @foreach($item->value()->get() as $value)
+                                @if($loop->iteration % 2 == 1)
+                                <div class="d-flex justify-content-around  align-items-center pb-3 table">
+                                    <p> <strong>{{$value->attribute_value->attribute->name}}</strong> </p>
+                                    <p> {{$value->attribute_value->value}}</p>
+                                </div>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex justify-content-around  align-items-center pb-3 table">
+                                <p><strong>رقم الاعلان</strong></p>
+                                <p>{{$item->id}}</p>
+                            </div>
+                            @foreach($item->value()->get() as $value)
+                                @if($loop->iteration % 2 == 0)
+                                <div class="d-flex justify-content-around  align-items-center pb-3 table">
+                                    <p> <strong>{{$value->attribute_value->attribute->name}}</strong> </p>
+                                    <p> {{$value->attribute_value->value}}</p>
+                                </div>
+                                @endif
+                            @endforeach
+                        </div>
+                        @foreach($item->option()->get() as $option)
+                            <div class="d-flex justify-content-around  align-items-center pb-3">
+                                <span class="icon-p">
+                                    <img class="icon-img" src="{{asset('front_assets/img/98866.png')}}">
+                                    {{$option->option->name}}  
+                                </span>
+                            </div> 
+                        @endforeach         
                     </div>
                 </div>
             </div>
@@ -160,7 +203,7 @@
             <div id="section3" class="container-fluid back-color">
                 <div class="head wow fadeInRight "  data-wow-duration="2s">
                     <h2 class="mb-5"> مكان العقار علي الخريطه  </h2>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3736489.7218514383!2d90.21589792292741!3d23.857125486636733!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1506502314230" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <div id="map"></div>
                 </div>
             </div>
 
@@ -169,4 +212,30 @@
 
     <!------ end nav tabs --------->
 
+@endsection
+
+
+@section('scripts')
+<script>
+        
+    function initMap() {
+        var myLatLng = {lat: {{$item->lat}}, lng: {{$item->lang}}};
+    
+        var map = new google.maps.Map(document.getElementById('map'), {
+        center: myLatLng,
+        zoom: 15
+        });
+    
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Hello World!',
+            draggable: false
+            });
+    
+    }
+    
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap" async defer></script>
+         
 @endsection

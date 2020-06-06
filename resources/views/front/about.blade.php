@@ -50,30 +50,6 @@
 
                 </div>
                 @endforeach
-                {{--<div class="col-md-4 mb-3 p-1 wow fadeInDown">--}}
-                    {{--<div class="card-about">--}}
-                        {{--<img class="img-sp" src="img/1.jpg" width="100%">--}}
-                        {{--<div class="text-card">--}}
-					{{--<span class="icon-p pt-3">--}}
-							{{--<img class="icon-img" src="./img/phone.png">--}}
-							{{--</span>--}}
-                            {{--<h5>هناك حقيقة مثبتة منذ زمن طويل </h5>--}}
-                            {{--<p>هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي .  </p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-4 mb-3 p-1 wow fadeInUp">--}}
-                    {{--<div class="card-about">--}}
-                        {{--<img class="img-sp" src="img/1.jpg" width="100%">--}}
-                        {{--<div class="text-card">--}}
-					{{--<span class="icon-p pt-3">--}}
-							{{--<img class="icon-img" src="./img/hand-graving-smartphone.png">--}}
-							{{--</span>--}}
-                            {{--<h5>هناك حقيقة مثبتة منذ زمن طويل </h5>--}}
-                            {{--<p>هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي .  </p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
             </div>
         </div>
     </section>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ItemClick extends Model
 {
-    protected $table = 'item_click';
+    protected $table = 'item_clicks';
     protected $fillable = [
         'id', 'status','item_id','user_id'
     ];

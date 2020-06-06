@@ -16,19 +16,27 @@
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
                                 <div class="d-flex justify-content-between  align-items-center">
                                     <span>الاعلانات المحفوظه</span>
-                                    <span>(4)</span>
+                                    <span>({{$favCount}})</span>
                                 </div></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
                                 <div class="d-flex justify-content-between  align-items-center">
                                     <span>العقارات المتواصل بخصوصها</span>
-                                    <span>(4)</span>
+                                    <span>({{$clickCount}})</span>
                                 </div>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="out-tab" data-toggle="tab" href="#out" role="tab" aria-controls="out" aria-selected="false">خروج</a>
+                            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="zmdi zmdi-power"></i> <span>تسجيل خروج</span>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+           
+                                    {{ csrf_field() }}
+           
+                                </form>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -37,45 +45,30 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="container">
-                                <div class="d-flex justify-content-between  align-items-center user-profile mb-3">
+                                {{-- <div class="d-flex justify-content-between  align-items-center user-profile mb-3">
                                     <h4><strong>معلوماتي الشخصيه</strong></h4>
                                     <a href=""><h4 class="dark-color"><strong>تعديل</strong></h4></a>
-                                </div>
+                                </div> --}}
                                 <div class="row shadow-lg p-3">
                                     <div class="col-12">
                                         <div class="d-flex justify-content-start  align-items-center user-profile">
                                             <p class="width-name">الاسم</p>
-                                            <p class="margin-profile">مني مدحت امين</p>
+                                            <p class="margin-profile">{{$user->name}}</p>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="d-flex justify-content-start  align-items-center user-profile">
                                             <p class="width-name">البريد الالكتروني</p>
-                                            <p class="margin-profile">monasrk@gmail.com</p>
+                                            <p class="margin-profile">{{$user->email}}</p>
                                         </div>
                                     </div>
                                     <div class="col-12">
 
                                         <div class="d-flex justify-content-start  align-items-center user-profile">
                                             <p class="width-name">رقم الجوال</p>
-                                            <p class="margin-profile">01114582358</p>
+                                            <p class="margin-profile">{{$user->phone}}</p>
                                         </div>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="d-flex justify-content-start  align-items-center user-profile">
-                                            <p class="width-name">تاريخ الميلاد</p>
-                                            <p class="margin-profile">25/1/1995</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-
-                                        <div class="d-flex justify-content-start  align-items-center user-profile">
-                                            <p class="width-name">رقم المرور</p>
-                                            <p class="margin-profile">M998752453</p>
-                                        </div>
-                                    </div>
-
-
                                 </div>
                             </div>
 
@@ -85,98 +78,50 @@
                                 <h4>الاعلانات المحفوظه</h4>
                                 <div class="row">
 
-                                    <div class="col-md-6 mb-3 " >
-                                        <div class="card shadow-lg">
-                                            <div class="image-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                                <img src="./img/3.jpg" alt="spongebob crew" />
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">شقه للبيع في الرياض ب الف ريال بعد الخصم 410</h5>
-                                                <p class="card-text">توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل لوكيشن بمدينة
-                                                    أكتوبر نفسك تسكن فى فيلا...</p>
-                                                <i class="	fa fa-location-arrow icon-home">
-                                                    الحي المتميز/الرياض </i>
-                                                <div class="d-flex justify-content-between  align-items-center pb-3">
-                                                    <i class="fa fa-home">   متر </i>
-                                                    <i class="	fa fa-bath	"> متر </i>
-                                                    <i class="fa fa-bed"> متر </i>
-                                                    <i class="	fa fa-arrows-alt"> متر </i>
+                                    @foreach($favs as $fav)
+                                        <div class="col-md-6 mb-3 " >
+                                            <div class="card shadow-lg">
+                                                <div class="image-wrapper">
+                                                    <span id="fav-block-{{$fav->item->id}}">
+                                                        @if(Auth::check())
+                                                            @if($fav->item->favourite($fav->item->id) == 1)
+                                                                <a onclick="unfav({{$fav->item->id}});">
+                                                                    <span id="wish-icon-{{$fav->item->id}}" class="wish-icon"><i class="fa fa-heart ml-3"></i></span>
+                                                                </a>
+                                                            @else
+                                                                <a onclick="fav({{$fav->item->id}});">
+                                                                    <span id="wish-icon-{{$fav->item->id}}" class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                                                                </a>
+                                                            @endif
+                                                        @else
+                                                            <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                                                        @endif
+                                                    </span>
+                                                    <img src="{{asset('admin_assets/images/item/'.$fav->item->main_image)}}" alt="spongebob crew" />
                                                 </div>
-                                                <p><a href="#">3,900,000 ريال </a></p>
-                                                <a href="./filter.html" class="btn btn-primary">شاهد</a>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{$fav->item->name}}</h5>
+                                                    <?php
+                                                        $description = substr($fav->item->description,0, 30)."...";
+                                                    ?>
+                                                    <p class="card-text">{{$description}}</p>
+                                                    <span class="icon-p pt-3">
+                                                        <img class="icon-img" src="{{asset('front_assets/img/67872.png')}}">
+                                                        {{$fav->item->city->name}} / {{$fav->item->district->name}} </span>
+
+                                                    <div class="d-flex justify-content-between  align-items-center ">
+                                                        @foreach($fav->item->value()->get() as $value)
+                                                            <span class="icon-p">
+                                                                <img class="icon-img" src="{{asset('admin_assets/images/attribute/'.$value->attribute_value->attribute->icon)}}">
+                                                                {{$value->attribute_value->attribute->name}}  </span>
+                                                        @endforeach
+                                                    </div>
+                                                    <p><a href="{{route('item_details',$fav->item->id)}}">{{$fav->item->price}} ريال سعودي </a></p>
+                                                    <a href="{{route('item_details',$fav->item->id)}}" class="btn btn-primary">شاهد</a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3 " >
-                                        <div class="card shadow-lg">
-                                            <div class="image-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                                <img src="./img/3.jpg" alt="spongebob crew" />
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">شقه للبيع في الرياض ب الف ريال بعد الخصم 410</h5>
-                                                <p class="card-text">توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل لوكيشن بمدينة
-                                                    أكتوبر نفسك تسكن فى فيلا...</p>
-                                                <i class="	fa fa-location-arrow icon-home">
-                                                    الحي المتميز/الرياض </i>
-                                                <div class="d-flex justify-content-between  align-items-center pb-3">
-                                                    <i class="fa fa-home">   متر </i>
-                                                    <i class="	fa fa-bath	"> متر </i>
-                                                    <i class="fa fa-bed"> متر </i>
-                                                    <i class="	fa fa-arrows-alt"> متر </i>
-                                                </div>
-                                                <p><a href="#">3,900,000 ريال </a></p>
-                                                <a href="./filter.html" class="btn btn-primary">شاهد</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3 " >
-                                        <div class="card shadow-lg">
-                                            <div class="image-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                                <img src="./img/3.jpg" alt="spongebob crew" />
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">شقه للبيع في الرياض ب الف ريال بعد الخصم 410</h5>
-                                                <p class="card-text">توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل لوكيشن بمدينة
-                                                    أكتوبر نفسك تسكن فى فيلا...</p>
-                                                <i class="	fa fa-location-arrow icon-home">
-                                                    الحي المتميز/الرياض </i>
-                                                <div class="d-flex justify-content-between  align-items-center pb-3">
-                                                    <i class="fa fa-home">   متر </i>
-                                                    <i class="	fa fa-bath	"> متر </i>
-                                                    <i class="fa fa-bed"> متر </i>
-                                                    <i class="	fa fa-arrows-alt"> متر </i>
-                                                </div>
-                                                <p><a href="#">3,900,000 ريال </a></p>
-                                                <a href="./filter.html" class="btn btn-primary">شاهد</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3 " >
-                                        <div class="card shadow-lg">
-                                            <div class="image-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                                <img src="./img/3.jpg" alt="spongebob crew" />
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">شقه للبيع في الرياض ب الف ريال بعد الخصم 410</h5>
-                                                <p class="card-text">توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل لوكيشن بمدينة
-                                                    أكتوبر نفسك تسكن فى فيلا...</p>
-                                                <i class="	fa fa-location-arrow icon-home">
-                                                    الحي المتميز/الرياض </i>
-                                                <div class="d-flex justify-content-between  align-items-center pb-3">
-                                                    <i class="fa fa-home">   متر </i>
-                                                    <i class="	fa fa-bath	"> متر </i>
-                                                    <i class="fa fa-bed"> متر </i>
-                                                    <i class="	fa fa-arrows-alt"> متر </i>
-                                                </div>
-                                                <p><a href="#">3,900,000 ريال </a></p>
-                                                <a href="./filter.html" class="btn btn-primary">شاهد</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
 
@@ -186,105 +131,54 @@
                                 <h4>العقارات المتواصل بخصوصها</h4>
                                 <div class="row">
 
-                                    <div class="col-md-6 mb-3 " >
-                                        <div class="card shadow-lg">
-                                            <div class="image-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                                <img src="./img/3.jpg" alt="spongebob crew" />
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">شقه للبيع في الرياض ب الف ريال بعد الخصم 410</h5>
-                                                <p class="card-text">توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل لوكيشن بمدينة
-                                                    أكتوبر نفسك تسكن فى فيلا...</p>
-                                                <i class="	fa fa-location-arrow icon-home">
-                                                    الحي المتميز/الرياض </i>
-                                                <div class="d-flex justify-content-between  align-items-center pb-3">
-                                                    <i class="fa fa-home">   متر </i>
-                                                    <i class="	fa fa-bath	"> متر </i>
-                                                    <i class="fa fa-bed"> متر </i>
-                                                    <i class="	fa fa-arrows-alt"> متر </i>
+                                    @foreach($clicks as $click)
+                                        <div class="col-md-6 mb-3 " >
+                                            <div class="card shadow-lg">
+                                                <div class="image-wrapper">
+                                                    <span id="fav-block-{{$click->item->id}}">
+                                                        @if(Auth::check())
+                                                            @if($click->item->favourite($click->item->id) == 1)
+                                                                <a onclick="unfav({{$click->item->id}});">
+                                                                    <span id="wish-icon-{{$click->item->id}}" class="wish-icon"><i class="fa fa-heart ml-3"></i></span>
+                                                                </a>
+                                                            @else
+                                                                <a onclick="fav({{$click->item->id}});">
+                                                                    <span id="wish-icon-{{$click->item->id}}" class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                                                                </a>
+                                                            @endif
+                                                        @else
+                                                            <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                                                        @endif
+                                                    </span>
+                                                    <img src="{{asset('admin_assets/images/item/'.$click->item->main_image)}}" alt="spongebob crew" />
                                                 </div>
-                                                <p><a href="#">3,900,000 ريال </a></p>
-                                                <a href="./filter.html" class="btn btn-primary">شاهد</a>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{$click->item->name}}</h5>
+                                                    <?php
+                                                        $description = substr($click->item->description,0, 30)."...";
+                                                    ?>
+                                                    <p class="card-text">{{$description}}</p>
+                                                    <span class="icon-p pt-3">
+                                                        <img class="icon-img" src="{{asset('front_assets/img/67872.png')}}">
+                                                        {{$click->item->city->name}} / {{$click->item->district->name}} </span>
+
+                                                    <div class="d-flex justify-content-between  align-items-center ">
+                                                        @foreach($click->item->value()->get() as $value)
+                                                            <span class="icon-p">
+                                                                <img class="icon-img" src="{{asset('admin_assets/images/attribute/'.$value->attribute_value->attribute->icon)}}">
+                                                                {{$value->attribute_value->attribute->name}}  </span>
+                                                        @endforeach
+                                                    </div>
+                                                    <p><a href="{{route('item_details',$click->item->id)}}">{{$click->item->price}} ريال سعودي </a></p>
+                                                    <a href="{{route('item_details',$click->item->id)}}" class="btn btn-primary">شاهد</a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3 " >
-                                        <div class="card shadow-lg">
-                                            <div class="image-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                                <img src="./img/3.jpg" alt="spongebob crew" />
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">شقه للبيع في الرياض ب الف ريال بعد الخصم 410</h5>
-                                                <p class="card-text">توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل لوكيشن بمدينة
-                                                    أكتوبر نفسك تسكن فى فيلا...</p>
-                                                <i class="	fa fa-location-arrow icon-home">
-                                                    الحي المتميز/الرياض </i>
-                                                <div class="d-flex justify-content-between  align-items-center pb-3">
-                                                    <i class="fa fa-home">   متر </i>
-                                                    <i class="	fa fa-bath	"> متر </i>
-                                                    <i class="fa fa-bed"> متر </i>
-                                                    <i class="	fa fa-arrows-alt"> متر </i>
-                                                </div>
-                                                <p><a href="#">3,900,000 ريال </a></p>
-                                                <a href="./filter.html" class="btn btn-primary">شاهد</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3 " >
-                                        <div class="card shadow-lg">
-                                            <div class="image-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                                <img src="./img/3.jpg" alt="spongebob crew" />
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">شقه للبيع في الرياض ب الف ريال بعد الخصم 410</h5>
-                                                <p class="card-text">توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل لوكيشن بمدينة
-                                                    أكتوبر نفسك تسكن فى فيلا...</p>
-                                                <i class="	fa fa-location-arrow icon-home">
-                                                    الحي المتميز/الرياض </i>
-                                                <div class="d-flex justify-content-between  align-items-center pb-3">
-                                                    <i class="fa fa-home">   متر </i>
-                                                    <i class="	fa fa-bath	"> متر </i>
-                                                    <i class="fa fa-bed"> متر </i>
-                                                    <i class="	fa fa-arrows-alt"> متر </i>
-                                                </div>
-                                                <p><a href="#">3,900,000 ريال </a></p>
-                                                <a href="./filter.html" class="btn btn-primary">شاهد</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3 " >
-                                        <div class="card shadow-lg">
-                                            <div class="image-wrapper">
-                                                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                                <img src="./img/3.jpg" alt="spongebob crew" />
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">شقه للبيع في الرياض ب الف ريال بعد الخصم 410</h5>
-                                                <p class="card-text">توين هاوس للبيع 431 م + حديقة 120 م خلف مول مباشرة بأرقى وافضل لوكيشن بمدينة
-                                                    أكتوبر نفسك تسكن فى فيلا...</p>
-                                                <i class="	fa fa-location-arrow icon-home">
-                                                    الحي المتميز/الرياض </i>
-                                                <div class="d-flex justify-content-between  align-items-center pb-3">
-                                                    <i class="fa fa-home">   متر </i>
-                                                    <i class="	fa fa-bath	"> متر </i>
-                                                    <i class="fa fa-bed"> متر </i>
-                                                    <i class="	fa fa-arrows-alt"> متر </i>
-                                                </div>
-                                                <p><a href="#">3,900,000 ريال </a></p>
-                                                <a href="./filter.html" class="btn btn-primary">شاهد</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
 
                         </div>
-                        <div class="tab-pane fade" id="out" role="tabpanel" aria-labelledby="out-tab">
-                        </div>
-
                     </div>
                 </div>
                 <!-- /.col-md-8 -->

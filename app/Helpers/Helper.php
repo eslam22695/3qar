@@ -10,6 +10,7 @@ use Auth;
 
 use App\Category;
 use App\City;
+use App\Setting;
 
 class Helper
 {
@@ -23,5 +24,10 @@ class Helper
     static function cities(){
         $cities = City::where('status',1)->get();
         return $cities;
+    }
+
+    static function setting(){
+        $setting = Setting::first();
+        return $setting;
     }
 }

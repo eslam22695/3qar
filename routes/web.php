@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/'  ,'IndexController@index')->name('home');
+Route::get('/'  ,'IndexController@index')->name('index');
 Route::get('about'  ,'IndexController@about')->name('about');
 Route::get('blog'  ,'IndexController@blog')->name('blog');
 Route::get('blog_details/{id}' ,'IndexController@blog_details')->name('blog_details');
@@ -19,13 +19,15 @@ Route::get('consultation'  ,'IndexController@consultation')->name('consultation'
 Route::post('consultation'  ,'IndexController@consultation_post');
 Route::get('contact'  ,'IndexController@contact')->name('contact');
 Route::post('contact'  ,'IndexController@contact_post');
-Route::get('item_details'  ,'IndexController@item_details')->name('item_details');
-Route::get('profile'  ,'IndexController@profile')->name('profile');
 Route::get('special'  ,'IndexController@special')->name('special');
 
 Route::get('items'  ,'IndexController@items')->name('items');
+Route::get('item_details/{id}'  ,'IndexController@item_details')->name('item_details');
 
 
+Route::get('/ajax_phone', 'IndexController@ajax_phone');
+Route::get('/ajax_fav', 'IndexController@ajax_fav');
+Route::get('/ajax_unfav', 'IndexController@ajax_unfav');
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
@@ -39,4 +41,13 @@ Route::group(['prefix' => 'admin'], function () {
   Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+});
+
+Auth::routes();
+
+Route::Group(['middleware' => ['auth']], function () {
+
+  Route::get('/home', 'IndexController@profile')->name('home');
+  Route::get('/profile', 'IndexController@profile')->name('profile');
+
 });
