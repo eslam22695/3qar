@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Attribute;
 use App\AttributeFamily;
 use App\AttributeValue;
+use App\ItemAttribute;
 
 class AttributeController extends Controller
 {
@@ -142,6 +143,7 @@ class AttributeController extends Controller
         ]);
 
         $input = $request->all();
+
         $attribute = Attribute::find($id);
 
         if(isset($input['icon'])){
@@ -158,17 +160,29 @@ class AttributeController extends Controller
 
         $attribute->update($input);
 
-        $values = AttributeValue::where('attribute_id',$id)->get();
+        /* $values = AttributeValue::where('attribute_id',$id)->get();
+        $value_ids = [];
+        $j = 0;
         foreach($values as $value){
+            $value_ids[$j] = $value->id;
             $value->delete();
-        }
+            $j = $j+1;
+        } */
 
         for($i=0;$i<count($input['attribute_value']);$i++){
-            $value = [
-                'attribute_id' => $id,
-                'value' => $input['attribute_value'][$i]
-            ];
-            AttributeValue::create($value);
+            
+            if(isset($input['attribute_value_id'][$i])){
+                $AttributeValue = AttributeValue::find($input['attribute_value_id'][$i]);
+                $AttributeValue->value = $input['attribute_value'][$i];
+                $AttributeValue->update();
+            }else{
+                $value = [
+                    'attribute_id' => $id,
+                    'value' => $input['attribute_value'][$i]
+                ];
+                AttributeValue::create($value);
+            }
+            
         }
 
         Session::flash('success','تم التعديل بنجاح');

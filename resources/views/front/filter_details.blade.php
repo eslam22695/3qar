@@ -15,6 +15,54 @@
 
 @section('content')
 
+<!--------start banner -------------->
+<section class="banner">
+    <div class="container">
+        <form method="GET" action="{{route('items')}}">
+            <div class="row">
+                <div class="wow fadeInLeft col-12">
+                    <h1>ابحث عن عقارات للبيع و للايجار بالتقسيط او كاش في السعوديه</h1>
+                    <p>تحب تسكن فين ؟</p>
+                </div>
+                    
+                <div class="col-md-5 p-0 wow fadeInLeft">
+                    <div class="form-group border-form">
+                        <select data-live-search="true" class="form-control selectpicker select-one" required name="cat_id">
+                            <option selected disabled value="0">اختر النوع</option>
+                            @foreach(@Helper::cats() as $cat)
+                                <option value="{{$cat->id}}">{{$cat->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-md-5 p-0 wow fadeInLeft">
+                    <div class="form-group">
+                        <select data-live-search="true" class="form-control selectpicker select-two" required name="city_id">
+                            <option selected disabled value="0">اختر المدينه</option>
+                            @foreach(@Helper::cities() as $city)
+                                <option value="{{$city->id}}">{{$city->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary  pl-5 pr-5 wow fadeInLeft">بحث</button>
+                    <h3>تحب تسكن فين ؟</h3>
+                </div>
+                <div class="col-md-12">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!--------end banner -------------->
+
     <!-------- start filter slider------>
     <section class="filter-slider  blog mt-5 wow fadeInUp">
         <div class="container ">
@@ -80,51 +128,52 @@
                             <a href="tel:{{$item->phone}}" class="btn btn-primary">{{$item->phone}}</a>
                         @else
                             <div id="show_phone">
-                                <a onclick="show_phone({{$item->id}});" class="btn btn-primary">اظهر الرقم الهاتف</a>
+                                <a style="color: #ffffff;" onclick="show_phone({{$item->id}});" class="btn btn-primary">اظهر الرقم الهاتف</a>
                             </div>
                         @endif
                     </div>
-                    <h3><strong>شاهد ايضا</strong></h3>
-                    @foreach($others as $other)
-                        <a href="{{route('item_details',$other->id)}}">
-                            <div class=" mb-3 wow fadeIn" data-wow-delay="{{$loop->iteration/3}}s">
-                                <div class="card shadow-lg p-2 postion">
-                                    <span id="fav-block-{{$other->id}}">
-                                        @if(Auth::check())
-                                            @if($other->favourite($other->id) == 1)
-                                                <a onclick="unfav({{$other->id}});">
-                                                    <span id="wish-icon-{{$other->id}}" class="wish-icon"><i class="fa fa-heart ml-3"></i></span>
-                                                </a>
+                    @if(isset($others) && $others != null)
+                        <h3><strong>شاهد ايضا</strong></h3>
+                        @foreach($others as $other)
+                            <a href="{{route('item_details',$other->id)}}">
+                                <div class=" mb-3 wow fadeIn" data-wow-delay="{{$loop->iteration/3}}s">
+                                    <div class="card shadow-lg p-2 postion">
+                                        <span id="fav-block-{{$other->id}}">
+                                            @if(Auth::check())
+                                                @if($other->favourite($other->id) == 1)
+                                                    <a onclick="unfav({{$other->id}});">
+                                                        <span id="wish-icon-{{$other->id}}" class="wish-icon"><i class="fa fa-heart ml-3"></i></span>
+                                                    </a>
+                                                @else
+                                                    <a onclick="fav({{$other->id}});">
+                                                        <span id="wish-icon-{{$other->id}}" class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                                                    </a>
+                                                @endif
                                             @else
-                                                <a onclick="fav({{$other->id}});">
-                                                    <span id="wish-icon-{{$other->id}}" class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
-                                                </a>
+                                                <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
                                             @endif
-                                        @else
-                                            <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
-                                        @endif
-                                    </span>
-                                    <div class="image-wrapper">
+                                        </span>
+                                        <div class="image-wrapper">
 
-                                        <img src="{{asset('admin_assets/images/item/'.$other->main_image)}}" class="img-blog" alt="spongebob crew" />
-                                    </div>
-                                    <div class="card-body p-0">
-                                        <h5 class="mb-0"><strong>{{$other->name}}</strong></h5>
-                                        <div class="d-flex justify-content-start  align-items-center">
-                                            @foreach($other->value()->get() as $value)
-                                                {{$value->attribute_value->attribute->name}} {{$value->attribute_value->value}} {{$loop->last ? '' : '/'}}
-                                            @endforeach 
+                                            <img src="{{asset('admin_assets/images/item/'.$other->main_image)}}" class="img-blog" alt="spongebob crew" />
                                         </div>
+                                        <div class="card-body p-0">
+                                            <h5 class="mb-0"><strong>{{$other->name}}</strong></h5>
+                                            <div class="d-flex justify-content-start  align-items-center">
+                                                @foreach($other->value()->get() as $value)
+                                                    {{$value->attribute_value->attribute->name}} {{$value->attribute_value->value}} {{$loop->last ? '' : '/'}}
+                                                @endforeach 
+                                            </div>
 
-                                        <p class="mb-0"><a href="{{route('item_details',$other->id)}}">{{$other->price}}  ريال سعودي </a></p>
-                                        <a href="{{route('item_details',$other->id)}}" class="btn btn-primary btn-filter">شاهد</a>
+                                            <p class="mb-0"><a href="{{route('item_details',$other->id)}}">{{$other->price}}  ريال سعودي </a></p>
+                                            <a href="{{route('item_details',$other->id)}}" class="btn btn-primary btn-filter">شاهد</a>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    @endforeach
-
+                            </a>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 

@@ -198,14 +198,14 @@ class ItemController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'require|max:191|unique:attributes,name',
+            'name'  => 'required|max:191|unique:attributes,name',
             'description'  => 'required',
             'price'  => 'required',
-            'main_image'  => 'required|main_image|mimes:jpeg,png,jpg,gif,svg|max:3048',
+            'main_image'  => 'nullable|main_image|mimes:jpeg,png,jpg,gif,svg|max:3048',
             'phone'  => 'required|digits:11|unique:owners,phone',
             'area'  => 'required',
-            'district_id'  => 'required|exists:districts,id',
-            'city_id'  => 'required|exists:cities,id',
+            'district_id'  => 'nullable|exists:districts,id',
+            'city_id'  => 'nullable|exists:cities,id',
             'category_id'  => 'required|exists:categories,id',
             'owner_id'  => 'required|exists:owners,id',
         ],[
@@ -214,7 +214,6 @@ class ItemController extends Controller
                 'name.unique' => 'حقل الاسم موجود مسبقا',
                 'description.required' => 'حقل الوصف  مطلوب',
                 'price.required' => 'حقل السعر  مطلوب',
-                'main_image.required' => 'حقل الصورة مطلوب',
                 'main_image.main_image' => 'حقل الصورة يجب أن يكون صورة',
                 'main_image.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
                 'main_image.max' => 'أقصى مساحة للصوره 2 ميجابايت',
@@ -223,9 +222,7 @@ class ItemController extends Controller
                 'phone.unique' => 'حقل رقم الجوال موجود مسبقا',
                 'area.required' => 'حقل المنطقة مطلوب',
 
-                'district_id.required' => 'حقل الاحياء مطلوب',
                 'district_id.exists' => 'الاحياء غير موجودة',
-                'city_id.required' => 'حقل المدينة مطلوب',
                 'city_id.exists' => 'المدينة غير موجودة',
                 'category_id.required' => 'حقل القسم  مطلوب',
                 'category_id.exists' => 'القسم غير موجودة',

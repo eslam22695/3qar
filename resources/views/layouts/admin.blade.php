@@ -14,7 +14,7 @@
 
     <link rel="shortcut icon" href="{{asset('admin_assets/images/logo.png')}}">
 
-    <title>بريق</title>
+    <title>3qar</title>
 
     <!--Morris Chart CSS -->
 
@@ -61,7 +61,7 @@
                 <a href="{{route('admin.home')}}" class="logo" dir="rtl">
                     <i class="icon-c-logo"></i>
                     <span> 
-                        بريق
+                        3qar
                     </span>
                 </a>
 
@@ -177,7 +177,7 @@
 
             <footer class="footer text-right">
 
-                Otex &copy; 2018 All rights reserved.
+                &copy; 2020 All rights reserved.
 
             </footer>
 

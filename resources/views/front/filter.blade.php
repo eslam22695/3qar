@@ -2,12 +2,59 @@
 
 @section('content')
 
+<!--------start banner -------------->
+<section class="banner">
+    <div class="container">
+        <form method="GET" action="{{route('items')}}">
+            <div class="row">
+                <div class="wow fadeInLeft col-12">
+                    <h1>ابحث عن عقارات للبيع و للايجار بالتقسيط او كاش في السعوديه</h1>
+                    <p>تحب تسكن فين ؟</p>
+                </div>
+                    
+                <div class="col-md-5 p-0 wow fadeInLeft">
+                    <div class="form-group border-form">
+                        <select data-live-search="true" class="form-control selectpicker select-one" required name="cat_id">
+                            <option selected disabled value="0">اختر النوع</option>
+                            @foreach(@Helper::cats() as $cat)
+                                <option value="{{$cat->id}}">{{$cat->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-md-5 p-0 wow fadeInLeft">
+                    <div class="form-group">
+                        <select data-live-search="true" class="form-control selectpicker select-two" required name="city_id">
+                            <option selected disabled value="0">اختر المدينه</option>
+                            @foreach(@Helper::cities() as $city)
+                                <option value="{{$city->id}}">{{$city->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary  pl-5 pr-5 wow fadeInLeft">بحث</button>
+                    <h3>تحب تسكن فين ؟</h3>
+                </div>
+                <div class="col-md-12">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!--------end banner -------------->
 
 <!--------start 3akar -------------->
 <section class="Special filter">
     <div class="container">
 
-        <div class="head pb-5 wow fadeInRight d-flex justify-content-between  align-items-center pb-3"  data-wow-duration="2s">
+        {{-- <div class="head pb-5 wow fadeInRight d-flex justify-content-between  align-items-center pb-3"  data-wow-duration="2s">
             <h2>العقارات للايجار</h2>
             <div class="dropdown">
                 <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
@@ -19,102 +66,93 @@
                     <a class="dropdown-item" href="#">Link 3</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-lg-4 col-md-6">
-                <div class="accordion shadow-sm" id="accordionExample">
-                    <div class="card">
-                        <div class="card-header" id="headingOne">
-                            <h2 class="clearfix mb-0">
-                                <span>المدينه</span>
-                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="fa fa-plus"></i></button>
-                            </h2>
-                        </div>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <div class=" coloured">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> الرياض
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> مكه
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> جده
-                                        </label>
+                <form method="GET" action="{{route('filter')}}">
+                    <div class="accordion shadow-sm" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="clearfix mb-0">
+                                    <span>المدينه</span>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="fa fa-plus"></i></button>
+                                </h2>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class=" coloured">
+                                        @foreach(@Helper::cities() as $city)
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="radio" name="city_id" value="{{$city->id}}" {{$city->id == $city_id ? 'checked' : ''}}> {{$city->name}}
+                                                </label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="headingTwo">
-                            <h2 class="mb-0">
-                                <span>الحي</span>
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-plus"></i></button>
-                            </h2>
-                        </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <div class="card-body">	<div class=" coloured">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> الرياض
-                                        </label>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <span>الحي</span>
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-plus"></i></button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class=" coloured">
+                                        @foreach(@Helper::cats() as $cat)
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="radio" name="cat_id" value="{{$cat->id}}" {{$cat->id == $cat_id ? 'checked' : ''}}> {{$cat->name}}
+                                                </label>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> مكه
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> جده
-                                        </label>
-                                    </div>
-                                </div></div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="headingThree">
-                            <h2 class="mb-0">
-                                <span>السعر</span>
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fa fa-plus"></i></button>
-                            </h2>
-                        </div>
-                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                            <div class="card-body pr-0 pl-0">
-                                <div class="container" >
-                                    <input class="prices-text" type="text" placeholder="السعر"  name="Prices">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" id="headingFour">
-                            <h2 class="mb-0">
-                                <span>المساحه</span>
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><i class="fa fa-plus"></i></button>
-                            </h2>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h2 class="mb-0">
+                                    <span>السعر</span>
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fa fa-plus"></i></button>
+                                </h2>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div class="card-body pr-0 pl-0">
+                                    <div class="container" >
+                                        <input class="prices-text" type="text" placeholder="السعر من"  name="from" value="{{$from == 0 ? '' : $from}}">
+                                    </div>
+                                    <div class="container" >
+                                        <input class="prices-text" type="text" placeholder="السعر إلي"  name="to" value="{{$to == 0 ? '' : $to}}">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <div class="container" >
-                                    <input class="prices-text" type="text" placeholder="المساحه"  name="Prices">
-                                </div></div>
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <h2 class="mb-0">
+                                    <span>المساحه</span>
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><i class="fa fa-plus"></i></button>
+                                </h2>
+                            </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="container" >
+                                        <input class="prices-text" type="text" placeholder="المساحه"  name="area" value="{{$area == 0 ? '' : $area}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around  align-items-center pb-3 mt-5">
+                            <button type="submit" class="btn btn-primary">بحث</button>
+
                         </div>
                     </div>
-
-                    <div class="d-flex justify-content-around  align-items-center pb-3 mt-5">
-                        <a href="#" class="btn btn-dark">اعاده ضبط</a>
-                        <a href="#" class="btn btn-primary">بحث</a>
-
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="col-lg-8 col-md-6">
                 <div class="row">

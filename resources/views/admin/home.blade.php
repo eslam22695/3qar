@@ -10,7 +10,7 @@
         <div class="col-sm-12">
             <div class="main-title-00">
                 <h4 class="page-title">الرئيسيه</h4>
-                <p class="text-muted page-title-alt">مرحبا فى لوحة ادارة موقع بريق</p>
+                <p class="text-muted page-title-alt">مرحبا فى لوحة ادارة موقع 3qar</p>
             </div>
             
         </div>
@@ -73,7 +73,7 @@
 <!-- End Right content here -->
 <!-- ============================================================== -->
 
-<section class="">
+{{-- <section class="">
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-md-4">
@@ -92,5 +92,5 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 @endsection

@@ -160,8 +160,10 @@ class SettingController extends Controller
 
         $input = $request->all();
         
+        $Setting = Setting::find($id);
+
         if(isset($input['logo'])){
-            $path=$attribute['logo'];
+            $path=$Setting['logo'];
             $logo = $input['logo'];
             $destination = public_path('admin_assets/images/setting');
             if(file_exists($destination.' / '.$path)){
@@ -173,7 +175,7 @@ class SettingController extends Controller
         }
 
         if(isset($input['about_image'])){
-            $path=$attribute['about_image'];
+            $path=$Setting['about_image'];
             $about_image = $input['about_image'];
             $destination = public_path('admin_assets/images/setting');
             if(file_exists($destination.' / '.$path)){
@@ -184,7 +186,6 @@ class SettingController extends Controller
             $input['about_image']=$name;
         }
 
-        $Setting = Setting::find($id);
         $Setting->update($input);
         Session::flash('success','تم التعديل بنجاح');
         return redirect()->back();

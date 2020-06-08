@@ -88,7 +88,10 @@
                             @foreach($values as $value)
                                 <tr>
                                     <td>قيمة</td>
-                                    <td><input type="text" class="form-control" name="attribute_value[]" value="{{$value->value}}" required></td>
+                                    <td>
+                                        <input type="text" class="form-control" name="attribute_value[]" value="{{$value->value}}" required>
+                                        <input type="hidden" class="form-control" name="attribute_value_id[]" value="{{$value->id}}" required>
+                                    </td>
                                     <td>
                                         <a href="{{ route('admin.attribute_value.delete',$value->id) }}" class="btn btn-danger waves-effect" title="remove">X</a>
                                     </td>

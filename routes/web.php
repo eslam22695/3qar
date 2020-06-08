@@ -22,6 +22,7 @@ Route::post('contact'  ,'IndexController@contact_post');
 Route::get('special'  ,'IndexController@special')->name('special');
 
 Route::get('items'  ,'IndexController@items')->name('items');
+Route::get('filter'  ,'IndexController@items')->name('filter');
 Route::get('item_details/{id}'  ,'IndexController@item_details')->name('item_details');
 
 

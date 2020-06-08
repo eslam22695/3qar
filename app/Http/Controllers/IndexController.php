@@ -122,9 +122,33 @@ class IndexController extends Controller
 
         $input = $request->all();
 
-        $items = Item::where('category_id',$input['cat_id'])->where('city_id',$input['city_id'])->where('status',1)->paginate(9);
+        $items = Item::where('category_id',$input['cat_id'])->where('city_id',$input['city_id'])->where('status',1);
 
-        return view('front.filter',compact('items'));
+        $from = 0;
+        $to = 0;
+        $area = 0;
+
+        if (isset($input['from']) && $input['from'] != null) {
+            $from = $input['from'];
+            $items->where('price', '>=', $input['from']);
+        }
+        
+        if (isset($input['to']) && $input['to'] != null) {
+            $to = $input['to'];
+            $items->where('price', '<=', $input['to']);
+        }
+        
+        if (isset($input['area']) && $input['area'] != null) {
+            $area = $input['area'];
+            $items->where('area', $input['area']);
+        }
+        
+        $items = $items->get();
+
+        $cat_id = $input['cat_id'];
+        $city_id = $input['city_id'];
+
+        return view('front.filter',compact('items','city_id','cat_id','from','to','area'));
     }
 
     public function item_details($id)

@@ -134,10 +134,10 @@
                                 <tr>
                                     <td>مقدمه صفحة التواصل</td>
                                     <td>
-                                        <textarea id="textarea" class="form-control" rows="2" name="contact"><?php if(isset($setting->contact)){echo $setting->contact;} ?></textarea> 
-                                        @if ($errors->has('contact'))
+                                        <textarea id="textarea" class="form-control" rows="2" name="contact_text"><?php if(isset($setting->contact_text)){echo $setting->contact;} ?></textarea> 
+                                        @if ($errors->has('contact_text'))
                                             <span class="alert alert-danger">
-                                                <strong>{{ $errors->first('contact') }}</strong>
+                                                <strong>{{ $errors->first('contact_text') }}</strong>
                                             </span>
                                         @endif
                                     </td>
@@ -350,10 +350,10 @@
                                 <tr>
                                     <td>مقدمه صفحة التواصل</td>
                                     <td>
-                                        <textarea id="textarea" class="form-control" rows="2" name="contact"> {{old('contact')}}</textarea>
-                                        @if ($errors->has('contact'))
+                                        <textarea id="textarea" class="form-control" rows="2" name="contact_text"> {{old('contact_text')}}</textarea>
+                                        @if ($errors->has('contact_text'))
                                             <span class="alert alert-danger">
-                                                <strong>{{ $errors->first('contact') }}</strong>
+                                                <strong>{{ $errors->first('contact_text') }}</strong>
                                             </span>
                                         @endif 
                                     </td>

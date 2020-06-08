@@ -38,16 +38,16 @@
             <div class="collapse navbar-collapse" id="exCollapsingNavbar">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{route('index')}}">الصفحه الرئيسيه</a>
+                        <a class="nav-link" href="{{route('index')}}">الصفحه الرئيسية</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('about')}}">من نحن</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('special')}}">عقارات مميزه</a>
+                        <a class="nav-link" href="{{url('special')}}">عقارات مميزة</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('blog')}}">المدونه</a>
+                        <a class="nav-link" href="{{url('blog')}}">المدونة</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('contact')}}">تواصل معنا</a>
@@ -70,53 +70,7 @@
 </header>
 
 <!--------End navbar  -------------->
-<!--------start banner -------------->
-<section class="banner">
-    <div class="container">
-        <form method="GET" action="{{route('items')}}">
-            <div class="row">
-                <div class="wow fadeInLeft col-12">
-                    <h1>ابحث عن عقارات للبيع و للايجار بالتقسيط او كاش في السعوديه</h1>
-                    <p>تحب تسكن فين ؟</p>
-                </div>
-                    
-                <div class="col-md-5 p-0 wow fadeInLeft">
-                    <div class="form-group border-form">
-                        <select data-live-search="true" class="form-control selectpicker select-one" required name="cat_id">
-                            <option selected disabled value="0">اختر النوع</option>
-                            @foreach(@Helper::cats() as $cat)
-                                <option value="{{$cat->id}}">{{$cat->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
-                </div>
-                <div class="col-md-5 p-0 wow fadeInLeft">
-                    <div class="form-group">
-                        <select data-live-search="true" class="form-control selectpicker select-two" required name="city_id">
-                            <option selected disabled value="0">اختر المدينه</option>
-                            @foreach(@Helper::cities() as $city)
-                                <option value="{{$city->id}}">{{$city->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary  pl-5 pr-5 wow fadeInLeft">بحث</button>
-                    <h3>تحب تسكن فين ؟</h3>
-                </div>
-                <div class="col-md-12">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-        </form>
-    </div>
-</section>
-<!--------end banner -------------->
 
 @yield('content')
 

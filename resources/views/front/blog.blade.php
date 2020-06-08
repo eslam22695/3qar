@@ -3,6 +3,22 @@
 @section('content')
 
 
+<section class="banner-about">
+    <div class="container">
+        <div class="d-flex justify-content-between  align-items-center pb-3">
+            <h3>المدونة</h3>
+        </div>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('index')}}">الصفحه الرئيسيه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">المدونة</li>
+            </ol>
+        </nav>
+
+    </div>
+</section>
+
 <!--------start 3akar-------------->
 <section class="mt-5 filter blog">
     <div class="container">

@@ -30,6 +30,12 @@ class IndexController extends Controller
     public function home(Request $request)
     { 
         $data = [];
+        
+        $validator = Validator::make($request->all(), [
+            'lat' => 'required',
+            'lang' => 'required',
+        ]);
+
         $lat = $request['lat'];
         $lang = $request['lang'];
         
@@ -289,7 +295,7 @@ class IndexController extends Controller
                 $data['blogs'][$i]['title'] = $blogs[$i]->title;
                 $data['blogs'][$i]['description'] = $blogs[$i]->description;
                 $data['blogs'][$i]['image'] = url($this->asset.'blog/'.$blogs[$i]->image);
-                
+                $data['blogs'][$i]['created_at'] = $blogs[$i]->created_at;
             }
         }
         
@@ -314,6 +320,7 @@ class IndexController extends Controller
         $data['description'] = $blog->description;
         $data['content'] = $blog->content;
         $data['image'] = url($this->asset.'blog/'.$blog->image);
+        $data['created_at'] = $blog->created_at;
 
         return response([
             'status'    =>      'success',
