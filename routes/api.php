@@ -17,7 +17,11 @@ Route::post('register', 'api\AuthController@register');
 
 Route::get('home', 'api\IndexController@home');
 Route::get('category/{id}', 'api\IndexController@category');
+Route::get('items', 'api\IndexController@items');
+Route::get('item/{id}', 'api\IndexController@item');
+Route::get('district/{id}', 'api\IndexController@district');
 
+Route::get('featured', 'api\IndexController@featured');
 Route::get('categories', 'api\IndexController@categories');
 Route::get('cities', 'api\IndexController@cities');
 Route::get('about', 'api\IndexController@about');
@@ -28,6 +32,7 @@ Route::post('service_request', 'api\IndexController@service_request');
 Route::get('blog', 'api\IndexController@blog');
 Route::get('blog_details/{id}', 'api\IndexController@blog_details');
 
+Route::get('filter', 'api\IndexController@filter');
 
 
 /* Route::group(['middleware' => 'auth:api'], function(){

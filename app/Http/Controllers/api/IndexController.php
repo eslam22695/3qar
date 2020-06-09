@@ -17,6 +17,10 @@ use App\Service;
 use App\ServiceRequest;
 use App\Blog;
 use App\Feature;
+use App\ItemAttribute;
+use App\ItemImage;
+use App\ItemOption;
+use App\District;
 
 class IndexController extends Controller
 {
@@ -38,8 +42,14 @@ class IndexController extends Controller
 
         $lat = $request['lat'];
         $lang = $request['lang'];
+        $cat_id = $request['cat_id'];
         
-        $item = Item::select(DB::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lang ) - radians('.$lang.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->having('distance', '<', 25)->where('status',1)->orderBy('distance')->get();
+        if($cat_id == 0){
+            $item = Item::select(DB::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lang ) - radians('.$lang.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->having('distance', '<', 25)->where('status',1)->orderBy('distance')->get();
+        }else{
+            $item = Item::select(DB::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lang ) - radians('.$lang.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->having('distance', '<', 25)->where('category_id',$cat_id)->where('status',1)->orderBy('distance')->get();
+        }
+        
 
         if(isset($item) && count($item)>0){
             for($i=0; $i<count($item); $i++){
@@ -53,6 +63,8 @@ class IndexController extends Controller
                 $data['item'][$i]['city'] = $item[$i]->city->name;
                 $data['item'][$i]['area'] = $item[$i]->area;
                 $data['item'][$i]['phone'] = $item[$i]->phone;
+                $data['item'][$i]['lat'] = $item[$i]->lat;
+                $data['item'][$i]['lang'] = $item[$i]->lang;
             }
         }else{
             $data = [];
@@ -66,7 +78,11 @@ class IndexController extends Controller
 
     public function category($id){
         $data = [];
-        $item = Item::where('category_id',$id)->where('status',1)->orderBy('id')->get();
+        if($id == 0){
+            $item = Item::where('status',1)->orderBy('id')->get();
+        }else{
+            $item = Item::where('category_id',$id)->where('status',1)->orderBy('id')->get();
+        }
 
         if(isset($item) && $item != null){
             for($i=0; $i<count($item); $i++){
@@ -80,6 +96,53 @@ class IndexController extends Controller
                 $data['item'][$i]['city'] = $item[$i]->city->name;
                 $data['item'][$i]['area'] = $item[$i]->area;
                 $data['item'][$i]['phone'] = $item[$i]->phone;
+
+                $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
+
+                for($j=0; $j<count($attribute); $j++){
+                    $data['item'][$i]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
+                    $data['item'][$i]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
+                    $data['item'][$i]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
+
+                }
+
+            }
+        }else{
+            $data = [];
+        }
+
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
+
+    public function items(){
+        $data = [];
+        $item = Item::where('status',1)->orderBy('id')->get();
+        
+        if(isset($item) && $item != null){
+            for($i=0; $i<count($item); $i++){
+                $data['item'][$i]['id'] = $item[$i]->id;
+                $data['item'][$i]['name'] = $item[$i]->name;
+                $data['item'][$i]['description'] = $item[$i]->description;
+                $data['item'][$i]['price'] = $item[$i]->price;
+                $data['item'][$i]['main_image'] = url($this->asset.'item/'.$item[$i]->main_image);
+                $data['item'][$i]['category'] = $item[$i]->category->name;
+                $data['item'][$i]['district'] = $item[$i]->district->name;
+                $data['item'][$i]['city'] = $item[$i]->city->name;
+                $data['item'][$i]['area'] = $item[$i]->area;
+                $data['item'][$i]['phone'] = $item[$i]->phone;
+
+                $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
+
+                for($j=0; $j<count($attribute); $j++){
+                    $data['item'][$i]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
+                    $data['item'][$i]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
+                    $data['item'][$i]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
+
+                }
+
             }
         }else{
             $data = [];
@@ -111,6 +174,180 @@ class IndexController extends Controller
         $city = City::where('status',1)->get();
         if(isset($city) && $city != null){
             $data['city'] = $city;
+        }else{
+            $data = [];
+        }
+
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
+
+    public function district($id){
+        $district = District::where('city_id',$id)->where('status',1)->get();
+        if(isset($district) && $district != null){
+            $data['district'] = $district;
+        }else{
+            $data = [];
+        }
+
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
+
+    public function item($id){
+        $data = [];
+        $item = Item::find($id);
+        $data['id'] = $item->id;
+        $data['name'] = $item->name;
+        $data['description'] = $item->description;
+        $data['price'] = $item->price;
+        $data['main_image'] = url($this->asset.'item/'.$item->main_image);
+        $data['category'] = $item->category->name;
+        $data['district'] = $item->district->name;
+        $data['city'] = $item->city->name;
+        $data['area'] = $item->area;
+        $data['phone'] = $item->phone;
+        $data['lat'] = $item->lat;
+        $data['lang'] = $item->lang;
+
+        $images = ItemImage::where('item_id',$item->id)->get();
+        for($i=0; $i<count($images); $i++){
+            $data['image'][$i] = url($this->asset.'item/'.$images[$i]->image);
+        }
+
+        $options = ItemOption::where('item_id',$item->id)->get();
+        for($o=0; $o<count($options); $o++){
+            $data['option'][$o] = $options[$o]->option->name;
+        }
+
+        $attribute = ItemAttribute::where('item_id',$item->id)->get();
+        for($a=0; $a<count($attribute); $a++){
+            $data['attribute'][$a]['name'] = $attribute[$a]->attribute_value->attribute->name;
+            $data['attribute'][$a]['icon'] = url($this->asset.'attribute/'.$attribute[$a]->attribute_value->attribute->icon);
+            $data['attribute'][$a]['value'] = $attribute[$a]->attribute_value->value;
+        }
+
+        $more = Item::where('category_id',$item->category_id)->where('id', '!=' , $id)->where('status',1)->inRandomOrder()->take(3)->get();
+        for($m=0; $m<count($more); $m++){
+            $data['more'][$i]['id'] = $more[$i]->id;
+            $data['more'][$i]['name'] = $more[$i]->name;
+            $data['more'][$i]['description'] = $more[$i]->description;
+            $data['more'][$i]['price'] = $more[$i]->price;
+            $data['more'][$i]['main_image'] = url($this->asset.'item/'.$more[$i]->main_image);
+            $data['more'][$i]['category'] = $more[$i]->category->name;
+            $data['more'][$i]['district'] = $more[$i]->district->name;
+            $data['more'][$i]['city'] = $more[$i]->city->name;
+            $data['more'][$i]['area'] = $more[$i]->area;
+            $data['more'][$i]['phone'] = $more[$i]->phone;
+
+            $attribute = ItemAttribute::where('item_id',$more[$i]->id)->get();
+
+            for($j=0; $j<count($attribute); $j++){
+                $data['more'][$i]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
+                $data['more'][$i]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
+                $data['more'][$i]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
+
+            }
+
+        }
+
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
+
+    public function featured(){
+        $item = Item::where('featured',1)->where('status',1)->orderBy('id')->get();
+        $data = [];
+
+        if(isset($item) && $item != null){
+            for($i=0; $i<count($item); $i++){
+                $data['item'][$i]['id'] = $item[$i]->id;
+                $data['item'][$i]['name'] = $item[$i]->name;
+                $data['item'][$i]['description'] = $item[$i]->description;
+                $data['item'][$i]['price'] = $item[$i]->price;
+                $data['item'][$i]['main_image'] = url($this->asset.'item/'.$item[$i]->main_image);
+                $data['item'][$i]['category'] = $item[$i]->category->name;
+                $data['item'][$i]['district'] = $item[$i]->district->name;
+                $data['item'][$i]['city'] = $item[$i]->city->name;
+                $data['item'][$i]['area'] = $item[$i]->area;
+                $data['item'][$i]['phone'] = $item[$i]->phone;
+
+                $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
+
+                for($j=0; $j<count($attribute); $j++){
+                    $data['item'][$i]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
+                    $data['item'][$i]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
+                    $data['item'][$i]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
+
+                }
+
+            }
+        }else{
+            $data = [];
+        }
+
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
+
+    public function filter(Request $request){
+        $input = $request->all();
+
+        $item = Item::query();
+
+        if (isset($input['cat_id']) && $input['cat_id'] != null) {
+            $item->where('category_id', $input['cat_id']);
+        }
+        
+        if (isset($input['city_id']) && $input['city_id'] != null) {
+            $item->where('city_id', $input['city_id']);
+        }
+        
+        if (isset($input['from']) && $input['from'] != null) {
+            $item->where('price', '>=', $input['from']);
+        }
+        
+        if (isset($input['to']) && $input['to'] != null) {
+            $item->where('price', '<=', $input['to']);
+        }
+        
+        if (isset($input['area']) && $input['area'] != null) {
+            $item->where('area', $input['area']);
+        }
+
+        $item = $item->where('status',1)->get();
+
+        if(isset($item) && $item != null){
+            for($i=0; $i<count($item); $i++){
+                $data['item'][$i]['id'] = $item[$i]->id;
+                $data['item'][$i]['name'] = $item[$i]->name;
+                $data['item'][$i]['description'] = $item[$i]->description;
+                $data['item'][$i]['price'] = $item[$i]->price;
+                $data['item'][$i]['main_image'] = url($this->asset.'item/'.$item[$i]->main_image);
+                $data['item'][$i]['category'] = $item[$i]->category->name;
+                $data['item'][$i]['district'] = $item[$i]->district->name;
+                $data['item'][$i]['city'] = $item[$i]->city->name;
+                $data['item'][$i]['area'] = $item[$i]->area;
+                $data['item'][$i]['phone'] = $item[$i]->phone;
+
+                $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
+
+                for($j=0; $j<count($attribute); $j++){
+                    $data['item'][$i]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
+                    $data['item'][$i]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
+                    $data['item'][$i]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
+
+                }
+
+            }
         }else{
             $data = [];
         }
