@@ -242,6 +242,13 @@
                             <li><a href="{{route('admin.setting.index')}}" class="waves-effect"><i class="ion-ios7-information-outline"></i> <span> الاعدادات </span></a></li>
                         </ul>
                     </li>
+
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> التقارير </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="{{route('admin.district_report')}}" class="waves-effect"><i class="icon-globe"></i> <span> الاحياء حسب المدينة </span></a></li>
+                        </ul>
+                    </li>
                     
                 </ul>
 

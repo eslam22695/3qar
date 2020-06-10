@@ -54,3 +54,10 @@ Route::delete('delete_image/{image_id}','admin\ItemController@delete_image')->na
 
 //Global Status Route
 Route::get('status/{status}/{db}/{id}','admin\SettingController@status')->name('status');
+
+
+//Report
+
+/*District*/
+Route::get('report/district','admin\ReportController@district')->name('district_report');
+Route::post('report/district','admin\ReportController@district_report')->name('district_report');

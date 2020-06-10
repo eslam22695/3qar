@@ -73,7 +73,10 @@
                             </tr>
                         </tbody>
                     
-                    </table>
+                    <tr>
+                                <td style="width:25%"></td>
+                                <td><button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button></td>
+                            </tr>
 
                     <table class="table table-bordered table-striped">
                     

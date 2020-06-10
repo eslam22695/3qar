@@ -77,7 +77,8 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function category($id){
+    public function category($id)
+    {
         $data = [];
         if($id == 0){
             $item = Item::where('status',1)->orderBy('id')->get();
@@ -118,7 +119,8 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function items(){
+    public function items()
+    {
         $data = [];
         $item = Item::where('status',1)->orderBy('id')->get();
         
@@ -155,7 +157,8 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function categories(){
+    public function categories()
+    {
 
         $cats = Category::where('status',1)->get();
         if(isset($cats) && $cats != null){
@@ -170,7 +173,8 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function cities(){
+    public function cities()
+    {
 
         $city = City::where('status',1)->get();
         if(isset($city) && $city != null){
@@ -185,7 +189,8 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function district($id){
+    public function district($id)
+    {
         $district = District::where('city_id',$id)->where('status',1)->get();
         if(isset($district) && $district != null){
             $data['district'] = $district;
@@ -199,7 +204,8 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function item($id){
+    public function item($id)
+    {
         $data = [];
         $item = Item::find($id);
         $data['id'] = $item->id;
@@ -262,7 +268,8 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function featured(){
+    public function featured()
+    {
         $item = Item::where('featured',1)->where('status',1)->orderBy('id')->get();
         $data = [];
 
@@ -299,7 +306,8 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function filter(Request $request){
+    public function filter(Request $request)
+    {
         $input = $request->all();
 
         $item = Item::query();
@@ -583,7 +591,7 @@ class IndexController extends Controller
         }
 
         $user = Auth::user();
-        
+
         $input = $request->all();
 
         if($input['status'] == 0){
