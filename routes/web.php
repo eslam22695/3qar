@@ -50,5 +50,6 @@ Route::Group(['middleware' => ['auth']], function () {
 
   Route::get('/home', 'IndexController@profile')->name('home');
   Route::get('/profile', 'IndexController@profile')->name('profile');
+  Route::post('/profile', 'IndexController@edit_profile')->name('edit_profile');
 
 });

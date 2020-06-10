@@ -61,11 +61,24 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="container">
-                                {{-- <div class="d-flex justify-content-between  align-items-center user-profile mb-3">
+                                <div class="d-flex justify-content-between  align-items-center user-profile mb-3">
                                     <h4><strong>معلوماتي الشخصيه</strong></h4>
-                                    <a href=""><h4 class="dark-color"><strong>تعديل</strong></h4></a>
-                                </div> --}}
-                                <div class="row shadow-lg p-3">
+                                    
+                                    <a href="#" id="show" class="unedit"><h4 class="dark-color"><strong>تعديل</strong></h4></a>
+                                </div>
+                                <div class="row shadow-lg p-3 unedit">
+                                    <div class="col-12">
+                                        @if (Session::has('success'))
+                                            <div class="alert alert-success">{{ Session::get('success') }}</div>
+                                        @elseif(Session::has('danger'))
+                                            <div class="alert alert-danger">{{ Session::get('danger') }}</div>
+                                        @endif
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                     <div class="col-12">
                                         <div class="d-flex justify-content-start  align-items-center user-profile">
                                             <p class="width-name">الاسم</p>
@@ -79,12 +92,46 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-
                                         <div class="d-flex justify-content-start  align-items-center user-profile">
                                             <p class="width-name">رقم الجوال</p>
                                             <p class="margin-profile">{{$user->phone}}</p>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row shadow-lg p-3 edit" style="display: none;">
+                                    <form method="POST" action="{{route('edit_profile')}}">
+                                        @csrf
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start  align-items-center user-profile mb-3">
+                                                <p class="width-name">الاسم</p>
+                                                <input type="text" class="form-control" name="name" value="{{$user->name}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start  align-items-center user-profile mb-3">
+                                                <p class="width-name">البريد الالكتروني</p>
+                                                <input type="email" class="form-control" name="email" value="{{$user->email}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start  align-items-center user-profile mb-3">
+                                                <p class="width-name">رقم الجوال</p>
+                                                <input type="text" class="form-control" name="phone" value="{{$user->phone}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start  align-items-center user-profile mb-3">
+                                                <p class="width-name">رقم السري</p>
+                                                <input type="password" class="form-control" name="password">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="d-flex justify-content-start  align-items-center user-profile">
+                                                <button type="submit" class="btn btn-primary">تعديل</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
 
@@ -95,6 +142,7 @@
                                 <div class="row">
 
                                     @foreach($favs as $fav)
+                                    <?php $title = str_replace(' ', '_', $fav->item->name); ?>
                                         <div class="col-md-6 mb-3 " >
                                             <div class="card shadow-lg">
                                                 <div class="image-wrapper">
@@ -109,8 +157,6 @@
                                                                     <span id="wish-icon-{{$fav->item->id}}" class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
                                                                 </a>
                                                             @endif
-                                                        @else
-                                                            <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
                                                         @endif
                                                     </span>
                                                     <img src="{{asset('admin_assets/images/item/'.$fav->item->main_image)}}" alt="spongebob crew" />
@@ -132,8 +178,8 @@
                                                                 {{$value->attribute_value->attribute->name}}  </span>
                                                         @endforeach
                                                     </div>
-                                                    <p><a href="{{route('item_details',$fav->item->id)}}">{{$fav->item->price}} ريال سعودي </a></p>
-                                                    <a href="{{route('item_details',$fav->item->id)}}" class="btn btn-primary">شاهد</a>
+                                                    <p><a href="{{route('item_details',[$fav->item->id,$title])}}">{{$fav->item->price}} ريال سعودي </a></p>
+                                                    <a href="{{route('item_details',[$fav->item->id,$title])}}" class="btn btn-primary">شاهد</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,6 +194,7 @@
                                 <div class="row">
 
                                     @foreach($clicks as $click)
+                                    <?php $title = str_replace(' ', '_', $click->item->name); ?>
                                         <div class="col-md-6 mb-3 " >
                                             <div class="card shadow-lg">
                                                 <div class="image-wrapper">
@@ -185,8 +232,8 @@
                                                                 {{$value->attribute_value->attribute->name}}  </span>
                                                         @endforeach
                                                     </div>
-                                                    <p><a href="{{route('item_details',$click->item->id)}}">{{$click->item->price}} ريال سعودي </a></p>
-                                                    <a href="{{route('item_details',$click->item->id)}}" class="btn btn-primary">شاهد</a>
+                                                    <p><a href="{{route('item_details',[$click->item->id,$title])}}">{{$click->item->price}} ريال سعودي </a></p>
+                                                    <a href="{{route('item_details',[$click->item->id,$title])}}" class="btn btn-primary">شاهد</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -207,4 +254,17 @@
     </section>
     <!--------end profile-------------->
 
+@endsection
+
+@section('scripts')
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#show").click(function () {
+            $(".edit").toggle();
+            $(".unedit").toggle();
+        });
+    });
+</script>
+    
 @endsection

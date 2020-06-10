@@ -81,6 +81,7 @@
                 <div class="row">
 
                     @foreach($items as $item)
+                    <?php $title = str_replace(' ', '_', $item->name); ?>
                         <div class="col-lg-4 col-md-6 mb-3 wow fadeIn" data-wow-delay="{{$loop->iteration/3}}">
                             <div class="card shadow-lg">
                                 <div class="image-wrapper">
@@ -127,7 +128,7 @@
                                     </div>
 
                                     <p> <strong>{{$item->price}} ريال سعودي</strong> </p>
-                                    <a href=" {{route('item_details',$item->id)}}" class="btn btn-primary">شاهد</a>
+                                    <a href=" {{route('item_details',[$item->id,$title])}}" class="btn btn-primary">شاهد</a>
                                 </div>
                             </div>
                         </div>

@@ -93,7 +93,9 @@
                                 </a>
                             @endif
                         @else
-                            <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                            <a href="{{route('login')}}">
+                                <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                            </a>
                         @endif
                     </span>
                     <div class="product__slider-thmb">
@@ -137,43 +139,43 @@
                         <h3><strong>شاهد ايضا</strong></h3>
                         @foreach($others as $other)
                             <?php $title = str_replace(' ', '_', $other->name); ?>
-                            <a href="{{route('item_details',[$other->id,$title])}}">
-                                <div class=" mb-3 wow fadeIn" data-wow-delay="{{$loop->iteration/3}}s">
-                                    <div class="card shadow-lg p-2 postion">
-                                        <span id="fav-block-{{$other->id}}">
-                                            @if(Auth::check())
-                                                @if($other->favourite($other->id) == 1)
-                                                    <a onclick="unfav({{$other->id}});">
-                                                        <span id="wish-icon-{{$other->id}}" class="wish-icon"><i class="fa fa-heart ml-3"></i></span>
-                                                    </a>
-                                                @else
-                                                    <a onclick="fav({{$other->id}});">
-                                                        <span id="wish-icon-{{$other->id}}" class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
-                                                    </a>
-                                                @endif
+                            <div class=" mb-3 wow fadeIn" data-wow-delay="{{$loop->iteration/3}}s">
+                                <div class="card shadow-lg p-2 postion">
+                                    <span id="fav-block-{{$other->id}}">
+                                        @if(Auth::check())
+                                            @if($other->favourite($other->id) == 1)
+                                                <a onclick="unfav({{$other->id}});">
+                                                    <span id="wish-icon-{{$other->id}}" class="wish-icon"><i class="fa fa-heart ml-3"></i></span>
+                                                </a>
                                             @else
-                                                <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                                                <a onclick="fav({{$other->id}});">
+                                                    <span id="wish-icon-{{$other->id}}" class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                                                </a>
                                             @endif
-                                        </span>
-                                        <div class="image-wrapper">
+                                        @else
+                                            <a href="{{route('login')}}">
+                                                <span class="wish-icon"><i class="fa fa-heart-o ml-3"></i></span>
+                                            </a>
+                                        @endif
+                                    </span>
+                                    <div class="image-wrapper">
 
-                                            <img src="{{asset('admin_assets/images/item/'.$other->main_image)}}" class="img-blog" alt="spongebob crew" />
+                                        <img src="{{asset('admin_assets/images/item/'.$other->main_image)}}" class="img-blog" alt="spongebob crew" />
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <h5 class="mb-0"><strong>{{$other->name}}</strong></h5>
+                                        <div class="d-flex justify-content-start  align-items-center">
+                                            @foreach($other->value()->get() as $value)
+                                                {{$value->attribute_value->attribute->name}} {{$value->attribute_value->value}} {{$loop->last ? '' : '/'}}
+                                            @endforeach 
                                         </div>
-                                        <div class="card-body p-0">
-                                            <h5 class="mb-0"><strong>{{$other->name}}</strong></h5>
-                                            <div class="d-flex justify-content-start  align-items-center">
-                                                @foreach($other->value()->get() as $value)
-                                                    {{$value->attribute_value->attribute->name}} {{$value->attribute_value->value}} {{$loop->last ? '' : '/'}}
-                                                @endforeach 
-                                            </div>
 
-                                            <p class="mb-0"><a href="{{route('item_details',[$other->id,$title])}}">{{$other->price}}  ريال سعودي </a></p>
-                                            <a href="{{route('item_details',[$other->id,$title])}}" class="btn btn-primary btn-filter">شاهد</a>
+                                        <p class="mb-0"><a href="{{route('item_details',[$other->id,$title])}}">{{$other->price}}  ريال سعودي </a></p>
+                                        <a href="{{route('item_details',[$other->id,$title])}}" class="btn btn-primary btn-filter">شاهد</a>
 
-                                        </div>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         @endforeach
                     @endif
                 </div>

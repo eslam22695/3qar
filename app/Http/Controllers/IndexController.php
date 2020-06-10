@@ -20,15 +20,12 @@ use App\ItemImage;
 use App\Service;
 use App\ServiceRequest;
 use App\Setting;
+use App\User;
 use Auth;
 
 class IndexController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $setting = Setting::first();
@@ -44,7 +41,6 @@ class IndexController extends Controller
         return view('front.about',compact('setting','features'));
     }
 
-
     public function blog()
     {
         $blogs = Blog::orderBy('id','desc')->paginate(9);
@@ -52,7 +48,6 @@ class IndexController extends Controller
         return view('front.blog',compact('blogs'));
 
     }
-
 
     public function blog_details($id,$title)
     {
@@ -62,7 +57,6 @@ class IndexController extends Controller
 
         return view('front.blog_details',compact('blog','blogs'));
     }
-
 
     public function consultation()
     {
@@ -112,7 +106,6 @@ class IndexController extends Controller
         Session::flash('success','تم إرسالة الرسالة بنجاح سيتم التواصل في أقرب وقت ');
         return redirect()->back();
     }
-
 
     public function items(Request $request)
     {
@@ -184,6 +177,31 @@ class IndexController extends Controller
         $clickCount = ItemClick::where('user_id',$user->id)->count();
 
         return view('front.profile',compact('user','favs','favCount','clicks','clickCount'));
+    }
+
+    public function edit_profile(Request $request){
+
+        $user = Auth::user();
+
+        $this->validate($request,[
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'phone' => 'required|numeric',
+            'password' => 'nullable|min:6',
+        ]);
+
+        $input = $request->all();
+
+        if(isset($input['password']) && $input['password'] != null){
+            $input['password'] = bcrypt($input['password']);
+        }else{
+            $input['password'] = $user->password;
+        }
+
+        $user->update($input);
+
+        Session::flash('success','تم التعديل بنجاح');
+        return redirect()->back();
     }
 
     public function special()

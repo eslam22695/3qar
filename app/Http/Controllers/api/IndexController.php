@@ -21,6 +21,7 @@ use App\ItemAttribute;
 use App\ItemImage;
 use App\ItemOption;
 use App\District;
+use App\Favourite;
 
 class IndexController extends Controller
 {
@@ -563,5 +564,50 @@ class IndexController extends Controller
             'status'    =>      'success',
             'data'      =>      $data
         ], 200);
+    }
+
+    /*AUTH*/
+
+    public function fav(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return response([
+                'status'    =>      'error',
+                'errors'     =>      $validator->errors(),
+                'data'      =>      null
+            ], 401);
+        }
+
+        $user = Auth::user();
+        
+        $input = $request->all();
+
+        if($input['status'] == 0){
+            $unfav = Favourite::where('item_id',$id)->where('user_id',$user->id)->first();
+            if($unfav != null){
+                $unfav->delete();
+            }
+            return response([
+                'status'    =>      'success',
+                'data'      =>      'تم حذف من المفضلة'
+            ], 200);
+        }elseif($input['status'] == 1){
+            $input['user_id'] = $user->id;
+            $input['item_id'] = $id;
+            Favourite::create($input);
+            return response([
+                'status'    =>      'success',
+                'data'      =>      'تم الإضافة إلى المفضلة'
+            ], 200);
+        }else{
+            return response([
+                'status'    =>      'error',
+                'data'      =>      null
+            ], 401);
+        }
     }
 }

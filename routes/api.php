@@ -35,6 +35,6 @@ Route::get('blog_details/{id}', 'api\IndexController@blog_details');
 Route::get('filter', 'api\IndexController@filter');
 
 
-/* Route::group(['middleware' => 'auth:api'], function(){
-
-}); */
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::get('fav/{id}', 'api\IndexController@fav');
+});
