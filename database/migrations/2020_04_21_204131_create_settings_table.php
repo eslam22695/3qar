@@ -17,6 +17,7 @@ class CreateSettingsTable extends Migration
             $table->bigIncrements('id');
             $table->text('logo')->nullable();
             $table->text('about_home')->nullable();
+            $table->text('about_home_text')->nullable();
             $table->text('main_about')->nullable();
             $table->text('about_image')->nullable();
             $table->text('footer')->nullable();

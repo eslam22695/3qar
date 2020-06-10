@@ -31,25 +31,28 @@
                         </div>
                     </div>
                 </div>
-                @foreach($blogs as $blog_menu)
 
-                    <div class="col-lg-4 col-md-6 d-none d-md-block d-sm-none">
+                <div class="col-lg-4 col-md-6 d-none d-md-block d-sm-none">
+                    @foreach($blogs as $blog_menu)
+                        <?php $title = str_replace(' ', '_', $blog_menu->title); ?>
                         <div class="d-flex justify-content-between  align-items-center pb-3">
 
                             <div class="image-wrapper img-details ">
-                                <a href="{{route('blog_details',$blog_menu->id)}}">
+                                <a href="{{route('blog_details',[$blog_menu->id,$title])}}">
                                     <img width="100%" src="{{asset('admin_assets/images/blog/'.$blog_menu->image)}}" class="img-small" alt="spongebob crew" />
                                 </a>
                             </div>
                             <div class="">
                                 <h5> {{$blog_menu->title}}</h5>
-                                <p class="p-details">{{$blog_menu->description}}</p>
+                                <?php
+                                    $description = substr($blog_menu->description,0, 150)."...";
+                                ?>
+                                <p class="p-details">{{$description}}</p>
                                 <i class="fa fa-calendar p-details"></i> <span>{{$blog_menu->created_at->format('d M Y') }}</span>
                             </div>
                         </div>
-
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
 
                 <div class="col-md-12">
                     <div class="head pb-5 wow fadeInRight"  data-wow-duration="2s">
@@ -61,13 +64,13 @@
 
                 </div>
 
-                @foreach($blogs as $blog_mob)
-
-                    <div class="col-lg-4 col-md-6  d-md-none d-sm-block">
+                <div class="col-lg-4 col-md-6  d-md-none d-sm-block">
+                    @foreach($blogs as $blog_mob)
+                        <?php $title = str_replace(' ', '_', $blog_mob->title); ?>
                         <div class="d-flex justify-content-between  align-items-center pb-3">
 
                             <div class="image-wrapper img-details ">
-                                <a href="{{route('blog_details',$blog_mob->id)}}">
+                                <a href="{{route('blog_details',[$blog_mob->id,$title])}}">
                                     <img width="100%" src="{{asset('admin_assets/images/blog/'.$blog_mob->image)}}" class="img-small" alt="spongebob crew" />
                                 </a>
                             </div>
@@ -77,9 +80,8 @@
                                 <i class="fa fa-calendar p-details"></i> <span>{{$blog_mob->created_at->format('d M Y') }}</span>
                             </div>
                         </div>
-
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
 
         </div>

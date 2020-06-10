@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 use App\Attribute;
 use App\Blog;
 use App\Contact;
 use App\Feature;
-use App\Http\Controllers\Controller;
 use App\Item;
 use App\ItemClick;
 use App\Favourite;
 use App\ItemImage;
 use App\Service;
 use App\ServiceRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Session;
 use App\Setting;
 use Auth;
 
@@ -30,15 +32,14 @@ class IndexController extends Controller
     public function index()
     {
         $setting = Setting::first();
-        $items = Item::where('featured', 1)->where('status', 1)->get();
-        $attribute = Attribute::all();
-        return view('front.index',compact('setting','items','attribute'));
+        $items = Item::where('featured', 1)->where('status', 1)->take(6)->get();
+        return view('front.index',compact('setting','items'));
     }
 
     public function about()
     {
         $setting = Setting::first();
-        $features = Feature::All();
+        $features = Feature::take(3)->get();
 
         return view('front.about',compact('setting','features'));
     }
@@ -46,18 +47,18 @@ class IndexController extends Controller
 
     public function blog()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::orderBy('id','desc')->paginate(9);
 
         return view('front.blog',compact('blogs'));
 
     }
 
 
-    public function blog_details($id)
+    public function blog_details($id,$title)
     {
         $blog = Blog::find($id);
 
-        $blogs = Blog::where('id','!=',$id)->where('status',1)->orderBy('id','desc')->take(4)->get();
+        $blogs = Blog::where('id','!=',$id)->where('status',1)->inRandomOrder()->take(4)->get();
 
         return view('front.blog_details',compact('blog','blogs'));
     }
@@ -75,7 +76,7 @@ class IndexController extends Controller
 
             'service_id'  => 'required|exists:services,id',
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'phone' => 'required|numeric',
             'message' => 'required',
         ]);
@@ -84,7 +85,7 @@ class IndexController extends Controller
 
         ServiceRequest::create($input);
 
-        Session::flash('success','تم الاضافه بنجاح');
+        Session::flash('success','تم إرسالة الرسالة بنجاح سيتم التواصل في أقرب وقت ');
         return redirect()->back();
     }
 
@@ -99,7 +100,7 @@ class IndexController extends Controller
     {
         $this->validate($request,[
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'phone' => 'required|numeric',
             'message' => 'required',
         ]);
@@ -108,7 +109,7 @@ class IndexController extends Controller
 
         Contact::create($input);
 
-        Session::flash('success','تم الاضافه بنجاح');
+        Session::flash('success','تم إرسالة الرسالة بنجاح سيتم التواصل في أقرب وقت ');
         return redirect()->back();
     }
 
@@ -124,34 +125,40 @@ class IndexController extends Controller
 
         $items = Item::where('category_id',$input['cat_id'])->where('city_id',$input['city_id'])->where('status',1);
 
-        $from = 0;
-        $to = 0;
-        $area = 0;
+        $price_from = 0;
+        $price_to = 0;
+        $area_from = 0;
+        $area_to = 0;
 
-        if (isset($input['from']) && $input['from'] != null) {
-            $from = $input['from'];
-            $items->where('price', '>=', $input['from']);
+        if (isset($input['price_from']) && $input['price_from'] != null) {
+            $price_from = $input['price_from'];
+            $items->where('price', '>=', $input['price_from']);
         }
         
-        if (isset($input['to']) && $input['to'] != null) {
-            $to = $input['to'];
-            $items->where('price', '<=', $input['to']);
+        if (isset($input['price_to']) && $input['price_to'] != null) {
+            $price_to = $input['price_to'];
+            $items->where('price', '<=', $price_to);
         }
         
-        if (isset($input['area']) && $input['area'] != null) {
-            $area = $input['area'];
-            $items->where('area', $input['area']);
+        if (isset($input['area_from']) && $input['area_from'] != null) {
+            $area_from = $input['area_from'];
+            $items->where('area', '>=', $input['area_from']);
         }
         
-        $items = $items->get();
+        if (isset($input['area_to']) && $input['area_to'] != null) {
+            $area_to = $input['area_to'];
+            $items->where('area', '<=', $input['area_to']);
+        }
+        
+        $items = $items->orderBy('id','desc')->paginate(9);
 
         $cat_id = $input['cat_id'];
         $city_id = $input['city_id'];
 
-        return view('front.filter',compact('items','city_id','cat_id','from','to','area'));
+        return view('front.filter',compact('items','city_id','cat_id','price_from','price_to','area_from','area_to'));
     }
 
-    public function item_details($id)
+    public function item_details($id,$title)
     {
         $count = 0;
         if(Auth::user()){
@@ -181,7 +188,7 @@ class IndexController extends Controller
 
     public function special()
     {
-        $specials = Item::where('featured',1)->where('status',1)->paginate(6);
+        $specials = Item::where('featured',1)->where('status',1)->paginate(9);
         return view('front.special',compact('specials'));
     }
 

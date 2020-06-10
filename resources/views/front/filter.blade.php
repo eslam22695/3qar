@@ -15,7 +15,7 @@
                 <div class="col-md-5 p-0 wow fadeInLeft">
                     <div class="form-group border-form">
                         <select data-live-search="true" class="form-control selectpicker select-one" required name="cat_id">
-                            <option selected disabled value="0">اختر النوع</option>
+                            <option selected disabled value="">اختر النوع</option>
                             @foreach(@Helper::cats() as $cat)
                                 <option value="{{$cat->id}}">{{$cat->name}}</option>
                             @endforeach
@@ -26,7 +26,7 @@
                 <div class="col-md-5 p-0 wow fadeInLeft">
                     <div class="form-group">
                         <select data-live-search="true" class="form-control selectpicker select-two" required name="city_id">
-                            <option selected disabled value="0">اختر المدينه</option>
+                            <option selected disabled value="">اختر المدينه</option>
                             @foreach(@Helper::cities() as $city)
                                 <option value="{{$city->id}}">{{$city->name}}</option>
                             @endforeach
@@ -95,7 +95,7 @@
                         <div class="card">
                             <div class="card-header" id="headingTwo">
                                 <h2 class="mb-0">
-                                    <span>الحي</span>
+                                    <span>النوع </span>
                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-plus"></i></button>
                                 </h2>
                             </div>
@@ -123,10 +123,10 @@
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                                 <div class="card-body pr-0 pl-0">
                                     <div class="container" >
-                                        <input class="prices-text" type="text" placeholder="السعر من"  name="from" value="{{$from == 0 ? '' : $from}}">
+                                        <input class="prices-text" type="number" placeholder="السعر من"  name="price_from" value="{{$price_from == 0 ? '' : $price_from}}">
                                     </div>
                                     <div class="container" >
-                                        <input class="prices-text" type="text" placeholder="السعر إلي"  name="to" value="{{$to == 0 ? '' : $to}}">
+                                        <input class="prices-text" type="number" placeholder="السعر إلي"  name="price_to" value="{{$price_to == 0 ? '' : $price_to}}">
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +141,10 @@
                             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                                 <div class="card-body">
                                     <div class="container" >
-                                        <input class="prices-text" type="text" placeholder="المساحه"  name="area" value="{{$area == 0 ? '' : $area}}">
+                                        <input class="prices-text" type="number" placeholder="المساحه من"  name="area_from" value="{{$area_from == 0 ? '' : $area_from}}">
+                                    </div>
+                                    <div class="container" >
+                                        <input class="prices-text" type="number" placeholder="المساحه إلي"  name="area_to" value="{{$area_to == 0 ? '' : $area_to}}">
                                     </div>
                                 </div>
                             </div>
@@ -157,6 +160,7 @@
             <div class="col-lg-8 col-md-6">
                 <div class="row">
                     @foreach($items as $item)
+                        <?php $title = str_replace(' ', '_', $item->name); ?>
                         <div class=" col-md-6 mb-3 wow fadeIn" data-wow-delay="{{$loop->iteration/3}}">
                             <div class="card shadow-lg">
                                 <div class="image-wrapper">
@@ -181,35 +185,14 @@
                                         @endforeach
 
                                     </div>
-                                    <p><a href="{{route('item_details',$item->id)}}"> <strong>{{$item->price}} ريال سعودي</strong> </a></p>
-                                    <a href="{{route('item_details',$item->id)}}" class="btn btn-primary">شاهد</a>
+                                    <p><a href="{{route('item_details',[$item->id,$title])}}"> <strong>{{$item->price}} ريال سعودي</strong> </a></p>
+                                    <a href="{{route('item_details',[$item->id,$title])}}" class="btn btn-primary">شاهد</a>
                                 </div>
                             </div>
                         </div>
                     @endforeach
 
-                    {{-- <nav class="m-auto" aria-label="...">
-                        <ul class="pagination shadow-sm mt-5">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active" aria-current="page">
-                          <span class="page-link">
-                            2
-                            <span class="sr-only">(current)</span>
-                          </span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav> --}}
+                    {{ $items->appends(request()->query())->links('pagination.custom') }}
 
                 </div>
             </div>

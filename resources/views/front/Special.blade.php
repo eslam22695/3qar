@@ -15,7 +15,7 @@
                 <div class="col-md-5 p-0 wow fadeInLeft">
                     <div class="form-group border-form">
                         <select data-live-search="true" class="form-control selectpicker select-one" required name="cat_id">
-                            <option selected disabled value="0">اختر النوع</option>
+                            <option selected disabled value="">اختر النوع</option>
                             @foreach(@Helper::cats() as $cat)
                                 <option value="{{$cat->id}}">{{$cat->name}}</option>
                             @endforeach
@@ -26,7 +26,7 @@
                 <div class="col-md-5 p-0 wow fadeInLeft">
                     <div class="form-group">
                         <select data-live-search="true" class="form-control selectpicker select-two" required name="city_id">
-                            <option selected disabled value="0">اختر المدينه</option>
+                            <option selected disabled value="">اختر المدينه</option>
                             @foreach(@Helper::cities() as $city)
                                 <option value="{{$city->id}}">{{$city->name}}</option>
                             @endforeach
@@ -58,6 +58,7 @@
             </div>
             <div class="row">
                 @foreach($specials as $special)
+                    <?php $title = str_replace(' ', '_', $special->name); ?>
                     <div class="col-lg-4 col-md-6 mb-3 wow fadeIn" data-wow-delay="{{$loop->iteration/3}}">
                         <div class="card shadow-lg">
                             <div class="image-wrapper">
@@ -98,35 +99,14 @@
 
                                 </div>
 
-                                <p><a href="{{route('item_details',$special->id)}}"> <strong>{{$special->price}} ريال سعودي</strong> </a></p>
-                                <a href="{{route('item_details',$special->id)}}" class="btn btn-primary">شاهد</a>
+                                <p><a href="{{route('item_details',[$special->id,$title])}}"> <strong>{{$special->price}} ريال سعودي</strong> </a></p>
+                                <a href="{{route('item_details',[$special->id,$title])}}" class="btn btn-primary">شاهد</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
 
-                {{-- <nav class="m-auto" aria-label="...">
-                    <ul class="pagination shadow-sm mt-5">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active" aria-current="page">
-							  <span class="page-link">
-								2
-								<span class="sr-only">(current)</span>
-							  </span>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav> --}}
+                {{ $specials->links('pagination.custom') }}
             </div>
         </div>
     </section>

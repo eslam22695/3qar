@@ -14,7 +14,7 @@
 Route::get('/'  ,'IndexController@index')->name('index');
 Route::get('about'  ,'IndexController@about')->name('about');
 Route::get('blog'  ,'IndexController@blog')->name('blog');
-Route::get('blog_details/{id}' ,'IndexController@blog_details')->name('blog_details');
+Route::get('blog_details/{id}/{title}' ,'IndexController@blog_details')->name('blog_details');
 Route::get('consultation'  ,'IndexController@consultation')->name('consultation');
 Route::post('consultation'  ,'IndexController@consultation_post');
 Route::get('contact'  ,'IndexController@contact')->name('contact');
@@ -23,7 +23,7 @@ Route::get('special'  ,'IndexController@special')->name('special');
 
 Route::get('items'  ,'IndexController@items')->name('items');
 Route::get('filter'  ,'IndexController@items')->name('filter');
-Route::get('item_details/{id}'  ,'IndexController@item_details')->name('item_details');
+Route::get('item_details/{id}/{title}'  ,'IndexController@item_details')->name('item_details');
 
 
 Route::get('/ajax_phone', 'IndexController@ajax_phone');

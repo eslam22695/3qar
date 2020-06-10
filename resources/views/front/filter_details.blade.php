@@ -28,7 +28,7 @@
                 <div class="col-md-5 p-0 wow fadeInLeft">
                     <div class="form-group border-form">
                         <select data-live-search="true" class="form-control selectpicker select-one" required name="cat_id">
-                            <option selected disabled value="0">اختر النوع</option>
+                            <option selected disabled value="">اختر النوع</option>
                             @foreach(@Helper::cats() as $cat)
                                 <option value="{{$cat->id}}">{{$cat->name}}</option>
                             @endforeach
@@ -39,7 +39,7 @@
                 <div class="col-md-5 p-0 wow fadeInLeft">
                     <div class="form-group">
                         <select data-live-search="true" class="form-control selectpicker select-two" required name="city_id">
-                            <option selected disabled value="0">اختر المدينه</option>
+                            <option selected disabled value="">اختر المدينه</option>
                             @foreach(@Helper::cities() as $city)
                                 <option value="{{$city->id}}">{{$city->name}}</option>
                             @endforeach
@@ -123,7 +123,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="number-phone shadow-lg  mb-4">
-                        <p><a href="{{route('item_details',$item->id)}}">{{$item->price}} ريال سعودي</a></p>
+                        <?php $title = str_replace(' ', '_', $item->name); ?>
+                        <p><a href="{{route('item_details',[$item->id,$title])}}">{{$item->price}} ريال سعودي</a></p>
                         @if($count == 1)
                             <a href="tel:{{$item->phone}}" class="btn btn-primary">{{$item->phone}}</a>
                         @else
@@ -135,7 +136,8 @@
                     @if(isset($others) && $others != null)
                         <h3><strong>شاهد ايضا</strong></h3>
                         @foreach($others as $other)
-                            <a href="{{route('item_details',$other->id)}}">
+                            <?php $title = str_replace(' ', '_', $other->name); ?>
+                            <a href="{{route('item_details',[$other->id,$title])}}">
                                 <div class=" mb-3 wow fadeIn" data-wow-delay="{{$loop->iteration/3}}s">
                                     <div class="card shadow-lg p-2 postion">
                                         <span id="fav-block-{{$other->id}}">
@@ -165,8 +167,8 @@
                                                 @endforeach 
                                             </div>
 
-                                            <p class="mb-0"><a href="{{route('item_details',$other->id)}}">{{$other->price}}  ريال سعودي </a></p>
-                                            <a href="{{route('item_details',$other->id)}}" class="btn btn-primary btn-filter">شاهد</a>
+                                            <p class="mb-0"><a href="{{route('item_details',[$other->id,$title])}}">{{$other->price}}  ريال سعودي </a></p>
+                                            <a href="{{route('item_details',[$other->id,$title])}}" class="btn btn-primary btn-filter">شاهد</a>
 
                                         </div>
                                     </div>

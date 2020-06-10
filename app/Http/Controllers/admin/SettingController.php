@@ -44,6 +44,7 @@ class SettingController extends Controller
         [
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'about_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'about_home' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'phone1'            => 'nullable|numeric',
             'phone2' => 'nullable|numeric',
             'email' => 'nullable|email',
@@ -59,6 +60,8 @@ class SettingController extends Controller
             'logo.mimes' => 'حقل اللوجو يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
             'about_image.image' => 'حقل صورة من نحن يجب أن يكون صورة',
             'about_image.mimes' => 'حقل صورة من نحن يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'about_home.image' => 'حقل صورة من نحن يجب أن يكون صورة',
+            'about_home.mimes' => 'حقل صورة من نحن يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
             'phone1.numeric' => 'حقل رقم الجوال 1 يجب أن يكون رقم',
             'phone2.numeric' => 'حقل رقم الجوال 2 يجب أن يكون رقم',
             'email.email' => 'حقل البريد الالكترونى يجب أن يكون بريد الكترونى صالح',
@@ -77,7 +80,7 @@ class SettingController extends Controller
         if(isset($input['logo'])){
             $logo = $input['logo'];
             $destination = public_path('admin_assets/images/setting');
-            $name = time().'.'.$logo->getClientOriginalExtension();
+            $name = time().'_logo.'.$logo->getClientOriginalExtension();
             $logo->move($destination,$name);
             $input['logo'] = $name;
         }
@@ -85,9 +88,17 @@ class SettingController extends Controller
         if(isset($input['about_image'])){
             $about_image = $input['about_image'];
             $destination = public_path('admin_assets/images/setting');
-            $name = time().'.'.$about_image->getClientOriginalExtension();
+            $name = time().'_about_image.'.$about_image->getClientOriginalExtension();
             $about_image->move($destination,$name);
             $input['about_image'] = $name;
+        }
+
+        if(isset($input['about_home'])){
+            $about_home = $input['about_home'];
+            $destination = public_path('admin_assets/images/setting');
+            $name = time().'_about_home.'.$about_home->getClientOriginalExtension();
+            $about_home->move($destination,$name);
+            $input['about_home'] = $name;
         }
 
         Setting::create($input);
@@ -130,6 +141,7 @@ class SettingController extends Controller
         [
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'about_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'about_home' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'phone1' => 'nullable|numeric',
             'phone2' => 'nullable|numeric',
             'email' => 'nullable|email',
@@ -145,6 +157,8 @@ class SettingController extends Controller
             'logo.mimes' => 'حقل اللوجو يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
             'about_image.image' => 'حقل صورة من نحن يجب أن يكون صورة',
             'about_image.mimes' => 'حقل صورة من نحن يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'about_home.image' => 'حقل صورة من نحن يجب أن يكون صورة',
+            'about_home.mimes' => 'حقل صورة من نحن يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
             'phone1.numeric' => 'حقل رقم الجوال 1 يجب أن يكون رقم',
             'phone2.numeric' => 'حقل رقم الجوال 2 يجب أن يكون رقم',
             'email.email' => 'حقل البريد الالكترونى يجب أن يكون بريد الكترونى صالح',
@@ -169,7 +183,7 @@ class SettingController extends Controller
             if(file_exists($destination.' / '.$path)){
                 unlink($destination.' / '.$path);
             }
-            $name=time().'.'.$logo->getClientOriginalName();
+            $name=time().'_logo.'.$logo->getClientOriginalName();
             $logo->move($destination,$name);
             $input['logo']=$name;
         }
@@ -181,9 +195,21 @@ class SettingController extends Controller
             if(file_exists($destination.' / '.$path)){
                 unlink($destination.' / '.$path);
             }
-            $name=time().'.'.$about_image->getClientOriginalName();
+            $name=time().'_about_image.'.$about_image->getClientOriginalName();
             $about_image->move($destination,$name);
             $input['about_image']=$name;
+        }
+
+        if(isset($input['about_home'])){
+            $path=$Setting['about_home'];
+            $about_home = $input['about_home'];
+            $destination = public_path('admin_assets/images/setting');
+            if(file_exists($destination.' / '.$path)){
+                unlink($destination.' / '.$path);
+            }
+            $name=time().'_about_home.'.$about_home->getClientOriginalName();
+            $about_home->move($destination,$name);
+            $input['about_home']=$name;
         }
 
         $Setting->update($input);

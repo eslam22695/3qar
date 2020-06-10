@@ -117,14 +117,13 @@ class BlogController extends Controller
                 'title'        => 'required|max:191',
                 'description'  => 'required',
                 'content'      => 'required',
-                'image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
+                'image'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
 
             ],[
                 'title.required' => 'حقل العنوان  مطلوب',
                 'title.max' => 'حقل العنوان أكبر من اللازم',
                 'description.required' => 'حقل الوصف  مطلوب',
                 'content.required' => 'حقل المحتوي  مطلوب',
-                'image.required' => 'حقل الصورة مطلوب',
                 'image.image' => 'حقل الصورة يجب أن يكون صورة',
                 'image.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
                 'image.max' => 'أقصى مساحة للصوره 2 ميجابايت',

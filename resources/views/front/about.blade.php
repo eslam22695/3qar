@@ -32,7 +32,7 @@
                     <div class="head">
                         <h2>من نحن</h2>
                     </div>
-                    <h3> {{isset($setting->about_home) ? $setting->about_home : ''}} </h3>
+                    <h3> {{isset($setting->main_about) ? $setting->main_about : ''}} </h3>
 
                 </div>
             </div>

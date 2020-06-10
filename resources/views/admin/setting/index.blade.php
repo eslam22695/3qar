@@ -38,10 +38,10 @@
                                 <tr>
                                     <td>من نحن الصفحة الرئيسية</td>
                                     <td>
-                                        <textarea id="textarea" class="form-control" rows="2" name="about_home"><?php if(isset($setting->about_home)){echo $setting->about_home;} ?></textarea> 
-                                        @if ($errors->has('about_home'))
+                                        <textarea id="textarea" class="form-control" rows="2" name="about_home_text"><?php if(isset($setting->about_home_text)){echo $setting->about_home_text;} ?></textarea> 
+                                        @if ($errors->has('about_home_text'))
                                             <span class="alert alert-danger">
-                                                <strong>{{ $errors->first('about_home') }}</strong>
+                                                <strong>{{ $errors->first('about_home_text') }}</strong>
                                             </span>
                                         @endif
                                     </td>
@@ -66,6 +66,18 @@
                                         @if ($errors->has('about_image'))
                                             <span class="alert alert-danger">
                                                 <strong>{{ $errors->first('about_image') }}</strong>
+                                            </span>
+                                        @endif
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>صورة من نحن صفحةالرئيسية</td>
+                                    <td>
+                                        <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="about_home">
+                                        @if ($errors->has('about_home'))
+                                            <span class="alert alert-danger">
+                                                <strong>{{ $errors->first('about_home') }}</strong>
                                             </span>
                                         @endif
                                     </td>
@@ -134,10 +146,22 @@
                                 <tr>
                                     <td>مقدمه صفحة التواصل</td>
                                     <td>
-                                        <textarea id="textarea" class="form-control" rows="2" name="contact_text"><?php if(isset($setting->contact_text)){echo $setting->contact;} ?></textarea> 
+                                        <textarea id="textarea" class="form-control" rows="2" name="contact_text"><?php if(isset($setting->contact_text)){echo $setting->contact_text;} ?></textarea> 
                                         @if ($errors->has('contact_text'))
                                             <span class="alert alert-danger">
                                                 <strong>{{ $errors->first('contact_text') }}</strong>
+                                            </span>
+                                        @endif
+                                    </td>
+                                </tr>
+        
+                                <tr>
+                                    <td>أسفل الصفحة</td>
+                                    <td>
+                                        <textarea id="textarea" class="form-control" rows="2" name="footer"><?php if(isset($setting->footer)){echo $setting->footer;} ?></textarea> 
+                                        @if ($errors->has('footer'))
+                                            <span class="alert alert-danger">
+                                                <strong>{{ $errors->first('footer') }}</strong>
                                             </span>
                                         @endif
                                     </td>
@@ -255,10 +279,22 @@
                                 <tr>
                                     <td>من نحن الصفحة الرئيسية</td>
                                     <td>
-                                        <textarea id="textarea" class="form-control" rows="2" name="about_home">{{old('about_home')}}</textarea>
-                                        @if ($errors->has('about_home'))
+                                        <textarea id="textarea" class="form-control" rows="2" name="about_home_text">{{old('about_home_text')}}</textarea>
+                                        @if ($errors->has('about_home_text'))
                                             <span class="alert alert-danger">
-                                                <strong>{{ $errors->first('about_home') }}</strong>
+                                                <strong>{{ $errors->first('about_home_text') }}</strong>
+                                            </span>
+                                        @endif 
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>صورة صفحة من نحن</td>
+                                    <td>
+                                        <textarea id="textarea" class="form-control" rows="2" name="about_image">{{old('about_image')}}</textarea>
+                                        @if ($errors->has('about_image'))
+                                            <span class="alert alert-danger">
+                                                <strong>{{ $errors->first('about_image') }}</strong>
                                             </span>
                                         @endif 
                                     </td>
@@ -356,6 +392,18 @@
                                                 <strong>{{ $errors->first('contact_text') }}</strong>
                                             </span>
                                         @endif 
+                                    </td>
+                                </tr>
+        
+                                <tr>
+                                    <td>أسفل الصفحة</td>
+                                    <td>
+                                        <textarea id="textarea" class="form-control" rows="2" name="footer"></textarea> 
+                                        @if ($errors->has('footer'))
+                                            <span class="alert alert-danger">
+                                                <strong>{{ $errors->first('footer') }}</strong>
+                                            </span>
+                                        @endif
                                     </td>
                                 </tr>
         
