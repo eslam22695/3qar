@@ -20,18 +20,15 @@ use App\Feature;
 use App\ItemAttribute;
 use App\ItemImage;
 use App\ItemOption;
+use App\ItemClick;
 use App\District;
 use App\Favourite;
+use App\User;
 
 class IndexController extends Controller
 {
     private $asset = '/admin_assets/images/';
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function home(Request $request)
     { 
         $data = [];
@@ -119,7 +116,7 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function items()
+    public function items(Request $request)
     {
         $data = [];
         $item = Item::where('status',1)->orderBy('id')->get();
@@ -136,6 +133,18 @@ class IndexController extends Controller
                 $data['item'][$i]['city'] = $item[$i]->city->name;
                 $data['item'][$i]['area'] = $item[$i]->area;
                 $data['item'][$i]['phone'] = $item[$i]->phone;
+                $data['item'][$i]['created_at'] = $item[$i]->created_at;
+        
+                if($user = User::find($request['user_id'])){
+                    $fav = Favourite::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
+                    if($fav != null){
+                        $data['item'][$i]['favourite'] = 1;
+                    }else{
+                        $data['item'][$i]['favourite'] = 0;
+                    }
+                }else{
+                    $data['item'][$i]['favourite'] = 0;
+                }
 
                 $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
 
@@ -145,6 +154,8 @@ class IndexController extends Controller
                     $data['item'][$i]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
 
                 }
+
+                
 
             }
         }else{
@@ -204,7 +215,7 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function item($id)
+    public function item(Request $request,$id)
     {
         $data = [];
         $item = Item::find($id);
@@ -220,6 +231,18 @@ class IndexController extends Controller
         $data['phone'] = $item->phone;
         $data['lat'] = $item->lat;
         $data['lang'] = $item->lang;
+        $data['created_at'] = $item->created_at;
+
+        if($user = User::find($request['user_id'])){
+            $fav = Favourite::where('item_id',$item->id)->where('user_id',$user->id)->first();
+            if($fav != null){
+                $data['favourite'] = 1;
+            }else{
+                $data['favourite'] = 0;
+            }
+        }else{
+            $data['favourite'] = 0;
+        }
 
         $images = ItemImage::where('item_id',$item->id)->get();
         for($i=0; $i<count($images); $i++){
@@ -268,9 +291,9 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function featured()
+    public function featured(Request $request)
     {
-        $item = Item::where('featured',1)->where('status',1)->orderBy('id')->get();
+        $item = Item::where('featured',1)->where('status',1)->orderBy('id','desc')->get();
         $data = [];
 
         if(isset($item) && $item != null){
@@ -285,6 +308,18 @@ class IndexController extends Controller
                 $data['item'][$i]['city'] = $item[$i]->city->name;
                 $data['item'][$i]['area'] = $item[$i]->area;
                 $data['item'][$i]['phone'] = $item[$i]->phone;
+                $data['item'][$i]['created_at'] = $item[$i]->created_at;
+
+                if($user = User::find($request['user_id'])){
+                    $fav = Favourite::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
+                    if($fav != null){
+                        $data['item'][$i]['favourite'] = 1;
+                    }else{
+                        $data['item'][$i]['favourite'] = 0;
+                    }
+                }else{
+                    $data['item'][$i]['favourite'] = 0;
+                }
 
                 $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
 
@@ -367,11 +402,6 @@ class IndexController extends Controller
         ], 200);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function about()
     { 
         $data = [];
@@ -402,11 +432,6 @@ class IndexController extends Controller
         ], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function contact()
     {
         $setting = Setting::first();
@@ -426,12 +451,6 @@ class IndexController extends Controller
         ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function contact_form(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -463,12 +482,6 @@ class IndexController extends Controller
         ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function services()
     {
         $services = Service::where('status',1)->get();
@@ -484,12 +497,6 @@ class IndexController extends Controller
         ], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function service_request(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -524,13 +531,6 @@ class IndexController extends Controller
         ], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function blog()
     {
         $blogs = Blog::where('status',1)->orderBy('id','desc')->get();
@@ -551,12 +551,6 @@ class IndexController extends Controller
         ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function blog_details($id)
     {
         $blog = Blog::find($id);
@@ -617,5 +611,202 @@ class IndexController extends Controller
                 'data'      =>      null
             ], 401);
         }
+    }
+
+    public function item_contacted()
+    {
+        $user = Auth::user();
+        $item = ItemClick::where('user_id',$user->id)->orderBy('id','desc')->get();
+        $data = [];
+
+        if(isset($item) && $item != null){
+            for($i=0; $i<count($item); $i++){
+                $data['item'][$i]['id'] = $item[$i]->item->id;
+                $data['item'][$i]['name'] = $item[$i]->item->name;
+                $data['item'][$i]['description'] = $item[$i]->item->description;
+                $data['item'][$i]['price'] = $item[$i]->item->price;
+                $data['item'][$i]['main_image'] = url($this->asset.'item/'.$item[$i]->item->main_image);
+                $data['item'][$i]['category'] = $item[$i]->item->category->name;
+                $data['item'][$i]['district'] = $item[$i]->item->district->name;
+                $data['item'][$i]['city'] = $item[$i]->item->city->name;
+                $data['item'][$i]['area'] = $item[$i]->item->area;
+                $data['item'][$i]['phone'] = $item[$i]->item->phone;
+                $data['item'][$i]['created_at'] = $item[$i]->item->created_at;
+
+                if($user = Auth::user()){
+                    $fav = Favourite::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
+                    if($fav != null){
+                        $data['item'][$i]['favourite'] = 1;
+                    }else{
+                        $data['item'][$i]['favourite'] = 0;
+                    }
+                }else{
+                    $data['item'][$i]['favourite'] = 0;
+                }
+                
+                $attribute = ItemAttribute::where('item_id',$item[$i]->item->id)->get();
+
+                for($j=0; $j<count($attribute); $j++){
+                    $data['item'][$i]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
+                    $data['item'][$i]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
+                    $data['item'][$i]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
+
+                }
+
+            }
+        }else{
+            $data = [];
+        }
+
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
+
+    public function item_favourite()
+    {
+        $user = Auth::user();
+        $item = Favourite::where('user_id',$user->id)->orderBy('id','desc')->get();
+        $data = [];
+
+        if(isset($item) && $item != null){
+            for($i=0; $i<count($item); $i++){
+                $data['item'][$i]['id'] = $item[$i]->item->id;
+                $data['item'][$i]['name'] = $item[$i]->item->name;
+                $data['item'][$i]['description'] = $item[$i]->item->description;
+                $data['item'][$i]['price'] = $item[$i]->item->price;
+                $data['item'][$i]['main_image'] = url($this->asset.'item/'.$item[$i]->item->main_image);
+                $data['item'][$i]['category'] = $item[$i]->item->category->name;
+                $data['item'][$i]['district'] = $item[$i]->item->district->name;
+                $data['item'][$i]['city'] = $item[$i]->item->city->name;
+                $data['item'][$i]['area'] = $item[$i]->item->area;
+                $data['item'][$i]['phone'] = $item[$i]->item->phone;
+                $data['item'][$i]['created_at'] = $item[$i]->item->created_at;
+
+                if($user = Auth::user()){
+                    $fav = Favourite::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
+                    if($fav != null){
+                        $data['item'][$i]['favourite'] = 1;
+                    }else{
+                        $data['item'][$i]['favourite'] = 0;
+                    }
+                }else{
+                    $data['item'][$i]['favourite'] = 0;
+                }
+                
+                $attribute = ItemAttribute::where('item_id',$item[$i]->item->id)->get();
+
+                for($j=0; $j<count($attribute); $j++){
+                    $data['item'][$i]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
+                    $data['item'][$i]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
+                    $data['item'][$i]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
+
+                }
+
+            }
+        }else{
+            $data = [];
+        }
+
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
+
+    public function edit_profile(Request $request){
+        $user = Auth::user();
+
+        $this->validate(request(),
+        [
+            'name'  => 'required|max:191',
+            'email'  => 'required|email|unique:users,email,'.$user->id,
+            'phone'  => 'required',
+            'password'  => 'nullable|min:6',
+            'password_confirmation'  => 'nullable|min:6',
+        ],[
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
+            'email.required' => 'حقل البريد الالكترونى مطلوب',
+            'email.email' => 'حقل البريد الالكترونى يجب أن يكون بريد الكترونى صالح',
+            'email.unique' => 'البريد الالكترونى موجود مسبقا',
+            'phone.required' => 'حقل رقم الجوال مطلوب',
+            'password.min' => 'حقل كلمة المرور على الأقل 6 حروف',
+            'password_confirmation.min' => 'حقل كلمة تأكيد المرور على الأقل 6 حروف',
+
+        ]);
+
+        if ($validator->fails()) {
+            return response([
+                'status'    =>      'error',
+                'errors'     =>      $validator->errors(),
+                'data'      =>      null
+            ], 401);
+        }
+
+        $data = [];
+        $input = $request->all();
+
+        /* if(isset($input['national_id'])){
+            if($input['national_id'] !== $user->national_id){
+                $national_id = User::where('national_id',$input['national_id'])->first();
+                if(isset($national_id) && $national_id != null){
+                    return response([
+                        'status'     =>      'error',
+                        'error'     =>      'رقم الهويه او الاقامة موجود من قبل!',
+                        'data'       =>      null
+                    ], 401);
+                }
+            }
+        }
+        
+        if(isset($input['email'])){
+            if($input['email'] != $user->email){
+                $email = User::where('email',$input['email'])->first();
+                if(isset($email) && $email != null){
+                    return response([
+                        'status'     =>      'error',
+                        'error'     =>      'البريد الالكترونى موجود من قبل!',
+                        'data'       =>      null
+                    ], 401);
+                }
+            }
+        }
+
+        if(isset($input['mobile'])){
+            if($input['mobile'] != $user->mobile){
+                $mobile = User::where('mobile',$input['mobile'])->first();
+                if(isset($mobile) && $mobile != null){
+                    return response([
+                        'status'     =>      'error',
+                        'error'     =>      'رقم الهاتف موجود من قبل!',
+                        'data'       =>      null
+                    ], 401);
+                }
+            }
+        } */
+        
+        if(isset($input['password']) && $input['password'] != null){
+            if($input['password'] === $input['password_confirmation']){
+                $input['password'] = bcrypt($input['password']);
+            }else{
+                return response([
+                    'status'    =>      'error',
+                    'error'     =>      'كلمه السر و تأكيد كلمه السر غير متماثلتين!',
+                    'data'      =>      null
+                ], 401);
+            }
+        }else{
+            $input['password'] = $user->password;
+        }
+
+        $user->update($input);
+        $success['user'] =  $user;
+        
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $success
+        ], 200);
     }
 }
