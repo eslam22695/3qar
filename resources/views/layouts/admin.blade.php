@@ -247,6 +247,11 @@
                         <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> التقارير </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{route('admin.district_report')}}" class="waves-effect"><i class="icon-globe"></i> <span> الاحياء حسب المدينة </span></a></li>
+                            <li><a href="{{route('admin.attribute_report')}}" class="waves-effect"><i class="icon-globe"></i> <span> الخصائص  حسب عائلة الخصائص  </span></a></li>
+                            <li><a href="{{route('admin.item_report')}}" class="waves-effect"><i class="icon-globe"></i> <span> العقارات  حسب المدينة / الحي / القسم / عائلة الخصائص   </span></a></li>
+                            <li><a href="{{route('admin.item_click')}}" class="waves-effect"><i class="icon-globe"></i> <span> تقرير اكثر العقارات التي تم التواصل بيها</span></a></li>
+                            <li><a href="{{route('admin.item_favourite')}}" class="waves-effect"><i class="icon-globe"></i> <span> تقرير اكثر العقارات المفضلة التي تم التواصل معها </span></a></li>
+
                         </ul>
                     </li>
                     
