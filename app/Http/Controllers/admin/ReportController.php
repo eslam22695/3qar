@@ -90,60 +90,76 @@ class ReportController extends Controller
     public function item_report(Request $request)
     {
         $this->validate(request(),
-            [
-                'family_id'  => 'required|exists:attribute_families,id',
-                'city_id' => 'required|exists:cities,id',
+        [
+            'city_id' => 'nullable|exists:cities,id',
+            'category_id' => 'nullable|exists:categories,id',
+        ],[
+            'city_id.exists' => 'المدينة غير موجودة',
+            'category_id.exists' => 'القسم غير موجودة',
+        ]);
 
-            ],[
+        dd($input = $request->all());
 
-                'family_id.required' => 'حقل عائلة الخصائص مطلوب',
-                'family_id.exists' => 'عائلة الخصائص غير موجودة',
-                'city_id.required' => 'حقل المدينة  مطلوب',
-            ]);
+        if ($request->hasAny(['city_id', 'category_id','price_from', 'price_to','area_from', 'area_to'])) {
 
-        $input = $request->all();
+            $items = Item::query();
 
-        $items = Item::where('city_id',$input['city_id'])->
-                       where('family_id',$input['family_id'])->get();
+            $price_from = 0;
+            $price_to = 0;
+            $area_from = 0;
+            $area_to = 0;
 
-        $price_from = 0;
-        $price_to = 0;
-        $area_from = 0;
-        $area_to = 0;
+            if (isset($input['city_id']) && $input['city_id'] != null) {
+                $city_id = $input['city_id'];
+                $items->where('city_id', $input['city_id']);
+            }
 
-        if (isset($input['price_from']) && $input['price_from'] != null) {
-            $price_from = $input['price_from'];
-            $items->where('price', '>=', $input['price_from']);
+            if (isset($input['category_id']) && $input['category_id'] != null) {
+                $category_id = $input['category_id'];
+                $items->where('category_id', $input['category_id']);
+            }
+
+            if (isset($input['price_from']) && $input['price_from'] != null) {
+                $price_from = $input['price_from'];
+                $items->where('price', '>=', $input['price_from']);
+            }
+
+            if (isset($input['price_to']) && $input['price_to'] != null) {
+                $price_to = $input['price_to'];
+                $items->where('price', '<=', $price_to);
+            }
+
+            if (isset($input['area_from']) && $input['area_from'] != null) {
+                $area_from = $input['area_from'];
+                $items->where('area', '>=', $input['area_from']);
+            }
+
+            if (isset($input['area_to']) && $input['area_to'] != null) {
+                $area_to = $input['area_to'];
+                $items->where('area', '<=', $input['area_to']);
+            }
+
+            $items = $items->get();
+
+            $families = AttributeFamily::all();
+            $cities = City::all();
+            $cats = Category::all();
+
+
+            return view('admin.reports.item',compact('items','cities','cats','families','price_from','price_to','area_from','area_to'));
+        }else{
+            Session::flash('danger','يرجى إختيار احدى الاختيارات!!');
+            return redirect()->back();
         }
-
-        if (isset($input['price_to']) && $input['price_to'] != null) {
-            $price_to = $input['price_to'];
-            $items->where('price', '<=', $price_to);
-        }
-
-        if (isset($input['area_from']) && $input['area_from'] != null) {
-            $area_from = $input['area_from'];
-            $items->where('area', '>=', $input['area_from']);
-        }
-
-        if (isset($input['area_to']) && $input['area_to'] != null) {
-            $area_to = $input['area_to'];
-            $items->where('area', '<=', $input['area_to']);
-        }
-
-
-
-        $families = AttributeFamily::all();
-        $cities = City::all();
-        $cats = Category::all();
-
-
-        return view('admin.reports.item',compact('items','cities','cats','families'));
     }
 
     public function item_click()
     {
-        $items = ItemClick::groupBy('item_id')->orderBy('item_id', 'desc')->get();
+        $items = DB::table('item_clicks')
+                    ->select('id','item_id','user_id')
+                    ->groupBy('item_id')
+                    ->orderBy('item_id', 'DESC')
+                    ->pluck('id','item_id','user_id')->toArray();
 
         return view('admin.reports.item_click', compact('items'));
 

@@ -3,6 +3,12 @@
 @section('styles')
     <!-- X-editable css -->
     <link type="text/css" href="{{asset('admin_assets/plugins/x-editable/css/bootstrap-editable.css')}}" rel="stylesheet">
+    <style type="text/css">
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -133,7 +139,9 @@
                                 <tr>
                                     <td>الخريطة</td>
                                     <td>
-                                        <textarea id="textarea" class="form-control" rows="2" name="map"><?php if(isset($setting->map)){echo $setting->map;} ?></textarea> 
+                                        <div id="map"></div>
+                                        <input type="hidden" id="lat" name="lat" value="{{$setting->lat}}">
+                                        <input type="hidden" id="lang" name="lang" value="{{$setting->lang}}">
                                         <?php if(isset($setting->map)){echo $setting->map;} ?>
                                         @if ($errors->has('map'))
                                             <span class="alert alert-danger">
@@ -374,7 +382,9 @@
                                 <tr>
                                     <td>الخريطة</td>
                                     <td>
-                                        <textarea id="textarea" class="form-control" rows="2" name="map"> {{old('map')}}</textarea> 
+                                        <div id="map"></div>
+                                        <input type="hidden" id="lat" name="lat" value="23.8859">
+                                        <input type="hidden" id="lang" name="lang" value="45.0792">
                                         @if ($errors->has('map'))
                                             <span class="alert alert-danger">
                                                 <strong>{{ $errors->first('map') }}</strong>
@@ -512,4 +522,31 @@
 <script src="{{asset('admin_assets/plugins/moment/moment.js')}}"></script>
 <script type="text/javascript" src="{{asset('admin_assets/plugins/x-editable/js/bootstrap-editable.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('admin_assets/pages/jquery.xeditable.js')}}"></script>
+
+<script>
+    function initMap() {
+        var myLatLng = {lat: {{isset($setting->lat) ? $setting->lat : 23.8859}}, lng: {{isset($setting->lang) ? $setting->lang : 45.0792}}};
+    
+        var map = new google.maps.Map(document.getElementById('map'), {
+        center: myLatLng,
+        zoom: 6
+        });
+    
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Hello World!',
+            draggable: true
+            });
+    
+        google.maps.event.addListener(marker, 'dragend', function(marker) {
+            var latLng = marker.latLng;
+            document.getElementById('lat').value = latLng.lat();
+            document.getElementById('lang').value = latLng.lng();
+        });
+    }
+    
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap" async defer></script>
+         
 @endsection

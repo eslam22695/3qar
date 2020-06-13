@@ -65,7 +65,7 @@ class IndexController extends Controller
                 $data['item'][$i]['lang'] = $item[$i]->lang;
             }
         }else{
-            $data = [];
+            $data['item'] = [];
         }
         
         return response([
@@ -107,7 +107,7 @@ class IndexController extends Controller
 
             }
         }else{
-            $data = [];
+            $data['item'] = [];
         }
 
         return response([
@@ -159,7 +159,7 @@ class IndexController extends Controller
 
             }
         }else{
-            $data = [];
+            $data['item'] = [];
         }
 
         return response([
@@ -175,7 +175,7 @@ class IndexController extends Controller
         if(isset($cats) && $cats != null){
             $data['cats'] = $cats;
         }else{
-            $data = [];
+            $data['cats'] = [];
         }
 
         return response([
@@ -191,7 +191,7 @@ class IndexController extends Controller
         if(isset($city) && $city != null){
             $data['city'] = $city;
         }else{
-            $data = [];
+            $data['city'] = [];
         }
 
         return response([
@@ -206,7 +206,7 @@ class IndexController extends Controller
         if(isset($district) && $district != null){
             $data['district'] = $district;
         }else{
-            $data = [];
+            $data['district'] = [];
         }
 
         return response([
@@ -263,23 +263,23 @@ class IndexController extends Controller
 
         $more = Item::where('category_id',$item->category_id)->where('id', '!=' , $id)->where('status',1)->inRandomOrder()->take(3)->get();
         for($m=0; $m<count($more); $m++){
-            $data['more'][$i]['id'] = $more[$i]->id;
-            $data['more'][$i]['name'] = $more[$i]->name;
-            $data['more'][$i]['description'] = $more[$i]->description;
-            $data['more'][$i]['price'] = $more[$i]->price;
-            $data['more'][$i]['main_image'] = url($this->asset.'item/'.$more[$i]->main_image);
-            $data['more'][$i]['category'] = $more[$i]->category->name;
-            $data['more'][$i]['district'] = $more[$i]->district->name;
-            $data['more'][$i]['city'] = $more[$i]->city->name;
-            $data['more'][$i]['area'] = $more[$i]->area;
-            $data['more'][$i]['phone'] = $more[$i]->phone;
+            $data['more'][$m]['id'] = $more[$m]->id;
+            $data['more'][$m]['name'] = $more[$m]->name;
+            $data['more'][$m]['description'] = $more[$m]->description;
+            $data['more'][$m]['price'] = $more[$m]->price;
+            $data['more'][$m]['main_image'] = url($this->asset.'item/'.$more[$m]->main_image);
+            $data['more'][$m]['category'] = $more[$m]->category->name;
+            $data['more'][$m]['district'] = $more[$m]->district->name;
+            $data['more'][$m]['city'] = $more[$m]->city->name;
+            $data['more'][$m]['area'] = $more[$m]->area;
+            $data['more'][$m]['phone'] = $more[$m]->phone;
 
             $attribute = ItemAttribute::where('item_id',$more[$i]->id)->get();
 
             for($j=0; $j<count($attribute); $j++){
-                $data['more'][$i]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
-                $data['more'][$i]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
-                $data['more'][$i]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
+                $data['more'][$m]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
+                $data['more'][$m]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
+                $data['more'][$m]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
 
             }
 
@@ -332,7 +332,7 @@ class IndexController extends Controller
 
             }
         }else{
-            $data = [];
+            $data['item'] = [];
         }
 
         return response([
@@ -393,7 +393,7 @@ class IndexController extends Controller
 
             }
         }else{
-            $data = [];
+            $data['item'] = [];
         }
 
         return response([
@@ -440,7 +440,8 @@ class IndexController extends Controller
             $data['phone2'] = $setting->phone2;
             $data['address'] = $setting->address;
             $data['email'] = $setting->email;
-            $data['map'] = $setting->map;
+            $data['lat'] = $setting->lat;
+            $data['lang'] = $setting->lang;
         }else{
             $data = [];
         }
@@ -488,7 +489,7 @@ class IndexController extends Controller
         if(isset($services) && count($services)>0){
             $data['services'] = $services;
         }else{
-            $data = [];
+            $data['services'] = [];
         }
         
         return response([
@@ -543,6 +544,8 @@ class IndexController extends Controller
                 $data['blogs'][$i]['image'] = url($this->asset.'blog/'.$blogs[$i]->image);
                 $data['blogs'][$i]['created_at'] = $blogs[$i]->created_at;
             }
+        }else{
+            $data['blogs'] = [];
         }
         
         return response([
@@ -655,7 +658,7 @@ class IndexController extends Controller
 
             }
         }else{
-            $data = [];
+            $data['item'] = [];
         }
 
         return response([
@@ -706,7 +709,7 @@ class IndexController extends Controller
 
             }
         }else{
-            $data = [];
+            $data['item'] = [];
         }
 
         return response([

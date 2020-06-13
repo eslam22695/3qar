@@ -57,7 +57,7 @@
                                     <td>المدينة</td>
 
                                     <td>
-                                        <select class="form-control" required name="city_id">
+                                        <select class="form-control" name="city_id">
                                             <option value="" disabled selected>إختار مدينة </option>
                                             @if($cities != null)
                                                 @foreach($cities as $city)
@@ -79,7 +79,7 @@
                                     <td>القسم</td>
 
                                     <td>
-                                        <select class="form-control" required name="category_id">
+                                        <select class="form-control" name="category_id">
                                             <option value="" selected disabled>إختار القسم</option>
                                             @if($cats != null)
                                                 @foreach($cats as $cat)
@@ -97,70 +97,37 @@
                                 </tr>
 
                                 <tr>
-                                    <td>عائلة الخصائص</td>
-
+                                    <td>السعر من</td>
                                     <td>
-                                        <select class="form-control" required name="family_id">
-                                            <option value="" disabled selected>إختار عائلة الخصائص</option>
-                                            @if($families != null)
-                                                @foreach($families as $family)
-                                                    <option value="{{$family->id}}">{{$family->name}}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                        @if ($errors->has('family_id'))
-                                            <span class="alert alert-danger">
-                                                <strong>{{ $errors->first('family_id') }}</strong>
-                                            </span>
-                                        @endif
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                        <td>السعر</td>
-                                    <td>
-                                        <div class="card">
-                                            <div class="card-header" id="headingThree">
-                                                <h2 class="mb-0">
-                                                    <span> حدد السعر</span>
-                                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fa fa-plus"></i></button>
-                                                </h2>
-                                            </div>
-                                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                                <div class="card-body pr-0 pl-0">
-                                                    <div class="container" >
-                                                        <input class="prices-text" type="number" placeholder="السعر من"  name="price_from" value="{{$price_from == 0 ? '' : $price_from}}">
-                                                    </div>
-                                                    <div class="container" >
-                                                        <input class="prices-text" type="number" placeholder="السعر إلي"  name="price_to" value="{{$price_to == 0 ? '' : $price_to}}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
+                                        <input class="form-control" type="number" placeholder="السعر من"  name="price_from" value="{{isset($price_from) ? $price_from == 0 ? '' : $price_from : ''}}">
+                                                    
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>المساحة</td>
-
+                                    <td>السعر إلي</td>
                                     <td>
-                                        <div class="card">
-                                            <div class="card-header" id="headingFour">
-                                                <h2 class="mb-0">
-                                                    <span>المساحه</span>
-                                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"><i class="fa fa-plus"></i></button>
-                                                </h2>
-                                            </div>
-                                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                                                <div class="card-body">
-                                                    <div class="container" >
-                                                        <input class="prices-text" type="number" placeholder="المساحه من"  name="area_from" value="{{$area_from == 0 ? '' : $area_from}}">
-                                                    </div>
-                                                    <div class="container" >
-                                                        <input class="prices-text" type="number" placeholder="المساحه إلي"  name="area_to" value="{{$area_to == 0 ? '' : $area_to}}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
+                                        <input class="form-control" type="number" placeholder="السعر إلي"  name="price_to" value="{{isset($price_to) ? $price_to == 0 ? '' : $price_to : ''}}">
+                                                    
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>المساحة من</td>
+                                    <td>
+                                       
+                                        <input class="form-control" type="number" placeholder="المساحه من"  name="area_from" value="{{isset($area_from) ? $area_from == 0 ? '' : $area_from : ''}}">
+                                                    
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>المساحة إلي</td>
+                                    <td>
+                                        
+                                        <input class="form-control" type="number" placeholder="المساحه إلي"  name="area_to" value="{{isset($area_to) ? $area_to == 0 ? '' : $area_to : ''}}">
+                                                    
                                     </td>
                                 </tr>
 
@@ -192,7 +159,8 @@
                             <th data-field="الاسم" data-align="center">الاسم</th>
                             <th data-field="القسم" data-align="center">القسم</th>
                             <th data-field="المدينة" data-align="center">المدينة</th>
-                            <th data-field="عائلة الخصائص" data-align="center">عائلة الخصائص</th>
+                            <th data-field="السعر" data-align="center">السعر</th>
+                            <th data-field="المساحة" data-align="center">المساحة</th>
                             <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
@@ -204,7 +172,8 @@
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->category->name}}</td>
                                     <td>{{$item->city->name}}</td>
-                                    <td>{{$item->attribute_families->name}}</td>
+                                    <td>{{$item->price}}</td>
+                                    <td>{{$item->area}}</td>
                                     <td>{{$item->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
 
                                     <td class="actions">
