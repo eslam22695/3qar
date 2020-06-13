@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Item;
 use App\Owner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -141,4 +142,27 @@ class OwnerController extends Controller
         session()->flash('success','تم الحذف بنجاح');
         return back();
     }
+
+
+//    public function owner_item(Request $request)
+//    {
+//        $this->validate(request(),
+//            [
+//                'owner_id'  => 'required|exists:owners,id',
+//            ],[
+//                'owner_id.required' => 'حقل المالك مطلوب',
+//                'owner_id.exists' => 'المالك غير موجودة',
+//
+//            ]);
+//
+//        $input = $request->all();
+//
+//        $owners = Owner::where('item_id',$input['item_id'])->get();
+//
+//        $items = Item::all();
+//
+//        return view('admin.owner.index',compact('owners','items'));
+//    }
+
+
 }

@@ -92,7 +92,7 @@
                         <tbody id="items_table">
                             <tr>
                                 <td>قيمة الخاصية 1</td>
-                                <td><input type="text" class="form-control" name="attribute_value[]" required></td>
+                                <td><input type="text" class="form-control" name="attribute_value[]" required {{old('attribute_value')}}></td>
                                 <td><button type="button" id="add" class="btn btn-info form-control">إضافة قيمة اخرى</button></td>
                                 @if ($errors->has('attribute_value'))
                                     <p class="alert alert-danger">

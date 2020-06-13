@@ -64,8 +64,8 @@
                                 <td>مركز المدينة</td>
                                 <td>
                                     <div id="map"></div>
-                                    <input type="hidden" id="lat" name="lat" value="23.8859">
-                                    <input type="hidden" id="lang" name="lang" value="45.0792">    
+                                    <input type="hidden" id="lat" name="lat" value="23.8859" {{old('lat')}}>
+                                    <input type="hidden" id="lang" name="lang" value="45.0792" {{old('lang')}}>
                                 
                                     @if ($errors->has('lat'))
                                         <p class="alert alert-danger">
