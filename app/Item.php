@@ -32,12 +32,6 @@ class Item extends Model
         return $this->belongsTo('App\Owner', 'owner_id', 'id');
     }
 
-    public function attribute_families()
-    {
-        return $this->belongsTo('App\AttributeFamily', 'attribute_families_id', 'id');
-    }
-
-
     public function district()
     {
         return $this->belongsTo('App\District', 'district_id', 'id');

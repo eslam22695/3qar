@@ -27,6 +27,8 @@ class CreateSettingsTable extends Migration
             $table->string('address')->nullable();
             $table->string('email')->nullable();
             $table->text('map')->nullable();
+            $table->text('lat')->nullable();
+            $table->text('lang')->nullable();
             $table->text('facebook')->nullable();
             $table->text('twitter')->nullable();
             $table->text('linkedin')->nullable();
