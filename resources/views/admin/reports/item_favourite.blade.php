@@ -46,7 +46,6 @@
     <div class="col-lg-12">
         <div class="card-box">
 
-
             @if(isset($items) && $items != null)
                 <div class="table-responsive">
                     <table  data-toggle="table"
@@ -69,13 +68,16 @@
                         </thead>
                         <tbody>
                         @if(isset($items))
-                            @foreach($items as $item)
+                            @for($i=0; $i<count($items); $i++)
+                                <?php
+                                    $item = \App\Item::find($items[$i]->id);
+                                ?>
                                 <tr>
-                                    <td>{{$item->item->name}}</td>
-                                    <td>{{$item->item->category->name}}</td>
-                                    <td>{{$item->item->city->name}}</td>
-                                    <td>{{$item->item->owner->name}}</td>
-                                    <td>{{$item->item->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
+                                    <td>{{$item->name}}</td>
+                                    <td>{{$item->category->name}}</td>
+                                    <td>{{$item->city->name}}</td>
+                                    <td>{{$item->owner->name}}</td>
+                                    <td>{{$item->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
 
                                     <td class="actions">
                                         <a href="{{ route('admin.status',[$item->status,'items',$item->id]) }}" class="btn btn-{{$item->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$item->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
@@ -105,8 +107,7 @@
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
                                 </div><!-- /.modal -->
-
-                            @endforeach
+                            @endfor
                         @endif
                         </tbody>
                     </table>

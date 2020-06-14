@@ -54,7 +54,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#v2-image" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                                      الصور
+                                الصور
                             </a>
                         </li>
                         <li class="nav-item">
@@ -64,12 +64,17 @@
                         </li>
                         <li class="nav-item">
                             <a href="#v2-attribute" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                                     الخصائص
+                                الخصائص
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#v2-option" data-toggle="tab" aria-expanded="false" class="nav-link">
                                 المميزات
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#v2-user" data-toggle="tab" aria-expanded="false" class="nav-link">
+                                مستفيد
                             </a>
                         </li>
                     </ul>
@@ -290,6 +295,29 @@
                                         </div>
                                     </div>
                                 @endforeach
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="v2-user">
+                            <div class="row">   
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="icon" class="control-label">المستخدمين</label>
+                                        <select class="form-control" name="user_id">
+                                            <option value="" selected disabled>إختار مستخدم</option>
+                                            @foreach($users as $user)
+                                                <option value="{{$user->id}}" {{$item->user_id == $user->id ? 'selected' : ''}}>{{$user->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="icon" class="control-label"> تنبية شهري </label>
+                                        <input type="checkbox" data-plugin="switchery" data-color="#5d9cec" name="notify" value="1" {{$item->notify === 1 ? 'checked' : ''}}/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

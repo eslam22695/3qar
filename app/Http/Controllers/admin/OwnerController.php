@@ -76,7 +76,8 @@ class OwnerController extends Controller
     public function show($id)
     {
         $owner = Owner::find($id);
-        return view('admin.owner.show',compact('owner'));
+        $items = Item::where('owner_id',$id)->orderBy('id','desc')->get();
+        return view('admin.owner.show',compact('owner','items'));
     }
 
     /**

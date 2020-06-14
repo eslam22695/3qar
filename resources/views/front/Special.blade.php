@@ -94,7 +94,7 @@
 
                                         <span class="icon-p">
                                             <img class="icon-img" src="{{asset('admin_assets/images/attribute/'.$value->attribute_value->attribute->icon)}}">
-                                            {{$value->attribute_value->attribute->name}}  </span>
+                                            {{$value->attribute_value->value}}  {{$value->attribute_value->attribute->name}}  </span>
                                     @endforeach
 
                                 </div>

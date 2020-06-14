@@ -35,11 +35,11 @@
                         </tr>                       
                         <tr>
                             <td>السعر</td>
-                            <td>{{ $item->price }}</td>
+                            <td>{{ $item->price }} ريال سعودي</td>
                         </tr>                       
                         <tr>
                             <td>المساحة</td>
-                            <td>{{ $item->area }}</td>
+                            <td>{{ $item->area }} متر مربع</td>
                         </tr>                       
                         <tr>
                             <td>رقم الجوال</td>

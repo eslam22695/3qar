@@ -33,6 +33,9 @@ class CreateItemsTable extends Migration
             $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('owners')->onUpdate('cascade')->onDelete('cascade');
 
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+
 
             $table->string('name');
             $table->text('description');
@@ -44,6 +47,7 @@ class CreateItemsTable extends Migration
             $table->string('lang')->nullable();
             $table->string('phone')->nullable();
             $table->boolean('featured')->default(0);
+            $table->boolean('notify')->default(1);
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

@@ -19,6 +19,7 @@ use App\Owner;
 use App\ItemAttribute;
 use App\ItemOption;
 use App\ItemImage;
+use App\User;
 
 class ItemController extends Controller
 {
@@ -184,7 +185,8 @@ class ItemController extends Controller
         $options = Option::where('status',1)->orderBy('id','desc')->get();
         $owners = Owner::where('status',1)->orderBy('id','desc')->get();
         $images = ItemImage::where('item_id',$id)->where('status',1)->get();
-        return view('admin.item.edit',compact('item','attributes','cats','cities','options','owners','images'));
+        $users = User::where('status',1)->get();
+        return view('admin.item.edit',compact('item','attributes','cats','cities','options','owners','users','images'));
     }
 
     /**
@@ -208,6 +210,7 @@ class ItemController extends Controller
             'city_id'  => 'nullable|exists:cities,id',
             'category_id'  => 'required|exists:categories,id',
             'owner_id'  => 'required|exists:owners,id',
+            'user_id'  => 'nullable|exists:users,id',
         ],[
                 'name.required' => 'حقل الاسم مطلوب',
                 'name.max' => 'حقل الاسم أكبر من اللازم',
@@ -228,6 +231,7 @@ class ItemController extends Controller
                 'category_id.exists' => 'القسم غير موجودة',
                 'owner_id.required' => 'حقل المالك مطلوب',
                 'owner_id.exists' => 'المالك غير موجودة',
+                'user_id.exists' => 'المستخدم غير موجودة',
         ]);
 
         $input = $request->all();
@@ -297,6 +301,10 @@ class ItemController extends Controller
                     'item_id' => $item->id
                 ];
                 ItemOption::create($options);
+            }
+
+            if(isset($input['user_id']) && $input['user_id'] != null){
+                $input['status'] = 0;
             }
 
             $item->update($input);

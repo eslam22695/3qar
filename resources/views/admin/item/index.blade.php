@@ -50,6 +50,8 @@
                             <th data-field="القسم" data-align="center">القسم</th>
                             <th data-field="المدينة" data-align="center">المدينة</th>
                             <th data-field="المالك" data-align="center">المالك</th>
+                            <th data-field="المستفيد" data-align="center">المستفيد</th>
+                            <th data-field="تنبيه شهري" data-align="center">تنبيه شهري</th>
                             <th data-field="الحالة"  data-align="center">الحالة</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
@@ -62,6 +64,8 @@
                                     <td>{{$item->category->name}}</td>
                                     <td>{{$item->city->name}}</td>
                                     <td>{{$item->owner->name}}</td>
+                                    <td>{{isset($item->user->name) ? $item->user->name : '----'}}</td>
+                                    <td>{{$item->notify == 1 ? 'نعم' : 'لا'}}</td>
                                     <td>{{$item->status === 1 ? 'مفعل' : 'غير مفعل'}}</td>
 
                                     <td class="actions">

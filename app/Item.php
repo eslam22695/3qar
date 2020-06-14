@@ -9,7 +9,7 @@ class Item extends Model
     protected $table = 'items';
     protected $fillable = [
         'id', 'name','description','price' ,'main_image','map','lat' , 'lang','phone','featured',
-        'status', 'district_id', 'dimension_id','city_id','category_id' ,'owner_id', 'area'
+        'status', 'district_id', 'dimension_id','city_id','category_id' ,'owner_id','user_id', 'area', 'notify'
     ];
 
     public function city()
@@ -30,6 +30,11 @@ class Item extends Model
     public function owner()
     {
         return $this->belongsTo('App\Owner', 'owner_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
     public function district()

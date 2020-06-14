@@ -1,5 +1,15 @@
 @extends('layouts.index')
 
+@section('styles')
+    
+<style type="text/css">
+    #map {
+        width: 100%;
+        height: 400px;
+    }
+</style>
+@endsection
+
 @section('content')
 
 <section class="banner-about">
@@ -40,7 +50,7 @@
             <div class="head  wow fadeInRight" >
                 <h2 class="mb-5"> تواصل معنا</h2>
             </div>
-            {{-- <iframe class="wow fadeIn" src="{{$setting->map}}" width="100%" height="300px" frameborder="0" style="border:0" allowfullscreen></iframe> --}}
+            <div id="map"></div>
         </div>
         <div class="Special">
             <div class="container">
@@ -105,4 +115,29 @@
     </section>
     <!-------end contact us----------->
 
+@endsection
+
+@section('scripts')
+<script>
+        
+    function initMap() {
+        var myLatLng = {lat: {{$setting->lat}}, lng: {{$setting->lang}}};
+    
+        var map = new google.maps.Map(document.getElementById('map'), {
+        center: myLatLng,
+        zoom: 15
+        });
+    
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Hello World!',
+            draggable: false
+            });
+    
+    }
+    
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap" async defer></script>
+         
 @endsection

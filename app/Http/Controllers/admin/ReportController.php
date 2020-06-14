@@ -155,11 +155,11 @@ class ReportController extends Controller
 
     public function item_click()
     {
-        $items = DB::table('item_clicks')
-                    ->select('id','item_id','user_id')
-                    ->groupBy('item_id')
-                    ->orderBy('item_id', 'DESC')
-                    ->pluck('id','item_id','user_id')->toArray();
+        $items = Item::join("item_clicks", "item_clicks.item_id", "=", "items.id")
+                ->select("items.id")
+                ->groupBy("items.id")
+                ->orderBy('items.id', 'asc')
+                ->get();
 
         return view('admin.reports.item_click', compact('items'));
 
@@ -167,9 +167,13 @@ class ReportController extends Controller
 
     public function item_favourite()
     {
-        $favourites = Favourite::groupBy('item_id')->orderBy('item_id', 'desc')->get();
+        $items = Item::join("favourites", "favourites.item_id", "=", "items.id")
+                ->select("items.id")
+                ->groupBy("items.id")
+                ->orderBy('items.id', 'asc')
+                ->get();
 
-        return view('admin.reports.item_favourite', compact('favourites'));
+        return view('admin.reports.item_favourite', compact('items'));
 
     }
 
