@@ -255,6 +255,8 @@
                         </ul>
                     </li>
                     
+                    <li><a href="{{route('admin.notify')}}" class="waves-effect"><i class="md md-assignment"></i> <span> إشعارات التنبية </span></a></li>
+
                 </ul>
 
                 <div class="clearfix"></div>

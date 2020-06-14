@@ -409,6 +409,26 @@ class IndexController extends Controller
                 $data['item'][$i]['area'] = $item[$i]->area;
                 $data['item'][$i]['phone'] = $item[$i]->phone;
 
+                if($user = User::find($request['user_id'])){
+                    $fav = Favourite::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
+                    $contacted = ItemClick::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
+                    
+                    if($fav != null){
+                        $data['item'][$i]['favourite'] = 1;
+                    }else{
+                        $data['item'][$i]['favourite'] = 0;
+                    }
+
+                    if($contacted != null){
+                        $data['item'][$i]['contacted'] = 1;
+                    }else{
+                        $data['item'][$i]['contacted'] = 0;
+                    }
+                }else{
+                    $data['item'][$i]['favourite'] = 0;
+                    $data['item'][$i]['contacted'] = 0;
+                }
+
                 $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
 
                 for($j=0; $j<count($attribute); $j++){
@@ -600,6 +620,21 @@ class IndexController extends Controller
 
     /*AUTH*/
 
+    public function profile(){
+        $data = [];
+        $user = Auth::user();
+        if(isset($user) && $user != null){
+            $data['user'] = $user;
+        }else{
+            $data['user'] = [];
+        }
+
+        return response([
+            'status'    =>      'success',
+            'data'      =>      $data
+        ], 200);
+    }
+
     public function fav(Request $request,$id)
     {
         $validator = Validator::make($request->all(), [
@@ -680,25 +715,21 @@ class IndexController extends Controller
                 $data['item'][$i]['phone'] = $item[$i]->item->phone;
                 $data['item'][$i]['created_at'] = $item[$i]->item->created_at;
 
-                if($user = User::find($request['user_id'])){
-                    $fav = Favourite::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
-                    $contacted = ItemClick::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
-                    
-                    if($fav != null){
-                        $data['item'][$i]['favourite'] = 1;
-                    }else{
-                        $data['item'][$i]['favourite'] = 0;
-                    }
-
-                    if($contacted != null){
-                        $data['item'][$i]['contacted'] = 1;
-                    }else{
-                        $data['item'][$i]['contacted'] = 0;
-                    }
+                $fav = Favourite::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
+                $contacted = ItemClick::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
+                
+                if($fav != null){
+                    $data['item'][$i]['favourite'] = 1;
                 }else{
                     $data['item'][$i]['favourite'] = 0;
+                }
+
+                if($contacted != null){
+                    $data['item'][$i]['contacted'] = 1;
+                }else{
                     $data['item'][$i]['contacted'] = 0;
                 }
+                
                 
                 $attribute = ItemAttribute::where('item_id',$item[$i]->item->id)->get();
 
@@ -740,25 +771,21 @@ class IndexController extends Controller
                 $data['item'][$i]['phone'] = $item[$i]->item->phone;
                 $data['item'][$i]['created_at'] = $item[$i]->item->created_at;
 
-                if($user = User::find($request['user_id'])){
-                    $fav = Favourite::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
-                    $contacted = ItemClick::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
-                    
-                    if($fav != null){
-                        $data['item'][$i]['favourite'] = 1;
-                    }else{
-                        $data['item'][$i]['favourite'] = 0;
-                    }
-
-                    if($contacted != null){
-                        $data['item'][$i]['contacted'] = 1;
-                    }else{
-                        $data['item'][$i]['contacted'] = 0;
-                    }
+                $fav = Favourite::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
+                $contacted = ItemClick::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
+                
+                if($fav != null){
+                    $data['item'][$i]['favourite'] = 1;
                 }else{
                     $data['item'][$i]['favourite'] = 0;
+                }
+
+                if($contacted != null){
+                    $data['item'][$i]['contacted'] = 1;
+                }else{
                     $data['item'][$i]['contacted'] = 0;
                 }
+                
                 
                 $attribute = ItemAttribute::where('item_id',$item[$i]->item->id)->get();
 
@@ -784,7 +811,7 @@ class IndexController extends Controller
     {
         $user = Auth::user();
 
-        $this->validate(request(),
+        $validator = Validator::make($request->all(),
         [
             'name'  => 'required|max:191',
             'email'  => 'required|email|unique:users,email,'.$user->id,

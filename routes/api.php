@@ -40,5 +40,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('fav/{id}', 'api\IndexController@fav');
     Route::get('item_contacted', 'api\IndexController@item_contacted');
     Route::get('item_favourite', 'api\IndexController@item_favourite');
+    Route::get('profile', 'api\IndexController@profile');
     Route::post('edit_profile', 'api\IndexController@edit_profile');
 });

@@ -70,10 +70,12 @@
     Route::get('report/item','admin\ReportController@item')->name('item_report');
     Route::post('report/item','admin\ReportController@item_report')->name('item_report');
 
-
     /*item_click*/
     Route::get('report/item_click','admin\ReportController@item_click')->name('item_click');
 
-
     /*item_favourite*/
     Route::get('report/item_favourite','admin\ReportController@item_favourite')->name('item_favourite');
+
+    //Notify
+    Route::get('notify','admin\NotifyController@index')->name('notify');
+    Route::post('notify_send','admin\NotifyController@store')->name('notify_send');
