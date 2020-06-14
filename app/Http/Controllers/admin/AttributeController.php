@@ -19,6 +19,19 @@ class AttributeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('permission:attribute-list|attribute-create|attribute-edit|attribute-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:attribute-create', ['only' => ['create','store']]);
+        $this->middleware('permission:attribute-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:attribute-delete', ['only' => ['destroy']]);
+    }
+
+    /** 
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $attributes = Attribute::orderBy('id','desc')->get();
