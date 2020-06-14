@@ -137,13 +137,22 @@ class IndexController extends Controller
         
                 if($user = User::find($request['user_id'])){
                     $fav = Favourite::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
+                    $contacted = ItemClick::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
+                    
                     if($fav != null){
                         $data['item'][$i]['favourite'] = 1;
                     }else{
                         $data['item'][$i]['favourite'] = 0;
                     }
+
+                    if($contacted != null){
+                        $data['item'][$i]['contacted'] = 1;
+                    }else{
+                        $data['item'][$i]['contacted'] = 0;
+                    }
                 }else{
                     $data['item'][$i]['favourite'] = 0;
+                    $data['item'][$i]['contacted'] = 0;
                 }
 
                 $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
@@ -235,13 +244,22 @@ class IndexController extends Controller
 
         if($user = User::find($request['user_id'])){
             $fav = Favourite::where('item_id',$item->id)->where('user_id',$user->id)->first();
+            $contacted = ItemClick::where('item_id',$item->id)->where('user_id',$user->id)->first();
+            
             if($fav != null){
                 $data['favourite'] = 1;
             }else{
                 $data['favourite'] = 0;
             }
+
+            if($contacted != null){
+                $data['contacted'] = 1;
+            }else{
+                $data['contacted'] = 0;
+            }
         }else{
             $data['favourite'] = 0;
+            $data['contacted'] = 0;
         }
 
         $images = ItemImage::where('item_id',$item->id)->get();
@@ -312,13 +330,22 @@ class IndexController extends Controller
 
                 if($user = User::find($request['user_id'])){
                     $fav = Favourite::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
+                    $contacted = ItemClick::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
+                    
                     if($fav != null){
                         $data['item'][$i]['favourite'] = 1;
                     }else{
                         $data['item'][$i]['favourite'] = 0;
                     }
+
+                    if($contacted != null){
+                        $data['item'][$i]['contacted'] = 1;
+                    }else{
+                        $data['item'][$i]['contacted'] = 0;
+                    }
                 }else{
                     $data['item'][$i]['favourite'] = 0;
+                    $data['item'][$i]['contacted'] = 0;
                 }
 
                 $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
@@ -472,7 +499,7 @@ class IndexController extends Controller
                 'status'    =>      'error',
                 'errors'     =>      $validator->errors(),
                 'data'      =>      null
-            ], 401);
+            ], 200);
         }
 
         $input = $request->all();
@@ -521,7 +548,7 @@ class IndexController extends Controller
                 'status'    =>      'error',
                 'errors'     =>      $validator->errors(),
                 'data'      =>      null
-            ], 401);
+            ], 200);
         }
 
         $input = $request->all();
@@ -584,7 +611,7 @@ class IndexController extends Controller
                 'status'    =>      'error',
                 'errors'     =>      $validator->errors(),
                 'data'      =>      null
-            ], 401);
+            ], 200);
         }
 
         $user = Auth::user();
@@ -612,8 +639,25 @@ class IndexController extends Controller
             return response([
                 'status'    =>      'error',
                 'data'      =>      null
-            ], 401);
+            ], 200);
         }
+    }
+
+    public function contacted($id){
+        $user = Auth::user();
+        $input = [];
+
+        $contacted = ItemClick::where('item_id',$id)->where('user_id',$user->id)->first();
+
+        if($contacted == null){
+            $input['user_id'] = $user->id;
+            $input['item_id'] = $id;
+            ItemClick::create($input);
+        }
+
+        return response([
+            'status'    =>      'success',
+        ], 200);
     }
 
     public function item_contacted()
@@ -636,15 +680,24 @@ class IndexController extends Controller
                 $data['item'][$i]['phone'] = $item[$i]->item->phone;
                 $data['item'][$i]['created_at'] = $item[$i]->item->created_at;
 
-                if($user = Auth::user()){
+                if($user = User::find($request['user_id'])){
                     $fav = Favourite::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
+                    $contacted = ItemClick::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
+                    
                     if($fav != null){
                         $data['item'][$i]['favourite'] = 1;
                     }else{
                         $data['item'][$i]['favourite'] = 0;
                     }
+
+                    if($contacted != null){
+                        $data['item'][$i]['contacted'] = 1;
+                    }else{
+                        $data['item'][$i]['contacted'] = 0;
+                    }
                 }else{
                     $data['item'][$i]['favourite'] = 0;
+                    $data['item'][$i]['contacted'] = 0;
                 }
                 
                 $attribute = ItemAttribute::where('item_id',$item[$i]->item->id)->get();
@@ -687,15 +740,24 @@ class IndexController extends Controller
                 $data['item'][$i]['phone'] = $item[$i]->item->phone;
                 $data['item'][$i]['created_at'] = $item[$i]->item->created_at;
 
-                if($user = Auth::user()){
+                if($user = User::find($request['user_id'])){
                     $fav = Favourite::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
+                    $contacted = ItemClick::where('item_id',$item[$i]->item->id)->where('user_id',$user->id)->first();
+                    
                     if($fav != null){
                         $data['item'][$i]['favourite'] = 1;
                     }else{
                         $data['item'][$i]['favourite'] = 0;
                     }
+
+                    if($contacted != null){
+                        $data['item'][$i]['contacted'] = 1;
+                    }else{
+                        $data['item'][$i]['contacted'] = 0;
+                    }
                 }else{
                     $data['item'][$i]['favourite'] = 0;
+                    $data['item'][$i]['contacted'] = 0;
                 }
                 
                 $attribute = ItemAttribute::where('item_id',$item[$i]->item->id)->get();
@@ -718,7 +780,8 @@ class IndexController extends Controller
         ], 200);
     }
 
-    public function edit_profile(Request $request){
+    public function edit_profile(Request $request)
+    {
         $user = Auth::user();
 
         $this->validate(request(),
@@ -745,7 +808,7 @@ class IndexController extends Controller
                 'status'    =>      'error',
                 'errors'     =>      $validator->errors(),
                 'data'      =>      null
-            ], 401);
+            ], 200);
         }
 
         $data = [];
@@ -759,7 +822,7 @@ class IndexController extends Controller
                         'status'     =>      'error',
                         'error'     =>      'رقم الهويه او الاقامة موجود من قبل!',
                         'data'       =>      null
-                    ], 401);
+                    ], 200);
                 }
             }
         }
@@ -772,7 +835,7 @@ class IndexController extends Controller
                         'status'     =>      'error',
                         'error'     =>      'البريد الالكترونى موجود من قبل!',
                         'data'       =>      null
-                    ], 401);
+                    ], 200);
                 }
             }
         }
@@ -785,7 +848,7 @@ class IndexController extends Controller
                         'status'     =>      'error',
                         'error'     =>      'رقم الهاتف موجود من قبل!',
                         'data'       =>      null
-                    ], 401);
+                    ], 200);
                 }
             }
         } */
@@ -798,7 +861,7 @@ class IndexController extends Controller
                     'status'    =>      'error',
                     'error'     =>      'كلمه السر و تأكيد كلمه السر غير متماثلتين!',
                     'data'      =>      null
-                ], 401);
+                ], 200);
             }
         }else{
             $input['password'] = $user->password;

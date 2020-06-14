@@ -30,7 +30,7 @@ class AuthController extends Controller
                 'status'    =>      'error',
                 'errors'     =>      $validator->errors(),
                 'data'      =>      null
-            ], 401);
+            ], 200);
         }
         $input = $request->all();
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
@@ -49,7 +49,7 @@ class AuthController extends Controller
                 return response([
                     'status'    =>      'error',
                     'error'     =>      'تم تعطيل حسابك يرجى التواصل مع مسئولى التطبيق!!',
-                ], 401);
+                ], 200);
             }
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             $success['user'] =  $user = Auth::user();
@@ -68,7 +68,7 @@ class AuthController extends Controller
             return response([
                 'status'    =>      'error',
                 'error'     =>      'البريد الالكتروني او كلمه المرور غير صحيح',
-            ], 401);
+            ], 200);
         }
     }
 
@@ -95,7 +95,7 @@ class AuthController extends Controller
                 'status'    =>      'error',
                 'errors'     =>      $validator->errors(),
                 'data'      =>      null
-            ], 401);
+            ], 200);
         }
         
         $code = rand(10000 , 99999);
@@ -143,7 +143,7 @@ class AuthController extends Controller
             return response([
                 'status'    =>      'error',
                 'error'     =>      'الرمز التفعيلى غير صحيح !!',
-            ], 401);
+            ], 200);
         }
         
     }
@@ -179,7 +179,7 @@ class AuthController extends Controller
             return response([
                 'status'    =>      'error',
                 'error'     =>      'رقم الهوية او الاقامة غير موجود !!',
-            ], 401);
+            ], 200);
         }
     }
     
@@ -200,7 +200,7 @@ class AuthController extends Controller
             return response([
                 'status'    =>      'error',
                 'error'     =>      'رمز إعادة كلمة المرور غير صحيح !!',
-            ], 401);
+            ], 200);
         }
     }
     
@@ -222,7 +222,7 @@ class AuthController extends Controller
                 'status'    =>      'error',
                 'errors'     =>      $validator->errors(),
                 'data'      =>      null
-            ], 401);
+            ], 200);
         }
         
         $user = User::find($input['id']);
