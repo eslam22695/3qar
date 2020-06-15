@@ -21,11 +21,18 @@
     @yield('styles')
 </head>
 <body>
+<section class="loading-overlay">
+    <div class="sk-folding-cube">
+        <img class="m-auto text-center" src="{{asset('front_assets//img/logo.png')}}">
+        <h4 class="mt-3 text-center">جارى التحميل</h4>
+    </div>
+        
+</section>
 <!--------start navbar -------------->
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-lg">
         <div class="container">
-            <a class="navbar-brand" href="{{route('index')}}">  <img src="{{asset('front_assets//img/logo.png')}}" width="80%" height="" alt=""></a>
+            <a class="navbar-brand" href="{{route('index')}}">  <img src="{{asset('front_assets//img/logo.png')}}" width="90%" height="" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar" aria-controls="exCollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <!--just add these span here-->
                 <span></span>
@@ -135,6 +142,20 @@
 <!--------end js-------------->
 
 <script>
+
+    $(window).on('load', function() 
+    {
+        $(".loading-overlay .sk-folding-cube").fadeOut(2000,
+        function(){
+            $("body").css("overflow","auto");
+            
+            $(this).parent().fadeOut(2000,
+            function()
+            {
+            $(this).remove(); 
+            });
+        });                              
+    });
 
     function fav(input){
                 

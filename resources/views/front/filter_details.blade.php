@@ -135,7 +135,7 @@
                             </div>
                         @endif
                     </div>
-                    @if(isset($others) && $others != null)
+                    @if(isset($others) && count($others) > 0)
                         <h3><strong>شاهد ايضا</strong></h3>
                         @foreach($others as $other)
                             <?php $title = str_replace(' ', '_', $other->name); ?>
