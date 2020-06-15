@@ -17,6 +17,20 @@ class OwnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('permission:owner-list|owner-create|owner-edit|owner-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:owner-create', ['only' => ['create','store']]);
+        $this->middleware('permission:owner-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:owner-delete', ['only' => ['destroy']]);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $owners = Owner::orderBy('id','desc')->get();

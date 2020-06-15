@@ -12,11 +12,28 @@ use Illuminate\Support\Facades\Session;
 
 class AttributeFamilyController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('permission:attribute_family-list|attribute_family-create|attribute_family-edit|attribute_family-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:attribute_family-create', ['only' => ['create','store']]);
+        $this->middleware('permission:attribute_family-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:attribute_family-delete', ['only' => ['destroy']]);
+    }
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
     public function index()
     {
             $families = AttributeFamily::orderBy('id','desc')->get();

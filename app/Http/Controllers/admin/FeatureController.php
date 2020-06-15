@@ -11,6 +11,21 @@ use App\Feature;
 
 class FeatureController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:feature-list|feature-create|feature-edit|feature-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:feature-create', ['only' => ['create','store']]);
+        $this->middleware('permission:feature-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:feature-delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

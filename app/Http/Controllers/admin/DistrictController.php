@@ -12,6 +12,22 @@ use Illuminate\Support\Facades\Session;
 
 class DistrictController extends Controller
 {
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:district-list|district-create|district-edit|district-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:district-create', ['only' => ['create','store']]);
+        $this->middleware('permission:district-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:district-delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

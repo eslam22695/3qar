@@ -19,6 +19,18 @@ use MongoDB\Driver\Query;
 
 class ReportController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:report-list|report-create|report-edit|attribute-delete', ['only' => ['index','show']]);
+//        $this->middleware('permission:report-create', ['only' => ['create','store']]);
+//        $this->middleware('permission:report-edit', ['only' => ['edit','update']]);
+//        $this->middleware('permission:report-delete', ['only' => ['destroy']]);
+    }
 
     public function district()
     {

@@ -17,6 +17,20 @@ class OptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('permission:option-list|option-create|option-edit|option-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:option-create', ['only' => ['create','store']]);
+        $this->middleware('permission:option-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:option-delete', ['only' => ['destroy']]);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $options = Option::orderBy('id','desc')->get();

@@ -11,6 +11,20 @@ use Illuminate\Support\Facades\Session;
 
 class ServiceRequestController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:service_request-list|service_request-create|service_request-edit|service_request-delete', ['only' => ['index','show']]);
+//        $this->middleware('permission:service_request-create', ['only' => ['create','store']]);
+//        $this->middleware('permission:service_request-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:service_request-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
