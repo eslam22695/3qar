@@ -56,7 +56,37 @@ class NotifyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+        [
+            'name'  => 'required|max:191',
+            'body' => 'required',
+            'item_id' => 'required|exists:items,id',
+        ],[
+            'body.required' => 'حقل المحتوى مطلوب',
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
+            'item_id.required' => 'حدث خطأ ما يرجى إعادة تحديث الصفحه',
+            'item_id.exists' => 'حدث خطأ ما يرجى إعادة تحديث الصفحه',
+        ]);
+
+        $input = $request->all();
+
+
+        $item = Item::find($input['item_id']);
+
+        $recipients = [$item->user->device_id];
+
+        fcm()
+        ->to($recipients) // $recipients must an array
+        ->priority('high')
+        ->notification([
+            'title' => $input['name'],
+            'body' => $input['body'],
+        ])
+        ->send();
+
+        Session::flash('success','تم الإرسال بنجاح');
+        return redirect()->back();
     }
 
     /**

@@ -67,9 +67,48 @@
                                     <td>{{$item->notify == 1 ? 'نعم' : 'لا'}}</td>
 
                                     <td class="actions">
-                                        <a href="{{ route('admin.item.edit',$item->id) }}" class="btn btn-success waves-effect" title="إرسال تنبية">إرسال تنبية</a>
+                                        <button type="button" data-toggle="modal" data-target="#{{$item->id}}delete" class="btn btn-success waves-effect" title="إرسال تنبية">إرسال تنبية</button>
                                     </td>
                                 </tr>
+
+                                <div id="{{$item->id}}delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog" style="width:55%;">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="icon error animateErrorIcon" style="display: block;"><span class="x-mark animateXMark"><span class="line left"></span><span class="line right"></span></span></div>
+                                                <h4 style="text-align:center;">إرسال تنبيه</h4>
+                                            </div>
+                                            <div class="modal-footer" style="text-align:center">
+                                                <form action="{{action('admin\NotifyController@store')}}" method="post">
+                                                    {{csrf_field()}}
+                                                    <input type="hidden" name="item_id" value="{{$item->id}}">
+                                                    <div class="form-group">
+                                                        <label for="icon" class="control-label">عنوان التنبيه</label>
+                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg" required {{old('name')}}>
+                                                        @if ($errors->has('name'))
+                                                            <span class="alert alert-danger">
+                                                                <strong>{{ $errors->first('name') }}</strong>
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="icon" class="control-label">محتوى التنبيه</label>
+                                                        <textarea class="form-control" name="body" required {{old('body')}} ></textarea>
+                                                        @if ($errors->has('body'))
+                                                            <span class="alert alert-danger">
+                                                                <strong>{{ $errors->first('body') }}</strong>
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                    <button class="btn btn-success" type="submit" dir="ltr">إرسال</button>
+                                                </form>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
 
                             @endforeach
                         @endif

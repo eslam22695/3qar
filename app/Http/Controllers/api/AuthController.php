@@ -18,6 +18,7 @@ class AuthController extends Controller
         // echo '</pre>'; die();
         // return 'assadsadd';
         $validator = Validator::make($request->all(), [
+            'device_id' => 'required',
             'email' => 'required|email',
             'password' => 'required',
         ],[
@@ -54,10 +55,10 @@ class AuthController extends Controller
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             $success['user'] =  $user = Auth::user();
 
-            /* if($user->device_id == null || $input['device_id'] != $user->device_id){
+            if($user->device_id == null || $input['device_id'] != $user->device_id){
                 $user->device_id = $input['device_id'];
                 $user->update();
-            } */
+            }
 
             return response([
                 'status'    =>      'success',
@@ -77,6 +78,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|unique:users,phone',
+            'device_id' => 'required',
             'password' => 'required',
             'password_confirmation' => 'required|same:password',
         ],[
@@ -89,6 +91,7 @@ class AuthController extends Controller
             'password.required' => 'يرجى ادخال كلمة المرور',
             'password_confirmation.required' => 'يرجى ادخال تأكيد كلمة المرور',
             'password_confirmation.same' => 'كلمة المرور و تأكيد كلمه المرور غير متماثلتين',
+            'device_id.required' => 'هناك خطا ما!!',
         ]);
         if ($validator->fails()) {
             return response([
@@ -104,6 +107,7 @@ class AuthController extends Controller
         $user->name =request('name') ;
         $user->email = request('email');
         $user->phone = request('phone');
+        $user->device_id =request('device_id') ;
         $user->password =bcrypt(request('password')) ;
         $user->save();
 

@@ -62,10 +62,10 @@ class OptionController extends Controller
             'name'  => 'required|max:191|unique:options,name',
             'option_group_id' => 'nullable|exists:option_groups,id',
         ],[
-                'name.required' => 'حقل الاسم مطلوب',
-                'name.max' => 'حقل الاسم أكبر من اللازم',
-                'name.unique' => 'حقل الاسم موجود مسبقا',
-                'option_group_id.exists' => 'عائله المميزات غير موجودة',
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
+            'name.unique' => 'حقل الاسم موجود مسبقا',
+            'option_group_id.exists' => 'عائله المميزات غير موجودة',
         ]);
 
 
