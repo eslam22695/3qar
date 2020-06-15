@@ -4,6 +4,12 @@
         return view('admin.home');
     })->name('home');
 
+    //role
+    Route::resource('role', 'admin\RoleController');
+
+    //admin
+    Route::resource('admin', 'admin\AdminController');
+
     //user
     Route::resource('user', 'admin\UserController');
 
@@ -52,10 +58,6 @@
     Route::get('item_family/{family_id}','admin\ItemController@item_family')->name('item_family');
     Route::delete('delete_image/{image_id}','admin\ItemController@delete_image')->name('delete_image');
 
-    //Global Status Route
-    Route::get('status/{status}/{db}/{id}','admin\SettingController@status')->name('status');
-
-
     //Report
 
     /*District*/
@@ -79,3 +81,6 @@
     //Notify
     Route::get('notify','admin\NotifyController@index')->name('notify');
     Route::post('notify_send','admin\NotifyController@store')->name('notify_send');
+    
+    //Global Status Route
+    Route::get('status/{status}/{db}/{id}','admin\SettingController@status')->name('status');

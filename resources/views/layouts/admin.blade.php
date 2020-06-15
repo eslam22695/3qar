@@ -244,6 +244,14 @@
                     </li>
 
                     <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> المسئوليين و الادوار </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="{{route('admin.role.index')}}" class="waves-effect"><i class="icon-globe"></i> <span> الادوار </span></a></li>
+                            <li><a href="{{route('admin.admin.index')}}" class="waves-effect"><i class="ion-images"></i> <span>المسئوليين </span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> التقارير </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{route('admin.district_report')}}" class="waves-effect"><i class="icon-globe"></i> <span> الاحياء حسب المدينة </span></a></li>

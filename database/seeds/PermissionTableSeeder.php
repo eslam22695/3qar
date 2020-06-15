@@ -42,8 +42,6 @@ class PermissionTableSeeder extends Seeder
             'city-edit',
             'city-delete',
             'contact-list',
-            'contact-create',
-            'contact-edit',
             'contact-delete',
             'district-list',
             'district-create',
@@ -85,7 +83,7 @@ class PermissionTableSeeder extends Seeder
  
  
          foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::create(['name' => $permission,'guard_name' => 'admin']);
          }
     }
 }
