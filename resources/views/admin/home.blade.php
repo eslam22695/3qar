@@ -23,7 +23,7 @@
                     <i class="md md-attach-money text-info"></i>
                 </div>
                 <div class="text-right">
-                    <h3 class="text-dark"><b class="counter">5</b></h3>
+                    <h3 class="text-dark"><b class="counter">{{App\Category::count()}}</b></h3>
                     <p class="text-muted mb-0">الاقسام</p>
                 </div>
                 <div class="clearfix"></div>
@@ -36,7 +36,7 @@
                     <i class="md md-add-shopping-cart text-pink"></i>
                 </div>
                 <div class="text-right">
-                    <h3 class="text-dark"><b class="counter">4</b></h3>
+                    <h3 class="text-dark"><b class="counter">{{App\User::count()}}</b></h3>
                     <p class="text-muted mb-0">المنتجات</p>
                 </div>
                 <div class="clearfix"></div>
@@ -49,7 +49,7 @@
                     <i class="md md-equalizer text-purple"></i>
                 </div>
                 <div class="text-right">
-                    <h3 class="text-dark"><b class="counter">3</b></h3>
+                    <h3 class="text-dark"><b class="counter">{{App\Blog::count()}}</b></h3>
                     <p class="text-muted mb-0">العملاء</p>
                 </div>
                 <div class="clearfix"></div>
@@ -62,7 +62,7 @@
                     <i class="md md-remove-red-eye text-success"></i>
                 </div>
                 <div class="text-right">
-                    <h3 class="text-dark"><b class="counter">2</b></h3>
+                    <h3 class="text-dark"><b class="counter">{{App\Blog::count()}}</b></h3>
                     <p class="text-muted mb-0">تدوينات</p>
                 </div>
                 <div class="clearfix"></div>
