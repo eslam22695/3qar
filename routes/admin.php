@@ -80,7 +80,7 @@
 
     //Notify
     Route::get('notify','admin\NotifyController@index')->name('notify');
-    Route::post('notify_send/{id}','admin\NotifyController@store')->name('notify_send');
+    Route::post('notify_send','admin\NotifyController@store')->name('notify_send');
     
     //Global Status Route
     Route::get('status/{status}/{db}/{id}','admin\SettingController@status')->name('status');

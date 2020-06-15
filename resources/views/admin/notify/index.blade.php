@@ -84,26 +84,32 @@
                                             <div class="modal-footer" style="text-align:center">
                                                 <form action="{{action('admin\NotifyController@store')}}" method="post">
                                                     {{csrf_field()}}
-                                                    <input type="hidden" name="item_id" value="{{$item->id}}">
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">عنوان التنبيه</label>
-                                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg" required {{old('name')}}>
-                                                        @if ($errors->has('name'))
-                                                            <span class="alert alert-danger">
-                                                                <strong>{{ $errors->first('name') }}</strong>
-                                                            </span>
-                                                        @endif
+                                                    <div class="row">
+                                                        <input type="hidden" name="item_id" value="{{$item->id}}">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="icon" class="control-label">عنوان التنبيه</label>
+                                                                <input type="text" id="example-input-large" name="name" class="form-control input-lg" required {{old('name')}}>
+                                                                @if ($errors->has('name'))
+                                                                    <span class="alert alert-danger">
+                                                                        <strong>{{ $errors->first('name') }}</strong>
+                                                                    </span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="icon" class="control-label">محتوى التنبيه</label>
+                                                                <textarea class="form-control" name="body" required {{old('body')}} ></textarea>
+                                                                @if ($errors->has('body'))
+                                                                    <span class="alert alert-danger">
+                                                                        <strong>{{ $errors->first('body') }}</strong>
+                                                                    </span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-success" type="submit" dir="ltr">إرسال</button>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="icon" class="control-label">محتوى التنبيه</label>
-                                                        <textarea class="form-control" name="body" required {{old('body')}} ></textarea>
-                                                        @if ($errors->has('body'))
-                                                            <span class="alert alert-danger">
-                                                                <strong>{{ $errors->first('body') }}</strong>
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                    <button class="btn btn-success" type="submit" dir="ltr">إرسال</button>
                                                 </form>
                                             </div>
                                         </div><!-- /.modal-content -->
