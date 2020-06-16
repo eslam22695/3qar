@@ -18,22 +18,7 @@
     </div>
 </section>
 
-    <div class="row">
-        <div class="col-sm-12">
-            @if (Session::has('success'))
-                <div class="alert alert-success">{{ Session::get('success') }}</div>
-            @elseif(Session::has('danger'))
-                <div class="alert alert-danger">{{ Session::get('danger') }}</div>
-            @endif
-        </div>
-        <div class="col-md-12">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
+
 <!--------start contact us-------->
 
 <section class="pt-5 contact-us">
@@ -43,6 +28,20 @@
                 <h2 class="mb-5">  خدمات اخرى </h2>
             </div>
             <div class="row mt-5">
+                <div class="col-sm-12">
+                    @if (Session::has('success'))
+                        <div class="alert alert-success">{{ Session::get('success') }}</div>
+                    @elseif(Session::has('danger'))
+                        <div class="alert alert-danger">{{ Session::get('danger') }}</div>
+                    @endif
+                </div>
+                <div class="col-md-12">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li class="alert alert-danger"><strong>{{ $error }}</strong></li>
+                        @endforeach
+                    </ul>
+                </div>
                 <div class="col-md-6 wow fadeInUp"  data-wow-duration=".5s">
                     <form method="Post" action="{{url('consultation')}}" class="contact-form">
                             {{ csrf_field() }}

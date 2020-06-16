@@ -371,7 +371,7 @@ class IndexController extends Controller
     public function filter(Request $request)
     {
         $input = $request->all();
-
+        $data = [];
         $item = Item::query();
 
         if (isset($input['cat_id']) && $input['cat_id'] != null) {

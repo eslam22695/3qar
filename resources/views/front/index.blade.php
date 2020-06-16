@@ -54,12 +54,12 @@
     <section class="about ">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 wow fadeInUp"  data-wow-duration="2s">
+                <div class="col-md-6 wow fadeInUp"  data-wow-delay=".5s">
                     @if(isset($setting->about_home))
                     <img src="{{asset('admin_assets/images/setting/'.$setting->about_home)}}" class="img-about">
                     @endif
                 </div>
-                <div class="col-md-6 text-about wow fadeInDown"  data-wow-duration="2s">
+                <div class="col-md-6 text-about wow fadeInDown"  data-wow-delay=".7s">
                     <div class="head">
                         <h2>من نحن</h2>
                     </div>
@@ -75,7 +75,7 @@
         <!--------start 3akar -------------->
         <section class="Special">
             <div class="container">
-                <div class="head pb-5 wow fadeInRight"  data-wow-duration="2s">
+                <div class="head pb-5 wow fadeInRight"  data-wow-delay=".5s">
                     <h2>العقارات المميزة</h2>
                 </div>
                 <div class="row">
