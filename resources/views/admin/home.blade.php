@@ -23,7 +23,7 @@
                     <i class="md md-attach-money text-info"></i>
                 </div>
                 <div class="text-right">
-                    <h3 class="text-dark"><b class="counter">{{App\Category::count()}}</b></h3>
+                    <h3 class="text-dark"><b class="counter">{{App\Category::where('status',1)->count()}}</b></h3>
                     <p class="text-muted mb-0">الاقسام</p>
                 </div>
                 <div class="clearfix"></div>
@@ -36,8 +36,8 @@
                     <i class="md md-add-shopping-cart text-pink"></i>
                 </div>
                 <div class="text-right">
-                    <h3 class="text-dark"><b class="counter">{{App\User::count()}}</b></h3>
-                    <p class="text-muted mb-0">المنتجات</p>
+                    <h3 class="text-dark"><b class="counter">{{App\Item::count()}}</b></h3>
+                    <p class="text-muted mb-0">العقارات</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -49,8 +49,8 @@
                     <i class="md md-equalizer text-purple"></i>
                 </div>
                 <div class="text-right">
-                    <h3 class="text-dark"><b class="counter">{{App\Blog::count()}}</b></h3>
-                    <p class="text-muted mb-0">العملاء</p>
+                    <h3 class="text-dark"><b class="counter">{{App\User::count()}}</b></h3>
+                    <p class="text-muted mb-0">الاعضاء</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -62,13 +62,124 @@
                     <i class="md md-remove-red-eye text-success"></i>
                 </div>
                 <div class="text-right">
-                    <h3 class="text-dark"><b class="counter">{{App\Blog::count()}}</b></h3>
-                    <p class="text-muted mb-0">تدوينات</p>
+                    <h3 class="text-dark"><b class="counter">{{App\Owner::count()}}</b></h3>
+                    <p class="text-muted mb-0">الملاك</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
         </div>
     </div>
+
+
+    <div class="row">
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="widget-bg-color-icon card-box fadeInDown animated">
+            <div class="bg-icon bg-icon-info pull-left">
+                <i class="md md-attach-money text-info"></i>
+            </div>
+            <div class="text-right">
+                <h3 class="text-dark"><b class="counter">{{App\Blog::count()}}</b></h3>
+                <p class="text-muted mb-0">المدونات </p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="widget-bg-color-icon card-box">
+            <div class="bg-icon bg-icon-pink pull-left">
+                <i class="md md-add-shopping-cart text-pink"></i>
+            </div>
+            <div class="text-right">
+                <h3 class="text-dark"><b class="counter">{{App\Contact::count()}}</b></h3>
+                <p class="text-muted mb-0">طلبات التواصل</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="widget-bg-color-icon card-box">
+            <div class="bg-icon bg-icon-purple pull-left">
+                <i class="md md-equalizer text-purple"></i>
+            </div>
+            <div class="text-right">
+                <h3 class="text-dark"><b class="counter">{{App\Service::count()}}</b></h3>
+                <p class="text-muted mb-0">خدمات</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="widget-bg-color-icon card-box">
+            <div class="bg-icon bg-icon-success pull-left">
+                <i class="md md-remove-red-eye text-success"></i>
+            </div>
+            <div class="text-right">
+                <h3 class="text-dark"><b class="counter">{{App\ServiceRequest::count()}}</b></h3>
+                <p class="text-muted mb-0">طلبات الخدمات</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="row">
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="widget-bg-color-icon card-box fadeInDown animated">
+            <div class="bg-icon bg-icon-info pull-left">
+                <i class="md md-attach-money text-info"></i>
+            </div>
+            <div class="text-right">
+                <h3 class="text-dark"><b class="counter">{{App\City::count()}}</b></h3>
+                <p class="text-muted mb-0">المدن</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="widget-bg-color-icon card-box">
+            <div class="bg-icon bg-icon-pink pull-left">
+                <i class="md md-add-shopping-cart text-pink"></i>
+            </div>
+            <div class="text-right">
+                <h3 class="text-dark"><b class="counter">{{App\District::count()}}</b></h3>
+                <p class="text-muted mb-0">الاحياء</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="widget-bg-color-icon card-box">
+            <div class="bg-icon bg-icon-purple pull-left">
+                <i class="md md-equalizer text-purple"></i>
+            </div>
+            <div class="text-right">
+                <h3 class="text-dark"><b class="counter">{{App\Admin::count()}}</b></h3>
+                <p class="text-muted mb-0">الادوار</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="widget-bg-color-icon card-box">
+            <div class="bg-icon bg-icon-success pull-left">
+                <i class="md md-remove-red-eye text-success"></i>
+            </div>
+            <div class="text-right">
+                <h3 class="text-dark"><b class="counter">{{App\Admin::count()}}</b></h3>
+                <p class="text-muted mb-0">مسئولين</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
 <!-- ============================================================== -->
 <!-- End Right content here -->
 <!-- ============================================================== -->
