@@ -119,9 +119,9 @@
                                     <img class="icon-img" src="{{asset('front_assets/img/67872.png')}}">
                                     {{isset($item->city->name) ? $item->city->name : ''}} / {{isset($item->district->name) ? $item->district->name : ''}} </span>
 
-                                    <div class="d-flex justify-content-between  align-items-center ">
+                                    <div class="row">
                                         @foreach($item->value()->get() as $value)
-                                            <span class="icon-p">
+                                            <span class="icon-p col-6">
                                                 <img class="icon-img" src="{{asset('admin_assets/images/attribute/'.$value->attribute_value->attribute->icon)}}"> 
                                                 {{$value->attribute_value->value}}  {{$value->attribute_value->attribute->name}}  </span>
                                         @endforeach
