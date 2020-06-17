@@ -44,13 +44,13 @@
                                 
                     <thead>
                         <tr>
-                            {{-- <th data-field="state"></th> --}}
                             <th data-field="الاسم" data-align="center">الاسم</th>
                             <th data-field="القسم" data-align="center">القسم</th>
                             <th data-field="المدينة" data-align="center">المدينة</th>
                             <th data-field="المالك" data-align="center">المالك</th>
                             <th data-field="المستفيد" data-align="center">المستفيد</th>
                             <th data-field="تنبيه" data-align="center">تنبيه</th>
+                            <th data-field="تاريخ البدء" data-align="center">تاريخ البدء</th>
                             <th data-field="التحكم" data-align="center">التحكم</th>
                         </tr>
                     </thead>
@@ -58,13 +58,13 @@
                         @if(isset($items))
                             @foreach($items as $item)
                                 <tr>
-                                    {{-- <td><input type="checkbox" name="user_id" value="{{$item->user_id}}"></td> --}}
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->category->name}}</td>
                                     <td>{{$item->city->name}}</td>
                                     <td>{{$item->owner->name}}</td>
                                     <td>{{isset($item->user->name) ? $item->user->name : '----'}}</td>
                                     <td>{{$item->notify == 1 ? 'نعم' : 'لا'}}</td>
+                                    <td>{{$item->date}}</td>
 
                                     <td class="actions">
                                         <button type="button" data-toggle="modal" data-target="#{{$item->id}}delete" class="btn btn-success waves-effect" title="إرسال تنبية">إرسال تنبية</button>

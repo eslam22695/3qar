@@ -48,6 +48,7 @@ class CreateItemsTable extends Migration
             $table->string('phone')->nullable();
             $table->boolean('featured')->default(0);
             $table->boolean('notify')->default(1);
+            $table->date('date')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

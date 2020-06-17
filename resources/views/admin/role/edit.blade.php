@@ -48,7 +48,7 @@
                                 <td>
                                     @foreach ($permissions as $permission)
                                         <div class="form-group">
-                                            <label for="icon" class="control-label"> {{$permission->name}} </label>
+                                            <label for="icon" class="control-label"> @lang('admin.'.$permission->name) </label>
                                             <input type="checkbox" name="permissions[]"  data-plugin="switchery" data-color="#5d9cec" value="{{$permission->id}}" {{$role->hasPermissionTo($permission->name) === true ? 'checked' : ''}}>  
                                         </div>
                                     @endforeach

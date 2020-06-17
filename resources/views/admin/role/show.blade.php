@@ -20,7 +20,7 @@
                     <tbody>
                         @for($i=0; $i<count($permissions); $i++)
                         <tr>
-                            <td>{{$permissions[$i]['name']}}</td>
+                            <td>@lang('admin.'.$permissions[$i]['name'])</td>
                         </tr>
                         @endfor
                     </tbody>

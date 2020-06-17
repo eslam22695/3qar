@@ -9,7 +9,7 @@ class Item extends Model
     protected $table = 'items';
     protected $fillable = [
         'id', 'name','description','price' ,'main_image','map','lat' , 'lang','phone','featured',
-        'status', 'district_id', 'dimension_id','city_id','category_id' ,'owner_id','user_id', 'area', 'notify'
+        'status', 'district_id', 'dimension_id','city_id','category_id' ,'owner_id','user_id', 'area', 'date', 'notify'
     ];
 
     public function city()

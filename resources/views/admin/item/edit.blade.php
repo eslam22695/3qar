@@ -318,6 +318,13 @@
                                         <input type="checkbox" data-plugin="switchery" data-color="#5d9cec" name="notify" value="1" {{$item->notify === 1 ? 'checked' : ''}}/>
                                     </div>
                                 </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="icon" class="control-label"> تاريخ البدء </label>
+                                        <input type="date" class="form-control" name="date" value="{{$item->date}}"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

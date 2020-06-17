@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 use App\User;
 use App\Item;
 
@@ -34,7 +35,15 @@ class NotifyController extends Controller
      */
     public function index()
     {
-        $items = Item::where('notify',1)->get();
+        $date = now();
+
+        $items = Item::where('notify',1)->whereMonth('date', '>', $date->month)
+
+           ->orWhere(function ($query) use ($date) {
+               $query->whereMonth('date', '=', $date->month)->whereDay('date', '>=', $date->day);
+           })
+           ->orderByRaw("DAYOFMONTH('date')",'ASC')
+           ->get();
         return view('admin.notify.index',compact('items')); 
     }
 
