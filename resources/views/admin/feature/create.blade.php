@@ -54,7 +54,7 @@
 
                             <tr>
                                 <td>الاسم</td>
-                                <td><input type="text" class="form-control" name="title" required {{old('title')}}></td>
+                                <td><input type="text" class="form-control" name="title" required value="{{old('title')}}" ></td>
                                 @if ($errors->has('title'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('title') }}</strong>

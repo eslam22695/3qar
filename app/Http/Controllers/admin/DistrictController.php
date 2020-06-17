@@ -121,10 +121,17 @@ class DistrictController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(),
-        [
-            'name'    => 'required|unique:districts,name',
-            'city_id' => 'required|exists:cities,id',
-        ]);
+            [
+                'name'        => 'required|max:191|unique:districts,name',
+                'city_id' => 'required|exists:cities,id',
+            ],[
+                'name.required' => 'حقل الاسم مطلوب',
+                'name.max' => 'حقل الاسم أكبر من اللازم',
+                'name.unique' => 'حقل الاسم موجود مسبقا',
+                'city_id.required' => 'حقل المدينة  مطلوب',
+                'city_id.exists' => 'المدينة غير موجودة',
+
+            ]);
 
         $input = $request->all();
         if($district = District::find($id)){

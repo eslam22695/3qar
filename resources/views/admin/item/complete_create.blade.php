@@ -81,7 +81,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">اسم العقار</label>
-                                            <input type="text" id="example-input-large" name="name" class="form-control input-lg" required {{old('name')}}>
+                                            <input type="text" id="example-input-large" name="name" class="form-control input-lg" required value="{{old('name')}}">
                                             @if ($errors->has('name'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('name') }}</strong>
@@ -92,7 +92,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">وصف العقار</label>
-                                            <textarea class="form-control" name="description" required {{old('description')}} ></textarea>
+                                            <textarea class="form-control" name="description" required > {{old('description')}}</textarea>
                                             @if ($errors->has('description'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('description') }}</strong>
@@ -103,7 +103,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">سعر العقار</label>
-                                            <input type="text" id="example-input-large" name="price" class="form-control input-lg" required {{old('price')}} >
+                                            <input type="number" id="example-input-large" name="price" class="form-control input-lg" required value="{{old('price')}}" >
                                             @if ($errors->has('price'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('price') }}</strong>
@@ -114,7 +114,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">مساحة العقار</label>
-                                            <input type="text" id="example-input-large" name="area" class="form-control input-lg" required {{old('area')}}>
+                                            <input type="text" id="example-input-large" name="area" class="form-control input-lg" required value="{{old('area')}}">
                                             @if ($errors->has('area'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('area') }}</strong>
@@ -125,7 +125,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">رقم الجوال</label>
-                                            <input type="number" id="example-input-large" name="phone" class="form-control input-lg" required min="0" {{old('phone')}}>
+                                            <input type="number" id="example-input-large" name="phone" class="form-control input-lg" required min="0" value="{{old('phone')}}">
                                             @if ($errors->has('phone'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('phone') }}</strong>
@@ -172,7 +172,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">مميزة</label>
-                                            <input type="checkbox" checked data-plugin="switchery" data-color="#81c868" name="featured" value="1" {{old('featured')}}/>
+                                            <input type="checkbox" checked data-plugin="switchery" data-color="#81c868" name="featured" value="1" value="{{old('featured')}}"/>
                                         </div>
                                     </div>
                                 </div>

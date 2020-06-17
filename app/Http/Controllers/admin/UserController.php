@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Item;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -88,7 +89,8 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('admin.user.show',compact('user'));
+        $items = Item::where('user_id',$id)->orderBy('id','desc')->get();
+        return view('admin.user.show',compact('user','items'));
     }
 
     /**

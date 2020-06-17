@@ -41,7 +41,7 @@
                         
                             <tr>
                                 <td>الاسم</td>
-                                <td><input type="text" class="form-control" name="name" required {{old('name')}}></td>
+                                <td><input type="text" class="form-control" name="name" required value="{{old('name')}}" ></td>
                                 @if ($errors->has('name'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -50,7 +50,7 @@
                             </tr>
                             <tr>
                                 <td>البريد الالكترونى</td>
-                                <td><input type="email" class="form-control" name="email" required {{old('email')}}></td>
+                                <td><input type="email" class="form-control" name="email" required value="{{old('email')}}" ></td>
                                 @if ($errors->has('email'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -59,7 +59,7 @@
                             </tr>
                             <tr>
                                 <td>الجوال</td>
-                                <td><input type="text" class="form-control" name="phone" required {{old('phone')}}></td>
+                                <td><input type="text" class="form-control" name="phone" required value="{{old('phone')}}" ></td>
                                 @if ($errors->has('phone'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('phone') }}</strong>
