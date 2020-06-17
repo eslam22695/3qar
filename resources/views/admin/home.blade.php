@@ -46,7 +46,7 @@
         <div class="col-md-6 col-lg-6 col-xl-3">
             <div class="widget-bg-color-icon card-box">
                 <div class="bg-icon bg-icon-purple pull-left">
-                    <i class="md md-equalizer text-purple"></i>
+                    <i class="ion-man"></i>
                 </div>
                 <div class="text-right">
                     <h3 class="text-dark"><b class="counter">{{App\User::count()}}</b></h3>
@@ -59,7 +59,7 @@
         <div class="col-md-6 col-lg-6 col-xl-3">
             <div class="widget-bg-color-icon card-box">
                 <div class="bg-icon bg-icon-success pull-left">
-                    <i class="md md-remove-red-eye text-success"></i>
+                    <i class="ion-person"></i>
                 </div>
                 <div class="text-right">
                     <h3 class="text-dark"><b class="counter">{{App\Owner::count()}}</b></h3>
@@ -160,7 +160,7 @@
                 <i class="md md-equalizer text-purple"></i>
             </div>
             <div class="text-right">
-                <h3 class="text-dark"><b class="counter">{{App\Admin::count()}}</b></h3>
+                <h3 class="text-dark"><b class="counter">{{Spatie\Permission\Models\Role::count()}}</b></h3>
                 <p class="text-muted mb-0">الادوار</p>
             </div>
             <div class="clearfix"></div>
@@ -170,7 +170,7 @@
     <div class="col-md-6 col-lg-6 col-xl-3">
         <div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-icon-success pull-left">
-                <i class="md md-remove-red-eye text-success"></i>
+                <i class="ion-person-stalker"></i>
             </div>
             <div class="text-right">
                 <h3 class="text-dark"><b class="counter">{{App\Admin::count()}}</b></h3>

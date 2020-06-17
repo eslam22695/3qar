@@ -113,11 +113,15 @@ class CityController extends Controller
         $this->validate(request(),
         [
             'name'  => 'required|max:191|unique:cities,name,'.$id,
+            'lat' => 'required',
+            'lang' => 'required',
 
         ],[
                 'name.required' => 'حقل الاسم مطلوب',
                 'name.max' => 'حقل الاسم أكبر من اللازم',
-                'name.unique' => 'حقل الاسم موجود مسبقا'
+                'name.unique' => 'حقل الاسم موجود مسبقا',
+                'lat.required' => 'حقل الخريطة مطلوب',
+                'lang.required' => 'حقل الخريطة مطلوب',
         ]);
 
         $input = $request->all();
