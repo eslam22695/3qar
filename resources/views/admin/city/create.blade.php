@@ -50,7 +50,7 @@
                             <tr>
                                 <td>الاسم</td>
                                 <td>
-                                    <input type="text" class="form-control" name="name" required {{old('name')}}>
+                                    <input type="text" class="form-control" name="name" required value="{{old('name')}}" >
                                     @if ($errors->has('name'))
                                         <p class="alert alert-danger">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -64,8 +64,8 @@
                                 <td>مركز المدينة</td>
                                 <td>
                                     <div id="map"></div>
-                                    <input type="hidden" id="lat" name="lat" value="23.8859" {{old('lat')}}>
-                                    <input type="hidden" id="lang" name="lang" value="45.0792" {{old('lang')}}>
+                                    <input type="hidden" id="lat" name="lat" value="23.8859" value="{{old('lat')}}">
+                                    <input type="hidden" id="lang" name="lang" value="45.0792" value="{{old('lang')}}">
                                 
                                     @if ($errors->has('lat'))
                                         <p class="alert alert-danger">

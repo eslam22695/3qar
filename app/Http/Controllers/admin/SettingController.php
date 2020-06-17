@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
@@ -243,6 +244,15 @@ class SettingController extends Controller
     {
         $status == 0 ? $status = 1 : $status = 0;
         DB::table($db)->where('id',$id)->update(['status' => $status]);
+        if($status == 0 && $db == "owners"){
+            $items = Item::where('owner_id',$id)->get();
+
+            foreach($items as $item){
+                $item->astutus = 0 ;
+                $item->update();
+            }
+        }
+
         Session::flash('success','تم التعديل بنجاح');
         return redirect()->back();
     }

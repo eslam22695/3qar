@@ -53,7 +53,7 @@
                             </tr>
                             <tr>
                                 <td>العنوان</td>
-                                <td><input type="text" class="form-control" name="title" required {{old('title')}}></td>
+                                <td><input type="text" class="form-control" name="title" required value="{{old('title')}}" ></td>
                                 @if ($errors->has('title'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('title') }}</strong>
@@ -62,7 +62,7 @@
                             </tr>
                             <tr>
                                 <td>الوصف</td>
-                                <td><textarea class="form-control" name="description" >{{old('description')}}</textarea></td>
+                                <td><textarea class="form-control" name="description" > {{old('description')}}</textarea></td>
                                 @if ($errors->has('description'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('description') }}</strong>

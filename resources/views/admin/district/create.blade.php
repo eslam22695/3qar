@@ -45,7 +45,7 @@
                             <tr>
                                 <td>الاسم</td>
 
-                                <td><input type="text" class="form-control" name="name" required {{old('name')}} ></td>
+                                <td><input type="text" class="form-control" name="name" required value="{{old('name')}}"  ></td>
                                 @if ($errors->has('name'))
                                     <span class="alert alert-danger">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -78,16 +78,17 @@
                                 <td><button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button></td>
                             </tr>
 
-                    <table class="table table-bordered table-striped">
-                    
-                        <tbody>
-                            <tr>
-                                <td style="width:25%"></td>
-                                <td><button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button></td>
-                            </tr>
-                        </tbody>
-                    
-                    </table>
+                    {{--<table class="table table-bordered table-striped">--}}
+                    {{----}}
+                        {{--<tbody>--}}
+                            {{--<tr>--}}
+                                {{--<td style="width:25%"></td>--}}
+                                {{--<td><button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button></td>--}}
+                            {{--</tr>--}}
+                        {{--</tbody>--}}
+                    {{----}}
+                    {{--</table>--}}
+
                 {!! Form::close() !!}
             </div>
         </div><!-- end col -->

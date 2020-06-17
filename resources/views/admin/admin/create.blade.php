@@ -42,7 +42,7 @@
                             <tr>
                                 <td>الاسم</td>
                                 <td>
-                                    <input type="text" class="form-control" name="name" {{old('name')}} required>
+                                    <input type="text" class="form-control" name="name" value="{{old('name')}}"  required>
                                     @if ($errors->has('name'))
                                         <span class="alert alert-danger">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -53,7 +53,7 @@
                             <tr>
                                 <td>البريد الالكترونى</td>
                                 <td>
-                                    <input type="email" class="form-control" name="email" {{old('email')}} required>
+                                    <input type="email" class="form-control" name="email" value="{{old('email')}}"  required>
                                     @if ($errors->has('email'))
                                         <span class="alert alert-danger">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -83,7 +83,7 @@
                             <tr>
                                 <td>كلمة المرور</td>
                                 <td>
-                                    <input type="password" class="form-control" name="password" {{old('password')}} required>
+                                    <input type="password" class="form-control" name="password" value="{{old('password')}}"  required>
                                     @if ($errors->has('password'))
                                         <span class="alert alert-danger">
                                             <strong>{{ $errors->first('password') }}</strong>
