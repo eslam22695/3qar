@@ -65,6 +65,9 @@
 
                                     <td class="actions">
                                         <a href="{{ route('admin.status',[$item->status,'items',$item->id]) }}" class="btn btn-{{$item->status == 1 ? 'secondary' : 'dark'}} waves-effect" title="الحالة"> {{$item->status == 1 ? 'إبطال' : 'تفعيل'}}</a>
+                                        @if($item->user_id != null)
+                                            <a href="{{ url('admin/item/'.$item->id.'/edit/?status=0') }}" class="btn btn-light waves-effect" title="حذف المستفيد">حذف المستفيد</a>
+                                        @endif
                                         <a href="{{ route('admin.item.show',$item->id) }}" class="btn btn-primary waves-effect" title="مشاهدة">مشاهدة</a>
                                         <a href="{{ route('admin.item.edit',$item->id) }}" class="btn btn-success waves-effect" title="تعديل">تعديل</a>
                                         <button type="button" class="btn btn-danger waves-effect" data-toggle="modal" data-target="#{{$item->id}}delete" title="خدف"> خدف</button>

@@ -27,7 +27,6 @@
         <div class="row">
             <div class="col-md-4 ads">
                 <a href="{{route('index')}}"><img src="{{asset('front_assets/img/footer.png')}}"></a>
-                <h4>  وهي ان المحتوي هناك حقيقه مثبته منذ زمن طويل</h4>
             </div>
 
             <div class="col-md-8 login-form">

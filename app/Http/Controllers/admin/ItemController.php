@@ -189,9 +189,19 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit(Request $request, $id)
+    {   
         $item = Item::find($id);
+
+        if($request->status == 0){
+            $item->user_id = null;
+            $item->notify = 0;
+            $item->date = null;
+            $item->status = 1;
+            $item->update();
+            Session::flash('success','تم التعديل بنجاح');
+            return redirect()->back();
+        }
         $value =ItemAttribute::where('item_id',$id)->first();
         $attributes = Attribute::where('family_id',$value->attribute_value->attribute->family_id)->get();
         $cats = Category::where('status',1)->orderBy('id','desc')->get();
