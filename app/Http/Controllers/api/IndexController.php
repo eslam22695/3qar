@@ -63,6 +63,7 @@ class IndexController extends Controller
                 $data['item'][$i]['phone'] = $item[$i]->phone;
                 $data['item'][$i]['lat'] = $item[$i]->lat;
                 $data['item'][$i]['lang'] = $item[$i]->lang;
+                $data['item'][$i]['created_at'] = $item[$i]->created_at;
             }
         }else{
             $data['item'] = [];
@@ -95,6 +96,7 @@ class IndexController extends Controller
                 $data['item'][$i]['city'] = $item[$i]->city->name;
                 $data['item'][$i]['area'] = $item[$i]->area;
                 $data['item'][$i]['phone'] = $item[$i]->phone;
+                $data['item'][$i]['created_at'] = $item[$i]->created_at;
 
                 $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
 
@@ -280,6 +282,7 @@ class IndexController extends Controller
         }
 
         $more = Item::where('category_id',$item->category_id)->where('id', '!=' , $id)->where('status',1)->inRandomOrder()->take(3)->get();
+
         for($m=0; $m<count($more); $m++){
             $data['more'][$m]['id'] = $more[$m]->id;
             $data['more'][$m]['name'] = $more[$m]->name;
@@ -291,14 +294,35 @@ class IndexController extends Controller
             $data['more'][$m]['city'] = $more[$m]->city->name;
             $data['more'][$m]['area'] = $more[$m]->area;
             $data['more'][$m]['phone'] = $more[$m]->phone;
+            $data['more'][$m]['created_at'] = $more[$m]->created_at;
 
-            $attribute = ItemAttribute::where('item_id',$more[$i]->id)->get();
+            $attribute = ItemAttribute::where('item_id',$more[$m]->id)->get();
 
             for($j=0; $j<count($attribute); $j++){
                 $data['more'][$m]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
                 $data['more'][$m]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
                 $data['more'][$m]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
 
+            }
+
+            if($user = User::find($request['user_id'])){
+                $fav = Favourite::where('item_id',$data['more'][$m]['id'])->where('user_id',$user->id)->first();
+                $contacted = ItemClick::where('item_id',$data['more'][$m]['id'])->where('user_id',$user->id)->first();
+                
+                if($fav != null){
+                    $data['more'][$m]['favourite'] = 1;
+                }else{
+                    $data['more'][$m]['favourite'] = 0;
+                }
+    
+                if($contacted != null){
+                    $data['more'][$m]['contacted'] = 1;
+                }else{
+                    $data['more'][$m]['contacted'] = 0;
+                }
+            }else{
+                $data['more'][$m]['favourite'] = 0;
+                $data['more'][$m]['contacted'] = 0;
             }
 
         }
@@ -391,7 +415,7 @@ class IndexController extends Controller
         }
         
         if (isset($input['area']) && $input['area'] != null) {
-            $item->where('area', $input['area']);
+            $item->where('area', '>=', $input['area']);
         }
 
         $item = $item->where('status',1)->get();
@@ -408,6 +432,7 @@ class IndexController extends Controller
                 $data['item'][$i]['city'] = $item[$i]->city->name;
                 $data['item'][$i]['area'] = $item[$i]->area;
                 $data['item'][$i]['phone'] = $item[$i]->phone;
+                $data['item'][$i]['created_at'] = $item[$i]->created_at;
 
                 if($user = User::find($request['user_id'])){
                     $fav = Favourite::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();

@@ -10,7 +10,7 @@
         <div class="col-sm-12">
             <div class="main-title-00">
                 <h4 class="page-title">الرئيسيه</h4>
-                <p class="text-muted page-title-alt">مرحبا فى لوحة ادارة موقع 3qar</p>
+                <p class="text-muted page-title-alt">مرحبا فى لوحة ادارة موقع العتيق جروب</p>
             </div>
             
         </div>

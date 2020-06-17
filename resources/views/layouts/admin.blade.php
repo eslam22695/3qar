@@ -61,7 +61,7 @@
                 <a href="{{route('admin.home')}}" class="logo" dir="rtl">
                     <i class="icon-c-logo"></i>
                     <span> 
-                        3qar
+                        العتيق جروب
                     </span>
                 </a>
 
@@ -95,7 +95,7 @@
 
                        aria-haspopup="false" aria-expanded="false">
 
-                        <img src="{{asset('website/ar/imgs/Logo-2.png')}}" alt="user" class="rounded-circle">
+                        <img src="{{asset('front_assets//img/footer.png')}}" style="width: 100px !important; heigh:70px !important;" alt="user" class="rounded-circle">
 
                     </a>
 
@@ -105,7 +105,7 @@
 
                         <div class="dropdown-item noti-title">
 
-                            <h5 class="text-overflow"><small>مرحبا</small> </h5>
+                            <h5 class="text-overflow"><small>مرحبا {{Auth::guard('admin')->user()->name}}</small> </h5>
 
                         </div>
 
