@@ -142,12 +142,13 @@ class AttributeController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(),[
-            'name'  => 'required|max:191',
+            'name'  => 'required|max:191|unique:attributes,name,'.$id,
             'family_id'  => 'required|exists:attribute_families,id',
             'icon'   => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ],[
             'name.required' => 'حقل الاسم مطلوب',
             'name.max' => 'حقل الاسم أكبر من اللازم',
+            'name.unique' => 'حقل الاسم موجود مسبقا',
             'family_id.required' => 'حقل عائلة الخصائص مطلوب',
             'family_id.exists' => 'عائلة الخصائص غير موجودة',
             'icon.image' => 'حقل الصورة يجب أن يكون صورة',

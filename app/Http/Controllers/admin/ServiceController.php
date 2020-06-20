@@ -109,7 +109,7 @@ class ServiceController extends Controller
     {
         $this->validate(request(),
             [
-                'name'  => 'required|max:191|unique:services,name',
+                'name'  => 'required|max:191|unique:services,name,'.$id,
 
             ],[
                 'name.required' => 'حقل الاسم مطلوب',

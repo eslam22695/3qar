@@ -47,32 +47,32 @@
                 <div class="tabs-vertical-env">
 
                     <ul class="nav tabs-vertical">
-                        <li class="nav-item">
+                        <li class="nav-item mb-2" style="box-shadow: 3px 3px #ccc;">
                             <a href="#v2-home" data-toggle="tab" aria-expanded="true" class="nav-link active">
                                 التفاصيل الاساسية
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mb-2" style="box-shadow: 3px 3px #ccc;">
                             <a href="#v2-image" data-toggle="tab" aria-expanded="false" class="nav-link">
                                 الصور
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mb-2" style="box-shadow: 3px 3px #ccc;">
                             <a href="#v2-location" data-toggle="tab" aria-expanded="false" class="nav-link">
                                 الموقع
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mb-2" style="box-shadow: 3px 3px #ccc;">
                             <a href="#v2-attribute" data-toggle="tab" aria-expanded="false" class="nav-link">
                                 الخصائص
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mb-2" style="box-shadow: 3px 3px #ccc;">
                             <a href="#v2-option" data-toggle="tab" aria-expanded="false" class="nav-link">
                                 المميزات
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mb-2" style="box-shadow: 3px 3px #ccc;">
                             <a href="#v2-user" data-toggle="tab" aria-expanded="false" class="nav-link">
                                 مستفيد
                             </a>
@@ -86,7 +86,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="icon" class="control-label">اسم العقار</label>
-                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$item->name}}" required>
+                                        <input type="text" id="example-input-large" name="name" class="form-control input-lg" value="{{$item->name}}" >
                                         @if ($errors->has('name'))
                                             <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('name') }}</strong>
@@ -108,7 +108,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="icon" class="control-label">سعر العقار</label>
-                                        <input type="text" id="example-input-large" name="price" class="form-control input-lg" value="{{$item->price}}" required>
+                                        <input type="text" id="example-input-large" name="price" class="form-control input-lg" value="{{$item->price}}" >
                                         @if ($errors->has('price'))
                                             <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('price') }}</strong>
@@ -119,7 +119,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="icon" class="control-label">مساحة العقار</label>
-                                        <input type="text" id="example-input-large" name="area" class="form-control input-lg" value="{{$item->area}}" required>
+                                        <input type="text" id="example-input-large" name="area" class="form-control input-lg" value="{{$item->area}}" >
                                         @if ($errors->has('area'))
                                             <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('area') }}</strong>
@@ -130,7 +130,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="icon" class="control-label">رقم الجوال</label>
-                                        <input type="number" id="example-input-large" name="phone" class="form-control input-lg" value="{{$item->phone}}" required min="0">
+                                        <input type="number" id="example-input-large" name="phone" class="form-control input-lg" value="{{$item->phone}}"  min="0">
                                         @if ($errors->has('phone'))
                                             <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('phone') }}</strong>
@@ -141,7 +141,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="icon" class="control-label">القسم</label>
-                                        <select class="form-control" required name="category_id">
+                                        <select class="form-control"  name="category_id">
                                             <option value="" selected disabled>إختار القسم</option>
                                             @if($cats != null)
                                                 @foreach($cats as $cat)
@@ -159,7 +159,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="icon" class="control-label">المالك</label>
-                                        <select class="form-control" required name="owner_id">
+                                        <select class="form-control"  name="owner_id">
                                             <option value="" selected disabled>إختار المالك</option>
                                             @if($owners != null)
                                                 @foreach($owners as $owner)
@@ -321,7 +321,7 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="icon" class="control-label"> تاريخ البدء </label>
+                                        <label for="icon" class="control-label"> تاريخ بداية الاستحقاق </label>
                                         <input type="date" class="form-control" name="date" value="{{$item->date}}"/>
                                     </div>
                                 </div>

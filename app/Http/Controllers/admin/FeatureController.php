@@ -80,7 +80,7 @@ class FeatureController extends Controller
             $icon->move($destination,$name);
             $input['icon'] = $name;
         }
-        if(Feature::count() === 3){
+        if(Feature::count() == 3){
             Session::flash('success','لا يمكن إضافة اكثر من 3 مميزات');
         }else{
             Feature::create($input);

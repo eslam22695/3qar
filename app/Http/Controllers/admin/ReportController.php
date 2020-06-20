@@ -105,16 +105,25 @@ class ReportController extends Controller
         [
             'city_id' => 'nullable|exists:cities,id',
             'category_id' => 'nullable|exists:categories,id',
+            'price_from' => 'nullable|numeric',
+            'price_to' => 'nullable|numeric',
+            'area_from' => 'nullable|numeric',
+            'area_to' => 'nullable|numeric',
         ],[
             'city_id.exists' => 'المدينة غير موجودة',
             'category_id.exists' => 'القسم غير موجودة',
+            'price_from.numeric' => 'حقل السعر من يجب أن يكون رقم',
+            'price_to.numeric' => 'حقل السعر إلى يجب أن يكون رقم',
+            'area_from.numeric' => 'حقل المساحه من يجب أن يكون رقم',
+            'area_to.numeric' => 'حقل المساحه إلى يجب أن يكون رقم',
         ]);
 
-        dd($input = $request->all());
-
+        $input = $request->all();
+        
         if ($request->hasAny(['city_id', 'category_id','price_from', 'price_to','area_from', 'area_to'])) {
 
             $items = Item::query();
+            
 
             $price_from = 0;
             $price_to = 0;
@@ -132,12 +141,12 @@ class ReportController extends Controller
             }
 
             if (isset($input['price_from']) && $input['price_from'] != null) {
-                $price_from = $input['price_from'];
-                $items->where('price', '>=', $input['price_from']);
+                $price_from = (int)$input['price_from'];
+                $items->where('price', '>=', $price_from);
             }
 
             if (isset($input['price_to']) && $input['price_to'] != null) {
-                $price_to = $input['price_to'];
+                $price_to = (int)$input['price_to'];
                 $items->where('price', '<=', $price_to);
             }
 
@@ -150,6 +159,7 @@ class ReportController extends Controller
                 $area_to = $input['area_to'];
                 $items->where('area', '<=', $input['area_to']);
             }
+
 
             $items = $items->get();
 

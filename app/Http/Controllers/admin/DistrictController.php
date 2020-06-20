@@ -122,7 +122,7 @@ class DistrictController extends Controller
     {
         $this->validate(request(),
             [
-                'name'        => 'required|max:191|unique:districts,name',
+                'name'        => 'required|max:191|unique:districts,name,'.$id,
                 'city_id' => 'required|exists:cities,id',
             ],[
                 'name.required' => 'حقل الاسم مطلوب',

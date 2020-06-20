@@ -86,27 +86,32 @@ class ItemController extends Controller
         [
             'name'  => 'required|max:191',
             'description'  => 'required',
-            'price'  => 'required',
-            'main_image'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
-            'phone'  => 'required|digits:11',
-            'area'  => 'required',
+            'price'  => 'required|numeric',
+            'main_image'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'phone'  => 'required|numeric',
+            'area'  => 'required|numeric',
             'district_id'  => 'required|exists:districts,id',
             'city_id'  => 'required|exists:cities,id',
             'category_id'  => 'required|exists:categories,id',
             'owner_id'  => 'required|exists:owners,id',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|between:0,4'
         ],[
             'name.required' => 'حقل الاسم مطلوب',
             'name.max' => 'حقل الاسم أكبر من اللازم',
             'description.required' => 'حقل الوصف  مطلوب',
             'price.required' => 'حقل السعر  مطلوب',
+            'price.numeric' => 'حقل السعر  يجب أن يكون رقم',
             'main_image.required' => 'حقل الصورة مطلوب',
             'main_image.image' => 'حقل الصورة يجب أن يكون صورة',
             'main_image.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
             'main_image.max' => 'أقصى مساحة للصوره 2 ميجابايت',
+            'images.image' => 'حقل الصورة يجب أن يكون صورة',
+            'images.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'images.between' => '4 أقصى عدد صور',
             'phone.required' => 'حقل رقم الجوال مطلوب',
-            'phone.digits' => 'حقل رقم الجوال يجب يكون 11 رقم',
-            'area.required' => 'حقل المنطقة مطلوب',
-
+            'phone.numeric' => 'حقل رقم الجوال يجب يكون رقم',
+            'area.required' => 'حقل المساحة مطلوب',
+            'area.numeric' => 'حقل المساحة يجب أن يكون رقم',
             'district_id.required' => 'حقل الاحياء مطلوب',
             'district_id.exists' => 'الاحياء غير موجودة',
             'city_id.required' => 'حقل المدينة مطلوب',
@@ -193,7 +198,7 @@ class ItemController extends Controller
     {   
         $item = Item::find($id);
 
-        if($request->status == 0){
+        if(isset($request->status) && $request->status == 0){
             $item->user_id = null;
             $item->notify = 0;
             $item->date = null;
@@ -226,10 +231,10 @@ class ItemController extends Controller
         [
             'name'  => 'required|max:191|unique:attributes,name',
             'description'  => 'required',
-            'price'  => 'required',
-            'main_image'  => 'nullable|main_image|mimes:jpeg,png,jpg,gif,svg|max:3048',
-            'phone'  => 'required|digits:11|unique:owners,phone',
-            'area'  => 'required',
+            'price'  => 'required|numeric',
+            'main_image'  => 'nullable|main_image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'phone'  => 'required|numeric',
+            'area'  => 'required|numeric',
             'district_id'  => 'nullable|exists:districts,id',
             'city_id'  => 'nullable|exists:cities,id',
             'category_id'  => 'required|exists:categories,id',
@@ -237,20 +242,24 @@ class ItemController extends Controller
             'user_id'  => 'nullable|exists:users,id',
             'notify'  => 'nullable|boolean',
             'date'  => 'nullable|date',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|between:0,4'
         ],[
             'name.required' => 'حقل الاسم مطلوب',
             'name.max' => 'حقل الاسم أكبر من اللازم',
             'name.unique' => 'حقل الاسم موجود مسبقا',
             'description.required' => 'حقل الوصف  مطلوب',
             'price.required' => 'حقل السعر  مطلوب',
+            'price.numeric' => 'حقل السعر  يجب أن يكون رقم',
             'main_image.main_image' => 'حقل الصورة يجب أن يكون صورة',
             'main_image.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
             'main_image.max' => 'أقصى مساحة للصوره 2 ميجابايت',
+            'images.image' => 'حقل الصورة يجب أن يكون صورة',
+            'images.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
+            'images.between' => '4 أقصى عدد صور',
             'phone.required' => 'حقل رقم الجوال مطلوب',
-            'phone.digits' => 'حقل رقم الجوال يجب يكون 11 رقم',
-            'phone.unique' => 'حقل رقم الجوال موجود مسبقا',
+            'phone.numeric' => 'حقل رقم الجوال يجب يكون رقم',
             'area.required' => 'حقل المنطقة مطلوب',
-
+            'area.numeric' => 'حقل المساحة يجب أن يكون رقم',
             'district_id.exists' => 'الاحياء غير موجودة',
             'city_id.exists' => 'المدينة غير موجودة',
             'category_id.required' => 'حقل القسم  مطلوب',
@@ -258,11 +267,21 @@ class ItemController extends Controller
             'owner_id.required' => 'حقل المالك مطلوب',
             'owner_id.exists' => 'المالك غير موجودة',
             'user_id.exists' => 'المستخدم غير موجودة',
+            'date.date' => 'التاريخ غير صحيح',
         ]);
 
         $input = $request->all();
 
         if($item = Item::find($id)){
+
+            if(isset($input['images'])){
+                $count = count($input['images']) + ItemImage::where('item_id',$id)->count();
+                if($count > 4)
+                {
+                    Session::flash('danger','أقصي عدد لصور 4 !! ');
+                    return redirect()->back();
+                }            
+            }
             
             if(!isset($input['city_id']) || $input['city_id'] == null){
                 $input['city_id'] = $item->city_id;

@@ -58,8 +58,8 @@ class UserController extends Controller
         $this->validate(request(),
         [
             'name'  => 'required|max:191',
-            'email'  => 'required|email|unique:users',
-            'phone'  => 'required',
+            'email'  => 'required|email|unique:users,email',
+            'phone'  => 'required|numeric',
             'password'  => 'required|min:6',
         ],[
             'name.required' => 'حقل الاسم مطلوب',
@@ -68,6 +68,7 @@ class UserController extends Controller
             'email.email' => 'حقل البريد الالكترونى يجب أن يكون بريد الكترونى صالح',
             'email.unique' => 'البريد الالكترونى موجود مسبقا',
             'phone.required' => 'حقل رقم الجوال مطلوب',
+            'phone.numeric' => 'حقل رقم الجوال يجب يكون رقم',
             'password.required' => 'حقل كلمة المرور مطلوب',
             'password.min' => 'حقل كلمة المرور على الأقل 6 حروف',
 
@@ -118,7 +119,7 @@ class UserController extends Controller
         [
             'name'  => 'required|max:191',
             'email'  => 'required|email|unique:users,email,'.$id,
-            'phone'  => 'required',
+            'phone'  => 'required|numeric',
             'password'  => 'nullable|min:6',
         ],[
             'name.required' => 'حقل الاسم مطلوب',
@@ -127,6 +128,7 @@ class UserController extends Controller
             'email.email' => 'حقل البريد الالكترونى يجب أن يكون بريد الكترونى صالح',
             'email.unique' => 'البريد الالكترونى موجود مسبقا',
             'phone.required' => 'حقل رقم الجوال مطلوب',
+            'phone.numeric' => 'حقل رقم الجوال يجب يكون رقم',
             'password.min' => 'حقل كلمة المرور على الأقل 6 حروف',
 
         ]);

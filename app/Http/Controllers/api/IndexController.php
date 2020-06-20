@@ -396,82 +396,100 @@ class IndexController extends Controller
     {
         $input = $request->all();
         $data = [];
-        $item = Item::query();
 
-        if (isset($input['cat_id']) && $input['cat_id'] != null) {
-            $item->where('category_id', $input['cat_id']);
-        }
-        
-        if (isset($input['city_id']) && $input['city_id'] != null) {
-            $item->where('city_id', $input['city_id']);
-        }
-        
-        if (isset($input['from']) && $input['from'] != null) {
-            $item->where('price', '>=', $input['from']);
-        }
-        
-        if (isset($input['to']) && $input['to'] != null) {
-            $item->where('price', '<=', $input['to']);
-        }
-        
-        if (isset($input['area']) && $input['area'] != null) {
-            $item->where('area', '>=', $input['area']);
-        }
+        if ($request->hasAny(['city_id', 'category_id','price_from', 'price_to','area_from', 'area_to'])) {
 
-        $item = $item->where('status',1)->get();
+            $item = Item::query();
 
-        if(isset($item) && $item != null){
-            for($i=0; $i<count($item); $i++){
-                $data['item'][$i]['id'] = $item[$i]->id;
-                $data['item'][$i]['name'] = $item[$i]->name;
-                $data['item'][$i]['description'] = $item[$i]->description;
-                $data['item'][$i]['price'] = $item[$i]->price;
-                $data['item'][$i]['main_image'] = url($this->asset.'item/'.$item[$i]->main_image);
-                $data['item'][$i]['category'] = $item[$i]->category->name;
-                $data['item'][$i]['district'] = $item[$i]->district->name;
-                $data['item'][$i]['city'] = $item[$i]->city->name;
-                $data['item'][$i]['area'] = $item[$i]->area;
-                $data['item'][$i]['phone'] = $item[$i]->phone;
-                $data['item'][$i]['created_at'] = $item[$i]->created_at;
-
-                if($user = User::find($request['user_id'])){
-                    $fav = Favourite::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
-                    $contacted = ItemClick::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
-                    
-                    if($fav != null){
-                        $data['item'][$i]['favourite'] = 1;
-                    }else{
-                        $data['item'][$i]['favourite'] = 0;
-                    }
-
-                    if($contacted != null){
-                        $data['item'][$i]['contacted'] = 1;
-                    }else{
-                        $data['item'][$i]['contacted'] = 0;
-                    }
-                }else{
-                    $data['item'][$i]['favourite'] = 0;
-                    $data['item'][$i]['contacted'] = 0;
-                }
-
-                $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
-
-                for($j=0; $j<count($attribute); $j++){
-                    $data['item'][$i]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
-                    $data['item'][$i]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
-                    $data['item'][$i]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
-
-                }
-
+            if (isset($input['cat_id']) && $input['cat_id'] != null) {
+                $item->where('category_id', $input['cat_id']);
             }
+            
+            if (isset($input['city_id']) && $input['city_id'] != null) {
+                $item->where('city_id', $input['city_id']);
+            }
+            
+            if (isset($input['price_from']) && $input['price_from'] != null) {
+                $item->where('price', '>=', $input['price_from']);
+            }
+            
+            if (isset($input['price_to']) && $input['price_to'] != null) {
+                $item->where('price', '<=', $input['price_to']);
+            }
+            
+            if (isset($input['area_from']) && $input['area_from'] != null) {
+                $item->where('area', '>=', $input['area_from']);
+            }
+            
+            if (isset($input['area_to']) && $input['area_to'] != null) {
+                $item->where('area', '<=', $input['area_to']);
+            }
+
+            $item = $item->get();
+
+            if(isset($item) && count($item) > 0){
+                for($i=0; $i<count($item); $i++){
+                    if($item[$i]->status == 1){
+                        $data['item'][$i]['id'] = $item[$i]->id;
+                        $data['item'][$i]['name'] = $item[$i]->name;
+                        $data['item'][$i]['description'] = $item[$i]->description;
+                        $data['item'][$i]['price'] = $item[$i]->price;
+                        $data['item'][$i]['main_image'] = url($this->asset.'item/'.$item[$i]->main_image);
+                        $data['item'][$i]['category'] = $item[$i]->category->name;
+                        $data['item'][$i]['district'] = $item[$i]->district->name;
+                        $data['item'][$i]['city'] = $item[$i]->city->name;
+                        $data['item'][$i]['area'] = $item[$i]->area;
+                        $data['item'][$i]['phone'] = $item[$i]->phone;
+                        $data['item'][$i]['created_at'] = $item[$i]->created_at;
+    
+                        if($user = User::find($request['user_id'])){
+                            $fav = Favourite::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
+                            $contacted = ItemClick::where('item_id',$item[$i]->id)->where('user_id',$user->id)->first();
+                            
+                            if($fav != null){
+                                $data['item'][$i]['favourite'] = 1;
+                            }else{
+                                $data['item'][$i]['favourite'] = 0;
+                            }
+    
+                            if($contacted != null){
+                                $data['item'][$i]['contacted'] = 1;
+                            }else{
+                                $data['item'][$i]['contacted'] = 0;
+                            }
+                        }else{
+                            $data['item'][$i]['favourite'] = 0;
+                            $data['item'][$i]['contacted'] = 0;
+                        }
+    
+                        $attribute = ItemAttribute::where('item_id',$item[$i]->id)->get();
+    
+                        for($j=0; $j<count($attribute); $j++){
+                            $data['item'][$i]['attribute'][$j]['name'] = $attribute[$j]->attribute_value->attribute->name;
+                            $data['item'][$i]['attribute'][$j]['icon'] = url($this->asset.'attribute/'.$attribute[$j]->attribute_value->attribute->icon);
+                            $data['item'][$i]['attribute'][$j]['value'] = $attribute[$j]->attribute_value->value;
+    
+                        }
+    
+                    }
+                    
+                }
+            }else{
+                $data['item'] = [];
+            }
+
+            return response([
+                'status'    =>      'success',
+                'data'      =>      $data
+            ], 200);
+
         }else{
             $data['item'] = [];
+            return response([
+                'status'    =>      'error',
+                'data'      =>      $data
+            ], 200);
         }
-
-        return response([
-            'status'    =>      'success',
-            'data'      =>      $data
-        ], 200);
     }
 
     public function about()

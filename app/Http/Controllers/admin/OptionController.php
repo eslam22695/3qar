@@ -111,7 +111,7 @@ class OptionController extends Controller
     {
         $this->validate(request(),
         [
-            'name'  => 'required|max:191|unique:options,name',
+            'name'  => 'required|max:191|unique:options,name,'.$id,
             'option_group_id' => 'nullable|exists:option_groups,id',
         ],[
                 'name.required' => 'حقل الاسم مطلوب',

@@ -33,7 +33,7 @@
         <div class="col-md-12">
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li class="alert alert-danger">{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
@@ -47,27 +47,27 @@
                     <div class="tabs-vertical-env">
 
                         <ul class="nav tabs-vertical">
-                            <li class="nav-item">
+                            <li class="nav-item mb-2" style="box-shadow: 3px 3px #ccc;">
                                 <a href="#v2-home" data-toggle="tab" aria-expanded="true" class="nav-link active">
                                     التفاصيل الاساسية
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item mb-2" style="box-shadow: 3px 3px #ccc;">
                                 <a href="#v2-image" data-toggle="tab" aria-expanded="false" class="nav-link">
                                     الصور
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item mb-2" style="box-shadow: 3px 3px #ccc;">
                                 <a href="#v2-location" data-toggle="tab" aria-expanded="false" class="nav-link">
                                     الموقع
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item mb-2" style="box-shadow: 3px 3px #ccc;">
                                 <a href="#v2-attribute" data-toggle="tab" aria-expanded="false" class="nav-link">
                                     الخصائص
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item mb-2" style="box-shadow: 3px 3px #ccc;">
                                 <a href="#v2-option" data-toggle="tab" aria-expanded="false" class="nav-link">
                                     المميزات
                                 </a>
@@ -81,7 +81,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">اسم العقار</label>
-                                            <input type="text" id="example-input-large" name="name" class="form-control input-lg" required value="{{old('name')}}">
+                                            <input type="text" id="example-input-large" name="name" class="form-control input-lg"  value="{{old('name')}}">
                                             @if ($errors->has('name'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('name') }}</strong>
@@ -92,7 +92,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">وصف العقار</label>
-                                            <textarea class="form-control" name="description" required > {{old('description')}}</textarea>
+                                            <textarea class="form-control" name="description"  > {{old('description')}}</textarea>
                                             @if ($errors->has('description'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('description') }}</strong>
@@ -103,7 +103,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">سعر العقار</label>
-                                            <input type="number" id="example-input-large" name="price" class="form-control input-lg" required value="{{old('price')}}" >
+                                            <input type="number" id="example-input-large" name="price" class="form-control input-lg"  value="{{old('price')}}" >
                                             @if ($errors->has('price'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('price') }}</strong>
@@ -114,7 +114,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">مساحة العقار</label>
-                                            <input type="text" id="example-input-large" name="area" class="form-control input-lg" required value="{{old('area')}}">
+                                            <input type="number" id="example-input-large" name="area" class="form-control input-lg"  value="{{old('area')}}">
                                             @if ($errors->has('area'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('area') }}</strong>
@@ -125,7 +125,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">رقم الجوال</label>
-                                            <input type="number" id="example-input-large" name="phone" class="form-control input-lg" required min="0" value="{{old('phone')}}">
+                                            <input type="number" id="example-input-large" name="phone" class="form-control input-lg"  min="0" value="{{old('phone')}}">
                                             @if ($errors->has('phone'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('phone') }}</strong>
@@ -136,7 +136,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">القسم</label>
-                                            <select class="form-control" required name="category_id">
+                                            <select class="form-control"  name="category_id">
                                                 <option value="" selected disabled>إختار القسم</option>
                                                 @if($cats != null)
                                                     @foreach($cats as $cat)
@@ -154,7 +154,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">المالك</label>
-                                            <select class="form-control" required name="owner_id">
+                                            <select class="form-control"  name="owner_id">
                                                 <option value="" selected disabled>إختار المالك</option>
                                                 @if($owners != null)
                                                     @foreach($owners as $owner)
@@ -183,7 +183,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">الصورة الرئيسية</label>
-                                            <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="main_image" required>
+                                            <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="main_image" >
                                             @if ($errors->has('main_image'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('main_image') }}</strong>
@@ -193,7 +193,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="icon" class="control-label">الصور</label>
+                                            <label for="icon" class="control-label">الصور (أقصى عدد 4)</label>
                                             <input type="file" class="filestyle" data-placeholder="No file" data-iconname="fa fa-cloud-upload" name="images[]" multiple>
                                         </div>
                                     </div>
@@ -205,7 +205,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">المدينة</label>
-                                            <select class="form-control" required name="city_id">
+                                            <select class="form-control"  name="city_id">
                                                 <option value="" selected disabled>إختار المدينة</option>
                                                 @if($cities != null)
                                                     @foreach($cities as $city)
@@ -223,7 +223,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="icon" class="control-label">الحى</label>
-                                            <select class="form-control" required name="district_id">
+                                            <select class="form-control"  name="district_id">
                                                 <option value="" selected disabled>إختار الحى</option>
                                                 @if(!empty($districts))
                                                     @foreach($districts as $key => $value)

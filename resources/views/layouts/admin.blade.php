@@ -14,7 +14,7 @@
 
     <link rel="shortcut icon" href="{{asset('admin_assets/images/logo.png')}}">
 
-    <title>3qar</title>
+    <title>العتيق جروب</title>
 
     <!--Morris Chart CSS -->
 

@@ -34,7 +34,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::orderBy('id','desc')->get();
         return view('admin.blog.index',compact('blogs'));
     }
 
@@ -62,7 +62,7 @@ class BlogController extends Controller
                 'title'        => 'required|max:191',
                 'description'  => 'required',
                 'content'      => 'required',
-                'image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
+                'image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
             ],[
                 'title.required' => 'حقل العنوان  مطلوب',
@@ -133,7 +133,7 @@ class BlogController extends Controller
                 'title'        => 'required|max:191',
                 'description'  => 'required',
                 'content'      => 'required',
-                'image'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
+                'image'      => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
             ],[
                 'title.required' => 'حقل العنوان  مطلوب',

@@ -60,7 +60,7 @@ class OwnerController extends Controller
             [
                 'name'  => 'required|max:191|unique:owners,name',
                 'email'  => 'required|email|unique:owners,email',
-                'phone'  => 'required|digits:11|unique:owners,phone'
+                'phone'  => 'required|numeric|unique:owners,phone'
             ],[
                 'name.required' => 'حقل الاسم مطلوب',
                 'name.max' => 'حقل الاسم أكبر من اللازم',
@@ -69,7 +69,7 @@ class OwnerController extends Controller
                 'email.email' => 'حقل البريد الالكترونى يجب أن يكون بريد الكترونى صالح',
                 'email.unique' => 'البريد الالكترونى موجود مسبقا',
                 'phone.required' => 'حقل رقم الجوال مطلوب',
-                'phone.digits' => 'حقل رقم الجوال يجب يكون 11 رقم',
+                'phone.numeric' => 'حقل رقم الجوال يجب يكون رقم',
                 'phone.unique' => 'حقل رقم الجوال موجود مسبقا',
             ]);
 
@@ -117,9 +117,9 @@ class OwnerController extends Controller
     {
         $this->validate(request(),
             [
-                'name'  => 'required|max:191|unique:owners,name',
-                'email'  => 'required|email|unique:owners,email',
-                'phone'  => 'required|digits:11|unique:owners,phone'
+                'name'  => 'required|max:191|unique:owners,name,'.$id,
+                'email'  => 'required|email|unique:owners,email,'.$id,
+                'phone'  => 'required|numeric|unique:owners,phone,'.$id
             ],[
                 'name.required' => 'حقل الاسم مطلوب',
                 'name.max' => 'حقل الاسم أكبر من اللازم',
@@ -128,7 +128,7 @@ class OwnerController extends Controller
                 'email.email' => 'حقل البريد الالكترونى يجب أن يكون بريد الكترونى صالح',
                 'email.unique' => 'البريد الالكترونى موجود مسبقا',
                 'phone.required' => 'حقل رقم الجوال مطلوب',
-                'phone.digits' => 'حقل رقم الجوال يجب يكون 11 رقم',
+                'phone.numeric' => 'حقل رقم الجوال يجب يكون رقم',
                 'phone.unique' => 'حقل رقم الجوال موجود مسبقا',
             ]);
 

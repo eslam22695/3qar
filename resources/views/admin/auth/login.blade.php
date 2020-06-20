@@ -7,6 +7,10 @@
             <div class="panel panel-default">
 
                 <div class="panel-body">
+                    <div class="mb-4">
+                        <img class="img-responsive" src="{{asset('front_assets//img/logo.png')}}" width="90%" height="" alt="">
+                    </div>
+
                     <form class="form-horizontal" method="POST" action="{{ url('/admin/login') }}">
                         {{ csrf_field() }}
 
