@@ -140,7 +140,7 @@
                                                 <option value="" selected disabled>إختار القسم</option>
                                                 @if($cats != null)
                                                     @foreach($cats as $cat)
-                                                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                                        <option {{old('category_id') == $cat->id ? 'selected' : ''}} value="{{$cat->id}}">{{$cat->name}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -158,7 +158,7 @@
                                                 <option value="" selected disabled>إختار المالك</option>
                                                 @if($owners != null)
                                                     @foreach($owners as $owner)
-                                                        <option value="{{$owner->id}}">{{$owner->name}}</option>
+                                                        <option {{old('owner_id') == $cat->id ? 'selected' : ''}} value="{{$owner->id}}">{{$owner->name}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -209,7 +209,7 @@
                                                 <option value="" selected disabled>إختار المدينة</option>
                                                 @if($cities != null)
                                                     @foreach($cities as $city)
-                                                        <option value="{{$city->id}}">{{$city->name}}</option>
+                                                        <option {{old('city_id') == $city->id ? 'selected' : ''}} value="{{$city->id}}">{{$city->name}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -227,7 +227,7 @@
                                                 <option value="" selected disabled>إختار الحى</option>
                                                 @if(!empty($districts))
                                                     @foreach($districts as $key => $value)
-                                                        <option value="{{ $key }}">{{ $value }}</option>
+                                                        <option {{old('district_id') == $key ? 'selected' : ''}} value="{{ $key }}">{{ $value }}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -256,7 +256,7 @@
                                                     <option value="" selected disabled>إختار قيمة</option>
                                                     @if($attribute->values() != null)
                                                         @foreach($attribute->values as $value)
-                                                            <option value="{{$value->id}}">{{$value->value}}</option>
+                                                            <option {{old('values') == $value->value ? 'selected' : ''}} value="{{$value->id}}">{{$value->value}}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>

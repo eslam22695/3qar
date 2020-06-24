@@ -203,6 +203,7 @@ button:focus {
   background-color: #888888; }
 
 .scroll-top-wrapper.show {
+  background: #214e87;
   visibility: visible;
   cursor: pointer;
   opacity: 1.0; }
@@ -217,11 +218,12 @@ button:focus {
 		Strat Banner
 *********************************/
 .banner {
-  background-image: url("../img/banner.jpg");
+  /* background-image: url("../img/banner.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  background-attachment: fixed; */
+  background: #102d52;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -368,11 +370,12 @@ button:focus {
 *********************************/
 /************Strat banner**************/
 .banner-about {
-  background-image: url(../img/banner.jpg);
+  /* background-image: url(../img/banner.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  background-attachment: fixed; */
+  background: #102d52;
   height: 50vh;
   display: flex;
   justify-content: flex-end;
@@ -1328,6 +1331,12 @@ footer .fa.fa-youtube {
 footer .fa.fa-youtube:hover {
   transform: rotate(360deg);
   background-color: #e01839; }
+footer .fa.fa-linkedin {
+  background-color: #0056b3;
+  color: #fff; }
+footer .fa.fa-linkedin:hover {
+  transform: rotate(360deg);
+  background-color: #034892; }
 footer .fa.fa-android {
   background-color: #bcd679;
   color: #fff; }

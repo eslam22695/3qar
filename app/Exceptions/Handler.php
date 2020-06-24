@@ -46,8 +46,21 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($this->isHttpException($exception)) {
+            if (Auth::guard('admin')->check()) {
+                if (view()->exists('error.' . $exception->getStatusCode())) {
+                    return response()->view('error.' . $exception->getStatusCode(), [], $exception->getStatusCode());
+                }
+            } else {
+                if (view()->exists('error.front_' . $exception->getStatusCode())) {
+                    return response()->view('error.' . $exception->getStatusCode(), [], $exception->getStatusCode());
+                }
+            }
+            
+        }
+
         if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
-            return response()->json(['User have not permission for this page access.']);
+            return response()->view('error.role');
         }
      
         return parent::render($request, $exception);

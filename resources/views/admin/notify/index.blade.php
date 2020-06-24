@@ -16,7 +16,7 @@
             @elseif(Session::has('danger'))
                 <div class="alert alert-danger">{{ Session::get('danger') }}</div>
             @endif
-            <h4 class="page-title">التنبيهات</h4>
+            <h4 class="page-title">التنبيهات الشهرية</h4>
         </div>
         
     </div>

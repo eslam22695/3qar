@@ -18,7 +18,7 @@
                 <div class="alert alert-danger">{{ Session::get('danger') }}</div>
             @endif
             <h4 class="page-title">
-                تقرير اكثر العقارات التي تم التواصل بيها
+                 تقرير اكثر العقارات المفضلة التي تم التواصل معها
             </h4>
         </div>
         <div class="col-md-12">

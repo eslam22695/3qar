@@ -71,23 +71,13 @@
                                     @endif
                                 </td>
                             </tr>
-                        </tbody>
-                    
-                    <tr>
+                            <tr>
                                 <td style="width:25%"></td>
                                 <td><button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button></td>
                             </tr>
-
-                    {{--<table class="table table-bordered table-striped">--}}
-                    {{----}}
-                        {{--<tbody>--}}
-                            {{--<tr>--}}
-                                {{--<td style="width:25%"></td>--}}
-                                {{--<td><button type="submit" class="btn btn-default waves-effect waves-light form-control">حفظ</button></td>--}}
-                            {{--</tr>--}}
-                        {{--</tbody>--}}
-                    {{----}}
-                    {{--</table>--}}
+                        </tbody>
+                    
+                    </table>
 
                 {!! Form::close() !!}
             </div>

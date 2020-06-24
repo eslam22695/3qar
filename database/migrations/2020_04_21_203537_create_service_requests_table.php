@@ -21,6 +21,7 @@ class CreateServiceRequestsTable extends Migration
             $table->text('message');
             $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('id')->on('services')->onUpdate('cascade')->onDelete('cascade');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

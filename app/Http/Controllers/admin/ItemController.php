@@ -94,7 +94,7 @@ class ItemController extends Controller
             'city_id'  => 'required|exists:cities,id',
             'category_id'  => 'required|exists:categories,id',
             'owner_id'  => 'required|exists:owners,id',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|between:0,4'
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg'
         ],[
             'name.required' => 'حقل الاسم مطلوب',
             'name.max' => 'حقل الاسم أكبر من اللازم',
@@ -107,7 +107,6 @@ class ItemController extends Controller
             'main_image.max' => 'أقصى مساحة للصوره 2 ميجابايت',
             'images.image' => 'حقل الصورة يجب أن يكون صورة',
             'images.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
-            'images.between' => '4 أقصى عدد صور',
             'phone.required' => 'حقل رقم الجوال مطلوب',
             'phone.numeric' => 'حقل رقم الجوال يجب يكون رقم',
             'area.required' => 'حقل المساحة مطلوب',
@@ -151,6 +150,10 @@ class ItemController extends Controller
         }
 
         if(isset($input['images'])){
+            if(count($input['images']) > 4){
+                Session::flash('danger','أقصي عدد 4 صور');
+                return redirect()->back();    
+            }
             for($i = 0; $i < count($input['images']); $i++){
 
                 if($input['images'][$i]){
@@ -242,7 +245,7 @@ class ItemController extends Controller
             'user_id'  => 'nullable|exists:users,id',
             'notify'  => 'nullable|boolean',
             'date'  => 'nullable|date',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|between:0,4'
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg'
         ],[
             'name.required' => 'حقل الاسم مطلوب',
             'name.max' => 'حقل الاسم أكبر من اللازم',
@@ -255,7 +258,6 @@ class ItemController extends Controller
             'main_image.max' => 'أقصى مساحة للصوره 2 ميجابايت',
             'images.image' => 'حقل الصورة يجب أن يكون صورة',
             'images.mimes' => 'حقل الصورة يجب أن يكون [PNG,JPG,SVG,GIF,JPEG]',
-            'images.between' => '4 أقصى عدد صور',
             'phone.required' => 'حقل رقم الجوال مطلوب',
             'phone.numeric' => 'حقل رقم الجوال يجب يكون رقم',
             'area.required' => 'حقل المنطقة مطلوب',

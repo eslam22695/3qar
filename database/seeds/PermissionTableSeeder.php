@@ -77,8 +77,8 @@ class PermissionTableSeeder extends Seeder
             'user-create',
             'user-edit',
             'user-delete',
-            'notify-list',
-            'notify-create',
+            'notify-monthly',
+            'notify-all',
         ];
  
  

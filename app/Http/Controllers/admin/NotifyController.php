@@ -21,8 +21,9 @@ class NotifyController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:notify-list|notify-create|notify-edit|notify-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:notify-create', ['only' => ['create','store']]);
+        /* $this->middleware('permission:notify-list|notify-create|notify-edit|notify-delete', ['only' => ['index','show']]); */
+        $this->middleware('permission:notify-monthly', ['only' => ['index','store']]);
+        $this->middleware('permission:notify-all', ['only' => ['create','send']]);
 //        $this->middleware('permission:notify-edit', ['only' => ['edit','update']]);
 //        $this->middleware('permission:notify-delete', ['only' => ['destroy']]);
     }
@@ -45,16 +46,6 @@ class NotifyController extends Controller
            ->orderByRaw("DAYOFMONTH('date')",'ASC')
            ->get();
         return view('admin.notify.index',compact('items')); 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -99,14 +90,53 @@ class NotifyController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.notify.create'); 
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function send(Request $request)
     {
-        //
+        $this->validate(request(),
+        [
+            'name'  => 'required|max:191',
+            'body' => 'required',
+        ],[
+            'body.required' => 'حقل المحتوى مطلوب',
+            'name.required' => 'حقل الاسم مطلوب',
+            'name.max' => 'حقل الاسم أكبر من اللازم',
+        ]);
+
+        $input = $request->all();
+        $recipients = [];
+
+        $users = User::where('device_id', '!=', null)->where('status',1)->get();
+        
+        for($i=0; $i<count($users); $i++){
+            $recipients = [$users[$i]->device_id];
+        }
+        
+        fcm()
+        ->to($recipients) // $recipients must an array
+        ->priority('high')
+        ->notification([
+            'title' => $input['name'],
+            'body' => $input['body'],
+        ])
+        ->send();
+
+        Session::flash('success','تم الإرسال بنجاح');
+        return redirect()->back();
     }
 
     /**

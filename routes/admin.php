@@ -79,8 +79,11 @@
     Route::get('report/item_favourite','admin\ReportController@item_favourite')->name('item_favourite');
 
     //Notify
-    Route::get('notify','admin\NotifyController@index')->name('notify');
-    Route::post('notify_send','admin\NotifyController@store')->name('notify_send');
+    Route::get('notify_monthly','admin\NotifyController@index')->name('notify_monthly');
+    Route::post('notify_monthly_send','admin\NotifyController@store')->name('notify_monthly_send');
+
+    Route::get('notify_all','admin\NotifyController@index')->name('notify_all');
+    Route::post('notify_all_send','admin\NotifyController@store')->name('notify_all_send');
     
     //Global Status Route
     Route::get('status/{status}/{db}/{id}','admin\SettingController@status')->name('status');

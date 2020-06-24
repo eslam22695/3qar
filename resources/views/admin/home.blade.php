@@ -20,7 +20,7 @@
         <div class="col-md-6 col-lg-6 col-xl-3">
             <div class="widget-bg-color-icon card-box fadeInDown animated">
                 <div class="bg-icon bg-icon-info pull-left">
-                    <i class="md md-attach-money text-info"></i>
+                    <i class="md md-class text-info"></i>
                 </div>
                 <div class="text-right">
                     <h3 class="text-dark"><b class="counter">{{App\Category::where('status',1)->count()}}</b></h3>
@@ -33,7 +33,7 @@
         <div class="col-md-6 col-lg-6 col-xl-3">
             <div class="widget-bg-color-icon card-box">
                 <div class="bg-icon bg-icon-pink pull-left">
-                    <i class="md md-add-shopping-cart text-pink"></i>
+                    <i class="md md-business text-pink"></i>
                 </div>
                 <div class="text-right">
                     <h3 class="text-dark"><b class="counter">{{App\Item::count()}}</b></h3>
@@ -75,7 +75,7 @@
     <div class="col-md-6 col-lg-6 col-xl-3">
         <div class="widget-bg-color-icon card-box fadeInDown animated">
             <div class="bg-icon bg-icon-info pull-left">
-                <i class="md md-attach-money text-info"></i>
+                <i class="icon-globe text-info"></i>
             </div>
             <div class="text-right">
                 <h3 class="text-dark"><b class="counter">{{App\Blog::count()}}</b></h3>
@@ -88,7 +88,7 @@
     <div class="col-md-6 col-lg-6 col-xl-3">
         <div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-icon-pink pull-left">
-                <i class="md md-add-shopping-cart text-pink"></i>
+                <i class="md md-call text-pink"></i>
             </div>
             <div class="text-right">
                 <h3 class="text-dark"><b class="counter">{{App\Contact::count()}}</b></h3>
@@ -101,7 +101,7 @@
     <div class="col-md-6 col-lg-6 col-xl-3">
         <div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-icon-purple pull-left">
-                <i class="md md-equalizer text-purple"></i>
+                <i class="md md-clear-all text-purple"></i>
             </div>
             <div class="text-right">
                 <h3 class="text-dark"><b class="counter">{{App\Service::count()}}</b></h3>
@@ -114,7 +114,7 @@
     <div class="col-md-6 col-lg-6 col-xl-3">
         <div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-icon-success pull-left">
-                <i class="md md-remove-red-eye text-success"></i>
+                <i class="md md-email text-success"></i>
             </div>
             <div class="text-right">
                 <h3 class="text-dark"><b class="counter">{{App\ServiceRequest::count()}}</b></h3>
@@ -131,7 +131,7 @@
     <div class="col-md-6 col-lg-6 col-xl-3">
         <div class="widget-bg-color-icon card-box fadeInDown animated">
             <div class="bg-icon bg-icon-info pull-left">
-                <i class="md md-attach-money text-info"></i>
+                <i class="md md-place text-info"></i>
             </div>
             <div class="text-right">
                 <h3 class="text-dark"><b class="counter">{{App\City::count()}}</b></h3>
@@ -144,7 +144,7 @@
     <div class="col-md-6 col-lg-6 col-xl-3">
         <div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-icon-pink pull-left">
-                <i class="md md-add-shopping-cart text-pink"></i>
+                <i class="md md-pin-drop text-pink"></i>
             </div>
             <div class="text-right">
                 <h3 class="text-dark"><b class="counter">{{App\District::count()}}</b></h3>
@@ -157,7 +157,7 @@
     <div class="col-md-6 col-lg-6 col-xl-3">
         <div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-icon-purple pull-left">
-                <i class="md md-equalizer text-purple"></i>
+                <i class=" dripicons-view-list text-purple"></i>
             </div>
             <div class="text-right">
                 <h3 class="text-dark"><b class="counter">{{Spatie\Permission\Models\Role::count()}}</b></h3>

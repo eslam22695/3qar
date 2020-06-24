@@ -8,7 +8,7 @@ class ServiceRequest extends Model
 {
     protected $table = 'service_requests';
     protected $fillable = [
-        'id', 'name', 'email','phone','message','service_id'
+        'id', 'name', 'email','phone','message','status','service_id'
     ];
 
 

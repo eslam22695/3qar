@@ -203,67 +203,69 @@
 
                     <li><a href="{{route('admin.home')}}" class="waves-effect"><i class="ti-home"></i> <span> الرئيسيه </span></a></li>
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> المناطق </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="md md-map"></i> <span> المناطق </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="{{route('admin.city.index')}}" class="waves-effect"><i class="ion-images"></i> <span> المدن </span></a></li>
-                            <li><a href="{{route('admin.district.index')}}" class="waves-effect"><i class="ion-images"></i> <span> الاحياء </span></a></li>
+                            <li><a href="{{route('admin.city.index')}}" class="waves-effect"><i class="md md-place"></i> <span> المدن </span></a></li>
+                            <li><a href="{{route('admin.district.index')}}" class="waves-effect"><i class="md md-pin-drop"></i> <span> الاحياء </span></a></li>
                         </ul>
                     </li>
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> العقارات </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="md md-business"></i> <span> العقارات </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="{{route('admin.category.index')}}" class="waves-effect"><i class="icon-list"></i> <span> الاقسام </span></a></li>
-                            <li><a href="{{route('admin.item.index')}}" class="waves-effect"><i class="ion-images"></i> <span> العقارات</span></a></li>
+                            <li><a href="{{route('admin.category.index')}}" class="waves-effect"><i class="md md-class"></i> <span> الاقسام </span></a></li>
+                            <li><a href="{{route('admin.item.index')}}" class="waves-effect"><i class="md md-business"></i> <span> العقارات</span></a></li>
                         </ul>
                     </li>
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> الخصائص </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ion-ios7-pricetag"></i> <span> الخصائص </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="{{route('admin.attribute_family.index')}}" class="waves-effect"><i class="ion-images"></i> <span> عائلة الخصائص </span></a></li>
-                            <li><a href="{{route('admin.attribute.index')}}" class="waves-effect"><i class="ion-images"></i> <span> الخصائص </span></a></li>
+                            <li><a href="{{route('admin.attribute_family.index')}}" class="waves-effect"><i class="ion-ios7-folder"></i> <span> عائلة الخصائص </span></a></li>
+                            <li><a href="{{route('admin.attribute.index')}}" class="waves-effect"><i class="ion-navicon-round"></i> <span> الخصائص </span></a></li>
                         </ul>
                     </li>
                     <li><a href="{{route('admin.option.index')}}" class="waves-effect"><i class="md md-assignment"></i> <span> المميزات </span></a></li>
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> إداره الممتلكات </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ion-man"></i> <span> إداره الممتلكات </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{route('admin.owner.index')}}" class="waves-effect"><i class="md md-account-circle"></i> <span> الملاك </span></a></li>
-                            <li><a href="{{route('admin.user.index')}}" class="waves-effect"><i class="fa fa-signal"></i> <span> الاعضاء </span></a></li>
+                            <li><a href="{{route('admin.user.index')}}" class="waves-effect"><i class="ion-man"></i> <span> الاعضاء </span></a></li>
                         </ul>
                     </li>
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> إداره باقى الصفحات </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="ion-gear-b"></i> <span> إداره باقى الصفحات </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{route('admin.blog.index')}}" class="waves-effect"><i class="icon-globe"></i> <span> المدونة </span></a></li>
                             <li><a href="{{route('admin.feature.index')}}" class="waves-effect"><i class="ion-images"></i> <span> ما يميز الشركة </span></a></li>
-                            <li><a href="{{route('admin.contact.index')}}" class="waves-effect"><i class="ion-paper-airplane"></i> <span> طلبات التواصل </span></a></li>
-                            <li><a href="{{route('admin.services.index')}}" class="waves-effect"><i class="ion-images"></i> <span> الخدمات </span></a></li>
-                            <li><a href="{{route('admin.service_request.index')}}" class="waves-effect"><i class="ion-images"></i> <span> طلبات الخدمات </span></a></li>
+                            <li><a href="{{route('admin.contact.index')}}" class="waves-effect"><i class="md md-call"></i> <span> طلبات التواصل </span></a></li>
+                            <li><a href="{{route('admin.services.index')}}" class="waves-effect"><i class="md md-clear-all"></i> <span> الخدمات </span></a></li>
+                            <li><a href="{{route('admin.service_request.index')}}" class="waves-effect"><i class="md md-email"></i> <span> طلبات الخدمات </span></a></li>
                             <li><a href="{{route('admin.setting.index')}}" class="waves-effect"><i class="ion-ios7-information-outline"></i> <span> الاعدادات </span></a></li>
                         </ul>
                     </li>
 
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> المسئوليين و الادوار </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class=" dripicons-view-list"></i> <span> المسئوليين و الادوار </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="{{route('admin.role.index')}}" class="waves-effect"><i class="icon-globe"></i> <span> الادوار </span></a></li>
-                            <li><a href="{{route('admin.admin.index')}}" class="waves-effect"><i class="ion-images"></i> <span>المسئوليين </span></a></li>
+                            <li><a href="{{route('admin.role.index')}}" class="waves-effect"><i class=" dripicons-view-list"></i> <span> الادوار </span></a></li>
+                            <li><a href="{{route('admin.admin.index')}}" class="waves-effect"><i class="ion-person-stalker"></i> <span>المسئوليين </span></a></li>
                         </ul>
                     </li>
 
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> التقارير </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="md md-equalizer"></i> <span> التقارير </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="{{route('admin.district_report')}}" class="waves-effect"><i class="icon-globe"></i> <span> الاحياء حسب المدينة </span></a></li>
-                            <li><a href="{{route('admin.attribute_report')}}" class="waves-effect"><i class="icon-globe"></i> <span> الخصائص  حسب عائلة الخصائص  </span></a></li>
-                            <li><a href="{{route('admin.item_report')}}" class="waves-effect"><i class="icon-globe"></i> <span> العقارات  حسب المدينة / الحي / القسم / عائلة الخصائص   </span></a></li>
-                            <li><a href="{{route('admin.item_click')}}" class="waves-effect"><i class="icon-globe"></i> <span> تقرير اكثر العقارات التي تم التواصل بيها</span></a></li>
-                            <li><a href="{{route('admin.item_favourite')}}" class="waves-effect"><i class="icon-globe"></i> <span> تقرير اكثر العقارات المفضلة التي تم التواصل معها </span></a></li>
+                            <li><a href="{{route('admin.district_report')}}" class="waves-effect"><i class="md md-equalizer"></i> <span> الاحياء حسب المدينة </span></a></li>
+                            <li><a href="{{route('admin.attribute_report')}}" class="waves-effect"><i class="md md-equalizer"></i> <span> الخصائص  حسب عائلة الخصائص  </span></a></li>
+                            <li><a href="{{route('admin.item_report')}}" class="waves-effect"><i class="md md-equalizer"></i> <span> العقارات  حسب المدينة / الحي / القسم / عائلة الخصائص   </span></a></li>
+                            <li><a href="{{route('admin.item_click')}}" class="waves-effect"><i class="md md-equalizer"></i> <span> تقرير اكثر العقارات التي تم التواصل بيها</span></a></li>
+                            <li><a href="{{route('admin.item_favourite')}}" class="waves-effect"><i class="md md-equalizer"></i> <span> تقرير اكثر العقارات المفضلة التي تم التواصل معها </span></a></li>
 
                         </ul>
                     </li>
                     
-                    <li><a href="{{route('admin.notify')}}" class="waves-effect"><i class="md md-assignment"></i> <span> إشعارات التنبية </span></a></li>
+ 
+                    <li><a href="{{route('admin.notify_monthly')}}" class="waves-effect"><i class="ti-bell"></i> <span> إشعارات التنبية الشهرية</span></a></li>
+                    <li><a href="{{route('admin.notify_all')}}" class="waves-effect"><i class="md md-notifications"></i> <span> إشعارات التنبية العامة</span></a></li>
 
                 </ul>
 

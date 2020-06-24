@@ -74,8 +74,8 @@ return [
     'user-create' => 'اضافة الاعضاء',
     'user-edit' => 'تعديل الاعضاء',
     'user-delete' => 'حذف الاعضاء',
-    'notify-list' => 'عرض التنبيهات',
-    'notify-create' => 'اضافة التنبيهات',
+    'notify-monthly' => 'اضافة التنبيهات الشهرية',
+    'notify-all' => 'اضافة التنبيهات العامة',
 
 
 
