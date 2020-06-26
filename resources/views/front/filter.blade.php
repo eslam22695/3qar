@@ -84,7 +84,33 @@
                                         @foreach(@Helper::cities() as $city)
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="radio" name="city_id" value="{{$city->id}}" {{$city->id == $city_id ? 'checked' : ''}}> {{$city->name}}
+                                                    <input class="city_id" type="radio" name="city_id" value="{{$city->id}}" {{$city->id == $city_id ? 'checked' : ''}}> {{$city->name}}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingDistrict">
+                                <h2 class="clearfix mb-0">
+                                    <span>الحي</span>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDistrict" aria-expanded="true" aria-controls="collapseDistrict"><i class="fa fa-plus"></i></button>
+                                </h2>
+                            </div>
+                            <div id="collapseDistrict" class="collapse" aria-labelledby="headingDistrict" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="district_id coloured">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="radio" name="district_id" value="0" {{$district_id == 0 ? 'checked' : ''}}> الكل
+                                            </label>
+                                        </div>
+                                        @foreach($districts as $district)
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="radio" name="district_id" value="{{$district->id}}" {{$district->id == $district_id ? 'checked' : ''}}> {{$district->name}}
                                                 </label>
                                             </div>
                                         @endforeach
@@ -201,3 +227,36 @@
 </section>
 <!--------end 3akar -------------->
 @endsection
+
+@section('scripts')
+    <script>
+        $(".city_id").change(function(){
+            var city_id = $(this).val(); 
+
+            if(city_id){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('get_districts')}}?city_id="+city_id,
+                    success:function(res){               
+                        if(res){
+                            $(".district_id").empty();
+
+                            $(".district_id").append('<div class="checkbox"><label><input type="radio" name="district_id" value="0" checked> الكل</label></div>');
+
+                            $.each(res,function(key,value){
+                                
+                                $(".district_id").append('<div class="checkbox"><label><input type="radio" name="district_id" value="'+key+'"> '+value+'</label></div>');
+                            });
+                    
+                        }else{
+                            $(".district_id").empty();
+                        }
+                    }
+                });
+            }else{
+                $(".district_id").empty();
+            }      
+        });
+
+    </script>
+@endsection   

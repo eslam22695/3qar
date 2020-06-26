@@ -29,6 +29,7 @@ Route::get('item_details/{id}/{title}'  ,'IndexController@item_details')->name('
 Route::get('/ajax_phone', 'IndexController@ajax_phone');
 Route::get('/ajax_fav', 'IndexController@ajax_fav');
 Route::get('/ajax_unfav', 'IndexController@ajax_unfav');
+Route::get('get_districts','IndexController@ajax_district')->name('get_districts');
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');

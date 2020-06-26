@@ -21,6 +21,7 @@ use App\Service;
 use App\ServiceRequest;
 use App\Setting;
 use App\User;
+use App\District;
 use Auth;
 
 class IndexController extends Controller
@@ -116,13 +117,21 @@ class IndexController extends Controller
 
         $input = $request->all();
 
+        $districts = District::where('city_id',$input['city_id'])->where('status',1)->get();
+
         $items = Item::where('category_id',$input['cat_id'])->where('city_id',$input['city_id'])->where('status',1);
 
         $price_from = 0;
         $price_to = 0;
         $area_from = 0;
         $area_to = 0;
+        $district_id = 0;
 
+        if (isset($input['district_id']) && $input['district_id'] != null && $input['district_id'] != 0) {
+            $district_id = $input['district_id'];
+            $items->where('district_id', $input['district_id']);
+        }
+        
         if (isset($input['price_from']) && $input['price_from'] != null) {
             $price_from = $input['price_from'];
             $items->where('price', '>=', $input['price_from']);
@@ -148,7 +157,7 @@ class IndexController extends Controller
         $cat_id = $input['cat_id'];
         $city_id = $input['city_id'];
 
-        return view('front.filter',compact('items','city_id','cat_id','price_from','price_to','area_from','area_to'));
+        return view('front.filter',compact('items','city_id','cat_id','price_from','price_to','area_from','area_to','districts','district_id'));
     }
 
     public function item_details($id,$title)
@@ -244,6 +253,15 @@ class IndexController extends Controller
         }else{
             return 0;
         }
+    }
+    
+    /**
+     * District Ajax
+     */
+    public function ajax_district(Request $request)
+    {
+        $districts = DB::table('districts')->where('city_id',$request->city_id)->pluck("name","id")->all();
+        return response()->json($districts);
     }
 
 }

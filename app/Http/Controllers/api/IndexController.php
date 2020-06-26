@@ -30,7 +30,7 @@ class IndexController extends Controller
     private $asset = '/admin_assets/images/';
 
     public function home(Request $request)
-    { 
+    {
         $data = [];
         
         $validator = Validator::make($request->all(), [
@@ -38,16 +38,23 @@ class IndexController extends Controller
             'lang' => 'required',
         ]);
 
+        $item = Item::select(DB::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lang ) - radians('.$lang.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->having('distance', '<', 25)->where('status',1);
+
         $lat = $request['lat'];
         $lang = $request['lang'];
         $cat_id = $request['cat_id'];
+        $district_id = $request['district_id'];
         
-        if($cat_id == 0){
-            $item = Item::select(DB::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lang ) - radians('.$lang.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->having('distance', '<', 25)->where('status',1)->orderBy('distance')->get();
-        }else{
-            $item = Item::select(DB::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lang ) - radians('.$lang.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->having('distance', '<', 25)->where('category_id',$cat_id)->where('status',1)->orderBy('distance')->get();
+        if(isset($cat_id) && $cat_id != null && $cat_id != 0){
+            $item->where('category_id',$cat_id);
         }
         
+        if(isset($district_id) && $district_id != null && $district_id != 0){
+            $item->where('district_id',$district_id);
+        }
+        
+        
+        $item = $item->orderBy('distance')->get();
 
         if(isset($item) && count($item)>0){
             for($i=0; $i<count($item); $i++){
