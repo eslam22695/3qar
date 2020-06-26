@@ -33,6 +33,10 @@ class PermissionTableSeeder extends Seeder
             'blog-create',
             'blog-edit',
             'blog-delete',
+            'advertisement-list',
+            'advertisement-create',
+            'advertisement-edit',
+            'advertisement-delete',
             'category-list',
             'category-create',
             'category-edit',
@@ -79,6 +83,7 @@ class PermissionTableSeeder extends Seeder
             'user-delete',
             'notify-monthly',
             'notify-all',
+
         ];
  
  
