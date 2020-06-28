@@ -83,7 +83,6 @@ class PermissionTableSeeder extends Seeder
             'user-delete',
             'notify-monthly',
             'notify-all',
-
         ];
  
  

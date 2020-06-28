@@ -80,10 +80,10 @@ return [
     'user-delete' => 'حذف الاعضاء',
     'notify-list' => 'عرض التنبيهات',
     'notify-create' => 'اضافة التنبيهات',
-
-
-
-
+    'advertisement-list' => 'عرض اعلانات',
+    'advertisement-create' => 'اضافة اعلان',
+    'advertisement-edit' => 'تعديل اعلان',
+    'advertisement-delete' => 'حذف اعلان',
 
 ];
 

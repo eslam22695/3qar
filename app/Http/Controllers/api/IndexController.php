@@ -37,11 +37,12 @@ class IndexController extends Controller
             'lat' => 'required',
             'lang' => 'required',
         ]);
+        
         $lat = $request['lat'];
         $lang = $request['lang'];
         $cat_id = $request['cat_id'];
         $district_id = $request['district_id'];
-        
+
         $item = Item::select(DB::raw('*, ( 6367 * acos( cos( radians('.$lat.') ) * cos( radians( lat ) ) * cos( radians( lang ) - radians('.$lang.') ) + sin( radians('.$lat.') ) * sin( radians( lat ) ) ) ) AS distance'))->having('distance', '<', 25)->where('status',1);
 
         

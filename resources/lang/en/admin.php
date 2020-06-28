@@ -76,10 +76,10 @@ return [
     'user-delete' => 'حذف الاعضاء',
     'notify-monthly' => 'اضافة التنبيهات الشهرية',
     'notify-all' => 'اضافة التنبيهات العامة',
-
-
-
-
+    'advertisement-list' => 'عرض اعلانات',
+    'advertisement-create' => 'اضافة اعلان',
+    'advertisement-edit' => 'تعديل اعلان',
+    'advertisement-delete' => 'حذف اعلان',
 
 ];
 
