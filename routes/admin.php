@@ -16,6 +16,10 @@
     //blog
     Route::resource('blog', 'admin\BlogController');
 
+
+    //advertisement
+    Route::resource('advertisement', 'admin\AdvertisementController');
+
     //category
     Route::resource('category', 'admin\CategoryController', ['except' => ['show']]);
 

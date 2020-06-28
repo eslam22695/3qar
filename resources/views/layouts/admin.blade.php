@@ -235,6 +235,7 @@
                         <a href="javascript:void(0);" class="waves-effect"><i class="ion-gear-b"></i> <span> إداره باقى الصفحات </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="{{route('admin.blog.index')}}" class="waves-effect"><i class="icon-globe"></i> <span> المدونة </span></a></li>
+                            <li><a href="{{route('admin.advertisement.index')}}" class="waves-effect"><i class="icon-globe"></i> <span> الاعلانات </span></a></li>
                             <li><a href="{{route('admin.feature.index')}}" class="waves-effect"><i class="ion-images"></i> <span> ما يميز الشركة </span></a></li>
                             <li><a href="{{route('admin.contact.index')}}" class="waves-effect"><i class="md md-call"></i> <span> طلبات التواصل </span></a></li>
                             <li><a href="{{route('admin.services.index')}}" class="waves-effect"><i class="md md-clear-all"></i> <span> الخدمات </span></a></li>
