@@ -79,6 +79,10 @@ class PermissionTableSeeder extends Seeder
             'user-delete',
             'notify-monthly',
             'notify-all',
+            'advertisement-list',
+            'advertisement-create',
+            'advertisement-edit',
+            'advertisement-delete',
         ];
  
  
