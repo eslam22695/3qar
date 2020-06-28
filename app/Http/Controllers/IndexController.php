@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Advertisement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -262,6 +263,17 @@ class IndexController extends Controller
     {
         $districts = DB::table('districts')->where('city_id',$request->city_id)->pluck("name","id")->all();
         return response()->json($districts);
+    }
+
+
+    public function advertisement_details()
+    {
+        $advertisement = Advertisement::all();
+        dd($advertisement);
+
+
+
+        return view('front.advertisement_details',compact('advertisement'));
     }
 
 }

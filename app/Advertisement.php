@@ -11,3 +11,5 @@ class Advertisement extends Model
         'id', 'title','image', 'description','content','status'
     ];
 }
+
+

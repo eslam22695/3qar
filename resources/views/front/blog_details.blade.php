@@ -76,7 +76,7 @@
                             </div>
                             <div class="">
                                 <h5> {{$blog_mob->title}}</h5>
-                                {{-- <p class="p-details">{{$blog_mob->description}}</p> --}}
+                                 <p class="p-details">{{$blog_mob->description}}</p>
                                 <i class="fa fa-calendar p-details"></i> <span>{{$blog_mob->created_at->format('d M Y') }}</span>
                             </div>
                         </div>
